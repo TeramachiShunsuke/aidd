@@ -1,0 +1,70 @@
+name: Staleness
+
+on:
+  pull_request:
+    paths:
+      - "evidence/**"
+      - "adr/**"
+      - "playbook/**"
+      - "ledger/**"
+      - "reviews/**"
+      - ".github/scripts/check-staleness.sh"
+      - ".github/workflows/staleness.yml"
+      - "AGENTS.md"
+      - "CONVENTIONS.md"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      max_age_days:
+        description: "Fail when last_reviewed is older than this many days"
+        required: false
+        default: "90"
+      base_ref:
+        description: "Git ref used for frozen/append/sync comparisons"
+        required: false
+        default: "origin/main"
+
+permissions:
+  contents: read
+
+jobs:
+  staleness:
+    name: Check knowledge freshness
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve base ref
+        id: base
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "ref=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          else
+            INPUT_BASE="${{ github.event.inputs.base_ref }}"
+            echo "ref=${INPUT_BASE:-origin/main}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch base
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --prune origin "+refs/heads/*:refs/remotes/origin/*"
+
+      - name: Run staleness checks
+        shell: bash
+        env:
+          BASE_REF: ${{ steps.base.outputs.ref }}
+          MAX_AGE_DAYS: ${{ github.event.inputs.max_age_days || '90' }}
+        run: |
+          set -euo pipefail
+          export TODAY
+          TODAY="$(date -u +%F)"
+          chmod +x .github/scripts/check-staleness.sh
+          bash .github/scripts/check-staleness.sh
