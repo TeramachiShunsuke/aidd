@@ -20,6 +20,7 @@
 | ROOT-GRAPH | GRAPH | [GRAPH.md](GRAPH.md) | - | - |
 | ROOT-GUIDE | GUIDE — 文書コード体系とリレーション | [GUIDE.md](GUIDE.md) | - | - |
 | ROOT-README | aidd | [README.md](README.md) | - | - |
+| LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-09 |
 | LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-09 |
 | LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-09 |
 | LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-09 |
@@ -42,7 +43,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-001 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する | [adr/001-repository-layout.md](adr/001-repository-layout.md) | frozen | 2026-08-08 |
 | ADR-002 | YAML Frontmatter で status と last_reviewed を機械可読にする | [adr/002-frontmatter-schema.md](adr/002-frontmatter-schema.md) | frozen | 2026-08-08 |
 | ADR-003 | frozen 文書はバイトレベルで不変とする | [adr/003-frozen-immutability.md](adr/003-frozen-immutability.md) | frozen | 2026-08-08 |
-| ADR-004 | 鮮度は last_reviewed の 90 日と変更時同期で守る | [adr/004-staleness-policy.md](adr/004-staleness-policy.md) | active | 2026-08-08 |
+| ADR-004 | 鮮度は last_reviewed の 90 日と変更時同期で守る | [adr/004-staleness-policy.md](adr/004-staleness-policy.md) | active | 2026-08-09 |
 | ADR-005 | reviews ディレクトリは追記専用とする | [adr/005-reviews-append-only.md](adr/005-reviews-append-only.md) | frozen | 2026-08-08 |
 | ADR-006 | 文脈を Tier 0〜3 に分け、ロード順を固定する | [adr/006-context-tiers.md](adr/006-context-tiers.md) | active | 2026-08-09 |
 | ADR-007 | INDEX.md を生成物とし、CI で最新性を強制する | [adr/007-generated-index.md](adr/007-generated-index.md) | active | 2026-08-09 |
@@ -50,11 +51,12 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-009 | skills は playbook の入口とし、手順を二重に持たない | [adr/009-skills-as-playbook-entrypoints.md](adr/009-skills-as-playbook-entrypoints.md) | active | 2026-08-09 |
 | ADR-010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/010-knowledge-graph-layers.md](adr/010-knowledge-graph-layers.md) | active | 2026-08-09 |
 | ADR-011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/011-cross-tool-agent-integration.md](adr/011-cross-tool-agent-integration.md) | active | 2026-08-09 |
+| ADR-012 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する | [adr/012-review-attestations.md](adr/012-review-attestations.md) | active | 2026-08-09 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-08 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
-| PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-08 |
-| PB-004 | 文書を凍結する | [playbook/004-freeze-document.md](playbook/004-freeze-document.md) | active | 2026-08-08 |
-| PB-005 | staleness CI の失敗を直す | [playbook/005-fix-staleness-ci.md](playbook/005-fix-staleness-ci.md) | active | 2026-08-08 |
+| PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
+| PB-004 | 文書を凍結する | [playbook/004-freeze-document.md](playbook/004-freeze-document.md) | active | 2026-08-09 |
+| PB-005 | staleness CI の失敗を直す | [playbook/005-fix-staleness-ci.md](playbook/005-fix-staleness-ci.md) | active | 2026-08-09 |
 | PB-006 | Tier を割り当てる・見直す | [playbook/006-assign-tier.md](playbook/006-assign-tier.md) | active | 2026-08-09 |
 | PB-007 | INDEX.md を再生成する | [playbook/007-rebuild-index.md](playbook/007-rebuild-index.md) | active | 2026-08-09 |
 | PB-008 | SDD の spec と知識ベースを橋渡しする | [playbook/008-bridge-sdd-spec.md](playbook/008-bridge-sdd-spec.md) | active | 2026-08-09 |
@@ -86,16 +88,17 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
 | REV-004 | ツール横断の可搬性レビュー | [reviews/004-cross-tool-portability.md](reviews/004-cross-tool-portability.md) | active | 2026-08-09 |
 | REV-005 | リポジトリ全体の敵対レビューと取り込み | [reviews/005-adversarial-review.md](reviews/005-adversarial-review.md) | active | 2026-08-09 |
+| REV-006 | ライフサイクル矛盾の解消と、自己レビューで見つけた運用上の穴 | [reviews/006-lifecycle-self-review.md](reviews/006-lifecycle-self-review.md) | active | 2026-08-09 |
 
 ## 内訳
 
 | 区分 | 件数 |
 | --- | --- |
 | Tier 0 | 2 |
-| Tier 1 | 6 |
-| Tier 2 | 21 |
-| Tier 3 | 21 |
-| status: active | 40 |
+| Tier 1 | 7 |
+| Tier 2 | 22 |
+| Tier 3 | 22 |
+| status: active | 43 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |

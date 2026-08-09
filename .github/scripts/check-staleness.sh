@@ -2,9 +2,17 @@
 # Staleness guards for the aidd knowledge base.
 # Checks:
 #   1) frozen immutability
-#   2) last_reviewed sync on content changes
-#   3) reviews/ append-only
-#   4) 90-day last_reviewed expiry
+#   2) last_reviewed sync on content changes (log files exempt)
+#   3) append-only guard for log files (reviews/, ledger/attestations.md)
+#   4) 90-day expiry on the effective review date
+#   5) attestation format, resolvable ID, no future dates
+#
+# Freshness is the newer of the document's own `last_reviewed` and the latest
+# attestation recorded for its id (ADR-012). That keeps `frozen` documents
+# reviewable without touching a byte of them.
+#
+# Portability: no GNU-only `date -d` and no bash 4 `mapfile`, so this runs on
+# macOS (bash 3.2 / BSD userland) as well as CI.
 set -euo pipefail
 
 ROOT="$(git rev-parse --show-toplevel)"
@@ -14,10 +22,36 @@ BASE_REF="${BASE_REF:-origin/main}"
 TODAY="${TODAY:-$(date -u +%F)}"
 MAX_AGE_DAYS="${MAX_AGE_DAYS:-90}"
 SCOPE_DIRS=(evidence adr playbook ledger reviews)
+ATTEST_FILE="ledger/attestations.md"
+# Append-only logs: history, not claims. Exempt from freshness and date sync.
+LOG_PATHS=(reviews "$ATTEST_FILE")
 
 FAIL=0
 note() { printf '%s\n' "$*"; }
 fail() { note "ERROR: $*"; FAIL=1; }
+
+is_log_path() {
+  case "$1" in
+    reviews/*) return 0 ;;
+    "$ATTEST_FILE") return 0 ;;
+  esac
+  return 1
+}
+
+# Days since 1970-01-01 for an ISO date, without GNU date.
+days_since_epoch() {
+  printf '%s\n' "$1" | awk -F- '
+    function days(y, m, d,   era, yoe, doy, doe) {
+      if (m <= 2) y -= 1
+      era = int((y >= 0 ? y : y - 399) / 400)
+      yoe = y - era * 400
+      doy = int((153 * (m + (m > 2 ? -3 : 9)) + 2) / 5) + d - 1
+      doe = yoe * 365 + int(yoe / 4) - int(yoe / 100) + doy
+      return era * 146097 + doe - 719468
+    }
+    { print days($1 + 0, $2 + 0, $3 + 0) }
+  '
+}
 
 has_base=0
 if git rev-parse --verify "$BASE_REF" >/dev/null 2>&1; then
@@ -78,20 +112,90 @@ strip_last_reviewed() {
 }
 
 list_scoped_head_files() {
-  git ls-files "${SCOPE_DIRS[@]}" | while read -r f; do
-    [[ "$f" == *.md ]] && printf '%s\n' "$f"
-  done
+  # `--others` keeps local runs honest: a new document is checked before it is
+  # staged, the same way build-index.sh sees it.
+  git ls-files --cached --others --exclude-standard "${SCOPE_DIRS[@]}" \
+    | sort -u \
+    | while read -r f; do
+        [[ "$f" == *.md && -f "$f" ]] && printf '%s\n' "$f"
+      done
 }
 
 note "== aidd staleness check =="
 note "today(UTC)=$TODAY max_age_days=$MAX_AGE_DAYS base=$BASE_REF"
 
-# ---- 4) 90-day expiry (always) ----
-note "-- check: 90-day last_reviewed expiry --"
+TMPDIR_SELF="$(mktemp -d)"
+trap 'rm -rf "$TMPDIR_SELF"' EXIT
+ATTEST_TSV="$TMPDIR_SELF/attestations.tsv"
+DOC_IDS="$TMPDIR_SELF/ids.txt"
+: >"$ATTEST_TSV"
+: >"$DOC_IDS"
+
 while read -r f; do
   [[ -z "$f" ]] && continue
+  id="$(extract_fm_value "$f" id || true)"
+  [[ -n "$id" ]] && printf '%s\t%s\n' "$id" "$f" >>"$DOC_IDS"
+done < <(list_scoped_head_files)
+
+# Entries live under the `## 証跡` heading; everything above it is frontmatter,
+# prose and a fenced format example.
+attestation_entries() {
+  awk '
+    /^## 証跡[[:space:]]*$/ { in_entries = 1; next }
+    /^## / { in_entries = 0 }
+    in_entries && /^-[[:space:]]/ { print }
+  ' "$ATTEST_FILE"
+}
+
+if [[ -f "$ATTEST_FILE" ]]; then
+  attestation_entries \
+    | awk '/^- [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [A-Za-z0-9-]+ / { print $3 "\t" $2 }' \
+      >>"$ATTEST_TSV"
+fi
+
+latest_attestation() {
+  awk -F'\t' -v id="$1" '$1 == id { print $2 }' "$ATTEST_TSV" | sort | tail -n 1
+}
+
+today_days="$(days_since_epoch "$TODAY")"
+
+# ---- 5) attestation ledger ----
+note "-- check: attestation ledger --"
+if [[ -f "$ATTEST_FILE" ]]; then
+  while IFS=$'\t' read -r id when; do
+    [[ -z "$id" ]] && continue
+    if ! awk -F'\t' -v id="$id" '$1 == id { found = 1 } END { exit !found }' "$DOC_IDS"; then
+      fail "$ATTEST_FILE: attestation for unknown id '$id'"
+      continue
+    fi
+    if [[ "$when" > "$TODAY" ]]; then
+      fail "$ATTEST_FILE: attestation for $id is dated in the future ($when)"
+      continue
+    fi
+    note "OK attestation :: $id $when"
+  done <"$ATTEST_TSV"
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    printf '%s\n' "$line" | awk '
+      /^- [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [A-Za-z0-9-]+ [^[:space:]]/ { ok = 1 }
+      END { exit ok ? 0 : 1 }
+    ' || fail "$ATTEST_FILE: malformed entry '$line' (want '- YYYY-MM-DD <ID> <確認者> — <確認した内容>')"
+  done < <(attestation_entries)
+else
+  note "WARN: $ATTEST_FILE not found; freshness falls back to last_reviewed only"
+fi
+
+# ---- 4) 90-day expiry on the effective review date (always) ----
+note "-- check: ${MAX_AGE_DAYS}-day expiry (effective review date) --"
+while read -r f; do
+  [[ -z "$f" ]] && continue
+  if is_log_path "$f"; then
+    note "SKIP log file (append-only history) :: $f"
+    continue
+  fi
   lr="$(extract_fm_value "$f" last_reviewed || true)"
   st="$(extract_fm_value "$f" status || true)"
+  id="$(extract_fm_value "$f" id || true)"
   if [[ -z "$lr" ]]; then
     fail "$f: missing last_reviewed"
     continue
@@ -100,25 +204,38 @@ while read -r f; do
     fail "$f: invalid last_reviewed='$lr'"
     continue
   fi
-  # GNU date
-  lr_epoch="$(date -u -d "$lr" +%s 2>/dev/null || true)"
-  today_epoch="$(date -u -d "$TODAY" +%s)"
-  if [[ -z "$lr_epoch" ]]; then
-    fail "$f: cannot parse last_reviewed='$lr'"
+  if [[ "$lr" > "$TODAY" ]]; then
+    fail "$f: last_reviewed=$lr is in the future (today=$TODAY)"
     continue
   fi
-  age_days=$(( (today_epoch - lr_epoch) / 86400 ))
+  effective="$lr"
+  source_of="last_reviewed"
+  if [[ -n "$id" ]]; then
+    att="$(latest_attestation "$id")"
+    if [[ -n "$att" && "$att" > "$effective" ]]; then
+      effective="$att"
+      source_of="attestation"
+    fi
+  fi
+  lr_days="$(days_since_epoch "$effective")"
+  age_days=$(( today_days - lr_days ))
   if (( age_days > MAX_AGE_DAYS )); then
-    fail "$f: last_reviewed=$lr is ${age_days}d old (>${MAX_AGE_DAYS}d) status=${st:-unknown}"
+    fail "$f: effective review date $effective is ${age_days}d old (>${MAX_AGE_DAYS}d) status=${st:-unknown}"
   else
-    note "OK age ${age_days}d <= ${MAX_AGE_DAYS}d :: $f"
+    note "OK age ${age_days}d <= ${MAX_AGE_DAYS}d ($source_of) :: $f"
   fi
 done < <(list_scoped_head_files)
 
 if (( has_base == 1 )); then
   # Compare base → working tree (covers uncommitted local edits and CI checkouts).
-  mapfile -t CHANGED < <(git diff --name-only --diff-filter=ACMR "$BASE_REF" -- "${SCOPE_DIRS[@]}" || true)
-  mapfile -t DELETED < <(git diff --name-only --diff-filter=D "$BASE_REF" -- "${SCOPE_DIRS[@]}" || true)
+  CHANGED=()
+  while IFS= read -r line; do
+    [[ -n "$line" ]] && CHANGED+=("$line")
+  done < <(git diff --name-only --diff-filter=ACMR "$BASE_REF" -- "${SCOPE_DIRS[@]}" || true)
+  DELETED=()
+  while IFS= read -r line; do
+    [[ -n "$line" ]] && DELETED+=("$line")
+  done < <(git diff --name-only --diff-filter=D "$BASE_REF" -- "${SCOPE_DIRS[@]}" || true)
 
   # ---- 1) frozen immutability ----
   note "-- check: frozen immutability --"
@@ -155,6 +272,10 @@ if (( has_base == 1 )); then
   for f in "${CHANGED[@]:-}"; do
     [[ -z "${f:-}" || "$f" != *.md ]] && continue
     is_scoped "$f" || continue
+    if is_log_path "$f"; then
+      note "SKIP log file (append-only history) :: $f"
+      continue
+    fi
     if ! git cat-file -e "$BASE_REF:$f" 2>/dev/null; then
       lr="$(extract_fm_value "$f" last_reviewed || true)"
       if [[ "$lr" != "$TODAY" ]]; then
@@ -178,24 +299,19 @@ if (( has_base == 1 )); then
     fi
   done
 
-  # ---- 3) reviews/ append guard ----
-  note "-- check: reviews/ append-only --"
+  # ---- 3) append-only guard for log files ----
+  note "-- check: append-only logs (${LOG_PATHS[*]}) --"
   for f in "${DELETED[@]:-}"; do
     [[ -z "${f:-}" ]] && continue
-    case "$f" in
-      reviews/*.md|reviews/*/*.md)
-        fail "$f: deletion in reviews/ is not allowed"
-        ;;
-    esac
+    if is_log_path "$f"; then
+      fail "$f: deletion of an append-only log is not allowed"
+    fi
   done
   for f in "${CHANGED[@]:-}"; do
     [[ -z "${f:-}" || "$f" != *.md ]] && continue
-    case "$f" in
-      reviews/*) ;;
-      *) continue ;;
-    esac
+    is_log_path "$f" || continue
     if ! git cat-file -e "$BASE_REF:$f" 2>/dev/null; then
-      note "OK new review file :: $f"
+      note "OK new log file :: $f"
       continue
     fi
     base_content="$(git show "$BASE_REF:$f")"
@@ -203,7 +319,7 @@ if (( has_base == 1 )); then
     if [[ "$head_content" == "$base_content"* ]]; then
       note "OK append-only :: $f"
     else
-      fail "$f: reviews/ must be append-only (base content is not a prefix of HEAD)"
+      fail "$f: must be append-only (base content is not a prefix of HEAD)"
     fi
   done
 fi

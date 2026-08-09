@@ -2,7 +2,7 @@
 id: PB-005
 title: staleness CI の失敗を直す
 status: active
-last_reviewed: 2026-08-08
+last_reviewed: 2026-08-09
 owners:
   - TeramachiShunsuke
 tags:
@@ -10,21 +10,24 @@ tags:
   - ci
 related:
   - ADR-004
+  - ADR-012
   - EVID-008
 ---
 
 ## いつ使うか
 
-GitHub Actions の Staleness ワークフローが失敗したとき。
+GitHub Actions の Staleness ワークフローが失敗したとき。週次 `schedule` 実行では、誰の PR とも無関係に main が失敗しうる（期限超過の通知そのもの）。
 
 ## 手順
 
-1. ログの検査名を読む（frozen / last_reviewed / reviews / age90）
+1. ログの検査名を読む（frozen / last_reviewed / append-only logs / expiry / attestation）
 2. 原因別に対応する
    - **frozen**: 差分を戻す。どうしても変えるなら後継文書戦略へ切替
    - **last_reviewed 同期**: 本文変更に合わせて日付を今日（UTC）へ
-   - **reviews 追記**: 途中改変を捨て、末尾追記または新規ファイルにする
-   - **90 日**: 内容をレビューし日付更新。結果を reviews に追記
+   - **append-only logs**: 途中改変を捨て、末尾追記または新規ファイルにする。`reviews/` と `ledger/attestations.md` が対象
+   - **expiry（90 日）**: 内容をレビューする。本文を直したら日付更新、直す必要がなければ `ledger/attestations.md` に証跡を追記
+   - **attestation**: ID の綴りを直す（実在しない ID は失敗）。未来日は使えない
+   - **future date**: 前借りした日付を今日以前に戻す
 3. ローカルで `bash .github/scripts/check-staleness.sh` を再実行
 4. 必要なら Actions の `workflow_dispatch` で main を再検査
 
@@ -32,6 +35,7 @@ GitHub Actions の Staleness ワークフローが失敗したとき。
 
 - 同じ PR で CI が緑
 - 日付だけ進めて内容未確認、になっていない
+- 証跡を足した場合、その行に確認内容が書かれている
 
 ## 失敗時
 
@@ -41,3 +45,5 @@ GitHub Actions の Staleness ワークフローが失敗したとき。
 
 - [.github/workflows/staleness.yml](../.github/workflows/staleness.yml)
 - [.github/scripts/check-staleness.sh](../.github/scripts/check-staleness.sh)
+- [ADR-012](../adr/012-review-attestations.md)
+- [PB-003](003-run-review-cycle.md)
