@@ -44,9 +44,12 @@ jobs:
           chmod +x .github/scripts/build-index.sh
           bash .github/scripts/build-index.sh --check
 
-      # Warning only: which branch should renumber is a human call (ADR-016).
-      - name: Scan for id collisions on other branches
+      # Collisions with the base branch fail (this branch must renumber); those
+      # with other unmerged branches only warn (ADR-018).
+      - name: Scan for id collisions
         shell: bash
+        env:
+          BASE_REF: refs/remotes/origin/${{ github.base_ref || github.ref_name }}
         run: |
           set -euo pipefail
           git fetch --no-tags --prune origin "+refs/heads/*:refs/remotes/origin/*"
