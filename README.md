@@ -10,14 +10,19 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | --- | --- | --- |
 | [AGENTS.md](AGENTS.md) | エージェントの行動規範（常に読む） | 1 |
 | [CONVENTIONS.md](CONVENTIONS.md) | 文書形式・Frontmatter・命名規則 | 1 |
+| [GUIDE.md](GUIDE.md) | ID 体系と文書間リレーションの案内（人向けの入口） | 1 |
 | [INDEX.md](INDEX.md) | 全文書の生成インデックス（手で編集しない） | 1 |
+| [GRAPH.md](GRAPH.md) | 参照グラフとレビュー信号（手で編集しない） | 1 |
 | [evidence/](evidence/) | 観測・根拠（主張の土台） | 増える |
 | [adr/](adr/) | アーキテクチャ / 運用上の決定 | 増える |
 | [playbook/](playbook/) | 繰り返し手順 | 増える |
 | [ledger/](ledger/) | 主張・未決・変更の台帳 | 少数の定番ファイル |
 | [templates/](templates/) | 新規文書の雛形 | 固定 |
 | [reviews/](reviews/) | 定期レビュー記録（追記専用） | 増える |
-| `.cursor/skills/` | playbook への入口となる Agent Skills | 増える |
+| `.agents/skills/` | playbook への入口となる Agent Skills（正本） | 増える |
+| `.claude/skills/` | Claude Code 用の鏡（正本への symlink） | 正本と同数 |
+
+各 ID の意味と文書同士のつながりは [GUIDE.md](GUIDE.md) にまとめてある。
 
 ## 信頼モデル
 
@@ -36,11 +41,23 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | Tier | いつ読むか | 中身 |
 | --- | --- | --- |
 | 0 | 毎セッション、全文 | `AGENTS.md` / `CONVENTIONS.md` |
-| 1 | 毎セッション、一覧のみ | `INDEX.md` / `README.md` / `ledger/` / skills の `description` |
+| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md` / `ledger/` / skills の `description` |
 | 2 | 作業種別が決まったら | `adr/` / `playbook/` |
 | 3 | 主張を疑うとき | `evidence/` / `reviews/` / 廃止文書 |
 
 各文書の Tier は [INDEX.md](INDEX.md) に一覧される。
+
+## 対応エージェント
+
+Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ skill で動く。正本は 1 か所に置き、それを読まないツールにだけ橋を架ける（[ADR-011](adr/011-cross-tool-agent-integration.md)、根拠は [EVID-015](evidence/015-agent-tools-read-different-paths.md)）。
+
+| ツール | 規範 | skill |
+| --- | --- | --- |
+| Codex | `AGENTS.md` | `.agents/skills/` |
+| Cursor | `AGENTS.md` | `.agents/skills/` |
+| Claude Code | `CLAUDE.md`（`@AGENTS.md` の 1 行） | `.claude/skills/` → 正本への symlink |
+
+内容をツールごとに書き分けない。鏡が symlink であることは CI が検査する。Windows で `core.symlinks` が無効な環境だけは鏡が展開されないため、Claude Code 側で `/import` するか手動でコピーする（[OQ-011](ledger/open-questions.md)）。
 
 ## 外部 spec との接続（SDD）
 
@@ -60,16 +77,31 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 
 - **索引の最新性** — 再生成して差分が出たら失敗
 - **Frontmatter 妥当性** — 必須キー欠落・`id` 重複・`tier` の範囲外を拒否
-- **skill 整合性** — `name` とフォルダ名の不一致、参照先 playbook の不在を拒否
+- **skill 整合性** — `name` とフォルダ名の不一致、参照先 playbook の不在、Claude 用 symlink の欠落・誤リンクを拒否
+
+`.github/workflows/graph.yml` が [GRAPH.md](GRAPH.md) の参照グラフを検査する。
+
+- **参照の解決** — `related` と ledger の錨が実在する ID を指すこと
+- **錨のある主張** — 錨を 1 つも持たない claim を拒否
+- **リンク切れ** — 文書間の相対リンクが解決すること
+- **グラフの最新性** — 再生成して差分が出たら失敗
+
+グラフは推論を含まず、辺はすべてファイル内の明示的な記述に遡れる（[ADR-010](adr/010-knowledge-graph-layers.md)）。未使用の根拠や入口のない手順といった**レビュー信号**は `GRAPH.md` に出るが CI は落とさない。
 
 ## 使い方（最短）
 
-1. [AGENTS.md](AGENTS.md) と [CONVENTIONS.md](CONVENTIONS.md) を読む（Tier 0）
+1. [AGENTS.md](AGENTS.md) と [CONVENTIONS.md](CONVENTIONS.md) を読む（Tier 0）。ID 体系が初見なら [GUIDE.md](GUIDE.md)
 2. [INDEX.md](INDEX.md) で関係する文書 ID を特定する（Tier 1）
 3. 作業種別に応じて [playbook/](playbook/) を選ぶ
 4. 新規文書は [templates/](templates/) から作る
 5. 主張は [ledger/claims.md](ledger/claims.md) に錨を付ける
-6. `bash .github/scripts/build-index.sh` で索引を再生成する
+6. 生成物を再生成する（グラフ → 索引の順）
+
+```bash
+python3 .github/scripts/build-graph.py
+bash .github/scripts/build-index.sh
+```
+
 7. PR ではテンプレートのチェックリストを埋める
 
 ## ライセンス

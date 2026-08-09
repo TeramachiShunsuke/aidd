@@ -12,6 +12,7 @@ related:
   - EVID-012
   - ADR-006
   - ADR-007
+  - ADR-011
 tier: 2
 ---
 
@@ -21,7 +22,7 @@ playbook は手順の正本だが、エージェントは「どの playbook を�
 
 ## 決定
 
-1. skill は **`.cursor/skills/<name>/SKILL.md`** に置く。プロジェクト単位で自動ロードされ、バージョン管理下に入るため。
+1. skill は 1 フォルダ 1 ファイル（`<name>/SKILL.md`）で、バージョン管理下に置く。置き場所そのものは [ADR-011](011-cross-tool-agent-integration.md) が定める（正本は `.agents/skills/`、Claude Code 向けの鏡は `.claude/skills/`）。
 2. **1 skill = 1 playbook**。SKILL.md は手順を再定義せず、対応する playbook を読ませることを主目的とする。手順の正本は常に `playbook/`。
 3. Frontmatter は Agent Skills 標準の範囲に限る。`name`（親フォルダ名と一致）と `description` を必須とし、任意キーは `metadata` のみ使う。
    - `metadata.aidd-playbook`: 対応する playbook ID（例: `PB-001`）
@@ -41,7 +42,6 @@ playbook は手順の正本だが、エージェントは「どの playbook を�
 - 利点: 手順の正本が 1 か所（playbook）に残り、skill は薄い入口に留まる
 - 利点: 標準キーのみ使うため、`.claude/skills/` などへ複製しても壊れにくい
 - 代償: skill と playbook の 2 ファイルを同時に更新する場面がある（CI が参照切れのみ検出する）
-- 代償: `.cursor/` 配下に置くため、他ツールでは複製またはシンボリックリンクが必要になる（[OQ-006](../ledger/open-questions.md)）
 
 ## 関連
 

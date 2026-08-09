@@ -27,8 +27,9 @@ esac
 
 OUT="INDEX.md"
 SCOPE_DIRS=(evidence adr playbook ledger reviews)
-SKILLS_ROOT=".cursor/skills"
-ROOT_DOCS=(AGENTS.md CONVENTIONS.md README.md)
+SKILLS_ROOT=".agents/skills"
+CLAUDE_MIRROR=".claude/skills"
+ROOT_DOCS=(AGENTS.md CONVENTIONS.md GUIDE.md README.md GRAPH.md)
 SCRIPT_REL=".github/scripts/build-index.sh"
 
 FAIL=0
@@ -88,7 +89,7 @@ default_tier() {
   if [[ "$st" == "deprecated" ]]; then printf '3'; return; fi
   case "$p" in
     AGENTS.md|CONVENTIONS.md) printf '0' ;;
-    README.md|INDEX.md) printf '1' ;;
+    README.md|GUIDE.md|INDEX.md|GRAPH.md) printf '1' ;;
     ledger/*) printf '1' ;;
     "$SKILLS_ROOT"/*) printf '1' ;;
     adr/*|playbook/*) printf '2' ;;
@@ -102,6 +103,8 @@ root_doc_id() {
     AGENTS.md) printf 'ROOT-AGENTS' ;;
     CONVENTIONS.md) printf 'ROOT-CONVENTIONS' ;;
     README.md) printf 'ROOT-README' ;;
+    GUIDE.md) printf 'ROOT-GUIDE' ;;
+    GRAPH.md) printf 'ROOT-GRAPH' ;;
     *) printf 'ROOT' ;;
   esac
 }
@@ -188,6 +191,30 @@ if [[ -d "$SKILLS_ROOT" ]]; then
 
     printf '%s\t%s\t%s\t%s\n' "${name:-$folder}" "$f" "${pb:-?}" "${desc:-?}" >>"$SKILL_ROWS"
   done < <(list_files "$SKILLS_ROOT" | grep '/SKILL\.md$' || true)
+
+  # Claude Code reads only .claude/skills, so each skill is mirrored there as a
+  # symlink back to the canonical folder (ADR-011).
+  while read -r f; do
+    [[ -z "$f" ]] && continue
+    name="$(basename "$(dirname "$f")")"
+    mirror="$CLAUDE_MIRROR/$name"
+    want="../../$SKILLS_ROOT/$name"
+    if [[ ! -L "$mirror" ]]; then
+      fail "$mirror: missing symlink to '$want' (Claude Code mirror)"
+    elif [[ "$(readlink "$mirror")" != "$want" ]]; then
+      fail "$mirror: symlink points to '$(readlink "$mirror")', want '$want'"
+    else
+      note "OK claude mirror :: $mirror"
+    fi
+  done < <(list_files "$SKILLS_ROOT" | grep '/SKILL\.md$' || true)
+
+  while read -r mirror; do
+    [[ -z "$mirror" ]] && continue
+    name="$(basename "$mirror")"
+    if [[ ! -f "$SKILLS_ROOT/$name/SKILL.md" ]]; then
+      fail "$mirror: mirror without a skill at $SKILLS_ROOT/$name/SKILL.md"
+    fi
+  done < <(list_files "$CLAUDE_MIRROR")
 fi
 
 # ---------- render ----------

@@ -1,4 +1,4 @@
-name: Index
+name: Graph
 
 on:
   pull_request:
@@ -9,15 +9,13 @@ on:
       - "ledger/**"
       - "reviews/**"
       - ".agents/skills/**"
-      - ".claude/skills/**"
-      - "INDEX.md"
       - "GRAPH.md"
       - "AGENTS.md"
       - "CONVENTIONS.md"
       - "GUIDE.md"
       - "README.md"
-      - ".github/scripts/build-index.sh"
-      - ".github/workflows/index.yml"
+      - ".github/scripts/build-graph.py"
+      - ".github/workflows/graph.yml"
   push:
     branches:
       - main
@@ -27,16 +25,15 @@ permissions:
   contents: read
 
 jobs:
-  index:
-    name: Check generated index
+  graph:
+    name: Check reference graph
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify INDEX.md is up to date
+      - name: Verify GRAPH.md is up to date
         shell: bash
         run: |
           set -euo pipefail
-          chmod +x .github/scripts/build-index.sh
-          bash .github/scripts/build-index.sh --check
+          python3 .github/scripts/build-graph.py --check

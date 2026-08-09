@@ -7,7 +7,8 @@ metadata:
 ---
 
 <!--
-コピー先は .cursor/skills/<name>/SKILL.md。本文中の相対リンクはコピー先を基準にしているため、
+コピー先は .agents/skills/<name>/SKILL.md（Claude Code 用に .claude/skills/<name> の symlink も作る）。
+本文中の相対リンクはコピー先を基準にしているため、
 この雛形の位置（templates/）からは解決しない。手順は PB-009 を参照。
 -->
 

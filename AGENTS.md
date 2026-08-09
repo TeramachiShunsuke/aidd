@@ -11,11 +11,22 @@
 Tier（[ADR-006](adr/006-context-tiers.md)）に従って読む。上 2 つは毎回、下 2 つは必要になってから。
 
 1. Tier 0: 本ファイル（AGENTS.md）と [CONVENTIONS.md](CONVENTIONS.md) — 全文
-2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する
+2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)、ID 体系と関係が不明なときは [GUIDE.md](GUIDE.md)）
 3. Tier 2: 作業に関係する playbook と ADR — 全文
 4. Tier 3: 根拠を疑うときだけ evidence / reviews
 
-skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-009](adr/009-skills-as-playbook-entrypoints.md)）。
+skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-009](adr/009-skills-as-playbook-entrypoints.md)）。
+
+## 動作するツール
+
+このリポジトリは Codex / Cursor / Claude Code のいずれからでも同じ規範と skill で動く（[ADR-011](adr/011-cross-tool-agent-integration.md)）。
+
+| | 規範 | skill |
+| --- | --- | --- |
+| Codex / Cursor | 本ファイル（`AGENTS.md`） | `.agents/skills/`（正本） |
+| Claude Code | `CLAUDE.md` = `@AGENTS.md` の 1 行 | `.claude/skills/`（正本への symlink） |
+
+`CLAUDE.md` に規範を書き足さない。ツール固有のルールファイル（`.cursor/rules/*.mdc` 等）にも複製しない。
 
 ## やってよいこと
 
@@ -23,8 +34,8 @@ skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致�
 - `status: draft` / `active` の文書を更新し、同時に `last_reviewed` を今日（UTC）にする
 - `reviews/` に新規ファイルを追加する、または既存ファイルの**末尾のみ**追記する
 - `ledger/` の claims / open-questions / changelog を規約どおり更新する
-- `.cursor/skills/` に skill を追加・更新する（1 skill = 1 playbook）
-- `bash .github/scripts/build-index.sh` で `INDEX.md` を再生成する
+- `.agents/skills/` に skill を追加・更新し、`.claude/skills/` に symlink の鏡を作る（1 skill = 1 playbook）
+- 生成物（`GRAPH.md` → `INDEX.md` の順）を再生成する
 - PR 説明に、触った文書 ID と根拠（evidence / ADR）を列挙する
 
 ## やってはいけないこと
@@ -33,8 +44,9 @@ skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致�
 - `reviews/` の既存行・既存段落を書き換え・削除する
 - Frontmatter なし、または必須キー欠落の文書を追加する
 - 根拠なしの主張を ledger に載せる（evidence / ADR / 外部 URL のいずれかの錨が必要）
-- `INDEX.md` を手で編集する（生成物。文書側を直して再生成する）
+- `INDEX.md` / `GRAPH.md` を手で編集する（生成物。文書側を直して再生成する）
 - skill の本文に playbook の手順を書き写す（二重管理になる）
+- 意味グラフツールの出力（`graphify-out/` 等）を commit する
 - 秘密情報、トークン、個人データをコミットする
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新（本文レビューなし）
 
@@ -47,7 +59,7 @@ skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致�
   → 決定が必要なら ADR
   → 手順化できるなら playbook（発見されにくいなら skill も添える）
   → ledger を同期
-  → INDEX.md を再生成
+  → GRAPH.md と INDEX.md を再生成
   → PR（テンプレート必須項目を埋める）
 ```
 
@@ -63,6 +75,7 @@ skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致�
 ```bash
 bash .github/scripts/check-staleness.sh
 bash .github/scripts/build-index.sh --check
+python3 .github/scripts/build-graph.py --check
 ```
 
 ## エスカレーション
