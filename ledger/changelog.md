@@ -16,6 +16,7 @@ tags:
 
 ## 2026-08-09
 
+- 採番の権威を main に置いた: ADR-018 / EVID-023 / CLAIM-023。`check-id-collisions.sh` に `--next <PREFIX>`（main と全ブランチを走査して空き番号を返す）を追加し、base ブランチとの衝突を error、未着地ブランチ同士を warning に等級分けした。ファイル名変更を衝突と誤検出しないよう merge-base で判定する。PR の base は main を既定とし、積み上げ PR を禁止した（AGENTS / CONVENTIONS / PB-015）
 - 競合面を減らす: ADR-016 / EVID-021 / PB-015 / skill `aidd-resolve-conflict`。`.gitattributes` で `ledger/*.md` と `reviews/*.md` を `merge=union` にし、生成物は再生成で解決すると決めた。`check-id-collisions.sh` が他ブランチとの ID 衝突を警告する（Index CI）。`merge=union` が残しうる Frontmatter キーの二重定義を error として検出する
 - 機械と人間の分界を定義: ADR-017 / EVID-022 / CLAIM-021..022。CI は事実の記録・不整合の検出・前提条件の検査に限り、`status` の遷移と証跡の代筆はしない。`draft` の 30 日滞留を鮮度検査の警告として追加（生成物に日付依存の行を入れないため `GRAPH.md` には出さない）。OQ-024（台帳の断片化）と OQ-025（指紋方式）を追加
 - 実装スペックの扱いを定義: ADR-014 / EVID-018 / EVID-019 / PB-012 / PB-013。契約・決定・振る舞いに分割し、文書に残すのは共有境界・不可逆・選択肢ありの決定だけとした

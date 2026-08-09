@@ -11,22 +11,22 @@
 
 | 区分 | 件数 |
 | --- | --- |
-| ノード: adr | 17 |
-| ノード: claim | 22 |
-| ノード: evidence | 22 |
+| ノード: adr | 18 |
+| ノード: claim | 23 |
+| ノード: evidence | 23 |
 | ノード: external | 3 |
 | ノード: ledger | 4 |
-| ノード: open-question | 25 |
+| ノード: open-question | 27 |
 | ノード: playbook | 15 |
 | ノード: reviews | 6 |
 | ノード: root | 4 |
 | ノード: skill | 10 |
-| 辺: anchor | 45 |
+| 辺: anchor | 47 |
 | 辺: entrypoint | 10 |
-| 辺: links | 420 |
-| 辺: related | 179 |
-| ノード合計 | 128 |
-| 辺合計 | 654 |
+| 辺: links | 449 |
+| 辺: related | 188 |
+| ノード合計 | 133 |
+| 辺合計 | 694 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -51,6 +51,7 @@ graph LR
   ADR_015[ADR-015]
   ADR_016[ADR-016]
   ADR_017[ADR-017]
+  ADR_018[ADR-018]
   EVID_001(EVID-001)
   EVID_002(EVID-002)
   EVID_003(EVID-003)
@@ -73,6 +74,7 @@ graph LR
   EVID_020(EVID-020)
   EVID_021(EVID-021)
   EVID_022(EVID-022)
+  EVID_023(EVID-023)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -140,6 +142,10 @@ graph LR
   ADR_017 --> ADR_013
   ADR_017 --> EVID_016
   ADR_017 --> EVID_022
+  ADR_018 --> ADR_013
+  ADR_018 --> ADR_017
+  ADR_018 --> EVID_021
+  ADR_018 --> EVID_023
 ```
 
 ## ハブ（被参照が多い文書）
@@ -148,14 +154,14 @@ graph LR
 | --- | --- | --- | --- |
 | ADR-012 | 28 | 14 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する |
 | ADR-006 | 27 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ADR-013 | 25 | 19 | 検査を error と warning に等級分けし、充足しているものから機械で固定する |
 | ADR-010 | 24 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
 | ADR-007 | 20 | 12 | INDEX.md を生成物とし、CI で最新性を強制する |
-| ADR-013 | 20 | 19 | 検査を error と warning に等級分けし、充足しているものから機械で固定する |
 | LEDGER-OQ | 20 | 0 | Open questions |
 | EVID-010 | 19 | 9 | 手書き目次は腐るが、生成物なら差分で腐敗を検出できる |
-| ROOT-CONVENTIONS | 18 | 17 | CONVENTIONS.md |
+| ROOT-CONVENTIONS | 18 | 19 | CONVENTIONS.md |
+| ADR-003 | 17 | 4 | frozen 文書はバイトレベルで不変とする |
 | EVID-003 | 17 | 4 | 文書ドリフトは静かな回帰である |
-| PB-003 | 17 | 7 | レビューサイクルを回す |
 
 ## レビュー信号
 
@@ -199,4 +205,6 @@ graph LR
 | OQ-023 | 意味グラフの提案を `related` へ焼き込む作業を、誰がどの頻度で回すか？（現状は運用未定。adr:ADR-013） |
 | OQ-024 | 台帳を towncrier 方式の断片ファイルへ分割するか？ 現状は `merge=union` で行競合を消しているが、重複 ID は残りうる。分割すると 1 ファイル grep の利点が消える（evidence:EVID-021 adr:ADR-016） |
 | OQ-025 | レビュー判定を日付から Doorstop 方式の指紋（内容ハッシュ）へ移すか？ 本文を変えずに日付だけ進める操作を機械的に検出できるようになるが、`frozen` 文書は指紋を本体に書けないため証跡側に持つ設計が要る（evidence:EVID-022 adr:ADR-017） |
+| OQ-026 | 未着地の PR 同士の ID 衝突を、機械的に決着させる規約を置くか？（PR 番号の大小で譲る側を決めれば error に昇格できるが、GitHub API への依存が入り、オフラインで走る現在の検査の性質が変わる。evidence:EVID-023 adr:ADR-018） |
+| OQ-027 | 並行度が上がっても連番を維持できるか？ 現在は「1 PR ずつ・main を base」で衝突窓を短く保っているだけで、同時に 5 本以上開く運用は試していない。破綻したら採番方式そのもの（スラッグ / 外部番号）を選び直す必要があり、`frozen` 文書の扱いが論点になる（evidence:EVID-023 adr:ADR-003 ADR-018） |
 

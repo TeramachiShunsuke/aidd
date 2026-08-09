@@ -83,7 +83,7 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **Frontmatter 妥当性** — 必須キー欠落・`id` 重複・`tier` の範囲外を拒否
 - **skill 整合性** — `name` とフォルダ名の不一致、参照先 playbook の不在、Claude 用 symlink の欠落・誤リンクを拒否
 - **Frontmatter キーの重複** — `merge=union` が残しうる二重定義を拒否
-- **ID 衝突の走査** — 同じ ID を別ファイル名で使っているブランチを報告する（警告。どちらが譲るかは人間が決める）
+- **ID 衝突の走査** — 同じ ID を別ファイル名で使っているブランチを報告する。base ブランチとの衝突は失敗（譲るのは必ず PR 側）、未着地のブランチ同士は警告（先に着地した方が保持する）。新規採番は `check-id-collisions.sh --next EVID` に聞く（[ADR-018](adr/018-id-allocation.md)）
 
 `.github/workflows/graph.yml` が [GRAPH.md](GRAPH.md) の参照グラフを検査する。
 

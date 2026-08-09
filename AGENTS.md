@@ -50,6 +50,8 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - 意味グラフツールの出力（`graphify-out/` 等）を commit する
 - 生成物の競合を手で解決する（`GRAPH.md` → `INDEX.md` の順に再生成する。[PB-015](playbook/015-resolve-conflicts.md)）
 - 文書の `status` を CI やスクリプトから書き換える（遷移は人間の判断。[ADR-017](adr/017-machines-record-facts-humans-decide-status.md)）
+- 番号を目視で数えて採番する（`--next` に聞く。下記「採番と PR の単位」）
+- 1 セッションで複数の PR を積み上げる（base を別の PR にする。[ADR-018](adr/018-id-allocation.md)）
 - 秘密情報、トークン、個人データをコミットする
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新や証跡追記（本文レビューなし）
 
@@ -67,6 +69,19 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 ```
 
 外部の spec（requirements / design / tasks）との受け渡しは [ADR-008](adr/008-sdd-bridge.md) と [PB-008](playbook/008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
+
+## 採番と PR の単位
+
+新規文書を作る前に、番号を機械に聞く（[ADR-018](adr/018-id-allocation.md)）。目視で「最大が 022 だから 023」と数えない。開いている他のブランチが既にその番号を取っているかもしれない。
+
+```bash
+git fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
+bash .github/scripts/check-id-collisions.sh --next EVID   # ADR / PB / REV / CLAIM / OQ も可
+```
+
+PR の base は **main** とし、1 つの意図につき 1 本にまとめる。積み上げ PR は、親がマージされても子は main に届かないため、番号が確保されないまま滞留して衝突を招く（[REV-006](reviews/006-lifecycle-self-review.md) が実例）。
+
+分割が必要なら、直列にする。文書を追加する PR を先に main へ着地させ、それを参照する PR を後から出す。
 
 ## 完了条件
 

@@ -21,6 +21,18 @@
 
 `NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。ID の意味と文書同士のつながりの解説は [GUIDE.md](GUIDE.md) にある（本ファイルは規範、GUIDE は案内）。
 
+### 採番
+
+番号は自分で数えず、main と開いている全ブランチを走査して取る（[ADR-018](adr/018-id-allocation.md)）。
+
+```bash
+bash .github/scripts/check-id-collisions.sh --next EVID
+```
+
+ID は一度公開したら変えない。ただし**マージ前に base ブランチと衝突していた場合は、必ず自分の側が振り直す**（main は過去を書き換えない）。未着地のブランチ同士の衝突は警告に留まり、先に main へ着地した方が番号を保持する。手順は [PB-015](playbook/015-resolve-conflicts.md)。
+
+PR の base は main を既定とする。積み上げ PR は、親がマージされても子は main に届かないため、番号が確保されないまま滞留し衝突の温床になる。
+
 ## Frontmatter（必須）
 
 `evidence` / `adr` / `playbook` / `reviews` の各文書:

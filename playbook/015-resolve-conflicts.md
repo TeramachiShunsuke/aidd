@@ -11,14 +11,27 @@ tags:
   - ci
 related:
   - ADR-016
+  - ADR-018
   - EVID-021
+  - EVID-023
   - ADR-007
 tier: 2
 ---
 
 ## いつ使うか
 
-`git merge` / `git rebase` が競合したとき、または `build-index.sh --check` が ID の重複を報告したとき。
+`git merge` / `git rebase` が競合したとき、`check-id-collisions.sh` が ID の衝突を報告したとき、または `build-index.sh --check` が ID の重複を報告したとき。
+
+## 先に防ぐ（新規文書を作る前に読む）
+
+番号は自分で数えず、機械に聞く。main と開いている全ブランチを走査する（[ADR-018](../adr/018-id-allocation.md)）。
+
+```bash
+git fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
+bash .github/scripts/check-id-collisions.sh --next EVID   # ADR / PB / REV / CLAIM / OQ も可
+```
+
+PR の base は main にする。積み上げ PR は、親がマージされても子は main に届かないため、番号が確保されないまま滞留する。
 
 ## 手順
 
@@ -51,13 +64,20 @@ bash .github/scripts/build-index.sh --check      # 文書 id の重複を検出�
 
 ### 4. ID の衝突（Git が競合として報告しないもの）
 
-別々のファイル名で同じ ID を使っている場合、Git は競合を報告せずマージが成功する。`check-id-collisions.sh` の警告か、マージ後の重複検査で気づく。
+別々のファイル名で同じ ID を使っている場合、Git は競合を報告せずマージが成功する。`check-id-collisions.sh` が事前に見せる。
 
 ```bash
-bash .github/scripts/check-id-collisions.sh   # 他ブランチとの衝突を事前に見る
+bash .github/scripts/check-id-collisions.sh
 ```
 
-振り直す側を決める（**先に main へ着地した方が番号を保持する**）。振り直しは 3 段階で行う。
+報告は 2 等級で、振り直す側は等級で決まる（[ADR-018](../adr/018-id-allocation.md)）。
+
+| 等級 | 相手 | 振り直す側 |
+| --- | --- | --- |
+| ERROR | base ブランチ（通常は main） | **必ず自分**。main は過去を書き換えない |
+| WARN | 未着地の他ブランチ | 先に main へ着地した方が番号を保持する |
+
+WARN は放置しても消えない。相手が着地した時点で ERROR に変わるので、**先に着地する見込みがない側は今のうちに振り直す**方が安い。振り直しは 3 段階で行う。
 
 1. ファイル名を変える（降順に処理して玉突きを避ける）
 2. 文書内の `id:` と、他文書からの `related` / 本文リンクを置換する
