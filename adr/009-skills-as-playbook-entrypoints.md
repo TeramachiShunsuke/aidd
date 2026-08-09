@@ -13,6 +13,8 @@ related:
   - ADR-006
   - ADR-007
   - ADR-011
+  - EVID-006
+  - EVID-009
 tier: 2
 ---
 

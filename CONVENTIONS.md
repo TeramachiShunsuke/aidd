@@ -130,8 +130,15 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - 検査: `python3 .github/scripts/build-graph.py --check`（CI で実行）
 - 生成物の更新順は **グラフ → 索引**（索引が `GRAPH.md` を拾うため）
 - 辺は明示メタデータのみ。`related` / `supersedes` / `superseded_by`、文書間リンク、claims の錨、skill の `metadata.aidd-playbook`。**推論した辺は持たない**
-- CI が落ちるのは 4 つだけ。参照の未解決、錨のない claim、リンク切れ、`GRAPH.md` の陳腐化
-- それ以外（未使用の根拠、根拠なしの決定、入口のない手順、孤立など）は**警告**で、レビューの候補として `GRAPH.md` に出る
+- 影響範囲の照会: `python3 .github/scripts/build-graph.py --impact <ID>`
+- CI が落ちる検査（[ADR-013](adr/013-check-grades.md)）
+  1. 参照の未解決 / 錨のない claim / リンク切れ / `GRAPH.md` の陳腐化
+  2. ADR の `## 根拠` 節に挙げた ID が `related` にない（`frozen` は対象外）
+  3. ADR が evidence の錨を持たない
+  4. 決定・主張が `deprecated` な根拠に乗っている
+  5. `superseded_by` を持つのに `status: deprecated` でない
+- 残り（未使用の根拠、手順のない決定、入口のない手順、草案に乗る決定、追随していない決定、孤立）は**警告**で、レビュー候補として `GRAPH.md` に出る
+- 昇格は違反 0 件・修正方法が一意・frozen を壊さない、の 3 条件を満たすときのみ（[PB-011](playbook/011-promote-check.md)）
 - 意味グラフ（LLM ベース）は CI に入れない。詳細は [ADR-010](adr/010-knowledge-graph-layers.md)、読み方は [PB-010](playbook/010-review-with-graph.md)
 
 ## skills
