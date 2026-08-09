@@ -21,6 +21,7 @@ cd "$ROOT"
 BASE_REF="${BASE_REF:-origin/main}"
 TODAY="${TODAY:-$(date -u +%F)}"
 MAX_AGE_DAYS="${MAX_AGE_DAYS:-90}"
+MAX_DRAFT_DAYS="${MAX_DRAFT_DAYS:-30}"
 SCOPE_DIRS=(evidence adr playbook ledger reviews)
 ATTEST_FILE="ledger/attestations.md"
 # Append-only logs: history, not claims. Exempt from freshness and date sync.
@@ -223,6 +224,12 @@ while read -r f; do
     fail "$f: effective review date $effective is ${age_days}d old (>${MAX_AGE_DAYS}d) status=${st:-unknown}"
   else
     note "OK age ${age_days}d <= ${MAX_AGE_DAYS}d ($source_of) :: $f"
+  fi
+  # Promoting or dropping a draft is a human call, so this only reports (ADR-017).
+  # It lives here rather than in GRAPH.md because a date-dependent line would
+  # make the generated graph go stale by the calendar alone.
+  if [[ "$st" == "draft" ]] && (( age_days > MAX_DRAFT_DAYS )); then
+    note "WARN: $f: draft のまま ${age_days}d 経過。active に上げるか取り下げる"
   fi
 done < <(list_scoped_head_files)
 

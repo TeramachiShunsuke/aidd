@@ -142,6 +142,24 @@ while read -r f; do
   [[ -z "$status" ]] && fail "$f: missing frontmatter key 'status'"
   [[ -z "$lr" ]] && fail "$f: missing frontmatter key 'last_reviewed'"
 
+  # A union merge (ADR-016) can leave two copies of a scalar key. Readers take
+  # the first and the second silently wins nothing, so catch it here.
+  dupe_keys="$(awk '
+    BEGIN { in_fm = 0; seen = 0 }
+    /^---[[:space:]]*$/ {
+      if (seen == 0) { in_fm = 1; seen = 1; next }
+      if (in_fm == 1) { exit }
+    }
+    in_fm == 1 && /^(id|title|status|last_reviewed|tier):[[:space:]]/ {
+      split($0, parts, ":")
+      count[parts[1]]++
+    }
+    END { for (k in count) if (count[k] > 1) print k }
+  ' "$f")"
+  if [[ -n "$dupe_keys" ]]; then
+    fail "$f: duplicate frontmatter key(s): $(printf '%s' "$dupe_keys" | tr '\n' ' ')"
+  fi
+
   if [[ -n "$id" ]]; then
     if grep -Fxq "$id" "$IDS" 2>/dev/null; then
       fail "$f: duplicate id '$id'"

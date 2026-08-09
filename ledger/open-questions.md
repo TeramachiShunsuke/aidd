@@ -21,7 +21,6 @@ tags:
 - OQ-004: Tier 0 / Tier 1 の総量に上限（行数またはトークン）を設けるか？（現状は上限なし。増やすときは ADR で合意）
 - OQ-005: 生成物 `INDEX.md` をリポジトリに置き続けるか、CI 生成に切り替えるか？（現状は差分レビュー可能性を優先して commit する）
 - OQ-007: SDD の「昇格するか」の判断を機械支援できるか？（現状は PB-008 の質問リストによる人間判断）
-- OQ-008: `GRAPH.md` の警告（未使用の根拠・根拠なしの決定など）を、いつ CI エラーへ昇格させるか？（現状はすべて警告のまま）
 - OQ-009: 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010）
 - OQ-010: 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？
 - OQ-011: Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011）
@@ -32,9 +31,16 @@ tags:
 - OQ-017: AIDD の効果（関連文書検索の成功率・手戻り・レビュー時間・グラフ警告の有効率）を実プロジェクトで測定するか？（測定なしに知識表現を増やすと文書官僚制化する懸念。REV-005）
 - OQ-018: 期限日の集中をどう散らすか？ 全文書の `last_reviewed` が 2026-08-08/09 に集中しており、期限も 2 日に集中する。週次 `schedule` の下では、その週に main が 40 件超のエラーで赤くなる（証跡を計画的に分散する運用で緩和できるが、仕組みはない。adr:ADR-012 REV-006）
 - OQ-019: 規範文書に散らばる手書きの表（Tier 表が README / CONVENTIONS / GUIDE、ツール対応表が AGENTS / README / GUIDE）を単一の出所にするか？ 生成インデックスと同じ腐り方をする（evidence:EVID-010 REV-006）
+- OQ-020: frozen 文書は根拠節と `related` の突き合わせから外れる。ADR-002 のズレ（EVID-003）をどう解消するか？（後継 ADR を作るか、frozen を解くか。adr:ADR-013）
+- OQ-021: 案件限りの ADR を spec / 実装リポジトリのどこに、どの体裁で置くか？（KB から検査できないため運用が割れやすい。adr:ADR-014）
+- OQ-022: 受け入れ例の粒度と網羅の目安をどう決めるか？（例が多すぎるとテストが遅く、少ないと解釈が入る。adr:ADR-014）
+- OQ-023: 意味グラフの提案を `related` へ焼き込む作業を、誰がどの頻度で回すか？（現状は運用未定。adr:ADR-013）
+- OQ-024: 台帳を towncrier 方式の断片ファイルへ分割するか？ 現状は `merge=union` で行競合を消しているが、重複 ID は残りうる。分割すると 1 ファイル grep の利点が消える（evidence:EVID-021 adr:ADR-016）
+- OQ-025: レビュー判定を日付から Doorstop 方式の指紋（内容ハッシュ）へ移すか？ 本文を変えずに日付だけ進める操作を機械的に検出できるようになるが、`frozen` 文書は指紋を本体に書けないため証跡側に持つ設計が要る（evidence:EVID-022 adr:ADR-017）
 
 ## Resolved
 
+- OQ-008: `GRAPH.md` の警告をいつ CI エラーへ昇格させるか？ → **違反 0 件・修正方法が一意・frozen を壊さない、の 3 条件**を満たしたとき。基準と等級表は ADR-013、手順は PB-011（adr:ADR-013 evidence:EVID-017、2026-08-09）
 - OQ-003: claims 錨のリンク切れを自動検知するか？ → **する**。`build-graph.py` が錨・`related`・文書間リンクの解決を検査し、CI を落とす（adr:ADR-010 evidence:EVID-014、2026-08-09）
 - OQ-006: skills を `.cursor/skills/` 以外へ複製するか？ → **複製しない**。正本を `.agents/skills/`（Codex / Cursor が読む）に置き、Claude Code 用に `.claude/skills/<name>` の symlink だけを作る。対応関係は CI が検査する（adr:ADR-011 evidence:EVID-015、2026-08-09）
 - OQ-013: frozen・90 日鮮度・reviews 追記のライフサイクル矛盾をどう解消するか？ → **レビュー証跡を分離する**。`ledger/attestations.md` への追記で実効レビュー日を導出し、frozen は本文を触らずにレビューできる。reviews と証跡台帳は追記専用ログとして期限・日付同期の対象外にした（adr:ADR-012 evidence:EVID-016、2026-08-09）

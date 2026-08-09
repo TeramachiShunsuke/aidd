@@ -15,13 +15,6 @@ tags:
 主張は短く、錨を必須とする。形式:
 
 ```text
-- [ ] CLAIM-NNN: <主張> — evidence:EVID-... adr:ADR-... url:https://...
-```
-
-完了・廃棄したら `[x]` にし、廃棄理由を末尾に書く。
-
-## Active
-
 - [ ] CLAIM-001: エージェント出力は根拠と分離して扱う — evidence:EVID-001
 - [ ] CLAIM-002: 長期記憶はリポジトリ上の構造化 Markdown に置く — evidence:EVID-002 adr:ADR-001
 - [ ] CLAIM-003: 文書ドリフトは回帰である — evidence:EVID-003 adr:ADR-004
@@ -38,3 +31,9 @@ tags:
 - [ ] CLAIM-014: 意味グラフは CI に置かず、探索の結果だけを evidence に昇格させる — evidence:EVID-013 adr:ADR-010
 - [ ] CLAIM-015: エージェントツールは探索パスが割れるため、正本を 1 か所に置き読まないツールにだけ橋を架ける — evidence:EVID-015 adr:ADR-011
 - [ ] CLAIM-016: レビューという出来事を不変な文書本体に書き込むと、不変性と鮮度が両立しなくなる。証跡を分離すれば両立する — evidence:EVID-016 adr:ADR-012
+- [ ] CLAIM-017: 検査は違反 0 件のものから error に固定し、判断の要るものは warning に残す — evidence:EVID-017 adr:ADR-013
+- [ ] CLAIM-018: 振る舞いはテスト、契約は定義ファイル、決定だけが文書として生き残る — evidence:EVID-018 adr:ADR-014
+- [ ] CLAIM-019: 事前設計が見合うのは不可逆な箇所だけで、可逆な箇所は試して測る — evidence:EVID-019 adr:ADR-014
+- [ ] CLAIM-020: インフラの状態は文書化せず、取得コマンドとして渡す — evidence:EVID-020 adr:ADR-015
+- [ ] CLAIM-021: 競合は解決を上手くするのではなく、競合面を減らして扱う — evidence:EVID-021 adr:ADR-016 url:https://github.com/twisted/towncrier
+- [ ] CLAIM-022: 機械が書けるのは事実と検出であり、status の遷移は人間の判断である — evidence:EVID-022 adr:ADR-017 url:https://github.com/doorstop-dev/doorstop

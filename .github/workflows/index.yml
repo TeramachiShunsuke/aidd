@@ -17,6 +17,7 @@ on:
       - "GUIDE.md"
       - "README.md"
       - ".github/scripts/build-index.sh"
+      - ".github/scripts/check-id-collisions.sh"
       - ".github/workflows/index.yml"
   push:
     branches:
@@ -33,6 +34,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Verify INDEX.md is up to date
         shell: bash
@@ -40,3 +43,12 @@ jobs:
           set -euo pipefail
           chmod +x .github/scripts/build-index.sh
           bash .github/scripts/build-index.sh --check
+
+      # Warning only: which branch should renumber is a human call (ADR-016).
+      - name: Scan for id collisions on other branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --prune origin "+refs/heads/*:refs/remotes/origin/*"
+          chmod +x .github/scripts/check-id-collisions.sh
+          bash .github/scripts/check-id-collisions.sh | tee -a "$GITHUB_STEP_SUMMARY"

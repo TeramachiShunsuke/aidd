@@ -11,22 +11,22 @@
 
 | 区分 | 件数 |
 | --- | --- |
-| ノード: adr | 12 |
-| ノード: claim | 16 |
-| ノード: evidence | 16 |
-| ノード: external | 1 |
+| ノード: adr | 17 |
+| ノード: claim | 22 |
+| ノード: evidence | 22 |
+| ノード: external | 3 |
 | ノード: ledger | 4 |
-| ノード: open-question | 19 |
-| ノード: playbook | 10 |
+| ノード: open-question | 25 |
+| ノード: playbook | 15 |
 | ノード: reviews | 6 |
 | ノード: root | 4 |
-| ノード: skill | 6 |
-| 辺: anchor | 31 |
-| 辺: entrypoint | 6 |
-| 辺: links | 278 |
-| 辺: related | 115 |
-| ノード合計 | 94 |
-| 辺合計 | 430 |
+| ノード: skill | 10 |
+| 辺: anchor | 45 |
+| 辺: entrypoint | 10 |
+| 辺: links | 420 |
+| 辺: related | 179 |
+| ノード合計 | 128 |
+| 辺合計 | 654 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -46,6 +46,12 @@ graph LR
   ADR_010[ADR-010]
   ADR_011[ADR-011]
   ADR_012[ADR-012]
+  ADR_013[ADR-013]
+  ADR_014[ADR-014]
+  ADR_015[ADR-015]
+  ADR_016[ADR-016]
+  ADR_017[ADR-017]
+  EVID_001(EVID-001)
   EVID_002(EVID-002)
   EVID_003(EVID-003)
   EVID_004(EVID-004)
@@ -61,6 +67,12 @@ graph LR
   EVID_014(EVID-014)
   EVID_015(EVID-015)
   EVID_016(EVID-016)
+  EVID_017(EVID-017)
+  EVID_018(EVID-018)
+  EVID_019(EVID-019)
+  EVID_020(EVID-020)
+  EVID_021(EVID-021)
+  EVID_022(EVID-022)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -72,44 +84,78 @@ graph LR
   ADR_005 --> EVID_005
   ADR_006 --> ADR_001
   ADR_006 --> ADR_007
+  ADR_006 --> EVID_002
   ADR_006 --> EVID_009
+  ADR_006 --> EVID_012
   ADR_007 --> ADR_004
   ADR_007 --> ADR_006
+  ADR_007 --> EVID_003
   ADR_007 --> EVID_010
   ADR_008 --> ADR_001
   ADR_008 --> ADR_006
+  ADR_008 --> EVID_001
+  ADR_008 --> EVID_007
   ADR_008 --> EVID_011
   ADR_009 --> ADR_006
   ADR_009 --> ADR_007
   ADR_009 --> ADR_011
+  ADR_009 --> EVID_006
+  ADR_009 --> EVID_009
   ADR_009 --> EVID_012
   ADR_010 --> ADR_007
+  ADR_010 --> EVID_009
+  ADR_010 --> EVID_010
   ADR_010 --> EVID_013
   ADR_010 --> EVID_014
   ADR_011 --> ADR_006
   ADR_011 --> ADR_009
+  ADR_011 --> EVID_009
+  ADR_011 --> EVID_012
   ADR_011 --> EVID_015
   ADR_012 --> ADR_003
   ADR_012 --> ADR_004
   ADR_012 --> ADR_005
   ADR_012 --> EVID_003
   ADR_012 --> EVID_016
+  ADR_013 --> ADR_003
+  ADR_013 --> ADR_010
+  ADR_013 --> EVID_010
+  ADR_013 --> EVID_013
+  ADR_013 --> EVID_014
+  ADR_013 --> EVID_017
+  ADR_014 --> ADR_008
+  ADR_014 --> EVID_011
+  ADR_014 --> EVID_018
+  ADR_014 --> EVID_019
+  ADR_015 --> ADR_006
+  ADR_015 --> ADR_014
+  ADR_015 --> EVID_009
+  ADR_015 --> EVID_019
+  ADR_015 --> EVID_020
+  ADR_016 --> ADR_007
+  ADR_016 --> ADR_013
+  ADR_016 --> EVID_010
+  ADR_016 --> EVID_021
+  ADR_017 --> ADR_012
+  ADR_017 --> ADR_013
+  ADR_017 --> EVID_016
+  ADR_017 --> EVID_022
 ```
 
 ## ハブ（被参照が多い文書）
 
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
-| ADR-006 | 23 | 13 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
-| ADR-012 | 20 | 14 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する |
-| ROOT-CONVENTIONS | 18 | 13 | CONVENTIONS.md |
-| ADR-004 | 16 | 9 | 鮮度は last_reviewed の 90 日と変更時同期で守る |
-| ADR-007 | 16 | 11 | INDEX.md を生成物とし、CI で最新性を強制する |
-| ADR-010 | 16 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
-| LEDGER-OQ | 16 | 0 | Open questions |
-| PB-003 | 16 | 7 | レビューサイクルを回す |
-| ADR-011 | 14 | 14 | skills と規範をツール横断にし、正本を 1 か所に置く |
-| ADR-009 | 13 | 11 | skills は playbook の入口とし、手順を二重に持たない |
+| ADR-012 | 28 | 14 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する |
+| ADR-006 | 27 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ADR-010 | 24 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
+| ADR-007 | 20 | 12 | INDEX.md を生成物とし、CI で最新性を強制する |
+| ADR-013 | 20 | 19 | 検査を error と warning に等級分けし、充足しているものから機械で固定する |
+| LEDGER-OQ | 20 | 0 | Open questions |
+| EVID-010 | 19 | 9 | 手書き目次は腐るが、生成物なら差分で腐敗を検出できる |
+| ROOT-CONVENTIONS | 18 | 17 | CONVENTIONS.md |
+| EVID-003 | 17 | 4 | 文書ドリフトは静かな回帰である |
+| PB-003 | 17 | 7 | レビューサイクルを回す |
 
 ## レビュー信号
 
@@ -119,8 +165,14 @@ graph LR
 | 入口のない手順 | PB-005 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-006 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-009 | 専用の skill 入口がなく発見されにくい |
+| 入口のない手順 | PB-011 | 専用の skill 入口がなく発見されにくい |
+| 手順のない決定 | ADR-017 | この決定を実行する playbook がない |
+| 追随していない決定 | ADR-002 → ADR-004 | 根拠が更新されたのに決定が再確認されていない |
 
 警告は CI を落とさない。次のレビューで扱う候補として出している。
+エラーになる検査と、警告に留める基準は [ADR-013](adr/013-check-grades.md)。
+
+根拠節と `related` の突き合わせは frozen 4 件を対象外にしている（ADR-001, ADR-002, ADR-003, ADR-005）。
 
 ## 未解決の問い
 
@@ -131,7 +183,6 @@ graph LR
 | OQ-004 | Tier 0 / Tier 1 の総量に上限（行数またはトークン）を設けるか？（現状は上限なし。増やすときは ADR で合意） |
 | OQ-005 | 生成物 `INDEX.md` をリポジトリに置き続けるか、CI 生成に切り替えるか？（現状は差分レビュー可能性を優先して commit する） |
 | OQ-007 | SDD の「昇格するか」の判断を機械支援できるか？（現状は PB-008 の質問リストによる人間判断） |
-| OQ-008 | `GRAPH.md` の警告（未使用の根拠・根拠なしの決定など）を、いつ CI エラーへ昇格させるか？（現状はすべて警告のまま） |
 | OQ-009 | 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010） |
 | OQ-010 | 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？ |
 | OQ-011 | Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011） |
@@ -142,4 +193,10 @@ graph LR
 | OQ-017 | AIDD の効果（関連文書検索の成功率・手戻り・レビュー時間・グラフ警告の有効率）を実プロジェクトで測定するか？（測定なしに知識表現を増やすと文書官僚制化する懸念。REV-005） |
 | OQ-018 | 期限日の集中をどう散らすか？ 全文書の `last_reviewed` が 2026-08-08/09 に集中しており、期限も 2 日に集中する。週次 `schedule` の下では、その週に main が 40 件超のエラーで赤くなる（証跡を計画的に分散する運用で緩和できるが、仕組みはない。adr:ADR-012 REV-006） |
 | OQ-019 | 規範文書に散らばる手書きの表（Tier 表が README / CONVENTIONS / GUIDE、ツール対応表が AGENTS / README / GUIDE）を単一の出所にするか？ 生成インデックスと同じ腐り方をする（evidence:EVID-010 REV-006） |
+| OQ-020 | frozen 文書は根拠節と `related` の突き合わせから外れる。ADR-002 のズレ（EVID-003）をどう解消するか？（後継 ADR を作るか、frozen を解くか。adr:ADR-013） |
+| OQ-021 | 案件限りの ADR を spec / 実装リポジトリのどこに、どの体裁で置くか？（KB から検査できないため運用が割れやすい。adr:ADR-014） |
+| OQ-022 | 受け入れ例の粒度と網羅の目安をどう決めるか？（例が多すぎるとテストが遅く、少ないと解釈が入る。adr:ADR-014） |
+| OQ-023 | 意味グラフの提案を `related` へ焼き込む作業を、誰がどの頻度で回すか？（現状は運用未定。adr:ADR-013） |
+| OQ-024 | 台帳を towncrier 方式の断片ファイルへ分割するか？ 現状は `merge=union` で行競合を消しているが、重複 ID は残りうる。分割すると 1 ファイル grep の利点が消える（evidence:EVID-021 adr:ADR-016） |
+| OQ-025 | レビュー判定を日付から Doorstop 方式の指紋（内容ハッシュ）へ移すか？ 本文を変えずに日付だけ進める操作を機械的に検出できるようになるが、`frozen` 文書は指紋を本体に書けないため証跡側に持つ設計が要る（evidence:EVID-022 adr:ADR-017） |
 
