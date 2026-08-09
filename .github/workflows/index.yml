@@ -1,0 +1,39 @@
+name: Index
+
+on:
+  pull_request:
+    paths:
+      - "evidence/**"
+      - "adr/**"
+      - "playbook/**"
+      - "ledger/**"
+      - "reviews/**"
+      - ".cursor/skills/**"
+      - "INDEX.md"
+      - "AGENTS.md"
+      - "CONVENTIONS.md"
+      - "README.md"
+      - ".github/scripts/build-index.sh"
+      - ".github/workflows/index.yml"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    name: Check generated index
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify INDEX.md is up to date
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x .github/scripts/build-index.sh
+          bash .github/scripts/build-index.sh --check

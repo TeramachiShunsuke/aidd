@@ -12,6 +12,8 @@
 | `reviews/` | `REV` | `NNN-short-slug.md` |
 | `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` |
 | `templates/` | — | 種別ごとの雛形（コピー元。CI 対象外のメタ扱い可） |
+| `.cursor/skills/` | （skill 名） | `<name>/SKILL.md`（playbook への入口） |
+| `INDEX.md` | — | 生成物。手で編集しない |
 
 `NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。
 
@@ -39,6 +41,7 @@ tags:
 | `related` | 関連文書 ID の配列 |
 | `supersedes` | 置き換える旧 ID |
 | `superseded_by` | 後継 ID（deprecated 時） |
+| `tier` | ロード階層 `0`〜`3`。既定と変えたいときだけ書く（[ADR-006](adr/006-context-tiers.md)） |
 
 `ledger/*` も同様に `id` / `title` / `status` / `last_reviewed` / `owners` を持つ。ledger の `status` は通常 `active`。
 
@@ -89,6 +92,65 @@ tags:
 - 「日付だけ進める」はレビュー実施時（reviews 追記とセット）に限る
 - **90 日**を超えると CI が失敗する（`frozen` / `deprecated` も例外にしない。鮮度の説明責任は残す）
 
+## Tier マッピング
+
+Tier はロードのタイミングであり、重要度の格付けではない。定義は [ADR-006](adr/006-context-tiers.md)。
+
+| Tier | いつ読むか | 既定で入るもの |
+| --- | --- | --- |
+| 0 | 毎セッション、全文 | `AGENTS.md` / `CONVENTIONS.md` |
+| 1 | 毎セッション、一覧のみ | `INDEX.md` / `README.md` / `ledger/*` / `.cursor/skills/*` |
+| 2 | 作業種別が決まったら全文 | `adr/*` / `playbook/*` |
+| 3 | 主張を疑うとき・監査時 | `evidence/*` / `reviews/*` / `deprecated` 全般 |
+
+- 既定で妥当なら `tier` は**書かない**
+- `status: frozen` に `tier` を後付けしない（不変のため）
+- `status: deprecated` は `tier` を持たない（常に Tier 3）
+- 違反は `build-index.sh` が検出する
+
+## 生成インデックス（INDEX.md）
+
+- 生成: `bash .github/scripts/build-index.sh`
+- 検査: `bash .github/scripts/build-index.sh --check`（CI で実行）
+- 出力は決定的。生成日時など実行ごとに変わる値を入れない
+- 手で編集しない。直すのは生成元の Frontmatter
+- 検査内容: 必須キーの欠落、`id` 重複、`tier` の範囲、skill の `name` とフォルダ名の一致、skill が参照する playbook の存在
+- 詳細は [ADR-007](adr/007-generated-index.md) と [PB-007](playbook/007-rebuild-index.md)
+
+## skills
+
+- 置き場所: `.cursor/skills/<name>/SKILL.md`
+- **1 skill = 1 playbook**。手順の正本は `playbook/` にあり、SKILL.md には要点（5 行以内）とリンクのみ置く
+- Frontmatter は Agent Skills 標準の範囲に限る
+
+  ```yaml
+  ---
+  name: <フォルダ名と一致>
+  description: <何をするか>。<いつ使うか>。
+  metadata:
+    aidd-playbook: PB-NNN
+    aidd-tier: "1"
+  ---
+  ```
+
+- 本文は `## いつ使うか` / `## 先に読むもの` / `## 手順の要点` / `## 禁止事項` の 4 節
+- 雛形は [templates/skill.md](templates/skill.md)、手順は [PB-009](playbook/009-add-skill.md)
+
+## SDD 接続
+
+外部の仕様駆動開発（requirements / design / tasks）との受け渡し規則は [ADR-008](adr/008-sdd-bridge.md)。
+
+| SDD 成果物 | KB 側 |
+| --- | --- |
+| requirements | `evidence/` / `ledger/claims.md` |
+| design | `adr/`（横断で再利用する決定のみ） |
+| tasks | `playbook/`（繰り返す手順のみ） |
+
+- spec 本文を KB に転記しない（リンクと ID のみ）
+- 実装固有の識別子を KB 文書に持ち込まない
+- 昇格の判断基準は「他プロジェクトでも同じ判断を繰り返すか」
+- 受け渡しシートは [templates/sdd-handoff.md](templates/sdd-handoff.md)、手順は [PB-008](playbook/008-bridge-sdd-spec.md)
+
 ## reviews/ 追記ルール
 
 許可:
@@ -117,7 +179,8 @@ claims の 1 行例:
 
 - [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) を使う
 - 関連 ID を明記する
-- stale CI を緑にする
+- `INDEX.md` を再生成して同じコミットに含める
+- Staleness / Index の両 CI を緑にする
 
 ## 言語
 

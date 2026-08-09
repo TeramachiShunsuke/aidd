@@ -2,7 +2,7 @@
 id: LEDGER-CLAIMS
 title: Claims ledger
 status: active
-last_reviewed: 2026-08-08
+last_reviewed: 2026-08-09
 owners:
   - TeramachiShunsuke
 tags:
@@ -30,3 +30,7 @@ tags:
 - [ ] CLAIM-006: テンプレートと Frontmatter で分散を抑える — evidence:EVID-006 adr:ADR-002
 - [ ] CLAIM-007: ledger は索引であり本文の代替ではない — evidence:EVID-007
 - [ ] CLAIM-008: PR + staleness CI が知識の品質ゲート — evidence:EVID-008 adr:ADR-004
+- [ ] CLAIM-009: 文脈は有限予算であり、読む順序を Tier で固定する — evidence:EVID-009 adr:ADR-006
+- [ ] CLAIM-010: 索引は生成物にして CI で最新性を強制する — evidence:EVID-010 adr:ADR-007
+- [ ] CLAIM-011: spec と知識ベースは別権威で、昇格条件付きの双方向受け渡しにする — evidence:EVID-011 adr:ADR-008
+- [ ] CLAIM-012: skill は playbook の入口であり手順の正本ではない — evidence:EVID-012 adr:ADR-009 url:https://cursor.com/docs/skills
