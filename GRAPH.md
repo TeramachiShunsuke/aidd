@@ -13,20 +13,20 @@
 | --- | --- |
 | ノード: adr | 11 |
 | ノード: claim | 15 |
-| ノード: evidence | 15 |
+| ノード: evidence | 16 |
 | ノード: external | 1 |
 | ノード: ledger | 3 |
-| ノード: open-question | 12 |
+| ノード: open-question | 17 |
 | ノード: playbook | 10 |
-| ノード: reviews | 4 |
+| ノード: reviews | 5 |
 | ノード: root | 4 |
 | ノード: skill | 6 |
 | 辺: anchor | 29 |
 | 辺: entrypoint | 6 |
-| 辺: links | 236 |
-| 辺: related | 92 |
-| ノード合計 | 81 |
-| 辺合計 | 363 |
+| 辺: links | 247 |
+| 辺: related | 102 |
+| ノード合計 | 88 |
+| 辺合計 | 384 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -93,15 +93,15 @@ graph LR
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
 | ADR-006 | 23 | 13 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
-| ROOT-CONVENTIONS | 17 | 12 | CONVENTIONS.md |
+| ROOT-CONVENTIONS | 18 | 12 | CONVENTIONS.md |
 | ADR-007 | 16 | 11 | INDEX.md を生成物とし、CI で最新性を強制する |
+| ADR-010 | 16 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
 | LEDGER-OQ | 16 | 0 | Open questions |
-| ADR-010 | 14 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
+| ADR-004 | 14 | 6 | 鮮度は last_reviewed の 90 日と変更時同期で守る |
+| ADR-011 | 14 | 14 | skills と規範をツール横断にし、正本を 1 か所に置く |
 | ADR-009 | 13 | 11 | skills は playbook の入口とし、手順を二重に持たない |
-| ADR-011 | 13 | 14 | skills と規範をツール横断にし、正本を 1 か所に置く |
+| PB-003 | 12 | 3 | レビューサイクルを回す |
 | ADR-001 | 11 | 6 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する |
-| ADR-004 | 11 | 6 | 鮮度は last_reviewed の 90 日と変更時同期で守る |
-| ADR-008 | 11 | 14 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
 
 ## レビュー信号
 
@@ -111,6 +111,7 @@ graph LR
 | 入口のない手順 | PB-005 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-006 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-009 | 専用の skill 入口がなく発見されにくい |
+| 未使用の根拠 | EVID-016 | どの決定・主張からも参照されていない |
 
 警告は CI を落とさない。次のレビューで扱う候補として出している。
 
@@ -127,5 +128,10 @@ graph LR
 | OQ-009 | 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010） |
 | OQ-010 | 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？ |
 | OQ-011 | Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011） |
-| OQ-012 | Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（現状は公式ドキュメント準拠の未検証前提。evidence:EVID-015） |
+| OQ-012 | Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（Codex / Claude Code とも実機での skill 発火を 2026-08-09 に確認済み。REV-005。CI 化の手段は未決。evidence:EVID-015） |
+| OQ-013 | frozen・90 日鮮度・reviews 追記のライフサイクル矛盾をどう解消するか？ レビュー証跡を文書本体から分離し effective freshness を導出する方式（ADR-012 候補）を設計する。**2026-11-07 に現行 frozen 文書が修復不能な期限切れになるため期限付き**（evidence:EVID-016） |
+| OQ-014 | staleness / index の検査を fixture テスト付きの単一検証器へ統合するか？ schedule 実行・未来日拒否・status 列挙・ID とファイル名の整合・base 欠落時の失敗・macOS 動作を含める。schedule 追加は OQ-013 の解消後に行う（evidence:EVID-016） |
+| OQ-015 | evidence の証拠能力を区別するメタデータ（source type / observed_at / confidence / 支持と反証の別）を導入するか？（現状の参照グラフは参照の存在のみを検査し、支持・反証・単なる関連を区別しない。adr:ADR-010） |
+| OQ-016 | 他プロジェクトへコピーして使う初期化手段（core / project の二層分離、owner・日付・ライセンスの初期化）を作るか？ それとも「AIDD Knowledge Base Template」として製品境界を名称で限定するか？（REV-005） |
+| OQ-017 | AIDD の効果（関連文書検索の成功率・手戻り・レビュー時間・グラフ警告の有効率）を実プロジェクトで測定するか？（測定なしに知識表現を増やすと文書官僚制化する懸念。REV-005） |
 
