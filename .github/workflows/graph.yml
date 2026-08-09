@@ -1,0 +1,38 @@
+name: Graph
+
+on:
+  pull_request:
+    paths:
+      - "evidence/**"
+      - "adr/**"
+      - "playbook/**"
+      - "ledger/**"
+      - "reviews/**"
+      - ".cursor/skills/**"
+      - "GRAPH.md"
+      - "AGENTS.md"
+      - "CONVENTIONS.md"
+      - "README.md"
+      - ".github/scripts/build-graph.py"
+      - ".github/workflows/graph.yml"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph:
+    name: Check reference graph
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify GRAPH.md is up to date
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/build-graph.py --check
