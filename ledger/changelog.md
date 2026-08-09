@@ -16,6 +16,9 @@ tags:
 
 ## 2026-08-09
 
+- 参照グラフを導入: ADR-010 / EVID-013 / EVID-014 / PB-010。`GRAPH.md` と `.github/scripts/build-graph.py`、Graph ワークフロー、skill `aidd-graph-review`
+- Graphify（意味グラフ）を評価し、CI には入れない判断を記録（EVID-013）。`graphify-out/` を `.gitignore` に追加
+- OQ-003（claims 錨のリンク切れ自動検知）を Resolved へ移動。OQ-008..010 を追加、claims に CLAIM-013..014 を追加
 - Tier モデルを導入: ADR-006 / EVID-009 / PB-006。Frontmatter の任意キー `tier` と既定規則（frozen 文書を書き換えずに導入）
 - 生成インデックスを導入: ADR-007 / EVID-010 / PB-007。`INDEX.md` と `.github/scripts/build-index.sh`、Index ワークフロー
 - SDD 接続を定義: ADR-008 / EVID-011 / PB-008 と `templates/sdd-handoff.md`（対応表・双方向の受け渡し・境界）

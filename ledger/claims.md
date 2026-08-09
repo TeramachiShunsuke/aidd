@@ -34,3 +34,5 @@ tags:
 - [ ] CLAIM-010: 索引は生成物にして CI で最新性を強制する — evidence:EVID-010 adr:ADR-007
 - [ ] CLAIM-011: spec と知識ベースは別権威で、昇格条件付きの双方向受け渡しにする — evidence:EVID-011 adr:ADR-008
 - [ ] CLAIM-012: skill は playbook の入口であり手順の正本ではない — evidence:EVID-012 adr:ADR-009 url:https://cursor.com/docs/skills
+- [ ] CLAIM-013: 参照グラフは明示メタデータから LLM なしで決定的に導出できる — evidence:EVID-014 adr:ADR-010
+- [ ] CLAIM-014: 意味グラフは CI に置かず、探索の結果だけを evidence に昇格させる — evidence:EVID-013 adr:ADR-010

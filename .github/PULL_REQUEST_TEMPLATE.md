@@ -25,7 +25,7 @@
 - [ ] `status: frozen` の文書を改変していない（改訂は後継 ID）
 - [ ] `reviews/` は末尾追記または新規追加のみ
 - [ ] ledger（claims / open-questions / changelog）を必要なら同期した
-- [ ] `INDEX.md` を再生成して同じ PR に含めた
+- [ ] `GRAPH.md` と `INDEX.md` を再生成して同じ PR に含めた（グラフ → 索引の順）
 - [ ] skill を足したなら 1 skill = 1 playbook で、手順を書き写していない
 - [ ] 秘密情報を含めていない
 
@@ -33,6 +33,7 @@
 
 ```bash
 bash .github/scripts/check-staleness.sh
+python3 .github/scripts/build-graph.py --check
 bash .github/scripts/build-index.sh --check
 ```
 
