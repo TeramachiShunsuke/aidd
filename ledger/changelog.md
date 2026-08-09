@@ -16,6 +16,7 @@ tags:
 
 ## 2026-08-09
 
+- 敵対レビューを取り込み: REV-005 / EVID-016。ライフサイクル矛盾（frozen×90 日鮮度×reviews 追記、2026-11-07 期限）と staleness CI の保証範囲・macOS 非対応を記録。OQ-013..017 を追加、OQ-012 に Codex / Claude Code の実機確認を追記。ライフサイクル再設計（ADR-012 候補）まで新規 frozen を凍結
 - エージェント連携をツール横断化: ADR-011 / EVID-015。skill の正本を `.cursor/skills/` から `.agents/skills/` へ移し、`.claude/skills/` に symlink の鏡を作成。`CLAUDE.md` は `@AGENTS.md` の 1 行のみ。鏡の対応関係を Index CI が検査する
 - 利用者向けに `GUIDE.md` を追加（ID コード体系・文書間リレーション・書き分け・ライフサイクル・実例）。Tier 1 に配置
 - OQ-006（skills の複製）を Resolved へ移動。OQ-011..012 を追加、claims に CLAIM-015 を追加

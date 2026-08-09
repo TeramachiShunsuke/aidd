@@ -80,10 +80,12 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-013 | Graphify は docs のみの知識ベースでは全ノードが LLM 由来になる | [evidence/013-graphify-needs-llm-for-docs.md](evidence/013-graphify-needs-llm-for-docs.md) | active | 2026-08-09 |
 | EVID-014 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる | [evidence/014-reference-graph-from-metadata.md](evidence/014-reference-graph-from-metadata.md) | active | 2026-08-09 |
 | EVID-015 | エージェントツールごとに skill と規範ファイルの探索パスが違う | [evidence/015-agent-tools-read-different-paths.md](evidence/015-agent-tools-read-different-paths.md) | active | 2026-08-09 |
+| EVID-016 | frozen・reviews・90 日鮮度の規則は同時に満たせず、期限付きで CI が修復不能になる | [evidence/016-lifecycle-rules-deadlock.md](evidence/016-lifecycle-rules-deadlock.md) | active | 2026-08-09 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
 | REV-004 | ツール横断の可搬性レビュー | [reviews/004-cross-tool-portability.md](reviews/004-cross-tool-portability.md) | active | 2026-08-09 |
+| REV-005 | リポジトリ全体の敵対レビューと取り込み | [reviews/005-adversarial-review.md](reviews/005-adversarial-review.md) | active | 2026-08-09 |
 
 ## 内訳
 
@@ -92,8 +94,8 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | Tier 0 | 2 |
 | Tier 1 | 6 |
 | Tier 2 | 21 |
-| Tier 3 | 19 |
-| status: active | 38 |
+| Tier 3 | 21 |
+| status: active | 40 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |

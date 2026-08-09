@@ -25,7 +25,12 @@ tags:
 - OQ-009: 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010）
 - OQ-010: 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？
 - OQ-011: Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011）
-- OQ-012: Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（現状は公式ドキュメント準拠の未検証前提。evidence:EVID-015）
+- OQ-012: Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（Codex / Claude Code とも実機での skill 発火を 2026-08-09 に確認済み。REV-005。CI 化の手段は未決。evidence:EVID-015）
+- OQ-013: frozen・90 日鮮度・reviews 追記のライフサイクル矛盾をどう解消するか？ レビュー証跡を文書本体から分離し effective freshness を導出する方式（ADR-012 候補）を設計する。**2026-11-07 に現行 frozen 文書が修復不能な期限切れになるため期限付き**（evidence:EVID-016）
+- OQ-014: staleness / index の検査を fixture テスト付きの単一検証器へ統合するか？ schedule 実行・未来日拒否・status 列挙・ID とファイル名の整合・base 欠落時の失敗・macOS 動作を含める。schedule 追加は OQ-013 の解消後に行う（evidence:EVID-016）
+- OQ-015: evidence の証拠能力を区別するメタデータ（source type / observed_at / confidence / 支持と反証の別）を導入するか？（現状の参照グラフは参照の存在のみを検査し、支持・反証・単なる関連を区別しない。adr:ADR-010）
+- OQ-016: 他プロジェクトへコピーして使う初期化手段（core / project の二層分離、owner・日付・ライセンスの初期化）を作るか？ それとも「AIDD Knowledge Base Template」として製品境界を名称で限定するか？（REV-005）
+- OQ-017: AIDD の効果（関連文書検索の成功率・手戻り・レビュー時間・グラフ警告の有効率）を実プロジェクトで測定するか？（測定なしに知識表現を増やすと文書官僚制化する懸念。REV-005）
 
 ## Resolved
 
