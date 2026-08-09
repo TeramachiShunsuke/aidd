@@ -29,7 +29,7 @@ graph LR
 | `REV` | レビュー記録 | `reviews/NNN-slug.md` | いつ誰が点検したか | REV-003 初回グラフレビュー |
 | `CLAIM` | 主張 | `ledger/claims.md` の 1 行 | 今どこまで言えるか | CLAIM-009 |
 | `OQ` | 未決の問い | `ledger/open-questions.md` の 1 行 | まだ決められないこと | OQ-011 |
-| `LEDGER-*` | 台帳そのもの | `ledger/*.md` | 索引 | LEDGER-CLAIMS |
+| `LEDGER-*` | 台帳そのもの | `ledger/*.md` | 索引と証跡 | LEDGER-CLAIMS / LEDGER-ATTESTATIONS |
 | `ROOT-*` | ルート文書 | `AGENTS.md` など | 規範・入口 | ROOT-AGENTS |
 | （skill 名） | エージェントの入口 | `.agents/skills/<name>/SKILL.md` | いつこの手順を出すか | aidd-add-evidence |
 
@@ -83,7 +83,12 @@ graph LR
 | `frozen` | 契約として固定 | **不可**。後継を新規作成する |
 | `deprecated` | 廃止 | 後継リンクの整備のみ |
 
-どの status でも `last_reviewed` から 90 日を超えると CI が落ちる。本文を変えたら同じコミットで `last_reviewed` を今日（UTC）にする。
+どの status でも、レビューから 90 日を超えると CI が落ちる。記録の付け方は 2 通りある。
+
+- **本文を直した**: 同じコミットで `last_reviewed` を今日（UTC）にする
+- **読んだが直す必要がなかった**: `ledger/attestations.md` に `- 日付 ID 確認者 — 確認内容` を 1 行追記する
+
+鮮度はこの 2 つのうち**新しい方**（実効レビュー日）で測る。`frozen` は本文を触れないので、後者だけがレビュー手段になる（[ADR-012](adr/012-review-attestations.md)）。`reviews/` と `ledger/attestations.md` 自体は履歴なので期限の対象外。
 
 ## 6. 読む順（Tier）
 

@@ -10,7 +10,7 @@
 | `adr/` | `ADR` | `NNN-short-slug.md` |
 | `playbook/` | `PB` | `NNN-short-slug.md` |
 | `reviews/` | `REV` | `NNN-short-slug.md` |
-| `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` |
+| `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` / `attestations.md` |
 | `templates/` | — | 種別ごとの雛形（コピー元。CI 対象外のメタ扱い可） |
 | `.agents/skills/` | （skill 名） | `<name>/SKILL.md`（playbook への入口。正本） |
 | `.claude/skills/` | （skill 名） | 正本への symlink（Claude Code 用の鏡） |
@@ -89,12 +89,15 @@ tags:
 | `frozen` | 契約として固定 | **不可**。後継を新規作成 |
 | `deprecated` | 廃止 | Frontmatter の後継リンク整備以外は原則触らない |
 
-## last_reviewed
+## last_reviewed と実効レビュー日
 
 - タイムゾーンは **UTC 日付**（`YYYY-MM-DD`）
 - 本文または意味のある Frontmatter を変えたら、必ず当日に更新する
-- 「日付だけ進める」はレビュー実施時（reviews 追記とセット）に限る
+- 未来日は書けない（CI が拒否する）
+- 鮮度は**実効レビュー日** = `max(last_reviewed, ledger/attestations.md にあるその ID の最新日)` で測る（[ADR-012](adr/012-review-attestations.md)）
 - **90 日**を超えると CI が失敗する（`frozen` / `deprecated` も例外にしない。鮮度の説明責任は残す）
+- 読み直して直す必要がなかった場合は、本文を触らず `ledger/attestations.md` に証跡を 1 行追記する。`frozen` 文書のレビュー手段はこれだけ
+- 追記専用ログ（`reviews/**` と `ledger/attestations.md`）は 90 日検査と日付同期の対象外。履歴は古くて正しい
 
 ## Tier マッピング
 
@@ -178,7 +181,9 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - 昇格の判断基準は「他プロジェクトでも同じ判断を繰り返すか」
 - 受け渡しシートは [templates/sdd-handoff.md](templates/sdd-handoff.md)、手順は [PB-008](playbook/008-bridge-sdd-spec.md)
 
-## reviews/ 追記ルール
+## 追記専用ログの規則
+
+対象は `reviews/**` と `ledger/attestations.md`。
 
 許可:
 
@@ -187,7 +192,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 
 禁止:
 
-- 既存バイトの改変・削除
+- 既存バイトの改変・削除（Frontmatter を含む。だから追記時に `last_reviewed` を触ってはいけない）
 - ファイル削除・リネーム（必要な場合は人間が main で特例処理）
 
 ## ledger
@@ -195,6 +200,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - `claims.md` — 主張と錨（`evidence:` / `adr:` / `url:`）
 - `open-questions.md` — 未決とブロッカー
 - `changelog.md` — 知識ベース自体の注目すべき変更（追記主体）
+- `attestations.md` — レビュー証跡（追記専用ログ）。形式は `- YYYY-MM-DD <文書 ID> <確認者> — <確認した内容>`。ID が実在しない行と未来日は CI が拒否する
 
 claims の 1 行例:
 

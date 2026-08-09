@@ -16,7 +16,7 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | [evidence/](evidence/) | 観測・根拠（主張の土台） | 増える |
 | [adr/](adr/) | アーキテクチャ / 運用上の決定 | 増える |
 | [playbook/](playbook/) | 繰り返し手順 | 増える |
-| [ledger/](ledger/) | 主張・未決・変更の台帳 | 少数の定番ファイル |
+| [ledger/](ledger/) | 主張・未決・変更・レビュー証跡の台帳 | 少数の定番ファイル |
 | [templates/](templates/) | 新規文書の雛形 | 固定 |
 | [reviews/](reviews/) | 定期レビュー記録（追記専用） | 増える |
 | `.agents/skills/` | playbook への入口となる Agent Skills（正本） | 増える |
@@ -68,10 +68,13 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 `.github/workflows/staleness.yml` が次を検査する。
 
 - **frozen 不変性** — `status: frozen` の本文改変を拒否
-- **last_reviewed 同期** — 本文変更時は `last_reviewed` を更新
-- **reviews/ 追記ガード** — 既存レビューの改変・削除を拒否（末尾追記と新規追加のみ）
-- **90日期限** — `last_reviewed` から 90 日超は失敗
-- **手動トリガー** — `workflow_dispatch` で随時実行可
+- **last_reviewed 同期** — 本文変更時は `last_reviewed` を更新（追記専用ログは対象外）
+- **追記専用ログのガード** — `reviews/**` と `ledger/attestations.md` の改変・削除を拒否（末尾追記と新規追加のみ）
+- **90日期限** — 実効レビュー日（`last_reviewed` と証跡の最新日のうち新しい方）から 90 日超は失敗
+- **証跡の妥当性** — 実在しない ID を指す証跡、未来日の日付を拒否
+- **週次実行と手動トリガー** — 期限超過は PR と無関係に起きるため `schedule`（週次）で検査し、`workflow_dispatch` でも随時実行できる
+
+`frozen` 文書は本文を触れないため、レビューは [ledger/attestations.md](ledger/attestations.md) への 1 行追記で記録する（[ADR-012](adr/012-review-attestations.md)）。
 
 `.github/workflows/index.yml` が [INDEX.md](INDEX.md) の最新性を検査する。
 
