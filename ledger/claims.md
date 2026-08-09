@@ -35,3 +35,5 @@ tags:
 - [ ] CLAIM-018: 振る舞いはテスト、契約は定義ファイル、決定だけが文書として生き残る — evidence:EVID-018 adr:ADR-014
 - [ ] CLAIM-019: 事前設計が見合うのは不可逆な箇所だけで、可逆な箇所は試して測る — evidence:EVID-019 adr:ADR-014
 - [ ] CLAIM-020: インフラの状態は文書化せず、取得コマンドとして渡す — evidence:EVID-020 adr:ADR-015
+- [ ] CLAIM-021: 競合は解決を上手くするのではなく、競合面を減らして扱う — evidence:EVID-021 adr:ADR-016 url:https://github.com/twisted/towncrier
+- [ ] CLAIM-022: 機械が書けるのは事実と検出であり、status の遷移は人間の判断である — evidence:EVID-022 adr:ADR-017 url:https://github.com/doorstop-dev/doorstop

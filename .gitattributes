@@ -1,0 +1,8 @@
+# 追記専用の台帳とレビュー記録は、両側の追加行を両方残す（ADR-016）。
+# union は意味を見ないので、重複 ID は build-graph.py / build-index.sh が落とす。
+ledger/*.md merge=union
+reviews/*.md merge=union
+
+# 生成物は競合しても中身を読まない。再生成が正解（ADR-007 / PB-015）。
+INDEX.md linguist-generated=true
+GRAPH.md linguist-generated=true

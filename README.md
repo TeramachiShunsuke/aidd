@@ -72,6 +72,7 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **追記専用ログのガード** — `reviews/**` と `ledger/attestations.md` の改変・削除を拒否（末尾追記と新規追加のみ）
 - **90日期限** — 実効レビュー日（`last_reviewed` と証跡の最新日のうち新しい方）から 90 日超は失敗
 - **証跡の妥当性** — 実在しない ID を指す証跡、未来日の日付を拒否
+- **草案の滞留** — `draft` のまま 30 日を超えた文書を警告する（遷移は人間が決めるので落とさない）
 - **週次実行と手動トリガー** — 期限超過は PR と無関係に起きるため `schedule`（週次）で検査し、`workflow_dispatch` でも随時実行できる
 
 `frozen` 文書は本文を触れないため、レビューは [ledger/attestations.md](ledger/attestations.md) への 1 行追記で記録する（[ADR-012](adr/012-review-attestations.md)）。
@@ -81,6 +82,8 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **索引の最新性** — 再生成して差分が出たら失敗
 - **Frontmatter 妥当性** — 必須キー欠落・`id` 重複・`tier` の範囲外を拒否
 - **skill 整合性** — `name` とフォルダ名の不一致、参照先 playbook の不在、Claude 用 symlink の欠落・誤リンクを拒否
+- **Frontmatter キーの重複** — `merge=union` が残しうる二重定義を拒否
+- **ID 衝突の走査** — 同じ ID を別ファイル名で使っているブランチを報告する（警告。どちらが譲るかは人間が決める）
 
 `.github/workflows/graph.yml` が [GRAPH.md](GRAPH.md) の参照グラフを検査する。
 

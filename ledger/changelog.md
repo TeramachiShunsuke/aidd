@@ -16,6 +16,8 @@ tags:
 
 ## 2026-08-09
 
+- 競合面を減らす: ADR-016 / EVID-021 / PB-015 / skill `aidd-resolve-conflict`。`.gitattributes` で `ledger/*.md` と `reviews/*.md` を `merge=union` にし、生成物は再生成で解決すると決めた。`check-id-collisions.sh` が他ブランチとの ID 衝突を警告する（Index CI）。`merge=union` が残しうる Frontmatter キーの二重定義を error として検出する
+- 機械と人間の分界を定義: ADR-017 / EVID-022 / CLAIM-021..022。CI は事実の記録・不整合の検出・前提条件の検査に限り、`status` の遷移と証跡の代筆はしない。`draft` の 30 日滞留を鮮度検査の警告として追加（生成物に日付依存の行を入れないため `GRAPH.md` には出さない）。OQ-024（台帳の断片化）と OQ-025（指紋方式）を追加
 - 実装スペックの扱いを定義: ADR-014 / EVID-018 / EVID-019 / PB-012 / PB-013。契約・決定・振る舞いに分割し、文書に残すのは共有境界・不可逆・選択肢ありの決定だけとした
 - DB / インフラの文脈を定義: ADR-015 / EVID-020 / PB-014。制約・契約・状態の 3 層に分け、状態は文書化せず取得コマンドで渡す
 - skill 3 件（aidd-spec-triage / aidd-tdd-start / aidd-infra-context）と `templates/acceptance-examples.md` を追加

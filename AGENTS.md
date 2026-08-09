@@ -48,6 +48,8 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - `INDEX.md` / `GRAPH.md` を手で編集する（生成物。文書側を直して再生成する）
 - skill の本文に playbook の手順を書き写す（二重管理になる）
 - 意味グラフツールの出力（`graphify-out/` 等）を commit する
+- 生成物の競合を手で解決する（`GRAPH.md` → `INDEX.md` の順に再生成する。[PB-015](playbook/015-resolve-conflicts.md)）
+- 文書の `status` を CI やスクリプトから書き換える（遷移は人間の判断。[ADR-017](adr/017-machines-record-facts-humans-decide-status.md)）
 - 秘密情報、トークン、個人データをコミットする
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新や証跡追記（本文レビューなし）
 

@@ -209,6 +209,8 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - `changelog.md` — 知識ベース自体の注目すべき変更（追記主体）
 - `attestations.md` — レビュー証跡（追記専用ログ）。形式は `- YYYY-MM-DD <文書 ID> <確認者> — <確認した内容>`。ID が実在しない行と未来日は CI が拒否する
 
+`ledger/*.md` と `reviews/*.md` は `.gitattributes` で `merge=union` を指定してある（[ADR-016](adr/016-shrink-conflict-surface.md)）。競合の代わりに両側の行が残るので、マージ後は重複 ID を検査で確認する。手順は [PB-015](playbook/015-resolve-conflicts.md)。
+
 claims の 1 行例:
 
 ```markdown
