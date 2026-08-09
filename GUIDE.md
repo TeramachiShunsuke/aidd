@@ -59,6 +59,9 @@ graph LR
 | 選択肢から 1 つに決めた | `adr/` | [PB-002](playbook/002-write-adr.md) |
 | 繰り返す作業 | `playbook/` | [CONVENTIONS.md](CONVENTIONS.md) |
 | 手順が見つけてもらえない | skill | [PB-009](playbook/009-add-skill.md) |
+| 詳細設計をどこまで書くか迷う | 決定だけ `adr/`、他は書かない | [PB-012](playbook/012-triage-implementation-spec.md) |
+| 実装に入る前に正しさを固定したい | テスト（文書は作らない） | [PB-013](playbook/013-start-tdd-from-examples.md) |
+| DB / インフラの前提を渡したい | 制約は `adr/`、状態は渡さない | [PB-014](playbook/014-hand-infra-context.md) |
 | 決められない・情報が足りない | `ledger/open-questions.md` | — |
 | 点検した記録 | `reviews/` | [PB-003](playbook/003-run-review-cycle.md) |
 | 外部 spec からの持ち帰り | 上のいずれか（昇格判断つき） | [PB-008](playbook/008-bridge-sdd-spec.md) |

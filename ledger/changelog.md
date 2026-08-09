@@ -16,6 +16,10 @@ tags:
 
 ## 2026-08-09
 
+- 実装スペックの扱いを定義: ADR-013 / EVID-017 / EVID-018 / PB-012 / PB-013。契約・決定・振る舞いに分割し、文書に残すのは共有境界・不可逆・選択肢ありの決定だけとした
+- DB / インフラの文脈を定義: ADR-014 / EVID-019 / PB-014。制約・契約・状態の 3 層に分け、状態は文書化せず取得コマンドで渡す
+- skill 3 件（aidd-spec-triage / aidd-tdd-start / aidd-infra-context）と `templates/acceptance-examples.md` を追加
+- claims に CLAIM-017..019、open-questions に OQ-015 / OQ-016 を追加
 - 検査を等級分け: ADR-012 / EVID-016 / PB-011。決定の系譜（`## 根拠` と `related` の突き合わせ）・evidence 錨の必須化・deprecated 参照・`superseded_by` の一貫性を CI エラーへ昇格
 - 昇格で検出したズレを修正: ADR-006/007/008/009/010/011 の `related` に、本文で根拠に挙げていた evidence を追加（計 11 辺）
 - `build-graph.py --impact <ID>` を追加し、変更の波及先を照会できるようにした

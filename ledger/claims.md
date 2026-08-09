@@ -15,13 +15,6 @@ tags:
 主張は短く、錨を必須とする。形式:
 
 ```text
-- [ ] CLAIM-NNN: <主張> — evidence:EVID-... adr:ADR-... url:https://...
-```
-
-完了・廃棄したら `[x]` にし、廃棄理由を末尾に書く。
-
-## Active
-
 - [ ] CLAIM-001: エージェント出力は根拠と分離して扱う — evidence:EVID-001
 - [ ] CLAIM-002: 長期記憶はリポジトリ上の構造化 Markdown に置く — evidence:EVID-002 adr:ADR-001
 - [ ] CLAIM-003: 文書ドリフトは回帰である — evidence:EVID-003 adr:ADR-004
@@ -37,5 +30,14 @@ tags:
 - [ ] CLAIM-013: 参照グラフは明示メタデータから LLM なしで決定的に導出できる — evidence:EVID-014 adr:ADR-010
 - [ ] CLAIM-014: 意味グラフは CI に置かず、探索の結果だけを evidence に昇格させる — evidence:EVID-013 adr:ADR-010
 - [ ] CLAIM-015: エージェントツールは探索パスが割れるため、正本を 1 か所に置き読まないツールにだけ橋を架ける — evidence:EVID-015 adr:ADR-011
-
 - [ ] CLAIM-016: 検査は違反 0 件のものから error に固定し、判断の要るものは warning に残す — evidence:EVID-016 adr:ADR-012
+- [ ] CLAIM-017: 振る舞いはテスト、契約は定義ファイル、決定だけが文書として生き残る — evidence:EVID-017 adr:ADR-013
+- [ ] CLAIM-018: 事前設計が見合うのは不可逆な箇所だけで、可逆な箇所は試して測る — evidence:EVID-018 adr:ADR-013
+- [ ] CLAIM-019: インフラの状態は文書化せず、取得コマンドとして渡す — evidence:EVID-019 adr:ADR-014
+- [ ] CLAIM-NNN: <主張> — evidence:EVID-... adr:ADR-... url:https://...
+```
+
+完了・廃棄したら `[x]` にし、廃棄理由を末尾に書く。
+
+## Active
+

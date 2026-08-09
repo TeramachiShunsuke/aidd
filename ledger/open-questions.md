@@ -26,6 +26,8 @@ tags:
 - OQ-011: Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011）
 - OQ-012: Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（現状は公式ドキュメント準拠の未検証前提。evidence:EVID-015）
 - OQ-013: frozen 文書は根拠節と `related` の突き合わせから外れる。ADR-002 のズレ（EVID-003）をどう解消するか？（後継 ADR を作るか、frozen を解くか。adr:ADR-012）
+- OQ-015: 案件限りの ADR を spec / 実装リポジトリのどこに、どの体裁で置くか？（KB から検査できないため運用が割れやすい。adr:ADR-013）
+- OQ-016: 受け入れ例の粒度と網羅の目安をどう決めるか？（例が多すぎるとテストが遅く、少ないと解釈が入る。adr:ADR-013）
 - OQ-014: 意味グラフの提案を `related` へ焼き込む作業を、誰がどの頻度で回すか？（現状は運用未定。adr:ADR-012）
 
 ## Resolved
