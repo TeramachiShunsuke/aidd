@@ -12,11 +12,14 @@
 | `reviews/` | `REV` | `NNN-short-slug.md` |
 | `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` |
 | `templates/` | — | 種別ごとの雛形（コピー元。CI 対象外のメタ扱い可） |
-| `.cursor/skills/` | （skill 名） | `<name>/SKILL.md`（playbook への入口） |
+| `.agents/skills/` | （skill 名） | `<name>/SKILL.md`（playbook への入口。正本） |
+| `.claude/skills/` | （skill 名） | 正本への symlink（Claude Code 用の鏡） |
 | `INDEX.md` | — | 生成物。手で編集しない |
 | `GRAPH.md` | — | 生成物。参照グラフとレビュー信号 |
+| `GUIDE.md` | — | ID 体系とリレーションの案内（人向け。規範は本ファイル） |
+| `CLAUDE.md` | — | `@AGENTS.md` の 1 行のみ。規範を書かない |
 
-`NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。
+`NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。ID の意味と文書同士のつながりの解説は [GUIDE.md](GUIDE.md) にある（本ファイルは規範、GUIDE は案内）。
 
 ## Frontmatter（必須）
 
@@ -100,7 +103,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 | Tier | いつ読むか | 既定で入るもの |
 | --- | --- | --- |
 | 0 | 毎セッション、全文 | `AGENTS.md` / `CONVENTIONS.md` |
-| 1 | 毎セッション、一覧のみ | `INDEX.md` / `README.md` / `ledger/*` / `.cursor/skills/*` |
+| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md` / `ledger/*` / `.agents/skills/*` |
 | 2 | 作業種別が決まったら全文 | `adr/*` / `playbook/*` |
 | 3 | 主張を疑うとき・監査時 | `evidence/*` / `reviews/*` / `deprecated` 全般 |
 
@@ -130,7 +133,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 
 ## skills
 
-- 置き場所: `.cursor/skills/<name>/SKILL.md`
+- 置き場所: 正本は `.agents/skills/<name>/SKILL.md`、Claude Code 用の鏡は `.claude/skills/<name>`（symlink）。詳細は [ADR-011](adr/011-cross-tool-agent-integration.md)
 - **1 skill = 1 playbook**。手順の正本は `playbook/` にあり、SKILL.md には要点（5 行以内）とリンクのみ置く
 - Frontmatter は Agent Skills 標準の範囲に限る
 
@@ -145,7 +148,20 @@ Tier はロードのタイミングであり、重要度の格付けではない
   ```
 
 - 本文は `## いつ使うか` / `## 先に読むもの` / `## 手順の要点` / `## 禁止事項` の 4 節
+- 鏡は必ず symlink（`../../.agents/skills/<name>`）。ファイルを複製しない。CI が対応関係とリンク先を検査する
 - 雛形は [templates/skill.md](templates/skill.md)、手順は [PB-009](playbook/009-add-skill.md)
+
+## エージェント連携
+
+規範と skill の正本は 1 か所に置き、それを読まないツールにだけ橋を架ける（[ADR-011](adr/011-cross-tool-agent-integration.md)）。
+
+| ツール | 規範 | skill |
+| --- | --- | --- |
+| Codex / Cursor | `AGENTS.md` | `.agents/skills/` |
+| Claude Code | `CLAUDE.md`（`@AGENTS.md` の 1 行） | `.claude/skills/`（symlink） |
+
+- `CLAUDE.md` に規範を書かない。Claude 固有の指示が要る場合のみ import 行の下に足す
+- `.cursor/rules/*.mdc` など、ツール固有のルールファイルに規範を複製しない
 
 ## SDD 接続
 

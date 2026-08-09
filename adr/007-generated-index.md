@@ -23,7 +23,7 @@ tier: 2
 
 1. リポジトリルートに **`INDEX.md`** を置き、Tier 1（索引）の単一の入口とする。
 2. `INDEX.md` は **生成物**であり、手で編集しない。生成は `.github/scripts/build-index.sh` が行う。
-3. 生成元は Frontmatter（`id` / `title` / `status` / `last_reviewed` / `tier`）と、`.cursor/skills/*/SKILL.md` の `name` / `description`。
+3. 生成元は Frontmatter（`id` / `title` / `status` / `last_reviewed` / `tier`）と、`.agents/skills/*/SKILL.md` の `name` / `description`。
 4. 出力は**決定的**とする。生成日時など実行ごとに変わる値を出力に含めない。
 5. CI は `build-index.sh --check` を実行し、再生成結果と差分があれば失敗させる。あわせて次の妥当性も検査する。
    - `id` の重複

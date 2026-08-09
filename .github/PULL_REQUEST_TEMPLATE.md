@@ -9,7 +9,7 @@
 - [ ] playbook
 - [ ] ledger
 - [ ] reviews（追記のみ）
-- [ ] skills（`.cursor/skills/`）
+- [ ] skills（`.agents/skills/`）
 - [ ] templates / meta（README, AGENTS, CONVENTIONS, CI）
 
 ## 関連 ID
