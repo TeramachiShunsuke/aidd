@@ -84,9 +84,18 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **参照の解決** — `related` と ledger の錨が実在する ID を指すこと
 - **錨のある主張** — 錨を 1 つも持たない claim を拒否
 - **リンク切れ** — 文書間の相対リンクが解決すること
+- **決定の系譜** — ADR が evidence の錨を持ち、本文の `## 根拠` に挙げた ID が `related` にも載っていること（`frozen` は対象外）
+- **廃止の巻き添え** — `deprecated` な根拠に乗る決定・主張を拒否
+- **置き換えの一貫性** — `superseded_by` を持つ文書が `deprecated` であること
 - **グラフの最新性** — 再生成して差分が出たら失敗
 
-グラフは推論を含まず、辺はすべてファイル内の明示的な記述に遡れる（[ADR-010](adr/010-knowledge-graph-layers.md)）。未使用の根拠や入口のない手順といった**レビュー信号**は `GRAPH.md` に出るが CI は落とさない。
+グラフは推論を含まず、辺はすべてファイル内の明示的な記述に遡れる（[ADR-010](adr/010-knowledge-graph-layers.md)）。未使用の根拠や入口のない手順といった**レビュー信号**は `GRAPH.md` に出るが CI は落とさない。エラーにするか警告に留めるかの基準は [ADR-012](adr/012-check-grades.md) にあり、違反 0 件で安定した検査から順にエラーへ上げる。
+
+変更の影響範囲は次で照会できる。
+
+```bash
+python3 .github/scripts/build-graph.py --impact ADR-006
+```
 
 ## 使い方（最短）
 

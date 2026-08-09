@@ -11,22 +11,22 @@
 
 | 区分 | 件数 |
 | --- | --- |
-| ノード: adr | 11 |
-| ノード: claim | 15 |
-| ノード: evidence | 15 |
+| ノード: adr | 12 |
+| ノード: claim | 16 |
+| ノード: evidence | 16 |
 | ノード: external | 1 |
 | ノード: ledger | 3 |
-| ノード: open-question | 12 |
-| ノード: playbook | 10 |
+| ノード: open-question | 14 |
+| ノード: playbook | 11 |
 | ノード: reviews | 4 |
 | ノード: root | 4 |
 | ノード: skill | 6 |
-| 辺: anchor | 29 |
+| 辺: anchor | 31 |
 | 辺: entrypoint | 6 |
-| 辺: links | 236 |
-| 辺: related | 92 |
-| ノード合計 | 81 |
-| 辺合計 | 363 |
+| 辺: links | 264 |
+| 辺: related | 115 |
+| ノード合計 | 87 |
+| 辺合計 | 416 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -45,6 +45,8 @@ graph LR
   ADR_009[ADR-009]
   ADR_010[ADR-010]
   ADR_011[ADR-011]
+  ADR_012[ADR-012]
+  EVID_001(EVID-001)
   EVID_002(EVID-002)
   EVID_003(EVID-003)
   EVID_004(EVID-004)
@@ -59,6 +61,7 @@ graph LR
   EVID_013(EVID-013)
   EVID_014(EVID-014)
   EVID_015(EVID-015)
+  EVID_016(EVID-016)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -69,39 +72,56 @@ graph LR
   ADR_005 --> EVID_005
   ADR_006 --> ADR_001
   ADR_006 --> ADR_007
+  ADR_006 --> EVID_002
   ADR_006 --> EVID_009
+  ADR_006 --> EVID_012
   ADR_007 --> ADR_004
   ADR_007 --> ADR_006
+  ADR_007 --> EVID_003
   ADR_007 --> EVID_010
   ADR_008 --> ADR_001
   ADR_008 --> ADR_006
+  ADR_008 --> EVID_001
+  ADR_008 --> EVID_007
   ADR_008 --> EVID_011
   ADR_009 --> ADR_006
   ADR_009 --> ADR_007
   ADR_009 --> ADR_011
+  ADR_009 --> EVID_006
+  ADR_009 --> EVID_009
   ADR_009 --> EVID_012
   ADR_010 --> ADR_007
+  ADR_010 --> EVID_009
+  ADR_010 --> EVID_010
   ADR_010 --> EVID_013
   ADR_010 --> EVID_014
   ADR_011 --> ADR_006
   ADR_011 --> ADR_009
+  ADR_011 --> EVID_009
+  ADR_011 --> EVID_012
   ADR_011 --> EVID_015
+  ADR_012 --> ADR_003
+  ADR_012 --> ADR_010
+  ADR_012 --> EVID_010
+  ADR_012 --> EVID_013
+  ADR_012 --> EVID_014
+  ADR_012 --> EVID_016
 ```
 
 ## ハブ（被参照が多い文書）
 
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
-| ADR-006 | 23 | 13 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
-| ROOT-CONVENTIONS | 17 | 12 | CONVENTIONS.md |
-| ADR-007 | 16 | 11 | INDEX.md を生成物とし、CI で最新性を強制する |
-| LEDGER-OQ | 16 | 0 | Open questions |
-| ADR-010 | 14 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
-| ADR-009 | 13 | 11 | skills は playbook の入口とし、手順を二重に持たない |
-| ADR-011 | 13 | 14 | skills と規範をツール横断にし、正本を 1 か所に置く |
-| ADR-001 | 11 | 6 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する |
-| ADR-004 | 11 | 6 | 鮮度は last_reviewed の 90 日と変更時同期で守る |
-| ADR-008 | 11 | 14 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
+| ADR-006 | 23 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ADR-010 | 21 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
+| LEDGER-OQ | 17 | 0 | Open questions |
+| ROOT-CONVENTIONS | 17 | 14 | CONVENTIONS.md |
+| ADR-007 | 16 | 12 | INDEX.md を生成物とし、CI で最新性を強制する |
+| ADR-009 | 13 | 13 | skills は playbook の入口とし、手順を二重に持たない |
+| ADR-011 | 13 | 16 | skills と規範をツール横断にし、正本を 1 か所に置く |
+| EVID-009 | 12 | 7 | 文脈は有限予算であり、常時ロードは劣化を招く |
+| EVID-010 | 12 | 9 | 手書き目次は腐るが、生成物なら差分で腐敗を検出できる |
+| EVID-014 | 12 | 7 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる |
 
 ## レビュー信号
 
@@ -111,8 +131,12 @@ graph LR
 | 入口のない手順 | PB-005 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-006 | 専用の skill 入口がなく発見されにくい |
 | 入口のない手順 | PB-009 | 専用の skill 入口がなく発見されにくい |
+| 入口のない手順 | PB-011 | 専用の skill 入口がなく発見されにくい |
 
 警告は CI を落とさない。次のレビューで扱う候補として出している。
+エラーになる検査と、警告に留める基準は [ADR-012](adr/012-check-grades.md)。
+
+根拠節と `related` の突き合わせは frozen 4 件を対象外にしている（ADR-001, ADR-002, ADR-003, ADR-005）。
 
 ## 未解決の問い
 
@@ -123,9 +147,10 @@ graph LR
 | OQ-004 | Tier 0 / Tier 1 の総量に上限（行数またはトークン）を設けるか？（現状は上限なし。増やすときは ADR で合意） |
 | OQ-005 | 生成物 `INDEX.md` をリポジトリに置き続けるか、CI 生成に切り替えるか？（現状は差分レビュー可能性を優先して commit する） |
 | OQ-007 | SDD の「昇格するか」の判断を機械支援できるか？（現状は PB-008 の質問リストによる人間判断） |
-| OQ-008 | `GRAPH.md` の警告（未使用の根拠・根拠なしの決定など）を、いつ CI エラーへ昇格させるか？（現状はすべて警告のまま） |
 | OQ-009 | 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010） |
 | OQ-010 | 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？ |
 | OQ-011 | Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011） |
 | OQ-012 | Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（現状は公式ドキュメント準拠の未検証前提。evidence:EVID-015） |
+| OQ-013 | frozen 文書は根拠節と `related` の突き合わせから外れる。ADR-002 のズレ（EVID-003）をどう解消するか？（後継 ADR を作るか、frozen を解くか。adr:ADR-012） |
+| OQ-014 | 意味グラフの提案を `related` へ焼き込む作業を、誰がどの頻度で回すか？（現状は運用未定。adr:ADR-012） |
 

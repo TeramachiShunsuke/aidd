@@ -16,6 +16,10 @@ tags:
 
 ## 2026-08-09
 
+- 検査を等級分け: ADR-012 / EVID-016 / PB-011。決定の系譜（`## 根拠` と `related` の突き合わせ）・evidence 錨の必須化・deprecated 参照・`superseded_by` の一貫性を CI エラーへ昇格
+- 昇格で検出したズレを修正: ADR-006/007/008/009/010/011 の `related` に、本文で根拠に挙げていた evidence を追加（計 11 辺）
+- `build-graph.py --impact <ID>` を追加し、変更の波及先を照会できるようにした
+- OQ-008 を Resolved へ移動。OQ-013 / OQ-014 を追加、claims に CLAIM-016 を追加
 - エージェント連携をツール横断化: ADR-011 / EVID-015。skill の正本を `.cursor/skills/` から `.agents/skills/` へ移し、`.claude/skills/` に symlink の鏡を作成。`CLAUDE.md` は `@AGENTS.md` の 1 行のみ。鏡の対応関係を Index CI が検査する
 - 利用者向けに `GUIDE.md` を追加（ID コード体系・文書間リレーション・書き分け・ライフサイクル・実例）。Tier 1 に配置
 - OQ-006（skills の複製）を Resolved へ移動。OQ-011..012 を追加、claims に CLAIM-015 を追加

@@ -84,12 +84,28 @@ def split_frontmatter(text: str) -> tuple[dict[str, object], str]:
     return data, body
 
 
+FRONTMATTER_RELS = ("related", "supersedes", "superseded_by")
+BASIS_SECTION = re.compile(r"^##\s*根拠\s*$(.*?)(?=^##\s|\Z)", re.M | re.S)
+DOC_ID = re.compile(r"\b(?:EVID|ADR|PB|REV)-\d{3}\b")
+
+
+def basis_ids(body: str) -> list[str]:
+    section = BASIS_SECTION.search(body)
+    if not section:
+        return []
+    return sorted(set(DOC_ID.findall(section.group(1))))
+
+
 class Graph:
     def __init__(self) -> None:
         self.nodes: dict[str, dict[str, str]] = {}
         self.edges: list[tuple[str, str, str, str]] = []  # src, rel, dst, source path
         self.errors: list[str] = []
         self.warnings: list[tuple[str, str, str]] = []
+        # ADR ID -> IDs cited in its `## 根拠` section. Compared against `related`
+        # so the graph never lags behind what the decision says it rests on.
+        self.basis: dict[str, list[str]] = {}
+        self.frozen_exempt: list[str] = []
 
     def add_node(self, node_id: str, **attrs: str) -> None:
         self.nodes[node_id] = dict(attrs)
@@ -117,7 +133,7 @@ def collect(graph: Graph) -> None:
         if not path.endswith(".md"):
             continue
         text = open(path, encoding="utf-8").read()
-        fm, _ = split_frontmatter(text)
+        fm, body = split_frontmatter(text)
         node_id = str(fm.get("id") or "")
         if not node_id:
             graph.errors.append(f"{path}: missing frontmatter 'id'")
@@ -128,8 +144,11 @@ def collect(graph: Graph) -> None:
             type=DIR_TYPE.get(path.split("/")[0], "other"),
             status=str(fm.get("status") or "?"),
             title=str(fm.get("title") or "?"),
+            reviewed=str(fm.get("last_reviewed") or ""),
         )
         doc_by_path[path] = node_id
+        if path.startswith("adr/"):
+            graph.basis[node_id] = basis_ids(body)
 
     for path in list_files(SKILLS_ROOT):
         if not path.endswith("/SKILL.md"):
@@ -227,6 +246,10 @@ def collect_ledger(graph: Graph) -> None:
 def validate(graph: Graph) -> None:
     """Errors block CI. Warnings are review signals and must stay actionable.
 
+    A check is an error only when the breakage has one obvious fix and the repo
+    currently has zero violations of it (ADR-012). Everything that needs a human
+    to choose between two valid repairs stays a warning.
+
     `related` is deliberately asymmetric (a playbook points at the decision it
     implements; the decision does not list every playbook), so one-way links are
     not treated as a defect.
@@ -254,8 +277,8 @@ def validate(graph: Graph) -> None:
 
         if kind == "adr":
             if not targets_of(node_id, ("evidence",)):
-                graph.warnings.append(
-                    ("根拠なしの決定", node_id, "evidence の錨を持たない"))
+                graph.errors.append(
+                    f"{attrs['path']}: {node_id} has no evidence anchor in 'related'")
             if not sources_of(node_id, ("playbook",)):
                 graph.warnings.append(
                     ("手順のない決定", node_id, "この決定を実行する playbook がない"))
@@ -264,8 +287,23 @@ def validate(graph: Graph) -> None:
                     graph.warnings.append(
                         ("草案に乗る決定", f"{node_id} → {target}", "根拠が draft のまま"))
                 if graph.nodes[target]["status"] == "deprecated":
+                    graph.errors.append(
+                        f"{attrs['path']}: {node_id} rests on deprecated {target}")
+                if graph.nodes[target]["reviewed"] > attrs["reviewed"]:
                     graph.warnings.append(
-                        ("廃止を参照", f"{node_id} → {target}", "根拠が deprecated"))
+                        ("追随していない決定", f"{node_id} → {target}",
+                         "根拠が更新されたのに決定が再確認されていない"))
+
+            if attrs["status"] == "frozen":
+                graph.frozen_exempt.append(node_id)
+            else:
+                declared = {d for s, r, d, _ in graph.edges
+                            if s == node_id and r in FRONTMATTER_RELS}
+                for cited in graph.basis.get(node_id, []):
+                    if cited != node_id and cited not in declared:
+                        graph.errors.append(
+                            f"{attrs['path']}: {node_id} cites {cited} in '## 根拠' "
+                            f"but 'related' does not list it")
 
         if kind == "playbook" and not [s for s, r, d, _ in graph.edges
                                        if d == node_id and r == "entrypoint"]:
@@ -275,12 +313,18 @@ def validate(graph: Graph) -> None:
         if kind == "claim":
             for target in targets_of(node_id, ("evidence", "adr")):
                 if graph.nodes[target]["status"] == "deprecated":
-                    graph.warnings.append(
-                        ("廃止を参照", f"{node_id} → {target}", "錨が deprecated"))
+                    graph.errors.append(
+                        f"ledger/claims.md: {node_id} is anchored to deprecated {target}")
 
         if kind in ("evidence", "adr", "playbook") and not graph.out_edges(node_id) \
                 and not graph.in_edges(node_id):
             graph.warnings.append(("孤立", node_id, "参照も被参照もない"))
+
+    for src, rel, dst, where in sorted(graph.edges):
+        if rel == "superseded_by" and graph.nodes[src]["status"] != "deprecated":
+            graph.errors.append(
+                f"{where}: {src} has superseded_by but status is "
+                f"'{graph.nodes[src]['status']}', want 'deprecated'")
 
 
 def render(graph: Graph) -> str:
@@ -362,6 +406,11 @@ def render(graph: Graph) -> str:
         add("（警告なし）")
     add("")
     add("警告は CI を落とさない。次のレビューで扱う候補として出している。")
+    add("エラーになる検査と、警告に留める基準は [ADR-012](adr/012-check-grades.md)。")
+    if graph.frozen_exempt:
+        add("")
+        add(f"根拠節と `related` の突き合わせは frozen {len(graph.frozen_exempt)} 件を"
+            f"対象外にしている（{', '.join(sorted(graph.frozen_exempt))}）。")
     add("")
 
     add("## 未解決の問い")
@@ -382,16 +431,59 @@ def render(graph: Graph) -> str:
     return "\n".join(lines) + "\n"
 
 
+def report_impact(graph: Graph, target: str) -> int:
+    """Lists what would be affected by changing `target`, following referrers."""
+    if target not in graph.nodes:
+        print(f"unknown id: {target}", file=sys.stderr)
+        return 2
+
+    seen: dict[str, int] = {target: 0}
+    frontier = [target]
+    depth = 0
+    while frontier:
+        depth += 1
+        nxt = []
+        for node_id in frontier:
+            for src, _, _, _ in graph.in_edges(node_id):
+                if src in graph.nodes and src not in seen:
+                    seen[src] = depth
+                    nxt.append(src)
+        frontier = nxt
+
+    attrs = graph.nodes[target]
+    print(f"{target} — {attrs['title']} ({attrs['path']})")
+    print(f"直接の被参照 {len([e for e in graph.in_edges(target) if e[0] in graph.nodes])} 件、"
+          f"波及 {len(seen) - 1} 件")
+    for node_id, dist in sorted(seen.items(), key=lambda kv: (kv[1], kv[0])):
+        if dist == 0:
+            continue
+        node = graph.nodes[node_id]
+        print(f"  {'  ' * (dist - 1)}[{dist}] {node_id} ({node['type']}) {node['title']}")
+    return 0
+
+
 def main() -> int:
     os.chdir(repo_root())
-    check = "--check" in sys.argv[1:]
-    if sys.argv[1:] and not check:
-        print(f"unknown argument: {sys.argv[1]}", file=sys.stderr)
+    args = sys.argv[1:]
+    check = "--check" in args
+    impact = ""
+    if "--impact" in args:
+        index = args.index("--impact")
+        if index + 1 >= len(args):
+            print("--impact needs an ID (e.g. --impact ADR-006)", file=sys.stderr)
+            return 2
+        impact = args[index + 1]
+        args = args[:index] + args[index + 2:]
+    if [a for a in args if a != "--check"]:
+        print(f"unknown argument: {[a for a in args if a != '--check'][0]}", file=sys.stderr)
         return 2
 
     graph = Graph()
     collect(graph)
     validate(graph)
+
+    if impact:
+        return report_impact(graph, impact)
 
     if graph.errors:
         for message in sorted(set(graph.errors)):

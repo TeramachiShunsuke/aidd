@@ -50,6 +50,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-009 | skills は playbook の入口とし、手順を二重に持たない | [adr/009-skills-as-playbook-entrypoints.md](adr/009-skills-as-playbook-entrypoints.md) | active | 2026-08-09 |
 | ADR-010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/010-knowledge-graph-layers.md](adr/010-knowledge-graph-layers.md) | active | 2026-08-09 |
 | ADR-011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/011-cross-tool-agent-integration.md](adr/011-cross-tool-agent-integration.md) | active | 2026-08-09 |
+| ADR-012 | 検査を error と warning に等級分けし、充足しているものから機械で固定する | [adr/012-check-grades.md](adr/012-check-grades.md) | active | 2026-08-09 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-08 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-08 |
@@ -60,6 +61,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | PB-008 | SDD の spec と知識ベースを橋渡しする | [playbook/008-bridge-sdd-spec.md](playbook/008-bridge-sdd-spec.md) | active | 2026-08-09 |
 | PB-009 | skill を追加・更新する | [playbook/009-add-skill.md](playbook/009-add-skill.md) | active | 2026-08-09 |
 | PB-010 | グラフで構造化レビューする | [playbook/010-review-with-graph.md](playbook/010-review-with-graph.md) | active | 2026-08-09 |
+| PB-011 | グラフの警告をエラーへ昇格する | [playbook/011-promote-check.md](playbook/011-promote-check.md) | active | 2026-08-09 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -80,6 +82,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-013 | Graphify は docs のみの知識ベースでは全ノードが LLM 由来になる | [evidence/013-graphify-needs-llm-for-docs.md](evidence/013-graphify-needs-llm-for-docs.md) | active | 2026-08-09 |
 | EVID-014 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる | [evidence/014-reference-graph-from-metadata.md](evidence/014-reference-graph-from-metadata.md) | active | 2026-08-09 |
 | EVID-015 | エージェントツールごとに skill と規範ファイルの探索パスが違う | [evidence/015-agent-tools-read-different-paths.md](evidence/015-agent-tools-read-different-paths.md) | active | 2026-08-09 |
+| EVID-016 | 警告のままの検査は劣化を検出できず、本文と related のズレが残る | [evidence/016-warnings-do-not-ratchet.md](evidence/016-warnings-do-not-ratchet.md) | active | 2026-08-09 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
@@ -91,9 +94,9 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 6 |
-| Tier 2 | 21 |
-| Tier 3 | 19 |
-| status: active | 38 |
+| Tier 2 | 23 |
+| Tier 3 | 20 |
+| status: active | 41 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
