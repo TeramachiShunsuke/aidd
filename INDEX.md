@@ -18,6 +18,7 @@
 | ID | タイトル | パス | status | last_reviewed |
 | --- | --- | --- | --- | --- |
 | ROOT-GRAPH | GRAPH | [GRAPH.md](GRAPH.md) | - | - |
+| ROOT-GUIDE | GUIDE — 文書コード体系とリレーション | [GUIDE.md](GUIDE.md) | - | - |
 | ROOT-README | aidd | [README.md](README.md) | - | - |
 | LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-09 |
 | LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-09 |
@@ -27,12 +28,12 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 
 | skill | playbook | description |
 | --- | --- | --- |
-| [aidd-add-evidence](.cursor/skills/aidd-add-evidence/SKILL.md) | PB-001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
-| [aidd-graph-review](.cursor/skills/aidd-graph-review/SKILL.md) | PB-010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
-| [aidd-rebuild-index](.cursor/skills/aidd-rebuild-index/SKILL.md) | PB-007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
-| [aidd-review-cycle](.cursor/skills/aidd-review-cycle/SKILL.md) | PB-003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
-| [aidd-sdd-bridge](.cursor/skills/aidd-sdd-bridge/SKILL.md) | PB-008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
-| [aidd-write-adr](.cursor/skills/aidd-write-adr/SKILL.md) | PB-002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
+| [aidd-add-evidence](.agents/skills/aidd-add-evidence/SKILL.md) | PB-001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
+| [aidd-graph-review](.agents/skills/aidd-graph-review/SKILL.md) | PB-010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
+| [aidd-rebuild-index](.agents/skills/aidd-rebuild-index/SKILL.md) | PB-007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
+| [aidd-review-cycle](.agents/skills/aidd-review-cycle/SKILL.md) | PB-003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
+| [aidd-sdd-bridge](.agents/skills/aidd-sdd-bridge/SKILL.md) | PB-008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
+| [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
 
 ## Tier 2 — 決定と手順（作業種別が決まったら）
 
@@ -48,6 +49,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-008 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する | [adr/008-sdd-bridge.md](adr/008-sdd-bridge.md) | active | 2026-08-09 |
 | ADR-009 | skills は playbook の入口とし、手順を二重に持たない | [adr/009-skills-as-playbook-entrypoints.md](adr/009-skills-as-playbook-entrypoints.md) | active | 2026-08-09 |
 | ADR-010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/010-knowledge-graph-layers.md](adr/010-knowledge-graph-layers.md) | active | 2026-08-09 |
+| ADR-011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/011-cross-tool-agent-integration.md](adr/011-cross-tool-agent-integration.md) | active | 2026-08-09 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-08 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-08 |
@@ -77,19 +79,21 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-012 | skills は description だけを常時ロードする段階的開示である | [evidence/012-skills-are-progressive-disclosure.md](evidence/012-skills-are-progressive-disclosure.md) | active | 2026-08-09 |
 | EVID-013 | Graphify は docs のみの知識ベースでは全ノードが LLM 由来になる | [evidence/013-graphify-needs-llm-for-docs.md](evidence/013-graphify-needs-llm-for-docs.md) | active | 2026-08-09 |
 | EVID-014 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる | [evidence/014-reference-graph-from-metadata.md](evidence/014-reference-graph-from-metadata.md) | active | 2026-08-09 |
+| EVID-015 | エージェントツールごとに skill と規範ファイルの探索パスが違う | [evidence/015-agent-tools-read-different-paths.md](evidence/015-agent-tools-read-different-paths.md) | active | 2026-08-09 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
+| REV-004 | ツール横断の可搬性レビュー | [reviews/004-cross-tool-portability.md](reviews/004-cross-tool-portability.md) | active | 2026-08-09 |
 
 ## 内訳
 
 | 区分 | 件数 |
 | --- | --- |
 | Tier 0 | 2 |
-| Tier 1 | 5 |
-| Tier 2 | 20 |
-| Tier 3 | 17 |
-| status: active | 35 |
+| Tier 1 | 6 |
+| Tier 2 | 21 |
+| Tier 3 | 19 |
+| status: active | 38 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
