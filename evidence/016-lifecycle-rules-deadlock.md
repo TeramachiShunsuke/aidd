@@ -13,6 +13,7 @@ related:
   - ADR-003
   - ADR-004
   - ADR-005
+  - ADR-012
   - PB-003
   - PB-005
   - REV-005
@@ -60,6 +61,7 @@ tier: 3
 - [ADR-003](../adr/003-frozen-immutability.md) — frozen 不変性の決定
 - [ADR-004](../adr/004-staleness-policy.md) — 90 日鮮度ポリシーの決定
 - [ADR-005](../adr/005-reviews-append-only.md) — reviews 追記のみの決定
+- [ADR-012](../adr/012-review-attestations.md) — 本観測を受けた解消（レビュー証跡の分離・実効レビュー日・未来日拒否・週次実行・macOS 対応）
 - [PB-003](../playbook/003-run-review-cycle.md) / [PB-005](../playbook/005-fix-staleness-ci.md) — 影響を受ける手順
 - [REV-005](../reviews/005-adversarial-review.md) — 本観測の出所となった敵対レビュー
 - OQ-013 / OQ-014（ledger/open-questions.md）
