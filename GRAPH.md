@@ -11,22 +11,22 @@
 
 | 区分 | 件数 |
 | --- | --- |
-| ノード: adr | 10 |
-| ノード: claim | 14 |
-| ノード: evidence | 14 |
+| ノード: adr | 11 |
+| ノード: claim | 15 |
+| ノード: evidence | 15 |
 | ノード: external | 1 |
 | ノード: ledger | 3 |
-| ノード: open-question | 10 |
+| ノード: open-question | 12 |
 | ノード: playbook | 10 |
-| ノード: reviews | 3 |
-| ノード: root | 3 |
+| ノード: reviews | 4 |
+| ノード: root | 4 |
 | ノード: skill | 6 |
-| 辺: anchor | 27 |
+| 辺: anchor | 29 |
 | 辺: entrypoint | 6 |
-| 辺: links | 191 |
-| 辺: related | 83 |
-| ノード合計 | 74 |
-| 辺合計 | 307 |
+| 辺: links | 236 |
+| 辺: related | 92 |
+| ノード合計 | 81 |
+| 辺合計 | 363 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -44,6 +44,7 @@ graph LR
   ADR_008[ADR-008]
   ADR_009[ADR-009]
   ADR_010[ADR-010]
+  ADR_011[ADR-011]
   EVID_002(EVID-002)
   EVID_003(EVID-003)
   EVID_004(EVID-004)
@@ -57,6 +58,7 @@ graph LR
   EVID_012(EVID-012)
   EVID_013(EVID-013)
   EVID_014(EVID-014)
+  EVID_015(EVID-015)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -76,26 +78,30 @@ graph LR
   ADR_008 --> EVID_011
   ADR_009 --> ADR_006
   ADR_009 --> ADR_007
+  ADR_009 --> ADR_011
   ADR_009 --> EVID_012
   ADR_010 --> ADR_007
   ADR_010 --> EVID_013
   ADR_010 --> EVID_014
+  ADR_011 --> ADR_006
+  ADR_011 --> ADR_009
+  ADR_011 --> EVID_015
 ```
 
 ## ハブ（被参照が多い文書）
 
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
-| ADR-006 | 20 | 13 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ADR-006 | 23 | 13 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ROOT-CONVENTIONS | 17 | 12 | CONVENTIONS.md |
 | ADR-007 | 16 | 11 | INDEX.md を生成物とし、CI で最新性を強制する |
-| ADR-010 | 13 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
-| ROOT-CONVENTIONS | 13 | 9 | CONVENTIONS.md |
-| LEDGER-OQ | 12 | 0 | Open questions |
+| LEDGER-OQ | 16 | 0 | Open questions |
+| ADR-010 | 14 | 16 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
+| ADR-009 | 13 | 11 | skills は playbook の入口とし、手順を二重に持たない |
+| ADR-011 | 13 | 14 | skills と規範をツール横断にし、正本を 1 か所に置く |
 | ADR-001 | 11 | 6 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する |
 | ADR-004 | 11 | 6 | 鮮度は last_reviewed の 90 日と変更時同期で守る |
 | ADR-008 | 11 | 14 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
-| PB-007 | 11 | 6 | INDEX.md を再生成する |
-| PB-001 | 9 | 3 | evidence を追加する |
 
 ## レビュー信号
 
@@ -116,9 +122,10 @@ graph LR
 | OQ-002 | frozen → deprecated 遷移を CI 例外としてどう安全に扱うか？（現状は owners 承認の明示 PR） |
 | OQ-004 | Tier 0 / Tier 1 の総量に上限（行数またはトークン）を設けるか？（現状は上限なし。増やすときは ADR で合意） |
 | OQ-005 | 生成物 `INDEX.md` をリポジトリに置き続けるか、CI 生成に切り替えるか？（現状は差分レビュー可能性を優先して commit する） |
-| OQ-006 | skills を `.cursor/skills/` 以外（`.agents/skills/` や `.claude/skills/`）へ複製するか？（複製すると二重管理、しないと他ツールで発火しない） |
 | OQ-007 | SDD の「昇格するか」の判断を機械支援できるか？（現状は PB-008 の質問リストによる人間判断） |
 | OQ-008 | `GRAPH.md` の警告（未使用の根拠・根拠なしの決定など）を、いつ CI エラーへ昇格させるか？（現状はすべて警告のまま） |
 | OQ-009 | 意味グラフ（Graphify 等）を定期的に回して探索する運用を作るか？（現状は任意のローカル探索のみ。ADR-010） |
 | OQ-010 | 構造グラフを `graph.json` としても出力し、外部ツール（Neo4j / Gephi / Obsidian）に渡せるようにするか？ |
+| OQ-011 | Windows で `core.symlinks` が無効な checkout では `.claude/skills/` の鏡がテキストファイルになる。Claude Code 側の `/import` に任せるか、複製へ切り替えるか？（現状は symlink 前提。adr:ADR-011） |
+| OQ-012 | Codex / Claude Code での実動作を CI か手順で検証する手段を持つか？（現状は公式ドキュメント準拠の未検証前提。evidence:EVID-015） |
 

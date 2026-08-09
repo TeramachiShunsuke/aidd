@@ -11,11 +11,22 @@
 Tier（[ADR-006](adr/006-context-tiers.md)）に従って読む。上 2 つは毎回、下 2 つは必要になってから。
 
 1. Tier 0: 本ファイル（AGENTS.md）と [CONVENTIONS.md](CONVENTIONS.md) — 全文
-2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)）
+2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)、ID 体系と関係が不明なときは [GUIDE.md](GUIDE.md)）
 3. Tier 2: 作業に関係する playbook と ADR — 全文
 4. Tier 3: 根拠を疑うときだけ evidence / reviews
 
-skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-009](adr/009-skills-as-playbook-entrypoints.md)）。
+skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-009](adr/009-skills-as-playbook-entrypoints.md)）。
+
+## 動作するツール
+
+このリポジトリは Codex / Cursor / Claude Code のいずれからでも同じ規範と skill で動く（[ADR-011](adr/011-cross-tool-agent-integration.md)）。
+
+| | 規範 | skill |
+| --- | --- | --- |
+| Codex / Cursor | 本ファイル（`AGENTS.md`） | `.agents/skills/`（正本） |
+| Claude Code | `CLAUDE.md` = `@AGENTS.md` の 1 行 | `.claude/skills/`（正本への symlink） |
+
+`CLAUDE.md` に規範を書き足さない。ツール固有のルールファイル（`.cursor/rules/*.mdc` 等）にも複製しない。
 
 ## やってよいこと
 
@@ -23,7 +34,7 @@ skills（`.cursor/skills/`）は Tier 1 の入口で、`description` が一致�
 - `status: draft` / `active` の文書を更新し、同時に `last_reviewed` を今日（UTC）にする
 - `reviews/` に新規ファイルを追加する、または既存ファイルの**末尾のみ**追記する
 - `ledger/` の claims / open-questions / changelog を規約どおり更新する
-- `.cursor/skills/` に skill を追加・更新する（1 skill = 1 playbook）
+- `.agents/skills/` に skill を追加・更新し、`.claude/skills/` に symlink の鏡を作る（1 skill = 1 playbook）
 - 生成物（`GRAPH.md` → `INDEX.md` の順）を再生成する
 - PR 説明に、触った文書 ID と根拠（evidence / ADR）を列挙する
 
