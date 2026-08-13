@@ -12,6 +12,7 @@ tags:
   - platform
 related:
   - EVID-026
+  - EVID-029
   - ADR-020
   - ADR-017
 ---
@@ -29,10 +30,11 @@ related:
 
 ## 限界
 
-Okta のテナント構成、グループと案件の対応、SCIM、MFA、どの IdP 属性を PF が読むかは、本リポジトリでは観測していない。GitHub へ PR を出すときの git 主体（GitHub App かサービスアカウントか）も未決である。ここでは「認証の正本は Okta」「git は認証情報を使わない」までで、属性マッピングと git 書き込み主体は言えない。
+Okta のテナント構成、グループと案件の対応、SCIM、MFA、どの IdP 属性を PF が読むかは、本リポジトリでは観測していない。GitHub へ PR を出すときの git 主体も未決である。運用者は直後に、Okta は今の利用例であり kernel の契約は汎用に保つと訂正した（[EVID-029](029-keep-platform-contract-generic.md)）。この文書が言えるのは「その時点で Okta を使うと言った」「git は認証情報を使わない」までである。
 
 ## 関連
 
 - [REV-007](../reviews/007-platform-acl-adversarial-review.md)
 - [ADR-020](../adr/020-platform-is-a-client.md)
 - [EVID-026](026-no-principal-or-document-acl.md)
+- [EVID-029](029-keep-platform-contract-generic.md)

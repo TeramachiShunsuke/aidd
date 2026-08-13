@@ -19,6 +19,7 @@ tags:
 - 働き方の kernel と案件の考え方を分離: ADR-019 / EVID-024 / EVID-025 / PB-017 / PB-018。既存 ADR は残して参照し、案件の `adr/` にコピーして混ぜない。散在ソース（Slack / 議事録 / Confluence）からは `draft` の evidence を起こし、観測の確定と status 遷移は人間が行う。skill `aidd-apply-to-project` / `aidd-draft-evidence` と `templates/evidence-intake.md` を追加。OQ-016 / OQ-021 を Resolved、OQ-029 と CLAIM-024..025 を追加
 - PF・ログイン ACL・実行ワークフロー構想の敵対レビュー: REV-007 / EVID-026 / EVID-027 / ADR-020。現行モデルに principal も文書 ACL もなく、アカウント集約はソース ACL を越境させる。PF は別リポのクライアントとし、認可と実行状態を本 KB の文書モデルに埋め込まない。OQ-030..033 と CLAIM-026..028 を追加
 - 批判レビューを Okta 仕様として取り込み: EVID-028。認証の正本は Okta、git は認証情報を使わない。OQ-030 / OQ-031 を Resolved、OQ-034 と CLAIM-029 を追加。REV-007 末尾に取り込み節を追記
+- kernel の PF / IdP 契約を汎用に戻す: EVID-029。今使おうとしている PF と Okta は実装例。契約は「IdP が認証、git は認証情報を使わない、PF はクライアント」。ADR-020 を更新、REV-007 に汎用性の節を追記
 
 ## 2026-08-09
 

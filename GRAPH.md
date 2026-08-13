@@ -13,7 +13,7 @@
 | --- | --- |
 | ノード: adr | 20 |
 | ノード: claim | 29 |
-| ノード: evidence | 28 |
+| ノード: evidence | 29 |
 | ノード: external | 3 |
 | ノード: ledger | 4 |
 | ノード: open-question | 34 |
@@ -23,10 +23,10 @@
 | ノード: skill | 12 |
 | 辺: anchor | 59 |
 | 辺: entrypoint | 12 |
-| 辺: links | 609 |
-| 辺: related | 248 |
-| ノード合計 | 159 |
-| 辺合計 | 928 |
+| 辺: links | 621 |
+| 辺: related | 254 |
+| ノード合計 | 160 |
+| 辺合計 | 946 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -82,6 +82,7 @@ graph LR
   EVID_026(EVID-026)
   EVID_027(EVID-027)
   EVID_028(EVID-028)
+  EVID_029(EVID-029)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -172,6 +173,7 @@ graph LR
   ADR_020 --> EVID_026
   ADR_020 --> EVID_027
   ADR_020 --> EVID_028
+  ADR_020 --> EVID_029
 ```
 
 ## ハブ（被参照が多い文書）
@@ -179,15 +181,15 @@ graph LR
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
 | ADR-006 | 32 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
-| ADR-008 | 29 | 16 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
-| ADR-019 | 29 | 27 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る |
+| ADR-008 | 32 | 16 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
+| ADR-019 | 30 | 27 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る |
 | ADR-012 | 28 | 14 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する |
 | ADR-010 | 27 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
 | ADR-014 | 26 | 19 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す |
 | ADR-013 | 25 | 19 | 検査を error と warning に等級分けし、充足しているものから機械で固定する |
+| ADR-020 | 25 | 32 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする |
 | LEDGER-OQ | 24 | 0 | Open questions |
 | ADR-017 | 22 | 16 | 機械は事実の記録と検出に限り、status の遷移は人間が行う |
-| ADR-020 | 22 | 29 | 認証は Okta、git は認証情報を使わず、PF は文書正本のクライアントとする |
 
 ## レビュー信号
 
@@ -237,5 +239,5 @@ graph LR
 | OQ-029 | 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは PF 側。認証情報は git に置かない。evidence:EVID-025 EVID-027 EVID-028 adr:ADR-020 REV-007） |
 | OQ-032 | アカウント由来の原文を、個人下書き・案件 KB・kernel のどの層まで昇格してよいか？（ADR-020 は kernel 直書きを禁じた。案件層の扱いと、削除・権限剥奪の伝播は未決。evidence:EVID-027 adr:ADR-020 REV-007） |
 | OQ-033 | 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-020 が今は採らない（evidence:EVID-008 adr:ADR-017 ADR-020 REV-007） |
-| OQ-034 | PF が git に PR を出すときの GitHub 主体は何か？ Okta ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める（evidence:EVID-028 adr:ADR-020 REV-007） |
+| OQ-034 | PF が git に PR を出すときの GitHub 主体は何か？ IdP ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める。特定 IdP 名には固定しない（evidence:EVID-028 EVID-029 adr:ADR-020 REV-007） |
 

@@ -53,7 +53,7 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - 番号を目視で数えて採番する（`--next` に聞く。下記「採番と PR の単位」）
 - 1 セッションで複数の PR を積み上げる（base を別の PR にする。[ADR-018](adr/018-id-allocation.md)）
 - 秘密情報、トークン、個人データをコミットする
-- Okta のセッションやソースシステムへ委譲した認証情報を git に置く、またはこのリポジトリの作業で使う（[ADR-020](adr/020-platform-is-a-client.md)）
+- IdP のセッションやソースシステムへ委譲した認証情報を git に置く、またはこのリポジトリの作業で使う（[ADR-020](adr/020-platform-is-a-client.md)）
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新や証跡追記（本文レビューなし）
 
 ## 作業フロー
@@ -69,7 +69,7 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
  → PR（テンプレート必須項目を埋める）
 ```
 
-新しいリポジトリへ適用するときは [PB-017](playbook/017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-019](adr/019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-020](adr/020-platform-is-a-client.md)（認証は Okta。git は認証情報を使わない。このリポジトリに PF を実装しない）。
+新しいリポジトリへ適用するときは [PB-017](playbook/017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-019](adr/019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-020](adr/020-platform-is-a-client.md)（認証は git の外の IdP。git は認証情報を使わない。特定の PF 製品は kernel に実装しない）。
 
 外部の spec（requirements / design / tasks）との受け渡しは [ADR-008](adr/008-sdd-bridge.md) と [PB-008](playbook/008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
 

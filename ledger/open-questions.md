@@ -41,12 +41,12 @@ tags:
 - OQ-029: 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは PF 側。認証情報は git に置かない。evidence:EVID-025 EVID-027 EVID-028 adr:ADR-020 REV-007）
 - OQ-032: アカウント由来の原文を、個人下書き・案件 KB・kernel のどの層まで昇格してよいか？（ADR-020 は kernel 直書きを禁じた。案件層の扱いと、削除・権限剥奪の伝播は未決。evidence:EVID-027 adr:ADR-020 REV-007）
 - OQ-033: 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-020 が今は採らない（evidence:EVID-008 adr:ADR-017 ADR-020 REV-007）
-- OQ-034: PF が git に PR を出すときの GitHub 主体は何か？ Okta ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める（evidence:EVID-028 adr:ADR-020 REV-007）
+- OQ-034: PF が git に PR を出すときの GitHub 主体は何か？ IdP ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める。特定 IdP 名には固定しない（evidence:EVID-028 EVID-029 adr:ADR-020 REV-007）
 
 ## Resolved
 
-- OQ-031: 文書の認可をどこに置くか？ → **git の外**。認証は Okta、認可とソース ACL の加味は PF。git は認証情報を使わず、Frontmatter に ACL を足さない（adr:ADR-020 evidence:EVID-026 EVID-028、2026-08-13）
-- OQ-030: 主体（principal）は何か？ → **Okta**。GitHub アカウントでも git の committer でもない。この KB だけを読んでもログイン主体は復元できない（adr:ADR-020 evidence:EVID-028、2026-08-13）
+- OQ-031: 文書の認可をどこに置くか？ → **git の外**。認証は IdP（今の利用は Okta）、認可とソース ACL の加味は PF。git は認証情報を使わず、Frontmatter に ACL を足さない（adr:ADR-020 evidence:EVID-026 EVID-028 EVID-029、2026-08-13）
+- OQ-030: 主体（principal）は何か？ → **git の外の IdP**。今の利用は Okta。GitHub アカウントでも git の committer でもない。IdP 製品名は kernel の契約にしない（adr:ADR-020 evidence:EVID-028 EVID-029、2026-08-13）
 - OQ-021: 案件限りの ADR を spec / 実装リポジトリのどこに、どの体裁で置くか？ → **案件リポ側**。kernel の `adr/` には入れない。案件リポ内のディレクトリ名は案件が決める（adr:ADR-019 evidence:EVID-024、2026-08-13）
 - OQ-016: 他プロジェクトへコピーして使う初期化手段（core / project の二層分離）を作るか？ → **二層分離は採用する**。本リポジトリは働き方の kernel、案件の考え方は案件リポ。参照は URL。owner・日付・ライセンスを書き換える初期化スクリプトは作らない（adr:ADR-019 evidence:EVID-024、2026-08-13）
 - OQ-008: `GRAPH.md` の警告をいつ CI エラーへ昇格させるか？ → **違反 0 件・修正方法が一意・frozen を壊さない、の 3 条件**を満たしたとき。基準と等級表は ADR-013、手順は PB-011（adr:ADR-013 evidence:EVID-017、2026-08-09）
