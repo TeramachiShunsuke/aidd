@@ -11,7 +11,7 @@
 Tier（[ADR-006](adr/006-context-tiers.md)）に従って読む。上 2 つは毎回、下 2 つは必要になってから。
 
 1. Tier 0: 本ファイル（AGENTS.md）と [CONVENTIONS.md](CONVENTIONS.md) — 全文
-2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)、ID 体系と関係が不明なときは [GUIDE.md](GUIDE.md)）
+2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)、ID 体系と関係が不明なときは [GUIDE.md](GUIDE.md)、人の始め方は [SETUP.md](SETUP.md)）
 3. Tier 2: 作業に関係する playbook と ADR — 全文
 4. Tier 3: 根拠を疑うときだけ evidence / reviews
 

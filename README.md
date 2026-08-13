@@ -10,7 +10,8 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | --- | --- | --- |
 | [AGENTS.md](AGENTS.md) | エージェントの行動規範（常に読む） | 1 |
 | [CONVENTIONS.md](CONVENTIONS.md) | 文書形式・Frontmatter・命名規則 | 1 |
-| [GUIDE.md](GUIDE.md) | ID 体系と文書間リレーションの案内（人向けの入口） | 1 |
+| [GUIDE.md](GUIDE.md) | ID 体系と文書間リレーションの案内（地図） | 1 |
+| [SETUP.md](SETUP.md) | 人向けの始め方（最低限の利用と、改善できる理解） | 1 |
 | [INDEX.md](INDEX.md) | 全文書の生成インデックス（手で編集しない） | 1 |
 | [GRAPH.md](GRAPH.md) | 参照グラフとレビュー信号（手で編集しない） | 1 |
 | [evidence/](evidence/) | 観測・根拠（主張の土台） | 増える |
@@ -22,7 +23,7 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | `.agents/skills/` | playbook への入口となる Agent Skills（正本） | 増える |
 | `.claude/skills/` | Claude Code 用の鏡（正本への symlink） | 正本と同数 |
 
-各 ID の意味と文書同士のつながりは [GUIDE.md](GUIDE.md) にまとめてある。
+各 ID の意味と文書同士のつながりは [GUIDE.md](GUIDE.md) にまとめてある。人の始め方は [SETUP.md](SETUP.md)。
 
 ## 信頼モデル
 
@@ -41,7 +42,7 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 | Tier | いつ読むか | 中身 |
 | --- | --- | --- |
 | 0 | 毎セッション、全文 | `AGENTS.md` / `CONVENTIONS.md` |
-| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md` / `ledger/` / skills の `description` |
+| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `SETUP.md` / `README.md` / `ledger/` / skills の `description` |
 | 2 | 作業種別が決まったら | `adr/` / `playbook/` |
 | 3 | 主張を疑うとき | `evidence/` / `reviews/` / 廃止文書 |
 
@@ -103,21 +104,14 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 python3 .github/scripts/build-graph.py --impact ADR-006
 ```
 
-## 使い方（最短）
+## 使い方
 
-1. [AGENTS.md](AGENTS.md) と [CONVENTIONS.md](CONVENTIONS.md) を読む（Tier 0）。ID 体系が初見なら [GUIDE.md](GUIDE.md)
-2. [INDEX.md](INDEX.md) で関係する文書 ID を特定する（Tier 1）
-3. 作業種別に応じて [playbook/](playbook/) を選ぶ
-4. 新規文書は [templates/](templates/) から作る
-5. 主張は [ledger/claims.md](ledger/claims.md) に錨を付ける
-6. 生成物を再生成する（グラフ → 索引の順）
+人は [SETUP.md](SETUP.md) から始める。層は 2 つあり、考え方への共感は必須ではない。
 
-```bash
-python3 .github/scripts/build-graph.py
-bash .github/scripts/build-index.sh
-```
+1. **最低限** — ワークフローを無駄なく使う（SETUP §1）
+2. **理解したら** — より効率的に使い、このリポジトリを改善する（SETUP §2）
 
-7. PR ではテンプレートのチェックリストを埋める
+エージェントの読み順は SETUP ではなく本 README の Tier 表と [AGENTS.md](AGENTS.md) である。新しい参加者を乗せる手順は [PB-019](playbook/019-onboard-with-setup-guide.md)。
 
 ## ライセンス
 

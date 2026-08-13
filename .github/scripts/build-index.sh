@@ -29,7 +29,7 @@ OUT="INDEX.md"
 SCOPE_DIRS=(evidence adr playbook ledger reviews)
 SKILLS_ROOT=".agents/skills"
 CLAUDE_MIRROR=".claude/skills"
-ROOT_DOCS=(AGENTS.md CONVENTIONS.md GUIDE.md README.md GRAPH.md)
+ROOT_DOCS=(AGENTS.md CONVENTIONS.md GUIDE.md SETUP.md README.md GRAPH.md)
 SCRIPT_REL=".github/scripts/build-index.sh"
 
 FAIL=0
@@ -89,7 +89,7 @@ default_tier() {
   if [[ "$st" == "deprecated" ]]; then printf '3'; return; fi
   case "$p" in
     AGENTS.md|CONVENTIONS.md) printf '0' ;;
-    README.md|GUIDE.md|INDEX.md|GRAPH.md) printf '1' ;;
+    README.md|GUIDE.md|SETUP.md|INDEX.md|GRAPH.md) printf '1' ;;
     ledger/*) printf '1' ;;
     "$SKILLS_ROOT"/*) printf '1' ;;
     adr/*|playbook/*) printf '2' ;;
@@ -104,6 +104,7 @@ root_doc_id() {
     CONVENTIONS.md) printf 'ROOT-CONVENTIONS' ;;
     README.md) printf 'ROOT-README' ;;
     GUIDE.md) printf 'ROOT-GUIDE' ;;
+    SETUP.md) printf 'ROOT-SETUP' ;;
     GRAPH.md) printf 'ROOT-GRAPH' ;;
     *) printf 'ROOT' ;;
   esac

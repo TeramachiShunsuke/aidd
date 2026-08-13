@@ -17,9 +17,10 @@
 | `INDEX.md` | — | 生成物。手で編集しない |
 | `GRAPH.md` | — | 生成物。参照グラフとレビュー信号 |
 | `GUIDE.md` | — | ID 体系とリレーションの案内（人向け。規範は本ファイル） |
+| `SETUP.md` | — | 人向けの始め方（最低限の利用と、改善できる理解。正本の値は複製しない） |
 | `CLAUDE.md` | — | `@AGENTS.md` の 1 行のみ。規範を書かない |
 
-`NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。ID の意味と文書同士のつながりの解説は [GUIDE.md](GUIDE.md) にある（本ファイルは規範、GUIDE は案内）。
+`NNN` はゼロ埋め 3 桁。slug は英小文字ケバブケース。人の始め方は [SETUP.md](SETUP.md)、ID の意味と文書同士のつながりの解説は [GUIDE.md](GUIDE.md) にある（本ファイルは規範、SETUP / GUIDE は案内）。
 
 ### 採番
 
@@ -118,7 +119,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 | Tier | いつ読むか | 既定で入るもの |
 | --- | --- | --- |
 | 0 | 毎セッション、全文 | `AGENTS.md` / `CONVENTIONS.md` |
-| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md` / `ledger/*` / `.agents/skills/*` |
+| 1 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `SETUP.md` / `README.md` / `ledger/*` / `.agents/skills/*` |
 | 2 | 作業種別が決まったら全文 | `adr/*` / `playbook/*` |
 | 3 | 主張を疑うとき・監査時 | `evidence/*` / `reviews/*` / `deprecated` 全般 |
 

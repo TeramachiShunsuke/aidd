@@ -2,7 +2,7 @@
 id: LEDGER-CHANGELOG
 title: Knowledge base changelog
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -13,6 +13,10 @@ tags:
 # Changelog
 
 知識ベース自体の注目すべき変更。新しいエントリを上に追記する。
+
+## 2026-08-13
+
+- 人向けセットアップ案内を二層で追加: SETUP.md / EVID-030 / ADR-021 / PB-019 / skill `aidd-setup`。最低限でワークフローを無駄なく使える層と、理解したら効率よく使いこの KB を改善できる層。考え方への全共感は成功条件にしない。GUIDE は地図、README は倉庫と CI、AGENTS はエージェント規範のまま
 
 ## 2026-08-09
 

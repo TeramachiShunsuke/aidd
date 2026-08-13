@@ -23,7 +23,7 @@ import sys
 from collections import defaultdict
 
 SCOPE_DIRS = ["evidence", "adr", "playbook", "ledger", "reviews"]
-ROOT_DOCS = ["AGENTS.md", "CONVENTIONS.md", "GUIDE.md", "README.md"]
+ROOT_DOCS = ["AGENTS.md", "CONVENTIONS.md", "GUIDE.md", "SETUP.md", "README.md"]
 SKILLS_ROOT = ".agents/skills"
 OUT = "GRAPH.md"
 SCRIPT_REL = ".github/scripts/build-graph.py"
