@@ -2,7 +2,7 @@
 id: ADR-014
 title: 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -14,6 +14,7 @@ related:
   - EVID-019
   - EVID-011
   - ADR-008
+  - ADR-019
 tier: 2
 ---
 
@@ -55,8 +56,8 @@ PdO が書くビジネススペックには、抽象的な条件だけでなく*
 
 ### 5. 決定の置き場所
 
-- 他の案件でも同じ判断を繰り返すもの → **KB の ADR**
-- その案件限りのもの → **spec / 実装リポジトリ側の ADR**（KB には持ち込まない）
+- 他の案件でも同じ判断を繰り返すもの → **KB の ADR**（kernel）
+- その案件限りのもの → **案件リポ側の ADR**（kernel には持ち込まない。[ADR-019](019-kernel-and-project-layers.md)）
 
 判定は [ADR-008](008-sdd-bridge.md) の境界をそのまま使う。KB 側は spec 本文を持たず、リンクと ID のみを持つ。
 
@@ -72,7 +73,7 @@ PdO が書くビジネススペックには、抽象的な条件だけでなく*
 - 利点: 振る舞いの二重管理が消え、テストと契約定義が唯一の正本になる
 - 利点: 上流の曖昧さが実装スペックの厚みとして可視化される
 - 代償: PdO の負荷が上がる。境界値まで書く作業は、これまで開発チームが解釈で吸収していた分が上流に戻ることを意味する
-- 代償: 案件固有 ADR の置き場所と体裁は各リポジトリに委ねられ、KB からは検査できない（[OQ-015](../ledger/open-questions.md)）
+- 代償: 案件リポ内のディレクトリ名（トップレベル `adr/` か機能配下か）は案件に委ね、kernel からは検査しない（[ADR-019](019-kernel-and-project-layers.md)）
 - 代償: 「不可逆かどうか」の判定に閾値がなく、当面は人の判断に依存する
 
 ## 関連
@@ -80,4 +81,5 @@ PdO が書くビジネススペックには、抽象的な条件だけでなく*
 - [PB-012](../playbook/012-triage-implementation-spec.md)
 - [PB-013](../playbook/013-start-tdd-from-examples.md)
 - [ADR-015](015-infra-context-layers.md)
+- [ADR-019](019-kernel-and-project-layers.md)
 - [templates/acceptance-examples.md](../templates/acceptance-examples.md)

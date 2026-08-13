@@ -2,7 +2,7 @@
 id: LEDGER-CLAIMS
 title: Claims ledger
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -38,3 +38,9 @@ tags:
 - [ ] CLAIM-021: 競合は解決を上手くするのではなく、競合面を減らして扱う — evidence:EVID-021 adr:ADR-016 url:https://github.com/twisted/towncrier
 - [ ] CLAIM-022: 機械が書けるのは事実と検出であり、status の遷移は人間の判断である — evidence:EVID-022 adr:ADR-017 url:https://github.com/doorstop-dev/doorstop
 - [ ] CLAIM-023: 番号の衝突は並行制御の問題であり、main を採番の権威に置けば譲る側が機械的に決まる — evidence:EVID-023 adr:ADR-018
+- [ ] CLAIM-024: 働き方の kernel と案件の考え方は別権威であり、同じ adr/ 一覧に混ぜない — evidence:EVID-024 adr:ADR-019
+- [ ] CLAIM-025: evidence の下書きは散在ソースから機械が起こしてよい。観測の確定と status の遷移は人間である — evidence:EVID-025 adr:ADR-019
+- [ ] CLAIM-026: 現行 KB に principal も文書 ACL もなく、owners は認可ではない — evidence:EVID-026 adr:ADR-020
+- [ ] CLAIM-027: アカウント連携の集約はソース側 ACL を共有正本へ越境させうる — evidence:EVID-027 adr:ADR-020
+- [ ] CLAIM-028: 将来の PF は本 KB のクライアントであり、文書正本は git 上の Markdown + PR のまま — evidence:EVID-008 adr:ADR-020
+- [ ] CLAIM-029: 人の認証は git の外の IdP が行い、git は認証情報を持たず認可にも使わない。今の利用は Okta だが契約は製品名に固定しない — evidence:EVID-028 EVID-029 adr:ADR-020

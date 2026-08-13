@@ -2,7 +2,7 @@
 id: PB-008
 title: SDD の spec と知識ベースを橋渡しする
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -10,8 +10,10 @@ tags:
   - sdd
 related:
   - ADR-008
+  - ADR-019
   - PB-001
   - PB-002
+  - PB-017
 tier: 2
 ---
 
@@ -31,7 +33,7 @@ tier: 2
 ### 方向 B: spec / 実装のあと（spec → KB）
 
 1. [templates/sdd-handoff.md](../templates/sdd-handoff.md) を spec 側リポジトリにコピーして記入する
-2. 各項目に「他プロジェクトでも同じ判断を繰り返すか？」を問い、**繰り返さないものは KB に持ち込まない**
+2. 各項目に「他プロジェクトでも同じ判断を繰り返すか？」を問い、**繰り返さないものは KB（kernel）に持ち込まない**。案件限りの決定は案件リポ側に置く（[ADR-019](../adr/019-kernel-and-project-layers.md)、[PB-017](017-apply-kernel-to-project.md)）
 3. 繰り返すものを種別に振り分ける
    - 観測・計測結果 → [PB-001](001-add-evidence.md) で `evidence/`
    - 横断で再利用する決定 → [PB-002](002-write-adr.md) で `adr/`
@@ -53,5 +55,7 @@ tier: 2
 ## 関連
 
 - [ADR-008](../adr/008-sdd-bridge.md)
+- [ADR-019](../adr/019-kernel-and-project-layers.md)
 - [EVID-011](../evidence/011-spec-first-reduces-rework.md)
 - [templates/sdd-handoff.md](../templates/sdd-handoff.md)
+- [PB-017](017-apply-kernel-to-project.md)
