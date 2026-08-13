@@ -14,6 +14,7 @@ related:
   - ADR-017
   - ADR-020
   - EVID-025
+  - EVID-028
   - EVID-001
   - PB-001
 tier: 2
@@ -27,7 +28,7 @@ tier: 2
 
 ## 手順
 
-1. 人間がソースを渡す。各ソースに識別子を付ける（URL、ページ名、会議の日時）。秘密・トークン・個人データは渡さない。アクセスできないソースは「未取得」と書き、内容を推測しない。ソース側で限られた読者だけが見える本文は、共有 kernel の `evidence/` に載せない（[ADR-020](../adr/020-platform-is-a-client.md)）
+1. 人間がソースを渡す。各ソースに識別子を付ける（URL、ページ名、会議の日時）。秘密・トークン・個人データ・Okta セッションは渡さない。アクセスできないソースは「未取得」と書き、内容を推測しない。ソース側で限られた読者だけが見える本文は、共有 kernel の `evidence/` に載せない（[ADR-020](../adr/020-platform-is-a-client.md)）
 2. [templates/evidence-intake.md](../templates/evidence-intake.md) にソース一覧を書く。案件リポの作業メモでも、PR 本文でもよい。知識ベースの正本にはしない
 3. エージェントはソースから**引用可能な事実**だけを抜く。意見・希望・未決は観測に混ぜず、`## 限界` か [ledger/open-questions.md](../ledger/open-questions.md) へ回す
 4. [templates/evidence.md](../templates/evidence.md) をコピーし、`status: draft` で evidence を作る。番号は `--next EVID` に聞く
@@ -43,6 +44,7 @@ tier: 2
 - `## 観測` の各箇条に出典がある
 - ソース全文の転記がない（引用は短く、リンクが辿れる）
 - 秘密情報が含まれていない
+- Okta やソースシステムの認証情報が git に含まれていない
 - ソース側で限られた読者だけが見える本文が、共有 kernel に載っていない
 - エージェントが `status` を `active` に上げていない
 

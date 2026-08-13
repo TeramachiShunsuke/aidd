@@ -68,7 +68,7 @@ graph LR
 | 外部 spec からの持ち帰り | 上のいずれか（昇格判断つき） | [PB-008](playbook/008-bridge-sdd-spec.md) |
 | 新しいリポジトリへ適用する | kernel は残し、案件 ADR と混ぜない | [PB-017](playbook/017-apply-kernel-to-project.md) |
 | Slack / 議事録 / Confluence が散らばっている | `draft` の evidence（確認後に `active`） | [PB-018](playbook/018-draft-evidence-from-sources.md) |
-| AIDD 自身の PF / ログイン ACL を足したくなった | この KB には埋め込まない | [ADR-020](adr/020-platform-is-a-client.md) |
+| AIDD 自身の PF / ログイン ACL を足したくなった | 認証は Okta。git には埋め込まない | [ADR-020](adr/020-platform-is-a-client.md) |
 
 迷ったときの原則は 3 つ。**根拠のない決定を書かない**（先に evidence）。**このプロジェクト固有の詳細を持ち込まない**（他でも同じ判断を繰り返すものだけ）。**働き方の決定と案件の考え方を同じ一覧に置かない**（[ADR-019](adr/019-kernel-and-project-layers.md)）。
 

@@ -199,6 +199,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - 実装固有の識別子を KB 文書に持ち込まない
 - 昇格の判断基準は「他プロジェクトでも同じ判断を繰り返すか」
 - 本リポジトリは働き方の **kernel** である。案件の考え方は案件リポ側に置き、kernel の `adr/` に混ぜない（[ADR-019](adr/019-kernel-and-project-layers.md)、手順は [PB-017](playbook/017-apply-kernel-to-project.md)）
+- 人の認証は Okta。git は認証情報を使わず、Frontmatter に ACL を足さない（[ADR-020](adr/020-platform-is-a-client.md)）
 - 受け渡しシートは [templates/sdd-handoff.md](templates/sdd-handoff.md)、手順は [PB-008](playbook/008-bridge-sdd-spec.md)
 
 ## 追記専用ログの規則

@@ -1,6 +1,6 @@
 ---
 id: ADR-020
-title: 主体・ACL・実行ワークフローは本 KB の文書モデルに埋め込まず、PF はクライアントとする
+title: 認証は Okta、git は認証情報を使わず、PF は文書正本のクライアントとする
 status: active
 last_reviewed: 2026-08-13
 owners:
@@ -10,9 +10,11 @@ tags:
   - acl
   - workflow
   - governance
+  - okta
 related:
   - EVID-026
   - EVID-027
+  - EVID-028
   - EVID-008
   - EVID-025
   - ADR-017
@@ -27,7 +29,9 @@ tier: 2
 
 将来、AIDD をプラットフォームの UI の裏で動かし、ログインアカウントの内容を ACL 付きでワークフローに載せたい、という構想がある。現行モデルは共有 git の Markdown と PR であり、principal も文書 ACL も実行状態も持たない（[EVID-026](../evidence/026-no-principal-or-document-acl.md)）。アカウント連携の集約はソース側 ACL を共有正本へ越境させる（[EVID-027](../evidence/027-account-aggregation-crosses-acl.md)）。
 
-構想を否定しない。ただし、このリポジトリの Frontmatter や playbook に認可と実行状態を足し始めると、[ADR-002](002-frontmatter-schema.md) の凍結スキーマ、[ADR-006](006-context-tiers.md) の全員向けロード、[ADR-017](017-machines-record-facts-humans-decide-status.md) の人間判断、[ADR-018](018-id-allocation.md) の直列採番と同時に壊れ、直す方法が一意でなくなる。
+[REV-007](../reviews/007-platform-acl-adversarial-review.md) の批判に対し、運用者はこれを認め、仕様を明示した。**認証は Okta で行う。git では認証情報を利用しない**（[EVID-028](../evidence/028-okta-auth-git-holds-no-credentials.md)）。構想を否定せず、認証と文書ストアを分離する。
+
+このリポジトリの Frontmatter や playbook に認可と実行状態を足し始めると、[ADR-002](002-frontmatter-schema.md) の凍結スキーマ、[ADR-006](006-context-tiers.md) の全員向けロード、[ADR-017](017-machines-record-facts-humans-decide-status.md) の人間判断、[ADR-018](018-id-allocation.md) の直列採番と同時に壊れ、直す方法が一意でなくなる。認証を git に戻すことも、同じ壊れ方をする。
 
 ## 決定
 
@@ -39,9 +43,12 @@ UI、ログイン、ACL エンジン、OAuth コネクタ、実行状態機械�
 
 品質ゲートは [EVID-008](../evidence/008-pr-as-quality-gate.md) のまま PR である。将来の PF はクライアントであり、読み・下書きの提案・PR の作成までを行ってよい。PF 独自の文書ストアを第二の正本にしない。正本を移すときは後継 ADR が先である。
 
-### 3. 文書モデルに認可を埋め込まない
+### 3. 認証は Okta。git は認証情報を使わない
 
-Frontmatter に `acl` / `principal` / `tenant` を足さない。`owners` は連絡先であり、認可判定に使わない。認可が必要になったら git の外（PF 側）か、リポジトリをテナント単位に分けるかであり、その選択は OQ-030 / OQ-031 が閉じるまで延期する。
+- 人の主体（principal）は **Okta** である。GitHub アカウントでも、git の committer でもない
+- git は文書ストアである。Okta のトークン、セッション、ソースシステムへ委譲した認証情報を**持たない・読まない・commit しない**
+- PF は Okta で人を認証し、そのセッションのあいだにソース ACL を加味して読む。知識ベースへ渡すのは、認証情報を含まない Markdown と PR だけである
+- Frontmatter に `acl` / `principal` / `tenant` を足さない。`owners` は連絡先であり、認可判定に使わない。認可は git の外（Okta と PF）に置く
 
 ### 4. 共有生成物は全員に見える前提で書く
 
@@ -57,6 +64,7 @@ Frontmatter に `acl` / `principal` / `tenant` を足さない。`owners` は連
 
 ## 根拠
 
+- [EVID-028](../evidence/028-okta-auth-git-holds-no-credentials.md): 認証の正本は Okta。git は認証情報を使わない
 - [EVID-026](../evidence/026-no-principal-or-document-acl.md): 現行モデルに principal も文書 ACL もない。`owners` と INDEX は認可ではない
 - [EVID-027](../evidence/027-account-aggregation-crosses-acl.md): アカウント連携の集約はソース ACL を共有正本へ越境させる
 - [EVID-008](../evidence/008-pr-as-quality-gate.md): 知識の品質ゲートは PR である
@@ -64,14 +72,15 @@ Frontmatter に `acl` / `principal` / `tenant` を足さない。`owners` は連
 
 ## 結果・トレードオフ
 
-- 利点: 構想を OQ に残しつつ、今の git KB を認可システムの振りをした中途半端なスキーマに壊さない
+- 利点: 認証と文書ストアが分かれ、git KB を IdP の振りにしない。REV-007 の P0-1 は仕様として閉じる
 - 利点: PF を別リポのクライアントに固定するので、この KB の CI（frozen / 追記専用 / 採番）と衝突する書き込み経路が増えない
-- 代償: 「裏でアカウントを反映してワークフローを回す」体験は、このリポジトリだけでは届かない。届ける作業は PF 側の設計であり、OQ-030..033 が閉じるまで着工しない
-- 代償: 共有 git を正本にする限り、文書単位 ACL は近似にしかならない。真の ACL が要るなら正本の置き場自体を後継 ADR でやり直す
+- 代償: このリポジトリだけを読んでも「今誰が作業しているか」は分からない。ログインが要る作業は PF 側
+- 代償: 共有 git を正本にする限り、文書単位 ACL は PF のビューにしかならない。clone した git は認証後の公開面である
+- 代償: PF が git に PR を出すときの GitHub 主体は未決（OQ-034）。Okta ユーザーと committer の対応を git に書き込まない前提で決める
 
 ## 関連
 
 - [REV-007](../reviews/007-platform-acl-adversarial-review.md)
 - [ADR-019](019-kernel-and-project-layers.md)
 - [ADR-017](017-machines-record-facts-humans-decide-status.md)
-- OQ-030 / OQ-031 / OQ-032 / OQ-033
+- OQ-032 / OQ-033 / OQ-034
