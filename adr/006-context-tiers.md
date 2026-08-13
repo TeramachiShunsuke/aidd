@@ -2,7 +2,7 @@
 id: ADR-006
 title: 文脈を Tier 0〜3 に分け、ロード順を固定する
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -14,6 +14,7 @@ related:
   - ADR-007
   - EVID-002
   - EVID-012
+  - ADR-021
 tier: 2
 ---
 
@@ -28,14 +29,14 @@ tier: 2
 | Tier | 名前 | いつ読むか | 主な中身 |
 | --- | --- | --- | --- |
 | 0 | 規範 | 毎セッション、必ず全文 | `AGENTS.md` / `CONVENTIONS.md` |
-| 1 | 索引 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md` / `ledger/*` / skills の `name` + `description` |
+| 1 | 索引 | 毎セッション、一覧のみ | `INDEX.md` / `GRAPH.md` / `GUIDE.md` / `SETUP.md` / `README.md` / `ledger/*` / skills の `name` + `description` |
 | 2 | 決定と手順 | 作業種別が決まったら全文 | `adr/*` / `playbook/*` |
 | 3 | 根拠と監査 | 主張を疑うとき・レビュー時 | `evidence/*` / `reviews/*` / `deprecated` 全般 |
 
 規則:
 
 1. Tier は Frontmatter の任意キー `tier`（`0`〜`3` の整数）で明示できる。
-2. `tier` がない文書は、次の既定規則で決まる。`AGENTS.md` と `CONVENTIONS.md` = 0、ルートの生成物・案内（`INDEX.md` / `GRAPH.md` / `GUIDE.md` / `README.md`）と `ledger/` と skills = 1、`adr/` と `playbook/` = 2、`evidence/` と `reviews/` = 3。
+2. `tier` がない文書は、次の既定規則で決まる。`AGENTS.md` と `CONVENTIONS.md` = 0、ルートの生成物・案内（`INDEX.md` / `GRAPH.md` / `GUIDE.md` / `SETUP.md` / `README.md`）と `ledger/` と skills = 1、`adr/` と `playbook/` = 2、`evidence/` と `reviews/` = 3。
 3. `status: deprecated` の文書は `tier` を持たない。常に Tier 3 として扱う。
 4. `status: frozen` の文書には `tier` を後付けしない（frozen は不変のため）。既定規則で決まる値を使う。
 5. 上記 3 と 4 の違反は CI が検出する（[ADR-007](007-generated-index.md)）。既定規則があるため、既存文書を 1 件も書き換えずに Tier を導入できる。
@@ -58,4 +59,5 @@ tier: 2
 
 - [PB-006](../playbook/006-assign-tier.md)
 - [ADR-007](007-generated-index.md)
+- [ADR-021](021-two-layer-setup-guide.md)
 - [CONVENTIONS.md](../CONVENTIONS.md)

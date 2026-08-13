@@ -44,3 +44,4 @@ tags:
 - [ ] CLAIM-027: アカウント連携の集約はソース側 ACL を共有正本へ越境させうる — evidence:EVID-027 adr:ADR-020
 - [ ] CLAIM-028: 将来の PF は本 KB のクライアントであり、文書正本は git 上の Markdown + PR のまま — evidence:EVID-008 adr:ADR-020
 - [ ] CLAIM-029: 人の認証は git の外の IdP が行い、git は認証情報を持たず認可にも使わない。今の利用は Okta だが契約は製品名に固定しない — evidence:EVID-028 EVID-029 adr:ADR-020
+- [ ] CLAIM-030: 人の入口は二層の SETUP.md であり、考え方への全共感は成功条件にしない — evidence:EVID-030 adr:ADR-021

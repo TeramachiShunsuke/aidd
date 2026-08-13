@@ -1,6 +1,6 @@
 # GUIDE — 文書コード体系とリレーション
 
-この知識ベースの**読み方と書き分け**の案内。守るべき規則そのものは [CONVENTIONS.md](CONVENTIONS.md)、現在の文書一覧は [INDEX.md](INDEX.md)、参照関係の実データは [GRAPH.md](GRAPH.md) にある。ここは「どれがどれで、どうつながっているか」を人が理解するための入口である。
+この知識ベースの**読み方と書き分け**の案内。人の始め方（最低限の利用と、改善できる理解）は [SETUP.md](SETUP.md)。守るべき規則そのものは [CONVENTIONS.md](CONVENTIONS.md)、現在の文書一覧は [INDEX.md](INDEX.md)、参照関係の実データは [GRAPH.md](GRAPH.md) にある。ここは「どれがどれで、どうつながっているか」を人が理解するための地図である。
 
 ## 1. 全体像
 
@@ -66,6 +66,7 @@ graph LR
 | 決められない・情報が足りない | `ledger/open-questions.md` | — |
 | 点検した記録 | `reviews/` | [PB-003](playbook/003-run-review-cycle.md) |
 | 外部 spec からの持ち帰り | 上のいずれか（昇格判断つき） | [PB-008](playbook/008-bridge-sdd-spec.md) |
+| このワークフローの始め方・セットアップ | 案内を読む（規範は書かない） | [SETUP.md](SETUP.md) / [PB-019](playbook/019-onboard-with-setup-guide.md) |
 | 新しいリポジトリへ適用する | kernel は残し、案件 ADR と混ぜない | [PB-017](playbook/017-apply-kernel-to-project.md) |
 | Slack / 議事録 / Confluence が散らばっている | `draft` の evidence（確認後に `active`） | [PB-018](playbook/018-draft-evidence-from-sources.md) |
 | AIDD の前に置く PF / ログイン ACL を足したくなった | 認証は git の外の IdP。製品名は kernel に固定しない | [ADR-020](adr/020-platform-is-a-client.md) |
@@ -104,7 +105,7 @@ graph LR
 | Tier | いつ読むか | 何を |
 | --- | --- | --- |
 | 0 | 毎回、全文 | [AGENTS.md](AGENTS.md) / [CONVENTIONS.md](CONVENTIONS.md) |
-| 1 | 毎回、一覧だけ | [INDEX.md](INDEX.md) / [GRAPH.md](GRAPH.md) / このファイル / `ledger/` / skill の説明文 |
+| 1 | 毎回、一覧だけ | [INDEX.md](INDEX.md) / [GRAPH.md](GRAPH.md) / [SETUP.md](SETUP.md) / このファイル / `ledger/` / skill の説明文 |
 | 2 | 作業が決まったら | `adr/` / `playbook/` |
 | 3 | 根拠を疑うとき | `evidence/` / `reviews/` |
 

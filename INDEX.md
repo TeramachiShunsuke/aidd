@@ -20,6 +20,7 @@
 | ROOT-GRAPH | GRAPH | [GRAPH.md](GRAPH.md) | - | - |
 | ROOT-GUIDE | GUIDE — 文書コード体系とリレーション | [GUIDE.md](GUIDE.md) | - | - |
 | ROOT-README | aidd | [README.md](README.md) | - | - |
+| ROOT-SETUP | SETUP — 最低限の利用と、改善できる理解 | [SETUP.md](SETUP.md) | - | - |
 | LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-09 |
 | LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-13 |
 | LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-13 |
@@ -38,6 +39,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | [aidd-resolve-conflict](.agents/skills/aidd-resolve-conflict/SKILL.md) | PB-015 | AIDD 知識ベースのマージ競合と ID の衝突を、ファイルの種類ごとに決まった方法で解決する。新規文書の空き番号を取るときにも使う。「コンフリクトを直して」「マージが競合した」「rebase が止まった」「ID が重複している」「番号を振り直したい」「次の番号は何番」と言われたときに使う。 |
 | [aidd-review-cycle](.agents/skills/aidd-review-cycle/SKILL.md) | PB-003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
 | [aidd-sdd-bridge](.agents/skills/aidd-sdd-bridge/SKILL.md) | PB-008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
+| [aidd-setup](.agents/skills/aidd-setup/SKILL.md) | PB-019 | AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。 |
 | [aidd-spec-triage](.agents/skills/aidd-spec-triage/SKILL.md) | PB-012 | 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。 |
 | [aidd-tdd-start](.agents/skills/aidd-tdd-start/SKILL.md) | PB-013 | ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。 |
 | [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
@@ -51,7 +53,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-003 | frozen 文書はバイトレベルで不変とする | [adr/003-frozen-immutability.md](adr/003-frozen-immutability.md) | frozen | 2026-08-08 |
 | ADR-004 | 鮮度は last_reviewed の 90 日と変更時同期で守る | [adr/004-staleness-policy.md](adr/004-staleness-policy.md) | active | 2026-08-09 |
 | ADR-005 | reviews ディレクトリは追記専用とする | [adr/005-reviews-append-only.md](adr/005-reviews-append-only.md) | frozen | 2026-08-08 |
-| ADR-006 | 文脈を Tier 0〜3 に分け、ロード順を固定する | [adr/006-context-tiers.md](adr/006-context-tiers.md) | active | 2026-08-09 |
+| ADR-006 | 文脈を Tier 0〜3 に分け、ロード順を固定する | [adr/006-context-tiers.md](adr/006-context-tiers.md) | active | 2026-08-13 |
 | ADR-007 | INDEX.md を生成物とし、CI で最新性を強制する | [adr/007-generated-index.md](adr/007-generated-index.md) | active | 2026-08-09 |
 | ADR-008 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する | [adr/008-sdd-bridge.md](adr/008-sdd-bridge.md) | active | 2026-08-09 |
 | ADR-009 | skills は playbook の入口とし、手順を二重に持たない | [adr/009-skills-as-playbook-entrypoints.md](adr/009-skills-as-playbook-entrypoints.md) | active | 2026-08-09 |
@@ -66,6 +68,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-018 | 番号は main を権威として確保し、衝突は PR の側が譲る | [adr/018-id-allocation.md](adr/018-id-allocation.md) | active | 2026-08-09 |
 | ADR-019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/019-kernel-and-project-layers.md](adr/019-kernel-and-project-layers.md) | active | 2026-08-13 |
 | ADR-020 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする | [adr/020-platform-is-a-client.md](adr/020-platform-is-a-client.md) | active | 2026-08-13 |
+| ADR-021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/021-two-layer-setup-guide.md](adr/021-two-layer-setup-guide.md) | active | 2026-08-13 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-13 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
@@ -84,6 +87,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | PB-016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/016-large-project-usage-map.md](playbook/016-large-project-usage-map.md) | active | 2026-08-09 |
 | PB-017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/017-apply-kernel-to-project.md](playbook/017-apply-kernel-to-project.md) | active | 2026-08-13 |
 | PB-018 | 散在ソースから evidence の下書きを起こす | [playbook/018-draft-evidence-from-sources.md](playbook/018-draft-evidence-from-sources.md) | active | 2026-08-13 |
+| PB-019 | 新しい参加者を二層のセットアップガイドへ乗せる | [playbook/019-onboard-with-setup-guide.md](playbook/019-onboard-with-setup-guide.md) | active | 2026-08-13 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -118,6 +122,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-027 | アカウント連携の集約は、ソース側 ACL を共有正本へ越境させる | [evidence/027-account-aggregation-crosses-acl.md](evidence/027-account-aggregation-crosses-acl.md) | active | 2026-08-13 |
 | EVID-028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/028-okta-auth-git-holds-no-credentials.md](evidence/028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-13 |
 | EVID-029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/029-keep-platform-contract-generic.md](evidence/029-keep-platform-contract-generic.md) | active | 2026-08-13 |
+| EVID-030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/030-human-entry-needs-two-layer-setup.md](evidence/030-human-entry-needs-two-layer-setup.md) | active | 2026-08-13 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
@@ -131,11 +136,11 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | 区分 | 件数 |
 | --- | --- |
 | Tier 0 | 2 |
-| Tier 1 | 7 |
-| Tier 2 | 38 |
-| Tier 3 | 36 |
-| status: active | 73 |
+| Tier 1 | 8 |
+| Tier 2 | 40 |
+| Tier 3 | 37 |
+| status: active | 76 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
-| skills | 12 |
+| skills | 13 |

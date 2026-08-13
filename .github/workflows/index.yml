@@ -15,6 +15,7 @@ on:
       - "AGENTS.md"
       - "CONVENTIONS.md"
       - "GUIDE.md"
+      - "SETUP.md"
       - "README.md"
       - ".github/scripts/build-index.sh"
       - ".github/scripts/check-id-collisions.sh"
