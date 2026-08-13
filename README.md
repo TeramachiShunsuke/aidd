@@ -67,7 +67,7 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 
 このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-019](adr/019-kernel-and-project-layers.md)、手順は [PB-017](playbook/017-apply-kernel-to-project.md)）。
 
-根拠の入口は、人が観測を書く [PB-001](playbook/001-add-evidence.md) だけではない。Slack / 議事録 / Confluence など散在ソースからは、エージェントが `status: draft` の evidence を起こし、人間が観測を確認してから `active` にする（[PB-018](playbook/018-draft-evidence-from-sources.md)）。
+根拠の入口は、人が観測を書く [PB-001](playbook/001-add-evidence.md) だけではない。Slack / 議事録 / Confluence など散在ソースからは、エージェントが `status: draft` の evidence を起こし、人間が観測を確認してから `active` にする（[PB-018](playbook/018-draft-evidence-from-sources.md)）。ログインアカウントを ACL 付きでワークフローに載せる PF は、このリポジトリの外のクライアントである（[ADR-020](adr/020-platform-is-a-client.md)）。
 
 ## 鮮度ガード（CI）
 

@@ -38,7 +38,11 @@ tags:
 - OQ-026: 未着地の PR 同士の ID 衝突を、機械的に決着させる規約を置くか？（PR 番号の大小で譲る側を決めれば error に昇格できるが、GitHub API への依存が入り、オフラインで走る現在の検査の性質が変わる。evidence:EVID-023 adr:ADR-018）
 - OQ-027: 並行度が上がっても連番を維持できるか？ 現在は「1 PR ずつ・main を base」で衝突窓を短く保っているだけで、同時に 5 本以上開く運用は試していない。破綻したら採番方式そのもの（スラッグ / 外部番号）を選び直す必要があり、`frozen` 文書の扱いが論点になる（evidence:EVID-023 adr:ADR-003 ADR-018）
 - OQ-028: UI デザイン成果物（Figma・Design System・画面状態）の正本と KB / 案件 ADR の境界を、専用 ADR として固定するか？（現状は ADR-014 の契約・決定・振る舞い分解を UI に当てた適用指針のみ。playbook:PB-016）
-- OQ-029: 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは未検証。evidence:EVID-025 adr:ADR-019）
+- OQ-029: 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは未検証。認可の置き場（OQ-031）より先に閉じない。evidence:EVID-025 EVID-027 adr:ADR-019 ADR-020 REV-007）
+- OQ-030: 主体（principal）は何か？ PF のログイン、GitHub アカウント、ソースシステム（Slack / Confluence）の ACL の積集合、のどれを「ログインしたアカウント」とみなすか？（現行 Frontmatter に主体は無い。evidence:EVID-026 adr:ADR-020 REV-007）
+- OQ-031: 文書の認可をどこに置くか？ git 外の PF ストア、テナント別リポジトリ、共有 git をやめて正本を移す、のどれか。共有 git の Frontmatter に ACL を足す案は ADR-020 が今は採らない（evidence:EVID-026 adr:ADR-002 ADR-020 REV-007）
+- OQ-032: アカウント由来の原文を、個人下書き・案件 KB・kernel のどの層まで昇格してよいか？（ADR-020 は kernel 直書きを禁じた。案件層の扱いと、削除・権限剥奪の伝播は未決。evidence:EVID-027 adr:ADR-020 REV-007）
+- OQ-033: 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-020 が今は採らない（evidence:EVID-008 adr:ADR-017 ADR-020 REV-007）
 
 ## Resolved
 

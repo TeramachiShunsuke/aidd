@@ -11,22 +11,22 @@
 
 | 区分 | 件数 |
 | --- | --- |
-| ノード: adr | 19 |
-| ノード: claim | 25 |
-| ノード: evidence | 25 |
+| ノード: adr | 20 |
+| ノード: claim | 28 |
+| ノード: evidence | 27 |
 | ノード: external | 3 |
 | ノード: ledger | 4 |
-| ノード: open-question | 29 |
+| ノード: open-question | 33 |
 | ノード: playbook | 18 |
-| ノード: reviews | 6 |
+| ノード: reviews | 7 |
 | ノード: root | 4 |
 | ノード: skill | 12 |
-| 辺: anchor | 51 |
+| 辺: anchor | 57 |
 | 辺: entrypoint | 12 |
-| 辺: links | 550 |
-| 辺: related | 219 |
-| ノード合計 | 145 |
-| 辺合計 | 832 |
+| 辺: links | 596 |
+| 辺: related | 243 |
+| ノード合計 | 156 |
+| 辺合計 | 908 |
 
 ## 根拠グラフ（決定と根拠）
 
@@ -53,6 +53,7 @@ graph LR
   ADR_017[ADR-017]
   ADR_018[ADR-018]
   ADR_019[ADR-019]
+  ADR_020[ADR-020]
   EVID_001(EVID-001)
   EVID_002(EVID-002)
   EVID_003(EVID-003)
@@ -78,6 +79,8 @@ graph LR
   EVID_023(EVID-023)
   EVID_024(EVID-024)
   EVID_025(EVID-025)
+  EVID_026(EVID-026)
+  EVID_027(EVID-027)
   ADR_001 --> EVID_002
   ADR_001 --> EVID_007
   ADR_002 --> ADR_004
@@ -153,26 +156,36 @@ graph LR
   ADR_019 --> ADR_008
   ADR_019 --> ADR_014
   ADR_019 --> ADR_017
+  ADR_019 --> ADR_020
   ADR_019 --> EVID_001
   ADR_019 --> EVID_009
   ADR_019 --> EVID_024
   ADR_019 --> EVID_025
+  ADR_020 --> ADR_002
+  ADR_020 --> ADR_006
+  ADR_020 --> ADR_017
+  ADR_020 --> ADR_018
+  ADR_020 --> ADR_019
+  ADR_020 --> EVID_008
+  ADR_020 --> EVID_025
+  ADR_020 --> EVID_026
+  ADR_020 --> EVID_027
 ```
 
 ## ハブ（被参照が多い文書）
 
 | ID | 被参照 | 参照 | タイトル |
 | --- | --- | --- | --- |
+| ADR-006 | 32 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
 | ADR-008 | 29 | 16 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する |
+| ADR-019 | 29 | 27 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る |
 | ADR-012 | 28 | 14 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する |
-| ADR-006 | 27 | 15 | 文脈を Tier 0〜3 に分け、ロード順を固定する |
+| ADR-010 | 27 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
 | ADR-014 | 26 | 19 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す |
 | ADR-013 | 25 | 19 | 検査を error と warning に等級分けし、充足しているものから機械で固定する |
-| ADR-010 | 24 | 18 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く |
 | LEDGER-OQ | 24 | 0 | Open questions |
-| ADR-019 | 23 | 24 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る |
+| ADR-017 | 21 | 16 | 機械は事実の記録と検出に限り、status の遷移は人間が行う |
 | EVID-009 | 21 | 7 | 文脈は有限予算であり、常時ロードは劣化を招く |
-| PB-001 | 21 | 6 | evidence を追加する |
 
 ## レビュー信号
 
@@ -219,5 +232,9 @@ graph LR
 | OQ-026 | 未着地の PR 同士の ID 衝突を、機械的に決着させる規約を置くか？（PR 番号の大小で譲る側を決めれば error に昇格できるが、GitHub API への依存が入り、オフラインで走る現在の検査の性質が変わる。evidence:EVID-023 adr:ADR-018） |
 | OQ-027 | 並行度が上がっても連番を維持できるか？ 現在は「1 PR ずつ・main を base」で衝突窓を短く保っているだけで、同時に 5 本以上開く運用は試していない。破綻したら採番方式そのもの（スラッグ / 外部番号）を選び直す必要があり、`frozen` 文書の扱いが論点になる（evidence:EVID-023 adr:ADR-003 ADR-018） |
 | OQ-028 | UI デザイン成果物（Figma・Design System・画面状態）の正本と KB / 案件 ADR の境界を、専用 ADR として固定するか？（現状は ADR-014 の契約・決定・振る舞い分解を UI に当てた適用指針のみ。playbook:PB-016） |
-| OQ-029 | 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは未検証。evidence:EVID-025 adr:ADR-019） |
+| OQ-029 | 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-018 が貼り付け前提。コネクタは未検証。認可の置き場（OQ-031）より先に閉じない。evidence:EVID-025 EVID-027 adr:ADR-019 ADR-020 REV-007） |
+| OQ-030 | 主体（principal）は何か？ PF のログイン、GitHub アカウント、ソースシステム（Slack / Confluence）の ACL の積集合、のどれを「ログインしたアカウント」とみなすか？（現行 Frontmatter に主体は無い。evidence:EVID-026 adr:ADR-020 REV-007） |
+| OQ-031 | 文書の認可をどこに置くか？ git 外の PF ストア、テナント別リポジトリ、共有 git をやめて正本を移す、のどれか。共有 git の Frontmatter に ACL を足す案は ADR-020 が今は採らない（evidence:EVID-026 adr:ADR-002 ADR-020 REV-007） |
+| OQ-032 | アカウント由来の原文を、個人下書き・案件 KB・kernel のどの層まで昇格してよいか？（ADR-020 は kernel 直書きを禁じた。案件層の扱いと、削除・権限剥奪の伝播は未決。evidence:EVID-027 adr:ADR-020 REV-007） |
+| OQ-033 | 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-020 が今は採らない（evidence:EVID-008 adr:ADR-017 ADR-020 REV-007） |
 

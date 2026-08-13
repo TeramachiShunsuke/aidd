@@ -68,7 +68,7 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
  → PR（テンプレート必須項目を埋める）
 ```
 
-新しいリポジトリへ適用するときは [PB-017](playbook/017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-019](adr/019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。
+新しいリポジトリへ適用するときは [PB-017](playbook/017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-019](adr/019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログイン ACL や実行ワークフローを持つ PF の構想は [ADR-020](adr/020-platform-is-a-client.md)（このリポジトリに実装せず、文書モデルへ認可を埋め込まない）。
 
 外部の spec（requirements / design / tasks）との受け渡しは [ADR-008](adr/008-sdd-bridge.md) と [PB-008](playbook/008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
 

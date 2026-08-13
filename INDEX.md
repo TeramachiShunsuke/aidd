@@ -65,6 +65,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-017 | 機械は事実の記録と検出に限り、status の遷移は人間が行う | [adr/017-machines-record-facts-humans-decide-status.md](adr/017-machines-record-facts-humans-decide-status.md) | active | 2026-08-09 |
 | ADR-018 | 番号は main を権威として確保し、衝突は PR の側が譲る | [adr/018-id-allocation.md](adr/018-id-allocation.md) | active | 2026-08-09 |
 | ADR-019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/019-kernel-and-project-layers.md](adr/019-kernel-and-project-layers.md) | active | 2026-08-13 |
+| ADR-020 | 主体・ACL・実行ワークフローは本 KB の文書モデルに埋め込まず、PF はクライアントとする | [adr/020-platform-is-a-client.md](adr/020-platform-is-a-client.md) | active | 2026-08-13 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-13 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
@@ -113,12 +114,15 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-023 | 連番の採番は並行制御の問題であり、採番の時点をどこに置くかで対策が決まる | [evidence/023-id-allocation-is-a-concurrency-problem.md](evidence/023-id-allocation-is-a-concurrency-problem.md) | active | 2026-08-09 |
 | EVID-024 | 働き方の ADR と案件の考え方の ADR を同じ一覧に置くと読めなくなる | [evidence/024-kernel-and-project-adrs-mix-poorly.md](evidence/024-kernel-and-project-adrs-mix-poorly.md) | active | 2026-08-13 |
 | EVID-025 | 散在ソースの集約は evidence の下書きに向くが、確定は観測の確認である | [evidence/025-scattered-sources-suit-evidence-drafts.md](evidence/025-scattered-sources-suit-evidence-drafts.md) | active | 2026-08-13 |
+| EVID-026 | 現行の知識ベースに principal はなく、owners も INDEX も認可ではない | [evidence/026-no-principal-or-document-acl.md](evidence/026-no-principal-or-document-acl.md) | active | 2026-08-13 |
+| EVID-027 | アカウント連携の集約は、ソース側 ACL を共有正本へ越境させる | [evidence/027-account-aggregation-crosses-acl.md](evidence/027-account-aggregation-crosses-acl.md) | active | 2026-08-13 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
 | REV-004 | ツール横断の可搬性レビュー | [reviews/004-cross-tool-portability.md](reviews/004-cross-tool-portability.md) | active | 2026-08-09 |
 | REV-005 | リポジトリ全体の敵対レビューと取り込み | [reviews/005-adversarial-review.md](reviews/005-adversarial-review.md) | active | 2026-08-09 |
 | REV-006 | ライフサイクル矛盾の解消と、自己レビューで見つけた運用上の穴 | [reviews/006-lifecycle-self-review.md](reviews/006-lifecycle-self-review.md) | active | 2026-08-09 |
+| REV-007 | PF・ログイン ACL・実行ワークフロー構想に対する敵対レビュー | [reviews/007-platform-acl-adversarial-review.md](reviews/007-platform-acl-adversarial-review.md) | active | 2026-08-13 |
 
 ## 内訳
 
@@ -126,9 +130,9 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 7 |
-| Tier 2 | 37 |
-| Tier 3 | 31 |
-| status: active | 67 |
+| Tier 2 | 38 |
+| Tier 3 | 34 |
+| status: active | 71 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |

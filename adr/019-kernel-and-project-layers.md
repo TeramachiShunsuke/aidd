@@ -17,6 +17,7 @@ related:
   - ADR-008
   - ADR-014
   - ADR-017
+  - ADR-020
 tier: 2
 ---
 
@@ -93,6 +94,7 @@ owner・日付・ライセンスを書き換える cookiecutter は、この決�
 - 代償: 作業者は kernel と案件の 2 箇所を知る必要がある。案件 `AGENTS.md` のリンクが腐ると、働き方へ辿れない
 - 代償: 下書きは幻覚を含みうる。`draft` のまま `active` 扱いすると、偽の観測が決定に乗る
 - 代償: Slack / Meet へのコネクタは用意しない。ソース本文は人間が渡すか、案件側のツールに委ねる
+- 代償: アカウント連携で得た原文を kernel に直接載せると、ソース側 ACL を越境する（[ADR-020](020-platform-is-a-client.md)）
 
 ## 関連
 
@@ -101,3 +103,4 @@ owner・日付・ライセンスを書き換える cookiecutter は、この決�
 - [ADR-008](008-sdd-bridge.md)
 - [ADR-014](014-implementation-spec-split.md)
 - [ADR-017](017-machines-record-facts-humans-decide-status.md)
+- [ADR-020](020-platform-is-a-client.md)
