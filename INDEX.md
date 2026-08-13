@@ -116,7 +116,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-025 | 散在ソースの集約は evidence の下書きに向くが、確定は観測の確認である | [evidence/025-scattered-sources-suit-evidence-drafts.md](evidence/025-scattered-sources-suit-evidence-drafts.md) | active | 2026-08-13 |
 | EVID-026 | 現行の知識ベースに principal はなく、owners も INDEX も認可ではない | [evidence/026-no-principal-or-document-acl.md](evidence/026-no-principal-or-document-acl.md) | active | 2026-08-13 |
 | EVID-027 | アカウント連携の集約は、ソース側 ACL を共有正本へ越境させる | [evidence/027-account-aggregation-crosses-acl.md](evidence/027-account-aggregation-crosses-acl.md) | active | 2026-08-13 |
-| EVID-028 | 認証の正本は Okta であり、git は認証情報を使わない | [evidence/028-okta-auth-git-holds-no-credentials.md](evidence/028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-13 |
+| EVID-028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/028-okta-auth-git-holds-no-credentials.md](evidence/028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-13 |
 | EVID-029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/029-keep-platform-contract-generic.md](evidence/029-keep-platform-contract-generic.md) | active | 2026-08-13 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
