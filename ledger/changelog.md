@@ -2,7 +2,7 @@
 id: LEDGER-CHANGELOG
 title: Knowledge base changelog
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -13,6 +13,10 @@ tags:
 # Changelog
 
 知識ベース自体の注目すべき変更。新しいエントリを上に追記する。
+
+## 2026-08-13
+
+- 働き方の kernel と案件の考え方を分離: ADR-019 / EVID-024 / EVID-025 / PB-017 / PB-018。既存 ADR は残して参照し、案件の `adr/` にコピーして混ぜない。散在ソース（Slack / 議事録 / Confluence）からは `draft` の evidence を起こし、観測の確定と status 遷移は人間が行う。skill `aidd-apply-to-project` / `aidd-draft-evidence` と `templates/evidence-intake.md` を追加。OQ-016 / OQ-021 を Resolved、OQ-029 と CLAIM-024..025 を追加
 
 ## 2026-08-09
 

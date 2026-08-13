@@ -21,15 +21,17 @@
 | ROOT-GUIDE | GUIDE — 文書コード体系とリレーション | [GUIDE.md](GUIDE.md) | - | - |
 | ROOT-README | aidd | [README.md](README.md) | - | - |
 | LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-09 |
-| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-09 |
-| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-09 |
-| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-09 |
+| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-13 |
+| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-13 |
+| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-13 |
 
 Skills（起動時は `description` のみロードされる。本文は一致時に読まれる）:
 
 | skill | playbook | description |
 | --- | --- | --- |
 | [aidd-add-evidence](.agents/skills/aidd-add-evidence/SKILL.md) | PB-001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
+| [aidd-apply-to-project](.agents/skills/aidd-apply-to-project/SKILL.md) | PB-017 | 新しいリポジトリやプロジェクトに AIDD の働き方を適用し、kernel の ADR を案件の考え方と混ぜない。ユーザーが「新しいリポジトリ」「プロジェクトに適用」「ワークフローの ADR と混ざる」「可読性」「既存の ADR を残す」と言ったときに使う。 |
+| [aidd-draft-evidence](.agents/skills/aidd-draft-evidence/SKILL.md) | PB-018 | Slack、Google Meet の議事録、Confluence、Issue など散らばった情報から evidence のドラフトを起こす。ユーザーが「エビデンスのドラフト」「議事録から根拠」「Slack を集約」「Confluence をまとめる」「観測点を AI に書かせる」と言ったときに使う。 |
 | [aidd-graph-review](.agents/skills/aidd-graph-review/SKILL.md) | PB-010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
 | [aidd-infra-context](.agents/skills/aidd-infra-context/SKILL.md) | PB-014 | DB / インフラの文脈を制約・契約・状態に仕分けし、状態は文書化せず取得コマンドで渡す。「インフラの構成をまとめたい」「DB の設計を残したい」「構成図が古い」「エージェントにインフラ作業をさせたい」「マイグレーションを設計したい」と言われたときに使う。 |
 | [aidd-rebuild-index](.agents/skills/aidd-rebuild-index/SKILL.md) | PB-007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
@@ -57,26 +59,29 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/011-cross-tool-agent-integration.md](adr/011-cross-tool-agent-integration.md) | active | 2026-08-09 |
 | ADR-012 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する | [adr/012-review-attestations.md](adr/012-review-attestations.md) | active | 2026-08-09 |
 | ADR-013 | 検査を error と warning に等級分けし、充足しているものから機械で固定する | [adr/013-check-grades.md](adr/013-check-grades.md) | active | 2026-08-09 |
-| ADR-014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/014-implementation-spec-split.md](adr/014-implementation-spec-split.md) | active | 2026-08-09 |
+| ADR-014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/014-implementation-spec-split.md](adr/014-implementation-spec-split.md) | active | 2026-08-13 |
 | ADR-015 | DB / インフラの文脈を制約・契約・状態に分け、状態は文書化しない | [adr/015-infra-context-layers.md](adr/015-infra-context-layers.md) | active | 2026-08-09 |
 | ADR-016 | 競合は解決を上手くするのではなく、競合面を減らして扱う | [adr/016-shrink-conflict-surface.md](adr/016-shrink-conflict-surface.md) | active | 2026-08-09 |
 | ADR-017 | 機械は事実の記録と検出に限り、status の遷移は人間が行う | [adr/017-machines-record-facts-humans-decide-status.md](adr/017-machines-record-facts-humans-decide-status.md) | active | 2026-08-09 |
 | ADR-018 | 番号は main を権威として確保し、衝突は PR の側が譲る | [adr/018-id-allocation.md](adr/018-id-allocation.md) | active | 2026-08-09 |
-| PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-08 |
+| ADR-019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/019-kernel-and-project-layers.md](adr/019-kernel-and-project-layers.md) | active | 2026-08-13 |
+| PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-13 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
 | PB-004 | 文書を凍結する | [playbook/004-freeze-document.md](playbook/004-freeze-document.md) | active | 2026-08-09 |
 | PB-005 | staleness CI の失敗を直す | [playbook/005-fix-staleness-ci.md](playbook/005-fix-staleness-ci.md) | active | 2026-08-09 |
 | PB-006 | Tier を割り当てる・見直す | [playbook/006-assign-tier.md](playbook/006-assign-tier.md) | active | 2026-08-09 |
 | PB-007 | INDEX.md を再生成する | [playbook/007-rebuild-index.md](playbook/007-rebuild-index.md) | active | 2026-08-09 |
-| PB-008 | SDD の spec と知識ベースを橋渡しする | [playbook/008-bridge-sdd-spec.md](playbook/008-bridge-sdd-spec.md) | active | 2026-08-09 |
+| PB-008 | SDD の spec と知識ベースを橋渡しする | [playbook/008-bridge-sdd-spec.md](playbook/008-bridge-sdd-spec.md) | active | 2026-08-13 |
 | PB-009 | skill を追加・更新する | [playbook/009-add-skill.md](playbook/009-add-skill.md) | active | 2026-08-09 |
 | PB-010 | グラフで構造化レビューする | [playbook/010-review-with-graph.md](playbook/010-review-with-graph.md) | active | 2026-08-09 |
 | PB-011 | グラフの警告をエラーへ昇格する | [playbook/011-promote-check.md](playbook/011-promote-check.md) | active | 2026-08-09 |
-| PB-012 | 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける | [playbook/012-triage-implementation-spec.md](playbook/012-triage-implementation-spec.md) | active | 2026-08-09 |
+| PB-012 | 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける | [playbook/012-triage-implementation-spec.md](playbook/012-triage-implementation-spec.md) | active | 2026-08-13 |
 | PB-013 | 受け入れ例から TDD を始める | [playbook/013-start-tdd-from-examples.md](playbook/013-start-tdd-from-examples.md) | active | 2026-08-09 |
 | PB-014 | DB / インフラの文脈をエージェントに渡す | [playbook/014-hand-infra-context.md](playbook/014-hand-infra-context.md) | active | 2026-08-09 |
 | PB-015 | 競合と ID 衝突を解決する | [playbook/015-resolve-conflicts.md](playbook/015-resolve-conflicts.md) | active | 2026-08-09 |
+| PB-017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/017-apply-kernel-to-project.md](playbook/017-apply-kernel-to-project.md) | active | 2026-08-13 |
+| PB-018 | 散在ソースから evidence の下書きを起こす | [playbook/018-draft-evidence-from-sources.md](playbook/018-draft-evidence-from-sources.md) | active | 2026-08-13 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -105,6 +110,8 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-021 | 共有台帳と連番 ID は並行ブランチで必ず衝突し、先行事例は競合面そのものを消している | [evidence/021-shared-ledgers-and-serial-ids-collide.md](evidence/021-shared-ledgers-and-serial-ids-collide.md) | active | 2026-08-09 |
 | EVID-022 | レビュー状態の機械追跡には先行事例があり、いずれも事実の記録と判断の実行を分けている | [evidence/022-review-state-is-tracked-mechanically.md](evidence/022-review-state-is-tracked-mechanically.md) | active | 2026-08-09 |
 | EVID-023 | 連番の採番は並行制御の問題であり、採番の時点をどこに置くかで対策が決まる | [evidence/023-id-allocation-is-a-concurrency-problem.md](evidence/023-id-allocation-is-a-concurrency-problem.md) | active | 2026-08-09 |
+| EVID-024 | 働き方の ADR と案件の考え方の ADR を同じ一覧に置くと読めなくなる | [evidence/024-kernel-and-project-adrs-mix-poorly.md](evidence/024-kernel-and-project-adrs-mix-poorly.md) | active | 2026-08-13 |
+| EVID-025 | 散在ソースの集約は evidence の下書きに向くが、確定は観測の確認である | [evidence/025-scattered-sources-suit-evidence-drafts.md](evidence/025-scattered-sources-suit-evidence-drafts.md) | active | 2026-08-13 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
@@ -118,10 +125,10 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 7 |
-| Tier 2 | 33 |
-| Tier 3 | 29 |
-| status: active | 61 |
+| Tier 2 | 36 |
+| Tier 3 | 31 |
+| status: active | 66 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
-| skills | 10 |
+| skills | 12 |

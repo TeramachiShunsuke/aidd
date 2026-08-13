@@ -12,6 +12,7 @@ metadata:
 
 - 新しい観測・計測・引用を知識ベースに残すとき
 - 既存の主張に反する事実が見つかったとき
+- 観測文が既にあるとき（Slack / 議事録 / Confluence から下書きを起こすときは [aidd-draft-evidence](../aidd-draft-evidence/SKILL.md)）
 
 ## 先に読むもの
 

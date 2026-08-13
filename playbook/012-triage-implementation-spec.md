@@ -2,7 +2,7 @@
 id: PB-012
 title: 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける
 status: active
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -12,6 +12,7 @@ tags:
 related:
   - ADR-014
   - ADR-008
+  - ADR-019
 tier: 2
 ---
 
@@ -40,8 +41,8 @@ tier: 2
 5. どれも当てはまらない決定は**書かない**。当てはまるものだけ ADR にする
 6. その ADR の置き場所を決める
 
-   - 他の案件でも同じ判断を繰り返す → KB に [PB-002](002-write-adr.md) で書く
-   - その案件限り → spec / 実装リポジトリ側に置き、KB には持ち込まない
+   - 他の案件でも同じ判断を繰り返す → kernel（本 KB）に [PB-002](002-write-adr.md) で書く
+   - その案件限り → 案件リポ側に置き、kernel の `adr/` には持ち込まない（[ADR-019](../adr/019-kernel-and-project-layers.md)）
 
 7. KB に上げたものは [ledger/claims.md](../ledger/claims.md) に錨を付ける（[PB-008](008-bridge-sdd-spec.md) の方向 B）
 
@@ -62,5 +63,6 @@ tier: 2
 ## 関連
 
 - [ADR-014](../adr/014-implementation-spec-split.md)
+- [ADR-019](../adr/019-kernel-and-project-layers.md)
 - [PB-013](013-start-tdd-from-examples.md)
 - [PB-008](008-bridge-sdd-spec.md)

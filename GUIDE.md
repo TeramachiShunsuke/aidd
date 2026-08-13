@@ -65,8 +65,12 @@ graph LR
 | 決められない・情報が足りない | `ledger/open-questions.md` | — |
 | 点検した記録 | `reviews/` | [PB-003](playbook/003-run-review-cycle.md) |
 | 外部 spec からの持ち帰り | 上のいずれか（昇格判断つき） | [PB-008](playbook/008-bridge-sdd-spec.md) |
+| 新しいリポジトリへ適用する | kernel は残し、案件 ADR と混ぜない | [PB-017](playbook/017-apply-kernel-to-project.md) |
+| Slack / 議事録 / Confluence が散らばっている | `draft` の evidence（確認後に `active`） | [PB-018](playbook/018-draft-evidence-from-sources.md) |
 
-迷ったときの原則は 2 つ。**根拠のない決定を書かない**（先に evidence）。**このプロジェクト固有の詳細を持ち込まない**（他でも同じ判断を繰り返すものだけ）。
+迷ったときの原則は 3 つ。**根拠のない決定を書かない**（先に evidence）。**このプロジェクト固有の詳細を持ち込まない**（他でも同じ判断を繰り返すものだけ）。**働き方の決定と案件の考え方を同じ一覧に置かない**（[ADR-019](adr/019-kernel-and-project-layers.md)）。
+
+本リポジトリは働き方の **kernel** である。新しい案件へ適用するときは ADR を丸コピーせず、案件リポ側にその製品の `adr/` を置く。Slack や議事録から根拠を起こすときは下書き（`draft`）までがエージェント、確定は人間である。
 
 ## 5. ライフサイクル
 
