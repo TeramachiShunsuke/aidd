@@ -14,6 +14,7 @@ related:
   - EVID-030
   - ADR-006
   - ADR-008
+  - ADR-019
 tier: 2
 ---
 
@@ -29,7 +30,7 @@ tier: 2
 2. [SETUP.md](../SETUP.md) の該当節を読ませる（または一緒に辿る）。層 1 なら §0 と §1、層 2 ならそのあと §2
 3. 今の作業が決まっているなら [INDEX.md](../INDEX.md) で playbook を 1 つ開き、SETUP のループで 1 周させる（探す → 書く → 再生成 → PR）
 4. エージェントに作業を頼む段階になってから [AGENTS.md](../AGENTS.md) を渡す。人の最初の文書を AGENTS にしない
-5. 案件リポの clone 手順や製品画面が尋ねられたら、kernel の SETUP には書かないと伝え、[ADR-008](../adr/008-sdd-bridge.md) の境界（繰り返す判断だけ）に戻す
+5. 案件リポの clone 手順や製品画面が尋ねられたら、kernel の SETUP には書かないと伝え、[PB-017](017-apply-kernel-to-project.md) へ渡す。繰り返す判断だけが kernel に残る（[ADR-008](../adr/008-sdd-bridge.md) / [ADR-019](../adr/019-kernel-and-project-layers.md)）
 
 ## 検証
 

@@ -2,7 +2,7 @@
 id: PB-001
 title: evidence を追加する
 status: active
-last_reviewed: 2026-08-08
+last_reviewed: 2026-08-13
 owners:
   - TeramachiShunsuke
 tags:
@@ -11,15 +11,18 @@ tags:
 related:
   - EVID-001
   - ADR-002
+  - PB-018
 ---
 
 ## いつ使うか
 
-新しい観測・根拠を知識ベースに入れるとき。
+新しい観測・根拠を知識ベースに入れるとき。観測文が既にあるとき。
+
+Slack / 議事録 / Confluence などソースが散らばっていて、下書きから起こすときは [PB-018](018-draft-evidence-from-sources.md) を先に使う。
 
 ## 手順
 
-1. `evidence/` の最大番号を確認し、次の `NNN` を決める
+1. `evidence/` の最大番号を確認し、次の `NNN` を決める（番号は `--next EVID` に聞く）
 2. `templates/evidence.md` を `evidence/NNN-short-slug.md` にコピー
 3. Frontmatter を埋める（`status: draft` から開始してよい）
 4. `## 主張` `## 観測` `## 限界` `## 関連` を書く
@@ -41,3 +44,4 @@ related:
 
 - [templates/evidence.md](../templates/evidence.md)
 - [CONVENTIONS.md](../CONVENTIONS.md)
+- [PB-018](018-draft-evidence-from-sources.md)

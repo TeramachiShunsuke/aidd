@@ -58,7 +58,7 @@
 ここを守れば、層 1 でも機能を空回りさせない。
 
 - 根拠のない決定を書かない（先に evidence。無ければ open-questions）
-- このリポジトリ固有でない判断だけを残す。案件の API 名・画面・スキーマは入れない（[ADR-008](adr/008-sdd-bridge.md)）
+- このリポジトリ固有でない判断だけを残す。案件の API 名・画面・スキーマは入れない（[ADR-008](adr/008-sdd-bridge.md)）。働き方の ADR を案件の `adr/` にコピーして混ぜない（[ADR-019](adr/019-kernel-and-project-layers.md)）
 - `INDEX.md` / `GRAPH.md` を手で編集しない
 - `status: frozen` の本文を改変しない。直すなら後継 ID
 - `reviews/` と `ledger/attestations.md` の既存行を書き換えない（末尾追記のみ）
@@ -91,6 +91,8 @@
 | グラフの信号を読む | [PB-010](playbook/010-review-with-graph.md) |
 | 競合・番号の衝突 | [PB-015](playbook/015-resolve-conflicts.md) |
 | spec と KB の受け渡し | [PB-008](playbook/008-bridge-sdd-spec.md) |
+| 新しい案件へ載せる | [PB-017](playbook/017-apply-kernel-to-project.md)（kernel の ADR を案件にコピーしない） |
+| 散在ソースから evidence の下書き | [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。確定は人間） |
 | 大規模リリースの置き場 | [PB-016](playbook/016-large-project-usage-map.md) |
 
 検査は PR 前にローカルで 3 つ。意味は [README.md](README.md) の鮮度ガード節。

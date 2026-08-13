@@ -64,6 +64,12 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 
 このリポジトリはコードを持たない。仕様駆動開発の成果物は実装リポジトリ側にあり、受け渡し規則を [ADR-008](adr/008-sdd-bridge.md) で定める。requirements は evidence / claims を引用し、横断で再利用する design だけが ADR に、繰り返す tasks だけが playbook に昇格する。spec 本文は取り込まず、リンクと ID のみを持つ。
 
+## 他プロジェクトへの適用
+
+このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-019](adr/019-kernel-and-project-layers.md)、手順は [PB-017](playbook/017-apply-kernel-to-project.md)）。
+
+根拠の入口は、人が観測を書く [PB-001](playbook/001-add-evidence.md) だけではない。Slack / 議事録 / Confluence など散在ソースからは、エージェントが `status: draft` の evidence を起こし、人間が観測を確認してから `active` にする（[PB-018](playbook/018-draft-evidence-from-sources.md)）。ログインアカウントを ACL 付きでワークフローに載せる PF は、このリポジトリの外のクライアントである。認証は git の外の IdP、git は認証情報を使わない。今の利用例を契約にしない（[ADR-020](adr/020-platform-is-a-client.md)）。
+
 ## 鮮度ガード（CI）
 
 `.github/workflows/staleness.yml` が次を検査する。
