@@ -77,6 +77,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | PB-013 | 受け入れ例から TDD を始める | [playbook/013-start-tdd-from-examples.md](playbook/013-start-tdd-from-examples.md) | active | 2026-08-09 |
 | PB-014 | DB / インフラの文脈をエージェントに渡す | [playbook/014-hand-infra-context.md](playbook/014-hand-infra-context.md) | active | 2026-08-09 |
 | PB-015 | 競合と ID 衝突を解決する | [playbook/015-resolve-conflicts.md](playbook/015-resolve-conflicts.md) | active | 2026-08-09 |
+| PB-016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/016-large-project-usage-map.md](playbook/016-large-project-usage-map.md) | active | 2026-08-09 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -118,9 +119,9 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 7 |
-| Tier 2 | 33 |
+| Tier 2 | 34 |
 | Tier 3 | 29 |
-| status: active | 61 |
+| status: active | 62 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
