@@ -21,116 +21,116 @@
 | ROOT-GUIDE | GUIDE — 文書コード体系とリレーション | [GUIDE.md](GUIDE.md) | - | - |
 | ROOT-README | aidd | [README.md](README.md) | - | - |
 | ROOT-SETUP | SETUP — 最低限の利用と、改善できる理解 | [SETUP.md](SETUP.md) | - | - |
-| LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-19 |
-| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-19 |
-| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-19 |
-| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-19 |
+| LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-09 |
+| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-14 |
+| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-13 |
+| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-14 |
 
 Skills（起動時は `description` のみロードされる。本文は一致時に読まれる）:
 
 | skill | playbook | description |
 | --- | --- | --- |
-| [aidd-add-evidence](.agents/skills/aidd-add-evidence/SKILL.md) | PB-00001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNNNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
-| [aidd-apply-to-project](.agents/skills/aidd-apply-to-project/SKILL.md) | PB-00017 | 新しいリポジトリやプロジェクトに AIDD の働き方を適用し、kernel の ADR を案件の考え方と混ぜない。ユーザーが「新しいリポジトリ」「プロジェクトに適用」「ワークフローの ADR と混ざる」「可読性」「既存の ADR を残す」と言ったときに使う。 |
-| [aidd-draft-evidence](.agents/skills/aidd-draft-evidence/SKILL.md) | PB-00018 | Slack、Google Meet の議事録、Confluence、Issue など散らばった情報から evidence のドラフトを起こす。ユーザーが「エビデンスのドラフト」「議事録から根拠」「Slack を集約」「Confluence をまとめる」「観測点を AI に書かせる」と言ったときに使う。 |
-| [aidd-graph-review](.agents/skills/aidd-graph-review/SKILL.md) | PB-00010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
-| [aidd-infra-context](.agents/skills/aidd-infra-context/SKILL.md) | PB-00014 | DB / インフラの文脈を制約・契約・状態に仕分けし、状態は文書化せず取得コマンドで渡す。「インフラの構成をまとめたい」「DB の設計を残したい」「構成図が古い」「エージェントにインフラ作業をさせたい」「マイグレーションを設計したい」と言われたときに使う。 |
-| [aidd-rebuild-index](.agents/skills/aidd-rebuild-index/SKILL.md) | PB-00007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
-| [aidd-resolve-conflict](.agents/skills/aidd-resolve-conflict/SKILL.md) | PB-00015 | AIDD 知識ベースのマージ競合と ID の衝突を、ファイルの種類ごとに決まった方法で解決する。新規文書の空き番号を取るときにも使う。「コンフリクトを直して」「マージが競合した」「rebase が止まった」「ID が重複している」「番号を振り直したい」「次の番号は何番」と言われたときに使う。 |
-| [aidd-review-cycle](.agents/skills/aidd-review-cycle/SKILL.md) | PB-00003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
-| [aidd-sdd-bridge](.agents/skills/aidd-sdd-bridge/SKILL.md) | PB-00008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
-| [aidd-setup](.agents/skills/aidd-setup/SKILL.md) | PB-00019 | AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。 |
-| [aidd-spec-triage](.agents/skills/aidd-spec-triage/SKILL.md) | PB-00012 | 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。 |
-| [aidd-tdd-start](.agents/skills/aidd-tdd-start/SKILL.md) | PB-00013 | ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。 |
-| [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-00002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNNNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
+| [aidd-add-evidence](.agents/skills/aidd-add-evidence/SKILL.md) | PB-001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
+| [aidd-apply-to-project](.agents/skills/aidd-apply-to-project/SKILL.md) | PB-017 | 新しいリポジトリやプロジェクトに AIDD の働き方を適用し、kernel の ADR を案件の考え方と混ぜない。ユーザーが「新しいリポジトリ」「プロジェクトに適用」「ワークフローの ADR と混ざる」「可読性」「既存の ADR を残す」と言ったときに使う。 |
+| [aidd-draft-evidence](.agents/skills/aidd-draft-evidence/SKILL.md) | PB-018 | Slack、Google Meet の議事録、Confluence、Issue など散らばった情報から evidence のドラフトを起こす。ユーザーが「エビデンスのドラフト」「議事録から根拠」「Slack を集約」「Confluence をまとめる」「観測点を AI に書かせる」と言ったときに使う。 |
+| [aidd-graph-review](.agents/skills/aidd-graph-review/SKILL.md) | PB-010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
+| [aidd-infra-context](.agents/skills/aidd-infra-context/SKILL.md) | PB-014 | DB / インフラの文脈を制約・契約・状態に仕分けし、状態は文書化せず取得コマンドで渡す。「インフラの構成をまとめたい」「DB の設計を残したい」「構成図が古い」「エージェントにインフラ作業をさせたい」「マイグレーションを設計したい」と言われたときに使う。 |
+| [aidd-rebuild-index](.agents/skills/aidd-rebuild-index/SKILL.md) | PB-007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
+| [aidd-resolve-conflict](.agents/skills/aidd-resolve-conflict/SKILL.md) | PB-015 | AIDD 知識ベースのマージ競合と ID の衝突を、ファイルの種類ごとに決まった方法で解決する。新規文書の空き番号を取るときにも使う。「コンフリクトを直して」「マージが競合した」「rebase が止まった」「ID が重複している」「番号を振り直したい」「次の番号は何番」と言われたときに使う。 |
+| [aidd-review-cycle](.agents/skills/aidd-review-cycle/SKILL.md) | PB-003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
+| [aidd-sdd-bridge](.agents/skills/aidd-sdd-bridge/SKILL.md) | PB-008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
+| [aidd-setup](.agents/skills/aidd-setup/SKILL.md) | PB-019 | AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。 |
+| [aidd-spec-triage](.agents/skills/aidd-spec-triage/SKILL.md) | PB-012 | 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。 |
+| [aidd-tdd-start](.agents/skills/aidd-tdd-start/SKILL.md) | PB-013 | ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。 |
+| [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
 
 ## Tier 2 — 決定と手順（作業種別が決まったら）
 
 | ID | タイトル | パス | status | last_reviewed |
 | --- | --- | --- | --- | --- |
-| ADR-00001 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する | [adr/00001-repository-layout.md](adr/00001-repository-layout.md) | frozen | 2026-08-19 |
-| ADR-00002 | YAML Frontmatter で status と last_reviewed を機械可読にする | [adr/00002-frontmatter-schema.md](adr/00002-frontmatter-schema.md) | frozen | 2026-08-19 |
-| ADR-00003 | frozen 文書はバイトレベルで不変とする | [adr/00003-frozen-immutability.md](adr/00003-frozen-immutability.md) | frozen | 2026-08-19 |
-| ADR-00004 | 鮮度は last_reviewed の 90 日と変更時同期で守る | [adr/00004-staleness-policy.md](adr/00004-staleness-policy.md) | active | 2026-08-19 |
-| ADR-00005 | reviews ディレクトリは追記専用とする | [adr/00005-reviews-append-only.md](adr/00005-reviews-append-only.md) | frozen | 2026-08-19 |
-| ADR-00006 | 文脈を Tier 0〜3 に分け、ロード順を固定する | [adr/00006-context-tiers.md](adr/00006-context-tiers.md) | active | 2026-08-19 |
-| ADR-00007 | INDEX.md を生成物とし、CI で最新性を強制する | [adr/00007-generated-index.md](adr/00007-generated-index.md) | active | 2026-08-19 |
-| ADR-00008 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する | [adr/00008-sdd-bridge.md](adr/00008-sdd-bridge.md) | active | 2026-08-19 |
-| ADR-00009 | skills は playbook の入口とし、手順を二重に持たない | [adr/00009-skills-as-playbook-entrypoints.md](adr/00009-skills-as-playbook-entrypoints.md) | active | 2026-08-19 |
-| ADR-00010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/00010-knowledge-graph-layers.md](adr/00010-knowledge-graph-layers.md) | active | 2026-08-19 |
-| ADR-00011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/00011-cross-tool-agent-integration.md](adr/00011-cross-tool-agent-integration.md) | active | 2026-08-19 |
-| ADR-00012 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する | [adr/00012-review-attestations.md](adr/00012-review-attestations.md) | active | 2026-08-19 |
-| ADR-00013 | 検査を error と warning に等級分けし、充足しているものから機械で固定する | [adr/00013-check-grades.md](adr/00013-check-grades.md) | active | 2026-08-19 |
-| ADR-00014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/00014-implementation-spec-split.md](adr/00014-implementation-spec-split.md) | active | 2026-08-19 |
-| ADR-00015 | DB / インフラの文脈を制約・契約・状態に分け、状態は文書化しない | [adr/00015-infra-context-layers.md](adr/00015-infra-context-layers.md) | active | 2026-08-19 |
-| ADR-00016 | 競合は解決を上手くするのではなく、競合面を減らして扱う | [adr/00016-shrink-conflict-surface.md](adr/00016-shrink-conflict-surface.md) | active | 2026-08-19 |
-| ADR-00017 | 機械は事実の記録と検出に限り、status の遷移は人間が行う | [adr/00017-machines-record-facts-humans-decide-status.md](adr/00017-machines-record-facts-humans-decide-status.md) | active | 2026-08-19 |
-| ADR-00018 | 番号は main を権威として確保し、衝突は PR の側が譲る | [adr/00018-id-allocation.md](adr/00018-id-allocation.md) | active | 2026-08-19 |
-| ADR-00019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/00019-kernel-and-project-layers.md](adr/00019-kernel-and-project-layers.md) | active | 2026-08-19 |
-| ADR-00020 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする | [adr/00020-platform-is-a-client.md](adr/00020-platform-is-a-client.md) | active | 2026-08-19 |
-| ADR-00021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/00021-two-layer-setup-guide.md](adr/00021-two-layer-setup-guide.md) | active | 2026-08-19 |
-| ADR-00022 | 全文書の ID とファイル名を5桁に統一する | [adr/00022-five-digit-id-scheme.md](adr/00022-five-digit-id-scheme.md) | active | 2026-08-19 |
-| PB-00001 | evidence を追加する | [playbook/00001-add-evidence.md](playbook/00001-add-evidence.md) | active | 2026-08-19 |
-| PB-00002 | ADR を書く | [playbook/00002-write-adr.md](playbook/00002-write-adr.md) | active | 2026-08-19 |
-| PB-00003 | レビューサイクルを回す | [playbook/00003-run-review-cycle.md](playbook/00003-run-review-cycle.md) | active | 2026-08-19 |
-| PB-00004 | 文書を凍結する | [playbook/00004-freeze-document.md](playbook/00004-freeze-document.md) | active | 2026-08-19 |
-| PB-00005 | staleness CI の失敗を直す | [playbook/00005-fix-staleness-ci.md](playbook/00005-fix-staleness-ci.md) | active | 2026-08-19 |
-| PB-00006 | Tier を割り当てる・見直す | [playbook/00006-assign-tier.md](playbook/00006-assign-tier.md) | active | 2026-08-19 |
-| PB-00007 | INDEX.md を再生成する | [playbook/00007-rebuild-index.md](playbook/00007-rebuild-index.md) | active | 2026-08-19 |
-| PB-00008 | SDD の spec と知識ベースを橋渡しする | [playbook/00008-bridge-sdd-spec.md](playbook/00008-bridge-sdd-spec.md) | active | 2026-08-19 |
-| PB-00009 | skill を追加・更新する | [playbook/00009-add-skill.md](playbook/00009-add-skill.md) | active | 2026-08-19 |
-| PB-00010 | グラフで構造化レビューする | [playbook/00010-review-with-graph.md](playbook/00010-review-with-graph.md) | active | 2026-08-19 |
-| PB-00011 | グラフの警告をエラーへ昇格する | [playbook/00011-promote-check.md](playbook/00011-promote-check.md) | active | 2026-08-19 |
-| PB-00012 | 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける | [playbook/00012-triage-implementation-spec.md](playbook/00012-triage-implementation-spec.md) | active | 2026-08-19 |
-| PB-00013 | 受け入れ例から TDD を始める | [playbook/00013-start-tdd-from-examples.md](playbook/00013-start-tdd-from-examples.md) | active | 2026-08-19 |
-| PB-00014 | DB / インフラの文脈をエージェントに渡す | [playbook/00014-hand-infra-context.md](playbook/00014-hand-infra-context.md) | active | 2026-08-19 |
-| PB-00015 | 競合と ID 衝突を解決する | [playbook/00015-resolve-conflicts.md](playbook/00015-resolve-conflicts.md) | active | 2026-08-19 |
-| PB-00016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/00016-large-project-usage-map.md](playbook/00016-large-project-usage-map.md) | active | 2026-08-19 |
-| PB-00017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/00017-apply-kernel-to-project.md](playbook/00017-apply-kernel-to-project.md) | active | 2026-08-19 |
-| PB-00018 | 散在ソースから evidence の下書きを起こす | [playbook/00018-draft-evidence-from-sources.md](playbook/00018-draft-evidence-from-sources.md) | active | 2026-08-19 |
-| PB-00019 | 新しい参加者を二層のセットアップガイドへ乗せる | [playbook/00019-onboard-with-setup-guide.md](playbook/00019-onboard-with-setup-guide.md) | active | 2026-08-19 |
+| ADR-001 | リポジトリを evidence / adr / playbook / ledger / reviews に分割する | [adr/001-repository-layout.md](adr/001-repository-layout.md) | frozen | 2026-08-08 |
+| ADR-002 | YAML Frontmatter で status と last_reviewed を機械可読にする | [adr/002-frontmatter-schema.md](adr/002-frontmatter-schema.md) | frozen | 2026-08-08 |
+| ADR-003 | frozen 文書はバイトレベルで不変とする | [adr/003-frozen-immutability.md](adr/003-frozen-immutability.md) | frozen | 2026-08-08 |
+| ADR-004 | 鮮度は last_reviewed の 90 日と変更時同期で守る | [adr/004-staleness-policy.md](adr/004-staleness-policy.md) | active | 2026-08-09 |
+| ADR-005 | reviews ディレクトリは追記専用とする | [adr/005-reviews-append-only.md](adr/005-reviews-append-only.md) | frozen | 2026-08-08 |
+| ADR-006 | 文脈を Tier 0〜3 に分け、ロード順を固定する | [adr/006-context-tiers.md](adr/006-context-tiers.md) | active | 2026-08-13 |
+| ADR-007 | INDEX.md を生成物とし、CI で最新性を強制する | [adr/007-generated-index.md](adr/007-generated-index.md) | active | 2026-08-09 |
+| ADR-008 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する | [adr/008-sdd-bridge.md](adr/008-sdd-bridge.md) | active | 2026-08-09 |
+| ADR-009 | skills は playbook の入口とし、手順を二重に持たない | [adr/009-skills-as-playbook-entrypoints.md](adr/009-skills-as-playbook-entrypoints.md) | active | 2026-08-09 |
+| ADR-010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/010-knowledge-graph-layers.md](adr/010-knowledge-graph-layers.md) | active | 2026-08-09 |
+| ADR-011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/011-cross-tool-agent-integration.md](adr/011-cross-tool-agent-integration.md) | active | 2026-08-09 |
+| ADR-012 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する | [adr/012-review-attestations.md](adr/012-review-attestations.md) | active | 2026-08-09 |
+| ADR-013 | 検査を error と warning に等級分けし、充足しているものから機械で固定する | [adr/013-check-grades.md](adr/013-check-grades.md) | active | 2026-08-09 |
+| ADR-014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/014-implementation-spec-split.md](adr/014-implementation-spec-split.md) | active | 2026-08-13 |
+| ADR-015 | DB / インフラの文脈を制約・契約・状態に分け、状態は文書化しない | [adr/015-infra-context-layers.md](adr/015-infra-context-layers.md) | active | 2026-08-09 |
+| ADR-016 | 競合は解決を上手くするのではなく、競合面を減らして扱う | [adr/016-shrink-conflict-surface.md](adr/016-shrink-conflict-surface.md) | active | 2026-08-09 |
+| ADR-017 | 機械は事実の記録と検出に限り、status の遷移は人間が行う | [adr/017-machines-record-facts-humans-decide-status.md](adr/017-machines-record-facts-humans-decide-status.md) | active | 2026-08-09 |
+| ADR-018 | 番号は main を権威として確保し、衝突は PR の側が譲る | [adr/018-id-allocation.md](adr/018-id-allocation.md) | active | 2026-08-09 |
+| ADR-019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/019-kernel-and-project-layers.md](adr/019-kernel-and-project-layers.md) | active | 2026-08-13 |
+| ADR-020 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする | [adr/020-platform-is-a-client.md](adr/020-platform-is-a-client.md) | active | 2026-08-13 |
+| ADR-021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/021-two-layer-setup-guide.md](adr/021-two-layer-setup-guide.md) | active | 2026-08-13 |
+| PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-13 |
+| PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
+| PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
+| PB-004 | 文書を凍結する | [playbook/004-freeze-document.md](playbook/004-freeze-document.md) | active | 2026-08-09 |
+| PB-005 | staleness CI の失敗を直す | [playbook/005-fix-staleness-ci.md](playbook/005-fix-staleness-ci.md) | active | 2026-08-09 |
+| PB-006 | Tier を割り当てる・見直す | [playbook/006-assign-tier.md](playbook/006-assign-tier.md) | active | 2026-08-09 |
+| PB-007 | INDEX.md を再生成する | [playbook/007-rebuild-index.md](playbook/007-rebuild-index.md) | active | 2026-08-09 |
+| PB-008 | SDD の spec と知識ベースを橋渡しする | [playbook/008-bridge-sdd-spec.md](playbook/008-bridge-sdd-spec.md) | active | 2026-08-13 |
+| PB-009 | skill を追加・更新する | [playbook/009-add-skill.md](playbook/009-add-skill.md) | active | 2026-08-09 |
+| PB-010 | グラフで構造化レビューする | [playbook/010-review-with-graph.md](playbook/010-review-with-graph.md) | active | 2026-08-09 |
+| PB-011 | グラフの警告をエラーへ昇格する | [playbook/011-promote-check.md](playbook/011-promote-check.md) | active | 2026-08-09 |
+| PB-012 | 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける | [playbook/012-triage-implementation-spec.md](playbook/012-triage-implementation-spec.md) | active | 2026-08-13 |
+| PB-013 | 受け入れ例から TDD を始める | [playbook/013-start-tdd-from-examples.md](playbook/013-start-tdd-from-examples.md) | active | 2026-08-09 |
+| PB-014 | DB / インフラの文脈をエージェントに渡す | [playbook/014-hand-infra-context.md](playbook/014-hand-infra-context.md) | active | 2026-08-09 |
+| PB-015 | 競合と ID 衝突を解決する | [playbook/015-resolve-conflicts.md](playbook/015-resolve-conflicts.md) | active | 2026-08-09 |
+| PB-016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/016-large-project-usage-map.md](playbook/016-large-project-usage-map.md) | active | 2026-08-09 |
+| PB-017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/017-apply-kernel-to-project.md](playbook/017-apply-kernel-to-project.md) | active | 2026-08-13 |
+| PB-018 | 散在ソースから evidence の下書きを起こす | [playbook/018-draft-evidence-from-sources.md](playbook/018-draft-evidence-from-sources.md) | active | 2026-08-13 |
+| PB-019 | 新しい参加者を二層のセットアップガイドへ乗せる | [playbook/019-onboard-with-setup-guide.md](playbook/019-onboard-with-setup-guide.md) | active | 2026-08-13 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
 | ID | タイトル | パス | status | last_reviewed |
 | --- | --- | --- | --- | --- |
-| EVID-00001 | エージェントは根拠なしで自信を持つ | [evidence/00001-agents-need-evidence.md](evidence/00001-agents-need-evidence.md) | active | 2026-08-19 |
-| EVID-00002 | コンテキスト窓は作業記憶であり長期記憶ではない | [evidence/00002-context-is-not-memory.md](evidence/00002-context-is-not-memory.md) | active | 2026-08-19 |
-| EVID-00003 | 文書ドリフトは静かな回帰である | [evidence/00003-doc-drift-is-regression.md](evidence/00003-doc-drift-is-regression.md) | active | 2026-08-19 |
-| EVID-00004 | 凍結は編集禁止であり改訂禁止ではない | [evidence/00004-frozen-means-immutable.md](evidence/00004-frozen-means-immutable.md) | frozen | 2026-08-19 |
-| EVID-00005 | 追記専用ログは改ざん耐性を上げる | [evidence/00005-append-only-reviews.md](evidence/00005-append-only-reviews.md) | active | 2026-08-19 |
-| EVID-00006 | テンプレート欠落は形式ばらつきを増やす | [evidence/00006-templates-reduce-variance.md](evidence/00006-templates-reduce-variance.md) | active | 2026-08-19 |
-| EVID-00007 | 台帳は横断索引であり本文の置き換えではない | [evidence/00007-ledger-is-index.md](evidence/00007-ledger-is-index.md) | active | 2026-08-19 |
-| EVID-00008 | PR は知識の品質ゲートである | [evidence/00008-pr-as-quality-gate.md](evidence/00008-pr-as-quality-gate.md) | active | 2026-08-19 |
-| EVID-00009 | 文脈は有限予算であり、常時ロードは劣化を招く | [evidence/00009-context-budget-is-finite.md](evidence/00009-context-budget-is-finite.md) | active | 2026-08-19 |
-| EVID-00010 | 手書き目次は腐るが、生成物なら差分で腐敗を検出できる | [evidence/00010-handwritten-index-rots.md](evidence/00010-handwritten-index-rots.md) | active | 2026-08-19 |
-| EVID-00011 | 仕様を先に固定しないエージェント実装は手戻りする | [evidence/00011-spec-first-reduces-rework.md](evidence/00011-spec-first-reduces-rework.md) | active | 2026-08-19 |
-| EVID-00012 | skills は description だけを常時ロードする段階的開示である | [evidence/00012-skills-are-progressive-disclosure.md](evidence/00012-skills-are-progressive-disclosure.md) | active | 2026-08-19 |
-| EVID-00013 | Graphify は docs のみの知識ベースでは全ノードが LLM 由来になる | [evidence/00013-graphify-needs-llm-for-docs.md](evidence/00013-graphify-needs-llm-for-docs.md) | active | 2026-08-19 |
-| EVID-00014 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる | [evidence/00014-reference-graph-from-metadata.md](evidence/00014-reference-graph-from-metadata.md) | active | 2026-08-19 |
-| EVID-00015 | エージェントツールごとに skill と規範ファイルの探索パスが違う | [evidence/00015-agent-tools-read-different-paths.md](evidence/00015-agent-tools-read-different-paths.md) | active | 2026-08-19 |
-| EVID-00016 | frozen・reviews・90 日鮮度の規則は同時に満たせず、期限付きで CI が修復不能になる | [evidence/00016-lifecycle-rules-deadlock.md](evidence/00016-lifecycle-rules-deadlock.md) | active | 2026-08-19 |
-| EVID-00017 | 警告のままの検査は劣化を検出できず、本文と related のズレが残る | [evidence/00017-warnings-do-not-ratchet.md](evidence/00017-warnings-do-not-ratchet.md) | active | 2026-08-19 |
-| EVID-00018 | 振る舞いを文書とテストに二重で持つと、文書だけが腐る | [evidence/00018-tests-outlive-design-docs.md](evidence/00018-tests-outlive-design-docs.md) | active | 2026-08-19 |
-| EVID-00019 | 変更コストは対称でなく、不可逆な決定だけが事前設計に見合う | [evidence/00019-change-cost-is-asymmetric.md](evidence/00019-change-cost-is-asymmetric.md) | active | 2026-08-19 |
-| EVID-00020 | インフラ文書は状態を含むと、鮮度検査が追いつかない速さで腐る | [evidence/00020-infra-state-rots-fastest.md](evidence/00020-infra-state-rots-fastest.md) | active | 2026-08-19 |
-| EVID-00021 | 共有台帳と連番 ID は並行ブランチで必ず衝突し、先行事例は競合面そのものを消している | [evidence/00021-shared-ledgers-and-serial-ids-collide.md](evidence/00021-shared-ledgers-and-serial-ids-collide.md) | active | 2026-08-19 |
-| EVID-00022 | レビュー状態の機械追跡には先行事例があり、いずれも事実の記録と判断の実行を分けている | [evidence/00022-review-state-is-tracked-mechanically.md](evidence/00022-review-state-is-tracked-mechanically.md) | active | 2026-08-19 |
-| EVID-00023 | 連番の採番は並行制御の問題であり、採番の時点をどこに置くかで対策が決まる | [evidence/00023-id-allocation-is-a-concurrency-problem.md](evidence/00023-id-allocation-is-a-concurrency-problem.md) | active | 2026-08-19 |
-| EVID-00024 | 働き方の ADR と案件の考え方の ADR を同じ一覧に置くと読めなくなる | [evidence/00024-kernel-and-project-adrs-mix-poorly.md](evidence/00024-kernel-and-project-adrs-mix-poorly.md) | active | 2026-08-19 |
-| EVID-00025 | 散在ソースの集約は evidence の下書きに向くが、確定は観測の確認である | [evidence/00025-scattered-sources-suit-evidence-drafts.md](evidence/00025-scattered-sources-suit-evidence-drafts.md) | active | 2026-08-19 |
-| EVID-00026 | 現行の知識ベースに principal はなく、owners も INDEX も認可ではない | [evidence/00026-no-principal-or-document-acl.md](evidence/00026-no-principal-or-document-acl.md) | active | 2026-08-19 |
-| EVID-00027 | アカウント連携の集約は、ソース側 ACL を共有正本へ越境させる | [evidence/00027-account-aggregation-crosses-acl.md](evidence/00027-account-aggregation-crosses-acl.md) | active | 2026-08-19 |
-| EVID-00028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/00028-okta-auth-git-holds-no-credentials.md](evidence/00028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-19 |
-| EVID-00029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/00029-keep-platform-contract-generic.md](evidence/00029-keep-platform-contract-generic.md) | active | 2026-08-19 |
-| EVID-00030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/00030-human-entry-needs-two-layer-setup.md](evidence/00030-human-entry-needs-two-layer-setup.md) | active | 2026-08-19 |
-| REV-00001 | Bootstrap design review | [reviews/00001-bootstrap-design-review.md](reviews/00001-bootstrap-design-review.md) | active | 2026-08-19 |
-| REV-00002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/00002-index-sdd-skills-tier-review.md](reviews/00002-index-sdd-skills-tier-review.md) | active | 2026-08-19 |
-| REV-00003 | 参照グラフによる初回の構造レビュー | [reviews/00003-first-graph-review.md](reviews/00003-first-graph-review.md) | active | 2026-08-19 |
-| REV-00004 | ツール横断の可搬性レビュー | [reviews/00004-cross-tool-portability.md](reviews/00004-cross-tool-portability.md) | active | 2026-08-19 |
-| REV-00005 | リポジトリ全体の敵対レビューと取り込み | [reviews/00005-adversarial-review.md](reviews/00005-adversarial-review.md) | active | 2026-08-19 |
-| REV-00006 | ライフサイクル矛盾の解消と、自己レビューで見つけた運用上の穴 | [reviews/00006-lifecycle-self-review.md](reviews/00006-lifecycle-self-review.md) | active | 2026-08-19 |
-| REV-00007 | PF・ログイン ACL・実行ワークフロー構想に対する敵対レビュー | [reviews/00007-platform-acl-adversarial-review.md](reviews/00007-platform-acl-adversarial-review.md) | active | 2026-08-19 |
+| EVID-001 | エージェントは根拠なしで自信を持つ | [evidence/001-agents-need-evidence.md](evidence/001-agents-need-evidence.md) | active | 2026-08-08 |
+| EVID-002 | コンテキスト窓は作業記憶であり長期記憶ではない | [evidence/002-context-is-not-memory.md](evidence/002-context-is-not-memory.md) | active | 2026-08-08 |
+| EVID-003 | 文書ドリフトは静かな回帰である | [evidence/003-doc-drift-is-regression.md](evidence/003-doc-drift-is-regression.md) | active | 2026-08-08 |
+| EVID-004 | 凍結は編集禁止であり改訂禁止ではない | [evidence/004-frozen-means-immutable.md](evidence/004-frozen-means-immutable.md) | frozen | 2026-08-08 |
+| EVID-005 | 追記専用ログは改ざん耐性を上げる | [evidence/005-append-only-reviews.md](evidence/005-append-only-reviews.md) | active | 2026-08-08 |
+| EVID-006 | テンプレート欠落は形式ばらつきを増やす | [evidence/006-templates-reduce-variance.md](evidence/006-templates-reduce-variance.md) | active | 2026-08-08 |
+| EVID-007 | 台帳は横断索引であり本文の置き換えではない | [evidence/007-ledger-is-index.md](evidence/007-ledger-is-index.md) | active | 2026-08-08 |
+| EVID-008 | PR は知識の品質ゲートである | [evidence/008-pr-as-quality-gate.md](evidence/008-pr-as-quality-gate.md) | active | 2026-08-08 |
+| EVID-009 | 文脈は有限予算であり、常時ロードは劣化を招く | [evidence/009-context-budget-is-finite.md](evidence/009-context-budget-is-finite.md) | active | 2026-08-09 |
+| EVID-010 | 手書き目次は腐るが、生成物なら差分で腐敗を検出できる | [evidence/010-handwritten-index-rots.md](evidence/010-handwritten-index-rots.md) | active | 2026-08-09 |
+| EVID-011 | 仕様を先に固定しないエージェント実装は手戻りする | [evidence/011-spec-first-reduces-rework.md](evidence/011-spec-first-reduces-rework.md) | active | 2026-08-09 |
+| EVID-012 | skills は description だけを常時ロードする段階的開示である | [evidence/012-skills-are-progressive-disclosure.md](evidence/012-skills-are-progressive-disclosure.md) | active | 2026-08-09 |
+| EVID-013 | Graphify は docs のみの知識ベースでは全ノードが LLM 由来になる | [evidence/013-graphify-needs-llm-for-docs.md](evidence/013-graphify-needs-llm-for-docs.md) | active | 2026-08-09 |
+| EVID-014 | 知識ベースの参照グラフは既存メタデータから決定的に導出できる | [evidence/014-reference-graph-from-metadata.md](evidence/014-reference-graph-from-metadata.md) | active | 2026-08-09 |
+| EVID-015 | エージェントツールごとに skill と規範ファイルの探索パスが違う | [evidence/015-agent-tools-read-different-paths.md](evidence/015-agent-tools-read-different-paths.md) | active | 2026-08-09 |
+| EVID-016 | frozen・reviews・90 日鮮度の規則は同時に満たせず、期限付きで CI が修復不能になる | [evidence/016-lifecycle-rules-deadlock.md](evidence/016-lifecycle-rules-deadlock.md) | active | 2026-08-09 |
+| EVID-017 | 警告のままの検査は劣化を検出できず、本文と related のズレが残る | [evidence/017-warnings-do-not-ratchet.md](evidence/017-warnings-do-not-ratchet.md) | active | 2026-08-09 |
+| EVID-018 | 振る舞いを文書とテストに二重で持つと、文書だけが腐る | [evidence/018-tests-outlive-design-docs.md](evidence/018-tests-outlive-design-docs.md) | active | 2026-08-09 |
+| EVID-019 | 変更コストは対称でなく、不可逆な決定だけが事前設計に見合う | [evidence/019-change-cost-is-asymmetric.md](evidence/019-change-cost-is-asymmetric.md) | active | 2026-08-09 |
+| EVID-020 | インフラ文書は状態を含むと、鮮度検査が追いつかない速さで腐る | [evidence/020-infra-state-rots-fastest.md](evidence/020-infra-state-rots-fastest.md) | active | 2026-08-09 |
+| EVID-021 | 共有台帳と連番 ID は並行ブランチで必ず衝突し、先行事例は競合面そのものを消している | [evidence/021-shared-ledgers-and-serial-ids-collide.md](evidence/021-shared-ledgers-and-serial-ids-collide.md) | active | 2026-08-09 |
+| EVID-022 | レビュー状態の機械追跡には先行事例があり、いずれも事実の記録と判断の実行を分けている | [evidence/022-review-state-is-tracked-mechanically.md](evidence/022-review-state-is-tracked-mechanically.md) | active | 2026-08-09 |
+| EVID-023 | 連番の採番は並行制御の問題であり、採番の時点をどこに置くかで対策が決まる | [evidence/023-id-allocation-is-a-concurrency-problem.md](evidence/023-id-allocation-is-a-concurrency-problem.md) | active | 2026-08-09 |
+| EVID-024 | 働き方の ADR と案件の考え方の ADR を同じ一覧に置くと読めなくなる | [evidence/024-kernel-and-project-adrs-mix-poorly.md](evidence/024-kernel-and-project-adrs-mix-poorly.md) | active | 2026-08-13 |
+| EVID-025 | 散在ソースの集約は evidence の下書きに向くが、確定は観測の確認である | [evidence/025-scattered-sources-suit-evidence-drafts.md](evidence/025-scattered-sources-suit-evidence-drafts.md) | active | 2026-08-13 |
+| EVID-026 | 現行の知識ベースに principal はなく、owners も INDEX も認可ではない | [evidence/026-no-principal-or-document-acl.md](evidence/026-no-principal-or-document-acl.md) | active | 2026-08-13 |
+| EVID-027 | アカウント連携の集約は、ソース側 ACL を共有正本へ越境させる | [evidence/027-account-aggregation-crosses-acl.md](evidence/027-account-aggregation-crosses-acl.md) | active | 2026-08-13 |
+| EVID-028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/028-okta-auth-git-holds-no-credentials.md](evidence/028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-13 |
+| EVID-029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/029-keep-platform-contract-generic.md](evidence/029-keep-platform-contract-generic.md) | active | 2026-08-13 |
+| EVID-030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/030-human-entry-needs-two-layer-setup.md](evidence/030-human-entry-needs-two-layer-setup.md) | active | 2026-08-13 |
+| REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
+| REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
+| REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
+| REV-004 | ツール横断の可搬性レビュー | [reviews/004-cross-tool-portability.md](reviews/004-cross-tool-portability.md) | active | 2026-08-09 |
+| REV-005 | リポジトリ全体の敵対レビューと取り込み | [reviews/005-adversarial-review.md](reviews/005-adversarial-review.md) | active | 2026-08-09 |
+| REV-006 | ライフサイクル矛盾の解消と、自己レビューで見つけた運用上の穴 | [reviews/006-lifecycle-self-review.md](reviews/006-lifecycle-self-review.md) | active | 2026-08-09 |
+| REV-007 | PF・ログイン ACL・実行ワークフロー構想に対する敵対レビュー | [reviews/007-platform-acl-adversarial-review.md](reviews/007-platform-acl-adversarial-review.md) | active | 2026-08-13 |
+| REV-008 | PF クライアント表面（IDE 拡張 → アプリ / Web / CLI）構想に対する敵対レビュー | [reviews/008-client-surface-adversarial-review.md](reviews/008-client-surface-adversarial-review.md) | active | 2026-08-14 |
 
 ## 内訳
 
@@ -138,8 +138,8 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 8 |
-| Tier 2 | 41 |
-| Tier 3 | 37 |
+| Tier 2 | 40 |
+| Tier 3 | 38 |
 | status: active | 77 |
 | status: frozen | 5 |
 | status: draft | 0 |

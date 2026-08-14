@@ -3,6 +3,7 @@ id: LEDGER-CHANGELOG
 title: Knowledge base changelog
 status: active
 last_reviewed: 2026-08-19
+last_reviewed: 2026-08-14
 owners:
   - TeramachiShunsuke
 tags:
@@ -13,6 +14,10 @@ tags:
 # Changelog
 
 知識ベース自体の注目すべき変更。新しいエントリを上に追記する。
+
+## 2026-08-14
+
+- PF クライアント表面（IDE 拡張 → アプリ / Web / CLI）構想の敵対レビュー: REV-008。ADR-020 の「クライアント」方針とは両立するが、VS Code + IntelliJ 同時第一世代と「認証難題を Web に先送り」する順序を批判。OQ-035（第一世代 surface）/ OQ-036（IDE 同時着手の可否）/ OQ-037（共有クライアント契約を先に固定するか）を追加
 
 ## 2026-08-13
 
