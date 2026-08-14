@@ -23,7 +23,7 @@
 | ROOT-SETUP | SETUP — 最低限の利用と、改善できる理解 | [SETUP.md](SETUP.md) | - | - |
 | LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-09 |
 | LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-14 |
-| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-13 |
+| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-14 |
 | LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-14 |
 
 Skills（起動時は `description` のみロードされる。本文は一致時に読まれる）:
@@ -69,6 +69,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-019 | 働き方の kernel と案件の考え方を別権威にし、evidence は下書きから入る | [adr/019-kernel-and-project-layers.md](adr/019-kernel-and-project-layers.md) | active | 2026-08-13 |
 | ADR-020 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする | [adr/020-platform-is-a-client.md](adr/020-platform-is-a-client.md) | active | 2026-08-13 |
 | ADR-021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/021-two-layer-setup-guide.md](adr/021-two-layer-setup-guide.md) | active | 2026-08-13 |
+| ADR-022 | PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI、必要なら MCP）とする | [adr/022-pf-first-step-agent-callable-client.md](adr/022-pf-first-step-agent-callable-client.md) | draft | 2026-08-14 |
 | PB-001 | evidence を追加する | [playbook/001-add-evidence.md](playbook/001-add-evidence.md) | active | 2026-08-13 |
 | PB-002 | ADR を書く | [playbook/002-write-adr.md](playbook/002-write-adr.md) | active | 2026-08-08 |
 | PB-003 | レビューサイクルを回す | [playbook/003-run-review-cycle.md](playbook/003-run-review-cycle.md) | active | 2026-08-09 |
@@ -123,6 +124,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/028-okta-auth-git-holds-no-credentials.md](evidence/028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-13 |
 | EVID-029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/029-keep-platform-contract-generic.md](evidence/029-keep-platform-contract-generic.md) | active | 2026-08-13 |
 | EVID-030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/030-human-entry-needs-two-layer-setup.md](evidence/030-human-entry-needs-two-layer-setup.md) | active | 2026-08-13 |
+| EVID-031 | 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しである | [evidence/031-agents-primary-path-is-files-shell-tools.md](evidence/031-agents-primary-path-is-files-shell-tools.md) | draft | 2026-08-14 |
 | REV-001 | Bootstrap design review | [reviews/001-bootstrap-design-review.md](reviews/001-bootstrap-design-review.md) | active | 2026-08-08 |
 | REV-002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/002-index-sdd-skills-tier-review.md](reviews/002-index-sdd-skills-tier-review.md) | active | 2026-08-09 |
 | REV-003 | 参照グラフによる初回の構造レビュー | [reviews/003-first-graph-review.md](reviews/003-first-graph-review.md) | active | 2026-08-09 |
@@ -138,10 +140,10 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 8 |
-| Tier 2 | 40 |
-| Tier 3 | 38 |
+| Tier 2 | 41 |
+| Tier 3 | 39 |
 | status: active | 77 |
 | status: frozen | 5 |
-| status: draft | 0 |
+| status: draft | 2 |
 | status: deprecated | 0 |
 | skills | 13 |
