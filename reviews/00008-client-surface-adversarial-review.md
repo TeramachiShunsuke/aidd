@@ -1,8 +1,8 @@
 ---
-id: REV-008
+id: REV-00008
 title: PF クライアント表面（IDE 拡張 → アプリ / Web / CLI）構想に対する敵対レビュー
 status: active
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-19
 owners:
   - TeramachiShunsuke
 tags:
@@ -78,11 +78,15 @@ related:
 
 | 指摘 | 閉じ方 |
 | --- | --- |
-| P0-1（IDE→Web の順序） | 第一歩から Web / 認証本体を外す。[ADR-022](../adr/022-pf-first-step-agent-callable-client.md)（`draft`） |
-| P0-2 / OQ-036（両 IDE 同時） | **採らない**。IDE 拡張自体を第一歩にしない（ADR-022 §3） |
-| P0-3（エージェント経路との並列） | [EVID-031](../evidence/031-agents-primary-path-is-files-shell-tools.md)。第一歩の成功条件を「GUI なしで draft→検査→PR」に固定（ADR-022 §1） |
-| P1-1（CLI の位置） | CLI を正準 surface とする。MCP は同型アダプタ（ADR-022 §3）。配布順の残件は OQ-038 |
-| P1-4 / OQ-037（契約先行） | **採用**。契約 v0 を ADR-022 §2 に書く。実装は別リポ |
+| P0-1（IDE→Web の順序） | 第一歩から Web / 認証本体を外す。[ADR-00023](../adr/00023-pf-first-step-agent-callable-client.md)（`draft`） |
+| P0-2 / OQ-036（両 IDE 同時） | **採らない**。IDE 拡張自体を第一歩にしない（ADR-00023 §3） |
+| P0-3（エージェント経路との並列） | [EVID-031](../evidence/031-agents-primary-path-is-files-shell-tools.md)。第一歩の成功条件を「GUI なしで draft→検査→PR」に固定（ADR-00023 §1） |
+| P1-1（CLI の位置） | CLI を正準 surface とする。MCP は同型アダプタ（ADR-00023 §3）。配布順の残件は OQ-038 |
+| P1-4 / OQ-037（契約先行） | **採用**。契約 v0 を ADR-00023 §2 に書く。実装は別リポ |
 | OQ-035（第一世代 surface） | **CLI（+ 必要なら MCP）**。Resolved |
 
-残る未決のうち第一歩の外: OQ-017 / OQ-029 / OQ-032 / OQ-033 / OQ-034。第一歩の中の残件: OQ-038。ADR-022 の `draft` → `active` は人間の status 遷移（ADR-017）。
+残る未決のうち第一歩の外: OQ-017 / OQ-029 / OQ-032 / OQ-033 / OQ-034。第一歩の中の残件: OQ-038。ADR-00023 の `draft` → `active` は人間の status 遷移（ADR-017）。
+
+## 2026-08-15 矛盾点検への引き継ぎ
+
+[REV-00009](00009-repo-consistency-adversarial-review.md) が、本取り込みの Resolved が draft 錨に乗っている点（C1）と、REV-007「着工」語との衝突（C2）を再指摘した。既存節は改変しない。C2 の閉じ方は REV-007 末尾の「着工の再定義」。C1 の残件は OQ-039。

@@ -4,6 +4,7 @@ title: Claims ledger
 status: active
 last_reviewed: 2026-08-19
 last_reviewed: 2026-08-14
+last_reviewed: 2026-08-15
 owners:
   - TeramachiShunsuke
 tags:
@@ -77,4 +78,5 @@ tags:
 - [ ] CLAIM-029: 人の認証は git の外の IdP が行い、git は認証情報を持たず認可にも使わない。今の利用は Okta だが契約は製品名に固定しない — evidence:EVID-028 EVID-029 adr:ADR-020
 - [ ] CLAIM-030: 人の入口は二層の SETUP.md であり、考え方への全共感は成功条件にしない — evidence:EVID-030 adr:ADR-021
 - [ ] CLAIM-031: 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しであり、GUI 専用面ではない — evidence:EVID-031
-- [ ] CLAIM-032: PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI 正準、必要なら MCP）であり、IDE 拡張やフル Web ではない — evidence:EVID-031 adr:ADR-022
+- [ ] CLAIM-032: PF のクライアント第一歩は共有クライアント契約とエージェント可呼び面（コマンドライン正準、必要なら同型アダプタ）であり、IDE 拡張やフル Web ではない（錨 ADR-022 / EVID-031 は draft。確定は OQ-039） — evidence:EVID-031 adr:ADR-022
+- [ ] CLAIM-033: 「製品着工」（ログイン/ACL/実行WF）と「クライアント第一歩」は別語であり、後者に OQ-033 は不要 — adr:ADR-022 REV-007 REV-009

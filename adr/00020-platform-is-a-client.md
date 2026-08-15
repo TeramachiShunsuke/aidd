@@ -20,9 +20,11 @@ related:
   - EVID-00025
   - ADR-00017
   - ADR-00019
+  - ADR-00023
   - ADR-00002
   - ADR-00006
   - ADR-00018
+  - REV-00009
 tier: 2
 ---
 
@@ -84,6 +86,8 @@ UI、ログイン、ACL エンジン、コネクタ、実行状態機械は**別
 ## 関連
 
 - [REV-00007](../reviews/00007-platform-acl-adversarial-review.md)
+- [REV-00009](../reviews/00009-repo-consistency-adversarial-review.md)
 - [ADR-00019](00019-kernel-and-project-layers.md)
 - [ADR-00017](00017-machines-record-facts-humans-decide-status.md)
+- [ADR-00023](00023-pf-first-step-agent-callable-client.md)（クライアント第一歩。製品着工とは別）
 - OQ-00032 / OQ-00033 / OQ-00034
