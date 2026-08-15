@@ -71,7 +71,6 @@ tags:
 - OQ-033: 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-020 が今は採らない（evidence:EVID-008 adr:ADR-017 ADR-020 REV-007）
 - OQ-034: PF が git に PR を出すときの GitHub 主体は何か？ IdP ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める。特定 IdP 名には固定しない（evidence:EVID-028 EVID-029 adr:ADR-020 REV-007）
 - OQ-038: エージェント可呼び面の配布は、CLI を先に配って MCP を後から薄く被せるか、最初から CLI+MCP を同梱するか？（契約の意味体系は同一。adr:ADR-022 evidence:EVID-031）
-- OQ-039: 人間が EVID-031 と ADR-022 を `draft` → `active` にするか？ するなら続けて AGENTS / README の PF 一文を ADR-022 に揃えるか。しない／差し戻すなら CLAIM-031/032 と OQ-035..037 の Resolved 表記をどう扱うか（adr:ADR-017 ADR-022 evidence:EVID-031 REV-009）
 
 ## Resolved
 
@@ -89,6 +88,10 @@ tags:
 - OQ-037: 複数 surface の前に共有クライアント契約を先に固定するか？ → **する（草案依存）**。契約内容とクライアント第一歩の範囲は ADR-022（`draft`）。実装は別リポ。`active` 確定は OQ-039（adr:ADR-022 evidence:EVID-031 EVID-029 REV-009、2026-08-14/15）
 - OQ-036: 第一世代で VS Code 系と IntelliJ を同時に出すか？ → **同時には出さない（草案依存）**。IDE 拡張自体をクライアント第一歩にしない（adr:ADR-022 REV-008 REV-009、2026-08-14/15）
 - OQ-035: PF の第一世代 surface は何か？ → **コマンドラインを正準とし、必要なら同型アダプタ（例: MCP）**（草案依存。ADR-022 が `draft`）。Web / IDE / desktop はクライアント第一歩の外（adr:ADR-022 evidence:EVID-031 REV-008 REV-009、2026-08-14/15）
+- OQ-039: 人間が EVID-031 と ADR-022 を `draft` → `active` にするか？ → **する**（運用者指示 2026-08-15）。続けて AGENTS / README / GUIDE の PF 一文を ADR-022 に揃えた（adr:ADR-017 ADR-022 evidence:EVID-031 REV-009、2026-08-15）
+- OQ-037: 複数 surface の前に共有クライアント契約を先に固定するか？ → **する**。契約内容とクライアント第一歩の範囲は ADR-022（`active`）。実装は別リポ（adr:ADR-022 evidence:EVID-031 EVID-029 REV-009、2026-08-14/15）
+- OQ-036: 第一世代で VS Code 系と IntelliJ を同時に出すか？ → **同時には出さない**。IDE 拡張自体をクライアント第一歩にしない（adr:ADR-022 REV-008 REV-009、2026-08-14/15）
+- OQ-035: PF の第一世代 surface は何か？ → **コマンドラインを正準とし、必要なら同型アダプタ（例: MCP）**。Web / IDE / desktop はクライアント第一歩の外（adr:ADR-022 evidence:EVID-031 REV-008 REV-009、2026-08-14/15）
 - OQ-031: 文書の認可をどこに置くか？ → **git の外**。認証は IdP（今の利用は Okta）、認可とソース ACL の加味は PF。git は認証情報を使わず、Frontmatter に ACL を足さない（adr:ADR-020 evidence:EVID-026 EVID-028 EVID-029、2026-08-13）
 - OQ-030: 主体（principal）は何か？ → **git の外の IdP**。今の利用は Okta。GitHub アカウントでも git の committer でもない。IdP 製品名は kernel の契約にしない（adr:ADR-020 evidence:EVID-028 EVID-029、2026-08-13）
 - OQ-021: 案件限りの ADR を spec / 実装リポジトリのどこに、どの体裁で置くか？ → **案件リポ側**。kernel の `adr/` には入れない。案件リポ内のディレクトリ名は案件が決める（adr:ADR-019 evidence:EVID-024、2026-08-13）

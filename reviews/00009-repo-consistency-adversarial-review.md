@@ -74,3 +74,14 @@ related:
 - EVID-031 と ADR-00023 を読み、問題なければ `draft` → `active`（OQ-039）
 - `active` 後に AGENTS / README の PF 一文を ADR-00023 と揃えるか判断
 - OQ-038（CLI と MCP の配布順）は実装リポ着手時に閉じる
+
+## 2026-08-15 取り込み（status 遷移）
+
+運用者が EVID-031 / ADR-022 を `active` にするよう指示した。既存節は改変しない。
+
+| 指摘 | 閉じ方 |
+| --- | --- |
+| C1 / OQ-039 | EVID-031・ADR-022 を `active`。OQ-035..037 の草案依存注記を外す。CLAIM-032 の draft 注記を外す |
+| T1（入口の世代差） | AGENTS / README / GUIDE の PF 一文を ADR-022 に同期 |
+
+残件: OQ-038。製品着工側の OQ-017 / 029 / 032–034 は従来どおり。

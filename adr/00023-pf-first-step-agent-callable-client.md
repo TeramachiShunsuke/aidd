@@ -1,7 +1,7 @@
 ---
 id: ADR-00023
 title: PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI、必要なら MCP）とする
-status: draft
+status: active
 last_reviewed: 2026-08-19
 owners:
   - TeramachiShunsuke
@@ -46,8 +46,6 @@ AIDD を開発プラットフォーム（PF）へ進めるとき、配信面と�
 2. その契約を、**エージェントが呼べる面**として出荷する。正準面は **コマンドラインインタフェース（CLI）**。エージェントが同じ操作をツールプロトコルで呼ぶ必要があるときだけ、**同じ操作の薄いアダプタ**（例: MCP）を足す
 
 成功条件（検証例として Cursor / Claude Code / Codex のいずれかを用いる）: **PF 独自 GUI を開かずに**「KB を Tier 順に読む → draft を起こす → 検査を通す → PR を出す」まで完了できる。
-
-本 ADR の `status` は `draft` である。台帳の Resolved（OQ-035..037）は草案依存であり、`active` への遷移は人間が行う（[ADR-017](017-machines-record-facts-humans-decide-status.md)、OQ-039）。
 
 ### 2. 共有クライアント契約（v0）
 
@@ -113,13 +111,12 @@ AIDD を開発プラットフォーム（PF）へ進めるとき、配信面と�
 - 代償: 人向けの「ログインしてソースを眺める」体験は第一歩に含まれない。デモ映えは弱い
 - 代償: IDE 利用者へのリーチは後回し。エディタ内の発見性は skills / AGENTS.md に依存し続ける
 - 代償: OQ-017（効果測定）が空のままクライアント第一歩に入るため、成功条件は操作完了の可否に留め、事業効果は後で測る
-- 代償: 本 ADR が `draft` のあいだ、台帳の Resolved は仮確定に過ぎない（OQ-039）
 
 ## 関連
 
 - [REV-00009](../reviews/00009-repo-consistency-adversarial-review.md)
 - [REV-00008](../reviews/00008-client-surface-adversarial-review.md)
 - [REV-007](../reviews/007-platform-acl-adversarial-review.md)
-- OQ-035 / OQ-036 / OQ-037（草案依存の Resolved）
-- OQ-038 / OQ-039
+- OQ-035 / OQ-036 / OQ-037 / OQ-039（Resolved）
+- OQ-038
 - OQ-017 / OQ-029 / OQ-032 / OQ-033 / OQ-034（製品着工側）

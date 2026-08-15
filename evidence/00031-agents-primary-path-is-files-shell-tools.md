@@ -1,7 +1,7 @@
 ---
 id: EVID-00031
 title: 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しである
-status: draft
+status: active
 last_reviewed: 2026-08-19
 owners:
   - TeramachiShunsuke

@@ -18,6 +18,7 @@ tags:
 
 ## 2026-08-15
 
+- 運用者指示により EVID-031 / ADR-022 を `draft` → `active`。OQ-039 を Resolved。AGENTS / README / GUIDE の PF 一文を ADR-022 に同期。OQ-035..037 の草案依存注記を外す
 - リポジトリ矛盾点検とブラッシュアップ: REV-009。確認した矛盾は (C1) draft 錨のまま Resolved/CLAIM 化した統治、(C2) REV-007「着工」と ADR-022「着手」の語の衝突、(C3) ADR-022 内の製品名と汎用契約の滲み。C2 は REV-007 末尾で「製品着工」と「クライアント第一歩」を分離。C3 と手順信号は ADR-022 を改訂（製品名は検証例、kernel に PF playbook を置かない）。T2 は EVID-028 に層分けを追記。C1 は OQ-035..037 に草案依存注記と OQ-039（人間の status 遷移）を追加。CLAIM-033 を追加。AGENTS/README の更新は ADR-022 `active` 後（OQ-039）
 
 ## 2026-08-14
