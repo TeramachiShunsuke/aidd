@@ -47,7 +47,7 @@ tier: 2
 
 ### 層 2: 意味グラフ（不採用・任意のローカル探索）
 
-- Graphify のような LLM ベースのグラフ（docs の意味抽出経路）は、CI にも既定の運用にも入れない。なお Graphify のコード経路（tree-sitter による決定的な AST 抽出。LLM なし）は意味層ではなく構造層の性質を持ち、案件リポでの文脈の絞り込みに使える（扱いは ADR-00027。本リポジトリの CI には入れない）
+- Graphify のような LLM ベースのグラフ（docs の意味抽出経路）は、CI にも既定の運用にも入れない。なお Graphify のコード経路（tree-sitter による決定的な AST 抽出。LLM なし）は意味層ではなく構造層の性質を持ち、案件リポでの文脈の絞り込みに使える（扱いは [ADR-00027](00027-cost-and-context-per-task.md)（`draft`）。本リポジトリの CI には入れない）
 - 使う場合はローカルの探索に限り、出力 `graphify-out/` は commit しない（`.gitignore`）
 - 得られた知見は成果物ごと取り込まず、[PB-00001](../playbook/00001-add-evidence.md) で evidence に昇格させる。[ADR-00008](00008-sdd-bridge.md) の spec 取り込みと同じ扱い
 

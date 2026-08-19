@@ -40,7 +40,7 @@ tier: 2
 
 | 言語 | 整形検査 | 静的検査 | 単体テスト | 外側の分離 | 1 コマンドの例 |
 | --- | --- | --- | --- | --- | --- |
-| Java | Spotless（`spotlessCheck`） | Checkstyle / Error Prone、アーキ規則は ArchUnit（テストとして走る） | JUnit 5 + AssertJ | `@Tag("acceptance")`。Gradle は JVM Test Suite プラグインで `acceptanceTest` を定義し `check.dependsOn` に足す（既定タスクではない）。Maven は Surefire（単体）/ Failsafe（外側、`<groups>acceptance</groups>`） | `./gradlew check` / `mvn -B verify` |
+| Java | Spotless（`spotlessCheck`） | Checkstyle / Error Prone、アーキ規則は ArchUnit（テストとして走る） | JUnit（Jupiter API。現行世代は JUnit 6）+ AssertJ | `@Tag("acceptance")`。Gradle は JVM Test Suite プラグインで `acceptanceTest` を定義し `check.dependsOn` に足す（既定タスクではない）。Maven は Surefire（単体）/ Failsafe（外側、`<groups>acceptance</groups>`） | `./gradlew check` / `mvn -B verify` |
 | Python | `ruff format --check` | `ruff check`、型は `mypy` か `pyright` | pytest | `@pytest.mark.acceptance` と `-m acceptance` / `-m "not acceptance"`。マーカーは `pyproject.toml` の `[tool.pytest.ini_options] markers` に登録し `--strict-markers` を付ける | `make check`（uv で固定した環境） |
 | TypeScript | `prettier --check`（Biome なら `biome ci` が整形 + lint を 1 回で行う） | ESLint（typescript-eslint）または Biome、型は `tsc --noEmit` | Vitest（または Jest） | `tests/acceptance/` ディレクトリか Vitest の `projects` 分離。UI なら Playwright を外側に | `npm run check`（`format:check && lint && typecheck && test && test:acceptance`） |
 | JavaScript | 同上 | 同上。型は JSDoc + `tsc --allowJs --checkJs --noEmit`（段階導入。`--noEmit` がないと出力で失敗する） | 同上 | 同上 | 同上 |

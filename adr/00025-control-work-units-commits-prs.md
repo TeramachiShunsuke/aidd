@@ -116,7 +116,7 @@ spec リポは Confluence をリンクとページバージョンで指し、本
 
 - [EVID-00033](../evidence/00033-work-units-align-to-acceptance-and-small-prs.md): 規約は機械可読（Conventional Commits / commitlint）、小さい PR はレビューが効く（Small CLs）、Issue キーで Jira が紐づく、本リポジトリも 1 意図 1 PR で運用している
 - [EVID-00008](../evidence/00008-pr-as-quality-gate.md): PR は品質ゲートであり、読める大きさが前提
-- [EVID-00018](../evidence/00018-tests-outlive-design-docs.md): 外側テスト 1 つは閉じた検証可能な単位
+- [EVID-00018](../evidence/00018-tests-outlive-design-docs.md): テストを正本にできるのは例まで落ちた受け入れ条件だけ（「外側テスト 1 つが閉じた単位」は EVID-00033 側の推論）
 
 ## 結果・トレードオフ
 

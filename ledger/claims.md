@@ -54,4 +54,4 @@ tags:
 - [ ] CLAIM-00034: PdO 設計から受け入れ条件への落とし込みは、エージェントが欠落を質問にし、値の出所を行に残し、レビュー→修正を有限回（既定 3 巡）で止めるワークフローとして案件リポで回す。承認は人（草案依存。EVID-00032 / ADR-00024 が `draft`。`active` 後に注記を外す） — evidence:EVID-00032 adr:ADR-00024
 - [ ] CLAIM-00035: 作業単位は受け入れ例に揃え（1 行 = 外側テスト 1 つ、Story = 代表例と付随する境界・反例の束）、命名は Conventional Commits + Issue キー、1 Story = 1 PR（backport のみ例外）、規模は既定値で止め、出荷は Epic 単位。進行の状態は Jira、内容は git、設計原文は Confluence（草案依存。EVID-00033 / ADR-00025 が `draft`） — evidence:EVID-00033 adr:ADR-00025 url:https://www.conventionalcommits.org/en/v1.0.0/
 - [ ] CLAIM-00036: TDD ループの形と 1 コマンドの品質ゲート（整形 → 静的検査 → 単体 → 外側）は言語横断で固定し、道具の銘柄は案件が選ぶ（草案依存。EVID-00034 / ADR-00026 が `draft`） — evidence:EVID-00034 adr:ADR-00026
-- [ ] CLAIM-00037: エージェントのモデル階層と effort はタスク種別（機械的 / 閉じた生成 / 判断・批評 / 人の決定）で既定を決め、昇格は検査の失敗で行う。文脈は決定的なコードグラフの影響範囲に絞り、常時注入しない（草案依存。EVID-00035 / ADR-00027 が `draft`） — evidence:EVID-00035 EVID-00036 EVID-00013 adr:ADR-00027
+- [ ] CLAIM-00037: エージェントのモデル階層と effort はタスク種別（機械的 / 閉じた生成 / 判断・批評 / 人の決定）で既定を決め、昇格は検査の失敗で行う。文脈は決定的なコードグラフの影響範囲に絞り、常時注入しない（草案依存。EVID-00035 / ADR-00027 が `draft`） — evidence:EVID-00035 evidence:EVID-00036 evidence:EVID-00013 adr:ADR-00027
