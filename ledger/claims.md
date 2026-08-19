@@ -15,6 +15,9 @@ tags:
 主張は短く、錨を必須とする。形式:
 
 ```text
+- [ ] CLAIM-NNNNN: <主張> — evidence:EVID-NNNNN adr:ADR-NNNNN url:<URL>
+```
+
 - [ ] CLAIM-00001: エージェント出力は根拠と分離して扱う — evidence:EVID-00001
 - [ ] CLAIM-00002: 長期記憶はリポジトリ上の構造化 Markdown に置く — evidence:EVID-00002 adr:ADR-00001
 - [ ] CLAIM-00003: 文書ドリフトは回帰である — evidence:EVID-00003 adr:ADR-00004
@@ -48,4 +51,7 @@ tags:
 - [ ] CLAIM-00031: 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しであり、GUI 専用面ではない — evidence:EVID-00031
 - [ ] CLAIM-00032: PF のクライアント第一歩は共有クライアント契約とエージェント可呼び面（コマンドライン正準、必要なら同型アダプタ）であり、IDE 拡張やフル Web ではない — evidence:EVID-00031 adr:ADR-00023
 - [ ] CLAIM-00033: 「製品着工」（ログイン/ACL/実行WF）と「クライアント第一歩」は別語であり、後者に OQ-00033 は不要 — adr:ADR-00023 (REV-00007 / REV-00009)
-- [ ] CLAIM-00034: PdO 設計から受け入れ条件への落とし込みは、エージェントが欠落を質問にし、値の出所を行に残し、レビュー→修正を有限回（既定 3 巡）で止めるワークフローとして案件リポで回す。承認は人 — evidence:EVID-00032 adr:ADR-00024
+- [ ] CLAIM-00034: PdO 設計から受け入れ条件への落とし込みは、エージェントが欠落を質問にし、値の出所を行に残し、レビュー→修正を有限回（既定 3 巡）で止めるワークフローとして案件リポで回す。承認は人（草案依存。EVID-00032 / ADR-00024 が `draft`。`active` 後に注記を外す） — evidence:EVID-00032 adr:ADR-00024
+- [ ] CLAIM-00035: 作業単位は受け入れ例の行グループ（外側テスト 1 つ）に揃え、命名は Conventional Commits + Issue キー、1 Issue = 1 PR、規模は既定値で止める。状態は Jira、内容は git、設計原文は Confluence（草案依存。EVID-00033 / ADR-00025 が `draft`） — evidence:EVID-00033 adr:ADR-00025 url:https://www.conventionalcommits.org/en/v1.0.0/
+- [ ] CLAIM-00036: TDD ループの形と 1 コマンドの品質ゲート（整形 → 静的検査 → 単体 → 外側）は言語横断で固定し、道具の銘柄は案件が選ぶ（草案依存。EVID-00034 / ADR-00026 が `draft`） — evidence:EVID-00034 adr:ADR-00026
+- [ ] CLAIM-00037: エージェントのモデル階層と effort はタスク種別（機械的 / 閉じた生成 / 判断・批評 / 人の決定）で既定を決め、昇格は検査の失敗で行う。文脈は決定的なコードグラフの影響範囲に絞り、常時注入しない（草案依存。EVID-00035 / ADR-00027 が `draft`） — evidence:EVID-00035 EVID-00013 adr:ADR-00027

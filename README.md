@@ -69,15 +69,15 @@ evidence → ADR → spec(SDD) → 受け入れ例 → テスト(TDD) → 実装
 ```
 
 - **SDD フェーズ**: evidence を根拠に ADR で決定し、spec（requirements / design / tasks）を書く。KB との受け渡しは [PB-00008](playbook/00008-bridge-sdd-spec.md)
-- **受け入れ例**: PdO の設計をエージェントが問い、PdO が決める往復（最大 3 巡）で具体値・境界・反例まで詰める（[PB-00020](playbook/00020-refine-acceptance-from-design.md)）。成果物は案件リポに置く
-- **TDD フェーズ**: 受け入れ例から外側のテストを起こし（[PB-00013](playbook/00013-start-tdd-from-examples.md)）、失敗→実装→整えるを回す
+- **受け入れ例**: PdO の要件をエージェントが問い、PdO が決める往復で具体値・境界・反例まで詰める（[PB-00020](playbook/00020-refine-acceptance-from-design.md)、`draft`）。成果物は案件リポに置く
+- **TDD フェーズ**: 受け入れ例から外側のテストを起こし（[PB-00013](playbook/00013-start-tdd-from-examples.md)）、失敗→実装→整えるを回す。タスク・担当・コミット・PR の規約は [PB-00022](playbook/00022-run-work-units-from-acceptance.md)、言語別の品質ゲートは [PB-00023](playbook/00023-set-up-language-tdd-loop.md)、モデル階層と文脈は [PB-00024](playbook/00024-choose-model-effort-context.md)（いずれも `draft`）
 - **還流**: 実装中に得た知見のうち、他案件でも繰り返すものだけ evidence / ADR として kernel に戻す
 
 spec 本文は KB に取り込まない。リンクと ID のみを持つ（[ADR-00008](adr/00008-sdd-bridge.md)）。
 
 ## 他プロジェクトへの適用
 
-このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-00019](adr/00019-kernel-and-project-layers.md)、手順は [PB-00017](playbook/00017-apply-kernel-to-project.md)）。
+このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-00019](adr/00019-kernel-and-project-layers.md)、手順は [PB-00017](playbook/00017-apply-kernel-to-project.md)）。SDD で運用中の spec リポジトリに Jira / Confluence ごと組み込む具体手順は [PB-00021](playbook/00021-embed-workflow-in-spec-repo.md)（`draft`）。kernel 自体の進め方は [ledger/roadmap.md](ledger/roadmap.md)。
 
 AI 前提のプロジェクトなら、[PB-00017](playbook/00017-apply-kernel-to-project.md) で kernel を接続し、skill と CI を最初から有効にする。AI 以前の既存プロジェクトでも段階的に載せられる。evidence → ADR → playbook の順に、属人化や暗黙知の多い箇所から後追いで文書化し、CI やエージェントは文書が安定してから足す。詳細は [PB-00017](playbook/00017-apply-kernel-to-project.md) の段階的適用の節、始め方は [SETUP.md](SETUP.md) を参照。
 
