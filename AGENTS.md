@@ -55,10 +55,14 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - 秘密情報、トークン、個人データをコミットする
 - IdP のセッションやソースシステムへ委譲した認証情報を git に置く、またはこのリポジトリの作業で使う（[ADR-00020](adr/00020-platform-is-a-client.md)）
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新や証跡追記（本文レビューなし）
+- **`main` ブランチで直接作業する**（コミット・push を含む。必ず作業ブランチを切ってから始める）
+- **`main` へ直接 push する**（`git push origin main` は禁止。PR 経由でのみマージする）
 
 ## 作業フロー
 
 ```text
+作業ブランチを切る（main では直接作業しない）
+ ↓
 意図の確認
  → INDEX.md で関連 evidence / ADR / playbook / ledger を特定
  → 不足なら evidence を先に書く（または open-questions に残す）
@@ -72,6 +76,19 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 新しいリポジトリへ適用するときは [PB-00017](playbook/00017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-00019](adr/00019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-00018](playbook/00018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-00020](adr/00020-platform-is-a-client.md)（認証は git の外の IdP。git は認証情報を使わない。特定の PF 製品は kernel に実装しない）。
 
 外部の spec（requirements / design / tasks）との受け渡しは [ADR-00008](adr/00008-sdd-bridge.md) と [PB-00008](playbook/00008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
+
+## ブランチと PR の必須ルール
+
+**作業は必ずブランチで行う。main への直接 push は厳禁。**
+
+```bash
+git checkout -b <prefix>/<短い説明>   # 例: feat/add-evid-00031
+# … 作業 …
+git push -u origin HEAD
+# → GitHub 上で PR を作成する
+```
+
+PR の base は **main** とし、1 つの意図につき 1 本にまとめる。
 
 ## 採番と PR の単位
 
