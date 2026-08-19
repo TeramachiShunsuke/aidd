@@ -14,6 +14,11 @@ tags:
 
 知識ベース自体の注目すべき変更。新しいエントリを上に追記する。
 
+## 2026-08-19
+
+- PdO 設計 → 受け入れ条件の AI ワークフローを定義: EVID-00032 / ADR-00024 / PB-00020（`status: draft`）。雛形 `templates/acceptance-refinement-log.md` を追加し、`templates/acceptance-examples.md` に `status` / `巡` / `出所` 列を追加。skill `aidd-refine-acceptance`。CLAIM-00034、OQ-00040（3 巡・観点の妥当性）/ OQ-00041（kernel skill の案件リポへの配布）を追加。批判レビュー 3 巡の指摘と対応は REV-00010
+- ledger の整理: 5 桁移行（ADR-00022）のマージで `merge=union` が残した 3 桁 ID の重複行（CLAIM-001..029、OQ-001..034 と Resolved の重複）を削除。3 桁しかなかった CLAIM-031..033 / OQ-038 / Resolved OQ-035..037, 039 を 5 桁に直し、旧 `ADR-022`（PF 第一歩）への参照を現 ID `ADR-00023` に合わせた（changelog と reviews の履歴は書き換えない）
+
 ## 2026-08-15
 
 - 運用者指示により EVID-031 / ADR-022 を `draft` → `active`。OQ-039 を Resolved。AGENTS / README / GUIDE の PF 一文を ADR-022 に同期。OQ-035..037 の草案依存注記を外す

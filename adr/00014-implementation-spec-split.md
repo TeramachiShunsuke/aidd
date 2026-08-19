@@ -48,7 +48,7 @@ tier: 2
 
 ### 3. ビジネススペックは受け入れ例まで落とす
 
-PdO が書くビジネススペックには、抽象的な条件だけでなく**具体値と境界値**を入れる。例が TDD の入力になる（[PB-00013](../playbook/00013-start-tdd-from-examples.md)）。雛形は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を spec リポジトリにコピーして使う。
+PdO が書くビジネススペックには、抽象的な条件だけでなく**具体値と境界値**を入れる。例が TDD の入力になる（[PB-00013](../playbook/00013-start-tdd-from-examples.md)）。雛形は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を spec リポジトリにコピーして使う。設計から例まで落とす工程（エージェントが問い、PdO が決める往復）は [ADR-00024](00024-refine-acceptance-with-bounded-review-rounds.md) / [PB-00020](../playbook/00020-refine-acceptance-from-design.md)。
 
 ### 4. 実装スペックの厚みをレビュー観点にする
 

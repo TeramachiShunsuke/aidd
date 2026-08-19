@@ -69,6 +69,7 @@ graph LR
 | 根拠を集める | 観測・計測・引用を evidence に置く | [PB-00001](playbook/00001-add-evidence.md) |
 | 決定する | evidence を根拠に ADR で選択を固定する | [PB-00002](playbook/00002-write-adr.md) |
 | 仕様を書く（SDD） | requirements / design / tasks を spec 側に書く。KB から前提を引用する | [PB-00008](playbook/00008-bridge-sdd-spec.md) |
+| 受け入れ例まで詰める | PdO の設計をエージェントが問い、PdO が決める往復で具体値・境界・反例にする | [PB-00020](playbook/00020-refine-acceptance-from-design.md) |
 | テストを起こす（TDD） | ビジネススペックの具体例から外側のテストを書く | [PB-00013](playbook/00013-start-tdd-from-examples.md) |
 | 実装する | 失敗するテスト → 通す → 整える | — |
 | 知見を戻す | 他案件でも繰り返す知見を evidence / ADR として KB に還流する | [PB-00008](playbook/00008-bridge-sdd-spec.md) 方向 B |
@@ -84,6 +85,7 @@ AI がない既存プロジェクトでも、evidence と ADR から段階的に
 | 繰り返す作業 | `playbook/` | [CONVENTIONS.md](CONVENTIONS.md) |
 | 手順が見つけてもらえない | skill | [PB-00009](playbook/00009-add-skill.md) |
 | 詳細設計をどこまで書くか迷う | 決定だけ `adr/`、他は書かない | [PB-00012](playbook/00012-triage-implementation-spec.md) |
+| PdO の設計はあるが受け入れ条件が曖昧 | 受け入れ例（案件リポ。質問→回答→反映を最大 3 巡） | [PB-00020](playbook/00020-refine-acceptance-from-design.md) |
 | 実装に入る前に正しさを固定したい | テスト（文書は作らない） | [PB-00013](playbook/00013-start-tdd-from-examples.md) |
 | DB / インフラの前提を渡したい | 制約は `adr/`、状態は渡さない | [PB-00014](playbook/00014-hand-infra-context.md) |
 | 大規模で複数機能を同時に出す置き場がイメージできない | 案件リポと KB の分担図を置く | [PB-00016](playbook/00016-large-project-usage-map.md) |

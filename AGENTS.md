@@ -75,7 +75,7 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 
 新しいリポジトリへ適用するときは [PB-00017](playbook/00017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-00019](adr/00019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-00018](playbook/00018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-00020](adr/00020-platform-is-a-client.md)（認証は git の外の IdP。git は認証情報を使わない。特定の PF 製品は kernel に実装しない）。
 
-外部の spec（requirements / design / tasks）との受け渡しは [ADR-00008](adr/00008-sdd-bridge.md) と [PB-00008](playbook/00008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
+外部の spec（requirements / design / tasks）との受け渡しは [ADR-00008](adr/00008-sdd-bridge.md) と [PB-00008](playbook/00008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。PdO の設計を TDD に渡せる受け入れ条件まで詰めるときは [PB-00020](playbook/00020-refine-acceptance-from-design.md)（案件リポで回す。エージェントは欠落を質問にし、値を推測で埋めない。承認は PdO。[ADR-00024](adr/00024-refine-acceptance-with-bounded-review-rounds.md)）。
 
 ## ブランチと PR の必須ルール
 

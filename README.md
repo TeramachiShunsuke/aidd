@@ -69,7 +69,8 @@ evidence → ADR → spec(SDD) → 受け入れ例 → テスト(TDD) → 実装
 ```
 
 - **SDD フェーズ**: evidence を根拠に ADR で決定し、spec（requirements / design / tasks）を書く。KB との受け渡しは [PB-00008](playbook/00008-bridge-sdd-spec.md)
-- **TDD フェーズ**: ビジネススペックの具体例から外側のテストを起こし（[PB-00013](playbook/00013-start-tdd-from-examples.md)）、失敗→実装→整えるを回す
+- **受け入れ例**: PdO の設計をエージェントが問い、PdO が決める往復（最大 3 巡）で具体値・境界・反例まで詰める（[PB-00020](playbook/00020-refine-acceptance-from-design.md)）。成果物は案件リポに置く
+- **TDD フェーズ**: 受け入れ例から外側のテストを起こし（[PB-00013](playbook/00013-start-tdd-from-examples.md)）、失敗→実装→整えるを回す
 - **還流**: 実装中に得た知見のうち、他案件でも繰り返すものだけ evidence / ADR として kernel に戻す
 
 spec 本文は KB に取り込まない。リンクと ID のみを持つ（[ADR-00008](adr/00008-sdd-bridge.md)）。
