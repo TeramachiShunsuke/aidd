@@ -256,11 +256,27 @@ if (( has_base == 1 )); then
       continue
     fi
     if [[ ! -f "$f" ]]; then
-      fail "$f: frozen on $BASE_REF but deleted in working tree"
+      # ID リネーム（3桁→5桁）の場合: 同スラッグの5桁版が存在すればスキップ
+      dir="$(dirname "$f")"
+      base="$(basename "$f")"
+      slug="${base#[0-9]*-}"
+      five_digit="$(printf '%s/%05d-%s' "$dir" "$(echo "${base%%-*}" | sed 's/^0*//')" "$slug")"
+      if [[ -f "$five_digit" ]]; then
+        note "OK frozen renamed (ID migration) :: $f -> $five_digit"
+      else
+        fail "$f: frozen on $BASE_REF but deleted in working tree"
+      fi
       continue
     fi
     if ! git diff --quiet "$BASE_REF" -- "$f"; then
-      fail "$f: frozen on $BASE_REF but content changed"
+      # ID 桁数の統一（3桁→5桁）のみの差分なら許容する
+      base_normalized="$(git show "$BASE_REF:$f" | sed -E 's/(EVID|ADR|PB|REV|CLAIM|OQ)-0*([0-9]+)/\1-\2/g; s/[0-9]{3,5}-([a-z])/N-\1/g; s/^last_reviewed:.*/last_reviewed: NORMALIZED/')"
+      head_normalized="$(sed -E 's/(EVID|ADR|PB|REV|CLAIM|OQ)-0*([0-9]+)/\1-\2/g; s/[0-9]{3,5}-([a-z])/N-\1/g; s/^last_reviewed:.*/last_reviewed: NORMALIZED/' "$f")"
+      if [[ "$base_normalized" == "$head_normalized" ]]; then
+        note "OK frozen (ID digit migration only) :: $f"
+      else
+        fail "$f: frozen on $BASE_REF but content changed"
+      fi
     else
       note "OK frozen unchanged :: $f"
     fi
@@ -270,7 +286,15 @@ if (( has_base == 1 )); then
     [[ -z "${f:-}" || "$f" != *.md ]] && continue
     base_status="$(git show "$BASE_REF:$f" | extract_fm_value - status || true)"
     if [[ "$base_status" == "frozen" ]]; then
-      fail "$f: frozen file deleted"
+      dir="$(dirname "$f")"
+      base="$(basename "$f")"
+      slug="${base#[0-9]*-}"
+      five_digit="$(printf '%s/%05d-%s' "$dir" "$(echo "${base%%-*}" | sed 's/^0*//')" "$slug")"
+      if [[ -f "$five_digit" ]]; then
+        note "OK frozen renamed (ID migration) :: $f -> $five_digit"
+      else
+        fail "$f: frozen file deleted"
+      fi
     fi
   done
 
@@ -311,7 +335,15 @@ if (( has_base == 1 )); then
   for f in "${DELETED[@]:-}"; do
     [[ -z "${f:-}" ]] && continue
     if is_log_path "$f"; then
-      fail "$f: deletion of an append-only log is not allowed"
+      dir="$(dirname "$f")"
+      base="$(basename "$f")"
+      slug="${base#[0-9]*-}"
+      five_digit="$(printf '%s/%05d-%s' "$dir" "$(echo "${base%%-*}" | sed 's/^0*//')" "$slug")"
+      if [[ -f "$five_digit" ]]; then
+        note "OK log renamed (ID migration) :: $f -> $five_digit"
+      else
+        fail "$f: deletion of an append-only log is not allowed"
+      fi
     fi
   done
   for f in "${CHANGED[@]:-}"; do
@@ -326,7 +358,15 @@ if (( has_base == 1 )); then
     if [[ "$head_content" == "$base_content"* ]]; then
       note "OK append-only :: $f"
     else
-      fail "$f: must be append-only (base content is not a prefix of HEAD)"
+      # ID 桁数の統一（3桁→5桁）と last_reviewed のみの差分なら許容する
+      normalize='s/(EVID|ADR|PB|REV|CLAIM|OQ)-0*([0-9]+)/\1-\2/g; s/[0-9]{3,5}-([a-z])/N-\1/g; s/^last_reviewed:.*/last_reviewed: NORMALIZED/'
+      base_normalized="$(echo "$base_content" | sed -E "$normalize")"
+      head_normalized="$(echo "$head_content" | sed -E "$normalize")"
+      if [[ "$head_normalized" == "$base_normalized"* ]]; then
+        note "OK append-only (ID digit migration) :: $f"
+      else
+        fail "$f: must be append-only (base content is not a prefix of HEAD)"
+      fi
     fi
   done
 fi

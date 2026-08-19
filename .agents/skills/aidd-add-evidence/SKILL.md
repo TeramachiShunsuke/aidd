@@ -1,8 +1,8 @@
 ---
 name: aidd-add-evidence
-description: AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。
+description: AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNNNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。
 metadata:
-  aidd-playbook: PB-001
+  aidd-playbook: PB-00001
   aidd-tier: "1"
 ---
 
@@ -18,7 +18,7 @@ metadata:
 
 1. [AGENTS.md](../../../AGENTS.md)
 2. [CONVENTIONS.md](../../../CONVENTIONS.md)
-3. [PB-001](../../../playbook/001-add-evidence.md) — 手順の正本
+3. [PB-00001](../../../playbook/00001-add-evidence.md) — 手順の正本
 
 ## 手順の要点
 
@@ -32,4 +32,4 @@ metadata:
 
 - 観測がないまま断定的な `## 主張` を書く（不足なら `ledger/open-questions.md` へ）
 - `status: frozen` の文書を改変する
-- 手順の詳細をこのファイルに書き写す（正本は PB-001）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00001）

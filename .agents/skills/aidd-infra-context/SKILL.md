@@ -2,7 +2,7 @@
 name: aidd-infra-context
 description: DB / インフラの文脈を制約・契約・状態に仕分けし、状態は文書化せず取得コマンドで渡す。「インフラの構成をまとめたい」「DB の設計を残したい」「構成図が古い」「エージェントにインフラ作業をさせたい」「マイグレーションを設計したい」と言われたときに使う。
 metadata:
-  aidd-playbook: PB-014
+  aidd-playbook: PB-00014
   aidd-tier: "1"
 ---
 
@@ -16,8 +16,8 @@ metadata:
 ## 先に読むもの
 
 1. [AGENTS.md](../../../AGENTS.md)
-2. [PB-014](../../../playbook/014-hand-infra-context.md) — 手順の正本
-3. [ADR-015](../../../adr/015-infra-context-layers.md) — 3 層の分け方
+2. [PB-00014](../../../playbook/00014-hand-infra-context.md) — 手順の正本
+3. [ADR-00015](../../../adr/00015-infra-context-layers.md) — 3 層の分け方
 
 ## 手順の要点
 

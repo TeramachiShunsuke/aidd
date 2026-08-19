@@ -2,7 +2,7 @@
 name: aidd-tdd-start
 description: ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。
 metadata:
-  aidd-playbook: PB-013
+  aidd-playbook: PB-00013
   aidd-tier: "1"
 ---
 
@@ -16,8 +16,8 @@ metadata:
 ## 先に読むもの
 
 1. [AGENTS.md](../../../AGENTS.md)
-2. [PB-013](../../../playbook/013-start-tdd-from-examples.md) — 手順の正本
-3. [EVID-018](../../../evidence/018-tests-outlive-design-docs.md) — なぜ文書ではなくテストに置くか
+2. [PB-00013](../../../playbook/00013-start-tdd-from-examples.md) — 手順の正本
+3. [EVID-00018](../../../evidence/00018-tests-outlive-design-docs.md) — なぜ文書ではなくテストに置くか
 
 ## 手順の要点
 
@@ -31,4 +31,4 @@ metadata:
 - 例のない要件を解釈で埋めて実装する
 - 内部構造（private メソッド、クラス名）に依存した外側テストを書く
 - 同じ振る舞いをテストと設計書の両方に書く
-- 性能・可用性の制約をテストで表現しようとする（ADR-015 の制約として扱う）
+- 性能・可用性の制約をテストで表現しようとする（ADR-00015 の制約として扱う）

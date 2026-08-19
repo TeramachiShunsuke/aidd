@@ -2,7 +2,7 @@
 name: aidd-spec-triage
 description: 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。
 metadata:
-  aidd-playbook: PB-012
+  aidd-playbook: PB-00012
   aidd-tier: "1"
 ---
 
@@ -16,8 +16,8 @@ metadata:
 ## 先に読むもの
 
 1. [AGENTS.md](../../../AGENTS.md)
-2. [PB-012](../../../playbook/012-triage-implementation-spec.md) — 手順の正本
-3. [ADR-014](../../../adr/014-implementation-spec-split.md) — 判断基準
+2. [PB-00012](../../../playbook/00012-triage-implementation-spec.md) — 手順の正本
+3. [ADR-00014](../../../adr/00014-implementation-spec-split.md) — 判断基準
 
 ## 手順の要点
 

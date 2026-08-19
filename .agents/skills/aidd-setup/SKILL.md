@@ -2,7 +2,7 @@
 name: aidd-setup
 description: AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。
 metadata:
-  aidd-playbook: PB-019
+  aidd-playbook: PB-00019
   aidd-tier: "1"
 ---
 
@@ -17,8 +17,8 @@ metadata:
 ## 先に読むもの
 
 1. [SETUP.md](../../../SETUP.md) — 人向けの始め方（二層）
-2. [PB-019](../../../playbook/019-onboard-with-setup-guide.md) — 手順の正本
-3. [ADR-021](../../../adr/021-two-layer-setup-guide.md) — 二層と全共感を成功条件にしないこと
+2. [PB-00019](../../../playbook/00019-onboard-with-setup-guide.md) — 手順の正本
+3. [ADR-00021](../../../adr/00021-two-layer-setup-guide.md) — 二層と全共感を成功条件にしないこと
 
 ## 手順の要点
 
@@ -31,4 +31,4 @@ metadata:
 
 - 全文書の通読や考え方への共感を、使い始めの条件にする
 - SETUP に CONVENTIONS の規範値を書き写す
-- 手順の詳細をこのファイルに書き写す（正本は PB-019）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00019）

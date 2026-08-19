@@ -86,7 +86,7 @@ def split_frontmatter(text: str) -> tuple[dict[str, object], str]:
 
 FRONTMATTER_RELS = ("related", "supersedes", "superseded_by")
 BASIS_SECTION = re.compile(r"^##\s*根拠\s*$(.*?)(?=^##\s|\Z)", re.M | re.S)
-DOC_ID = re.compile(r"\b(?:EVID|ADR|PB|REV)-\d{3}\b")
+DOC_ID = re.compile(r"\b(?:EVID|ADR|PB|REV)-\d{5}\b")
 
 
 def basis_ids(body: str) -> list[str]:
@@ -202,7 +202,7 @@ def collect_ledger(graph: Graph) -> None:
     if os.path.exists(claims_path):
         seen: set[str] = set()
         for line in open(claims_path, encoding="utf-8").read().split("\n"):
-            match = re.match(r"^-\s+\[[ xX]\]\s+(CLAIM-\d{3}):\s*(.*)$", line.strip())
+            match = re.match(r"^-\s+\[[ xX]\]\s+(CLAIM-\d{5}):\s*(.*)$", line.strip())
             if not match:
                 continue
             claim_id, rest = match.group(1), match.group(2)
@@ -231,7 +231,7 @@ def collect_ledger(graph: Graph) -> None:
             if line.startswith("## "):
                 section = "resolved" if "Resolved" in line else "open"
                 continue
-            match = re.match(r"^-\s+(OQ-\d{3}):\s*(.*)$", line.strip())
+            match = re.match(r"^-\s+(OQ-\d{5}):\s*(.*)$", line.strip())
             if not match:
                 continue
             oq_id = match.group(1)
@@ -337,8 +337,8 @@ def render(graph: Graph) -> str:
     add("# GRAPH")
     add("")
     add("知識ベースの参照グラフと、構造化レビューのための信号。")
-    add("辺はすべてリポジトリ内の明示的なメタデータ由来で、推論は含まない（[ADR-010](adr/010-knowledge-graph-layers.md)）。")
-    add("このファイルは生成物であり、手で編集しない。読み方は [PB-010](playbook/010-review-with-graph.md)。")
+    add("辺はすべてリポジトリ内の明示的なメタデータ由来で、推論は含まない（[ADR-010](adr/00010-knowledge-graph-layers.md)）。")
+    add("このファイルは生成物であり、手で編集しない。読み方は [PB-010](playbook/00010-review-with-graph.md)。")
     add("")
 
     type_counts: dict[str, int] = defaultdict(int)

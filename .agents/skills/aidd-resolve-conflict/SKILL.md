@@ -2,7 +2,7 @@
 name: aidd-resolve-conflict
 description: AIDD 知識ベースのマージ競合と ID の衝突を、ファイルの種類ごとに決まった方法で解決する。新規文書の空き番号を取るときにも使う。「コンフリクトを直して」「マージが競合した」「rebase が止まった」「ID が重複している」「番号を振り直したい」「次の番号は何番」と言われたときに使う。
 metadata:
-  aidd-playbook: PB-015
+  aidd-playbook: PB-00015
   aidd-tier: "1"
 ---
 
@@ -17,10 +17,10 @@ metadata:
 
 ## 先に読むもの
 
-1. [ADR-016](../../../adr/016-shrink-conflict-surface.md) — 競合を 3 種類に分ける決定
-2. [ADR-018](../../../adr/018-id-allocation.md) — 採番の権威と、どちらが譲るかの規則
-3. [PB-015](../../../playbook/015-resolve-conflicts.md) — 手順の正本
-4. 振り直しの実例は [REV-006](../../../reviews/006-lifecycle-self-review.md)
+1. [ADR-00016](../../../adr/00016-shrink-conflict-surface.md) — 競合を 3 種類に分ける決定
+2. [ADR-00018](../../../adr/00018-id-allocation.md) — 採番の権威と、どちらが譲るかの規則
+3. [PB-00015](../../../playbook/00015-resolve-conflicts.md) — 手順の正本
+4. 振り直しの実例は [REV-00006](../../../reviews/00006-lifecycle-self-review.md)
 
 ## 手順の要点
 
@@ -39,4 +39,4 @@ metadata:
 - `reviews/**` の既存行を書き換えて競合を消す（追記専用。旧内容は新内容の prefix でなければならない）
 - 検査を通すためだけに `related` や ID を削る（参照が消えると根拠の系譜が切れる）
 - base ブランチ側の番号を振り直して衝突を消す（譲るのは必ず PR 側。main は過去を書き換えない）
-- 手順の詳細をこのファイルに書き写す（正本は PB-015）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00015）

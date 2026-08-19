@@ -16,9 +16,21 @@
 このリポジトリに動かすアプリコードはない。次ができれば層 1 に足りる。
 
 1. git で clone する（または GitHub 上で読む）
-2. 変更は **Pull Request** で出す（品質ゲートは PR。[EVID-008](evidence/008-pr-as-quality-gate.md)）
+2. 変更は **Pull Request** で出す（品質ゲートは PR。[EVID-00008](evidence/00008-pr-as-quality-gate.md)）
 3. 検査をローカルで回すなら `bash` と `python3`（追加パッケージは不要）
-4. エージェントは任意。Codex / Cursor / Claude Code のどれでも同じ規範で動く（[ADR-011](adr/011-cross-tool-agent-integration.md)）
+4. エージェントは任意。Codex / Cursor / Claude Code のどれでも同じ規範で動く（[ADR-00011](adr/00011-cross-tool-agent-integration.md)）
+
+### 開発フローとの関係
+
+このリポジトリの知識は「仕様を決めてからテストで固定する」開発ループ（SDD → TDD）を支える。全体像は [GUIDE.md](GUIDE.md) の §4、spec との受け渡しは [PB-00008](playbook/00008-bridge-sdd-spec.md)、テストの起こし方は [PB-00013](playbook/00013-start-tdd-from-examples.md) が正本。
+
+### AI 以前の既存プロジェクトに載せるとき
+
+エージェントは必須ではない。段階的に始める道順は [PB-00017](playbook/00017-apply-kernel-to-project.md) の段階的適用の節にある。要点だけ記す。
+
+1. まず evidence → 2. ADR → 3. playbook → 4. CI・エージェントは最後
+
+文書の構造と品質ゲートだけでも価値がある。
 
 ## 1. 最低限わかっていたら無駄なく使える
 
@@ -32,12 +44,12 @@
 
 1. [INDEX.md](INDEX.md) で、同じ話が既にないか ID を探す
 2. 手元のものに合わせて書く。迷ったら [GUIDE.md](GUIDE.md) の判断表
-   - 観測・引用 → `evidence/`（[PB-001](playbook/001-add-evidence.md)）
-   - 選択肢から 1 つに決めた → `adr/`（[PB-002](playbook/002-write-adr.md)）。**根拠の evidence が先**
-   - 繰り返す作業 → `playbook/`。見つけてもらえないときだけ skill（[PB-009](playbook/009-add-skill.md)）
+   - 観測・引用 → `evidence/`（[PB-00001](playbook/00001-add-evidence.md)）
+   - 選択肢から 1 つに決めた → `adr/`（[PB-00002](playbook/00002-write-adr.md)）。**根拠の evidence が先**
+   - 繰り返す作業 → `playbook/`。見つけてもらえないときだけ skill（[PB-00009](playbook/00009-add-skill.md)）
    - 決められない → `ledger/open-questions.md`
 3. 新規ファイルは [templates/](templates/) をコピーする
-4. 番号は目視で数えず、機械に聞く（[ADR-018](adr/018-id-allocation.md)）
+4. 番号は目視で数えず、機械に聞く（[ADR-00018](adr/00018-id-allocation.md)）
 
    ```bash
    git fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
@@ -58,12 +70,12 @@
 ここを守れば、層 1 でも機能を空回りさせない。
 
 - 根拠のない決定を書かない（先に evidence。無ければ open-questions）
-- このリポジトリ固有でない判断だけを残す。案件の API 名・画面・スキーマは入れない（[ADR-008](adr/008-sdd-bridge.md)）。働き方の ADR を案件の `adr/` にコピーして混ぜない（[ADR-019](adr/019-kernel-and-project-layers.md)）
+- このリポジトリ固有でない判断だけを残す。案件の API 名・画面・スキーマは入れない（[ADR-00008](adr/00008-sdd-bridge.md)）。働き方の ADR を案件の `adr/` にコピーして混ぜない（[ADR-00019](adr/00019-kernel-and-project-layers.md)）
 - `INDEX.md` / `GRAPH.md` を手で編集しない
 - `status: frozen` の本文を改変しない。直すなら後継 ID
 - `reviews/` と `ledger/attestations.md` の既存行を書き換えない（末尾追記のみ）
 - 秘密情報・トークン・個人データを commit しない
-- 文書の `status` を「とりあえず」やスクリプトで進めない。遷移は人間（[ADR-017](adr/017-machines-record-facts-humans-decide-status.md)）
+- 文書の `status` を「とりあえず」やスクリプトで進めない。遷移は人間（[ADR-00017](adr/00017-machines-record-facts-humans-decide-status.md)）
 - PR を別 PR の上に積まない。番号を目視で採らない
 
 ### エージェントに頼むとき
@@ -76,24 +88,24 @@
 
 ### 地図を持つ
 
-[GUIDE.md](GUIDE.md) を通読する。ID の接頭辞、`related` と錨、lifecycle、Tier（ロードのタイミングであって重要度ではない。[ADR-006](adr/006-context-tiers.md)）が分かる。現在の一覧は [INDEX.md](INDEX.md)、参照と警告は [GRAPH.md](GRAPH.md)。
+[GUIDE.md](GUIDE.md) を通読する。ID の接頭辞、`related` と錨、lifecycle、Tier（ロードのタイミングであって重要度ではない。[ADR-00006](adr/00006-context-tiers.md)）が分かる。現在の一覧は [INDEX.md](INDEX.md)、参照と警告は [GRAPH.md](GRAPH.md)。
 
 ### このリポジトリを直す
 
-改善も層 1 と同じループである。足すのは「他の案件でも繰り返す判断」だけ（[ADR-008](adr/008-sdd-bridge.md)）。手順の入口は次で足りることが多い。
+改善も層 1 と同じループである。足すのは「他の案件でも繰り返す判断」だけ（[ADR-00008](adr/00008-sdd-bridge.md)）。手順の入口は次で足りることが多い。
 
 | やりたいこと | 手順 |
 | --- | --- |
-| evidence / ADR / playbook を足す | [PB-001](playbook/001-add-evidence.md) / [PB-002](playbook/002-write-adr.md) / [CONVENTIONS.md](CONVENTIONS.md) |
-| skill を足す（1 skill = 1 playbook） | [PB-009](playbook/009-add-skill.md) |
-| 鮮度を回す・90 日を直す | [PB-003](playbook/003-run-review-cycle.md) / [PB-005](playbook/005-fix-staleness-ci.md) |
-| frozen にする | [PB-004](playbook/004-freeze-document.md) |
-| グラフの信号を読む | [PB-010](playbook/010-review-with-graph.md) |
-| 競合・番号の衝突 | [PB-015](playbook/015-resolve-conflicts.md) |
-| spec と KB の受け渡し | [PB-008](playbook/008-bridge-sdd-spec.md) |
-| 新しい案件へ載せる | [PB-017](playbook/017-apply-kernel-to-project.md)（kernel の ADR を案件にコピーしない） |
-| 散在ソースから evidence の下書き | [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。確定は人間） |
-| 大規模リリースの置き場 | [PB-016](playbook/016-large-project-usage-map.md) |
+| evidence / ADR / playbook を足す | [PB-00001](playbook/00001-add-evidence.md) / [PB-00002](playbook/00002-write-adr.md) / [CONVENTIONS.md](CONVENTIONS.md) |
+| skill を足す（1 skill = 1 playbook） | [PB-00009](playbook/00009-add-skill.md) |
+| 鮮度を回す・90 日を直す | [PB-00003](playbook/00003-run-review-cycle.md) / [PB-00005](playbook/00005-fix-staleness-ci.md) |
+| frozen にする | [PB-00004](playbook/00004-freeze-document.md) |
+| グラフの信号を読む | [PB-00010](playbook/00010-review-with-graph.md) |
+| 競合・番号の衝突 | [PB-00015](playbook/00015-resolve-conflicts.md) |
+| spec と KB の受け渡し | [PB-00008](playbook/00008-bridge-sdd-spec.md) |
+| 新しい案件へ載せる | [PB-00017](playbook/00017-apply-kernel-to-project.md)（kernel の ADR を案件にコピーしない） |
+| 散在ソースから evidence の下書き | [PB-00018](playbook/00018-draft-evidence-from-sources.md)（`draft` まで。確定は人間） |
+| 大規模リリースの置き場 | [PB-00016](playbook/00016-large-project-usage-map.md) |
 
 検査は PR 前にローカルで 3 つ。意味は [README.md](README.md) の鮮度ガード節。
 
@@ -103,7 +115,7 @@ python3 .github/scripts/build-graph.py --check
 bash .github/scripts/build-index.sh --check
 ```
 
-`frozen` を読み直して直す必要がなかったときは、本文を触らず [ledger/attestations.md](ledger/attestations.md) に 1 行追記する（[ADR-012](adr/012-review-attestations.md)）。エージェントは証跡を代筆しない。
+`frozen` を読み直して直す必要がなかったときは、本文を触らず [ledger/attestations.md](ledger/attestations.md) に 1 行追記する（[ADR-00012](adr/00012-review-attestations.md)）。エージェントは証跡を代筆しない。
 
 ### 効率の足し方
 

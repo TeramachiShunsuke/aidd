@@ -2,7 +2,7 @@
 name: aidd-rebuild-index
 description: AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。
 metadata:
-  aidd-playbook: PB-007
+  aidd-playbook: PB-00007
   aidd-tier: "1"
 ---
 
@@ -15,9 +15,9 @@ metadata:
 
 ## 先に読むもの
 
-1. [ADR-007](../../../adr/007-generated-index.md) — INDEX.md は生成物であり手編集しない
-2. [PB-007](../../../playbook/007-rebuild-index.md) — 手順の正本
-3. Tier の割り当ては [ADR-006](../../../adr/006-context-tiers.md)
+1. [ADR-00007](../../../adr/00007-generated-index.md) — INDEX.md は生成物であり手編集しない
+2. [PB-00007](../../../playbook/00007-rebuild-index.md) — 手順の正本
+3. Tier の割り当ては [ADR-00006](../../../adr/00006-context-tiers.md)
 
 ## 手順の要点
 
@@ -31,4 +31,4 @@ metadata:
 
 - `INDEX.md` を手で編集する
 - 生成物に日付など実行ごとに変わる値を持ち込む
-- 手順の詳細をこのファイルに書き写す（正本は PB-007）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00007）

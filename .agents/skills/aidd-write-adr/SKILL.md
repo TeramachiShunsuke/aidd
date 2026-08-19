@@ -1,8 +1,8 @@
 ---
 name: aidd-write-adr
-description: AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。
+description: AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNNNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。
 metadata:
-  aidd-playbook: PB-002
+  aidd-playbook: PB-00002
   aidd-tier: "1"
 ---
 
@@ -17,7 +17,7 @@ metadata:
 
 1. [AGENTS.md](../../../AGENTS.md)
 2. [CONVENTIONS.md](../../../CONVENTIONS.md)
-3. [PB-002](../../../playbook/002-write-adr.md) — 手順の正本
+3. [PB-00002](../../../playbook/00002-write-adr.md) — 手順の正本
 
 ## 手順の要点
 
@@ -31,4 +31,4 @@ metadata:
 
 - `status: frozen` の ADR を編集する
 - evidence の錨がない `## 根拠`
-- 手順の詳細をこのファイルに書き写す（正本は PB-002）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00002）

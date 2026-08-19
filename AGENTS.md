@@ -8,18 +8,18 @@
 
 ## 必読順
 
-Tier（[ADR-006](adr/006-context-tiers.md)）に従って読む。上 2 つは毎回、下 2 つは必要になってから。
+Tier（[ADR-00006](adr/00006-context-tiers.md)）に従って読む。上 2 つは毎回、下 2 つは必要になってから。
 
 1. Tier 0: 本ファイル（AGENTS.md）と [CONVENTIONS.md](CONVENTIONS.md) — 全文
 2. Tier 1: [INDEX.md](INDEX.md) と [ledger/](ledger/) — 一覧のみ。ここで必要な文書 ID を特定する（構造を点検するときは [GRAPH.md](GRAPH.md)、ID 体系と関係が不明なときは [GUIDE.md](GUIDE.md)、人の始め方は [SETUP.md](SETUP.md)）
 3. Tier 2: 作業に関係する playbook と ADR — 全文
 4. Tier 3: 根拠を疑うときだけ evidence / reviews
 
-skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-009](adr/009-skills-as-playbook-entrypoints.md)）。
+skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致したときに本文が読まれる。手順の正本は常に playbook 側にある（[ADR-00009](adr/00009-skills-as-playbook-entrypoints.md)）。
 
 ## 動作するツール
 
-このリポジトリは Codex / Cursor / Claude Code のいずれからでも同じ規範と skill で動く（[ADR-011](adr/011-cross-tool-agent-integration.md)）。
+このリポジトリは Codex / Cursor / Claude Code のいずれからでも同じ規範と skill で動く（[ADR-00011](adr/00011-cross-tool-agent-integration.md)）。
 
 | | 規範 | skill |
 | --- | --- | --- |
@@ -34,7 +34,7 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - `status: draft` / `active` の文書を更新し、同時に `last_reviewed` を今日（UTC）にする
 - `reviews/` に新規ファイルを追加する、または既存ファイルの**末尾のみ**追記する
 - `ledger/` の claims / open-questions / changelog を規約どおり更新する
-- 読み直して直す必要がなかった文書について、`ledger/attestations.md` に証跡を**末尾追記**する（`frozen` 文書の唯一のレビュー手段。[ADR-012](adr/012-review-attestations.md)）
+- 読み直して直す必要がなかった文書について、`ledger/attestations.md` に証跡を**末尾追記**する（`frozen` 文書の唯一のレビュー手段。[ADR-00012](adr/00012-review-attestations.md)）
 - `.agents/skills/` に skill を追加・更新し、`.claude/skills/` に symlink の鏡を作る（1 skill = 1 playbook）
 - 生成物（`GRAPH.md` → `INDEX.md` の順）を再生成する
 - PR 説明に、触った文書 ID と根拠（evidence / ADR）を列挙する
@@ -48,12 +48,12 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
 - `INDEX.md` / `GRAPH.md` を手で編集する（生成物。文書側を直して再生成する）
 - skill の本文に playbook の手順を書き写す（二重管理になる）
 - 意味グラフツールの出力（`graphify-out/` 等）を commit する
-- 生成物の競合を手で解決する（`GRAPH.md` → `INDEX.md` の順に再生成する。[PB-015](playbook/015-resolve-conflicts.md)）
-- 文書の `status` を CI やスクリプトから書き換える（遷移は人間の判断。[ADR-017](adr/017-machines-record-facts-humans-decide-status.md)）
+- 生成物の競合を手で解決する（`GRAPH.md` → `INDEX.md` の順に再生成する。[PB-00015](playbook/00015-resolve-conflicts.md)）
+- 文書の `status` を CI やスクリプトから書き換える（遷移は人間の判断。[ADR-00017](adr/00017-machines-record-facts-humans-decide-status.md)）
 - 番号を目視で数えて採番する（`--next` に聞く。下記「採番と PR の単位」）
-- 1 セッションで複数の PR を積み上げる（base を別の PR にする。[ADR-018](adr/018-id-allocation.md)）
+- 1 セッションで複数の PR を積み上げる（base を別の PR にする。[ADR-00018](adr/00018-id-allocation.md)）
 - 秘密情報、トークン、個人データをコミットする
-- IdP のセッションやソースシステムへ委譲した認証情報を git に置く、またはこのリポジトリの作業で使う（[ADR-020](adr/020-platform-is-a-client.md)）
+- IdP のセッションやソースシステムへ委譲した認証情報を git に置く、またはこのリポジトリの作業で使う（[ADR-00020](adr/00020-platform-is-a-client.md)）
 - CI の鮮度検査を迂回する目的だけの `last_reviewed` 更新や証跡追記（本文レビューなし）
 
 ## 作業フロー
@@ -69,20 +69,20 @@ skills（`.agents/skills/`）は Tier 1 の入口で、`description` が一致�
  → PR（テンプレート必須項目を埋める）
 ```
 
-新しいリポジトリへ適用するときは [PB-017](playbook/017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-019](adr/019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-018](playbook/018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-020](adr/020-platform-is-a-client.md)（認証は git の外の IdP。git は認証情報を使わない。特定の PF 製品は kernel に実装しない）。
+新しいリポジトリへ適用するときは [PB-00017](playbook/00017-apply-kernel-to-project.md)（働き方の kernel と案件の考え方を混ぜない。[ADR-00019](adr/00019-kernel-and-project-layers.md)）。散在ソースから根拠を起こすときは [PB-00018](playbook/00018-draft-evidence-from-sources.md)（`draft` まで。`status` の遷移は人間）。ログインと ACL 付きワークフローを持つ PF は [ADR-00020](adr/00020-platform-is-a-client.md)（認証は git の外の IdP。git は認証情報を使わない。特定の PF 製品は kernel に実装しない）。
 
-外部の spec（requirements / design / tasks）との受け渡しは [ADR-008](adr/008-sdd-bridge.md) と [PB-008](playbook/008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
+外部の spec（requirements / design / tasks）との受け渡しは [ADR-00008](adr/00008-sdd-bridge.md) と [PB-00008](playbook/00008-bridge-sdd-spec.md) に従う。spec 本文は取り込まず、リンクと ID だけを持つ。
 
 ## 採番と PR の単位
 
-新規文書を作る前に、番号を機械に聞く（[ADR-018](adr/018-id-allocation.md)）。目視で「最大が 022 だから 023」と数えない。開いている他のブランチが既にその番号を取っているかもしれない。
+新規文書を作る前に、番号を機械に聞く（[ADR-00018](adr/00018-id-allocation.md)）。目視で「最大が 022 だから 023」と数えない。開いている他のブランチが既にその番号を取っているかもしれない。
 
 ```bash
 git fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
 bash .github/scripts/check-id-collisions.sh --next EVID   # ADR / PB / REV / CLAIM / OQ も可
 ```
 
-PR の base は **main** とし、1 つの意図につき 1 本にまとめる。積み上げ PR は、親がマージされても子は main に届かないため、番号が確保されないまま滞留して衝突を招く（[REV-006](reviews/006-lifecycle-self-review.md) が実例）。
+PR の base は **main** とし、1 つの意図につき 1 本にまとめる。積み上げ PR は、親がマージされても子は main に届かないため、番号が確保されないまま滞留して衝突を招く（[REV-00006](reviews/00006-lifecycle-self-review.md) が実例）。
 
 分割が必要なら、直列にする。文書を追加する PR を先に main へ着地させ、それを参照する PR を後から出す。
 

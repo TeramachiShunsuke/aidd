@@ -76,7 +76,7 @@ next_id() {
   local max
   max="$(cat "$TMP/max" 2>/dev/null || true)"
   [[ -z "$max" ]] && max=0
-  printf '%s-%03d\n' "$prefix" "$((max + 1))"
+  printf '%s-%05d\n' "$prefix" "$((max + 1))"
 }
 
 if [[ "${1:-}" == "--next" ]]; then

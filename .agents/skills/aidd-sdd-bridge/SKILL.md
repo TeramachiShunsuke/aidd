@@ -2,7 +2,7 @@
 name: aidd-sdd-bridge
 description: 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。
 metadata:
-  aidd-playbook: PB-008
+  aidd-playbook: PB-00008
   aidd-tier: "1"
 ---
 
@@ -15,8 +15,8 @@ metadata:
 
 ## 先に読むもの
 
-1. [ADR-008](../../../adr/008-sdd-bridge.md) — 対応表と境界
-2. [PB-008](../../../playbook/008-bridge-sdd-spec.md) — 手順の正本
+1. [ADR-00008](../../../adr/00008-sdd-bridge.md) — 対応表と境界
+2. [PB-00008](../../../playbook/00008-bridge-sdd-spec.md) — 手順の正本
 3. [templates/sdd-handoff.md](../../../templates/sdd-handoff.md) — 受け渡しシート
 
 ## 手順の要点
@@ -31,4 +31,4 @@ metadata:
 
 - spec 本文を知識ベースに転記する（リンクと ID のみ）
 - 実装固有の識別子（内部 API 名・ファイルパス・スキーマ）を KB 文書に持ち込む
-- 手順の詳細をこのファイルに書き写す（正本は PB-008）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00008）

@@ -2,7 +2,7 @@
 name: aidd-review-cycle
 description: AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。
 metadata:
-  aidd-playbook: PB-003
+  aidd-playbook: PB-00003
   aidd-tier: "1"
 ---
 
@@ -17,8 +17,8 @@ metadata:
 
 1. [AGENTS.md](../../../AGENTS.md)
 2. [CONVENTIONS.md](../../../CONVENTIONS.md)
-3. [PB-003](../../../playbook/003-run-review-cycle.md) — 手順の正本
-4. CI 失敗の切り分けは [PB-005](../../../playbook/005-fix-staleness-ci.md)
+3. [PB-00003](../../../playbook/00003-run-review-cycle.md) — 手順の正本
+4. CI 失敗の切り分けは [PB-00005](../../../playbook/00005-fix-staleness-ci.md)
 
 ## 手順の要点
 
@@ -32,4 +32,4 @@ metadata:
 
 - 本文を読まずに `last_reviewed` だけ進める（CI 迂回目的の更新）
 - `reviews/` の既存行の書き換え・削除・リネーム
-- 手順の詳細をこのファイルに書き写す（正本は PB-003）
+- 手順の詳細をこのファイルに書き写す（正本は PB-00003）

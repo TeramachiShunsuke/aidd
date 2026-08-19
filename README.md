@@ -37,7 +37,7 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 
 ## 読み込み階層（Tier）
 
-全文書に Tier 0〜3 を割り当てる。Tier は**ロードのタイミング**であり、重要度の格付けではない（[ADR-006](adr/006-context-tiers.md)）。
+全文書に Tier 0〜3 を割り当てる。Tier は**ロードのタイミング**であり、重要度の格付けではない（[ADR-00006](adr/00006-context-tiers.md)）。
 
 | Tier | いつ読むか | 中身 |
 | --- | --- | --- |
@@ -50,7 +50,7 @@ AI-Driven Development（AIDD）の運用知識を、証拠・決定・手順・�
 
 ## 対応エージェント
 
-Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ skill で動く。正本は 1 か所に置き、それを読まないツールにだけ橋を架ける（[ADR-011](adr/011-cross-tool-agent-integration.md)、根拠は [EVID-015](evidence/015-agent-tools-read-different-paths.md)）。
+Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ skill で動く。正本は 1 か所に置き、それを読まないツールにだけ橋を架ける（[ADR-00011](adr/00011-cross-tool-agent-integration.md)、根拠は [EVID-00015](evidence/00015-agent-tools-read-different-paths.md)）。
 
 | ツール | 規範 | skill |
 | --- | --- | --- |
@@ -58,17 +58,29 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 | Cursor | `AGENTS.md` | `.agents/skills/` |
 | Claude Code | `CLAUDE.md`（`@AGENTS.md` の 1 行） | `.claude/skills/` → 正本への symlink |
 
-内容をツールごとに書き分けない。鏡が symlink であることは CI が検査する。Windows で `core.symlinks` が無効な環境だけは鏡が展開されないため、Claude Code 側で `/import` するか手動でコピーする（[OQ-011](ledger/open-questions.md)）。
+内容をツールごとに書き分けない。鏡が symlink であることは CI が検査する。Windows で `core.symlinks` が無効な環境だけは鏡が展開されないため、Claude Code 側で `/import` するか手動でコピーする（[OQ-00011](ledger/open-questions.md)）。
 
-## 外部 spec との接続（SDD）
+## 開発ループ（SDD → TDD）
 
-このリポジトリはコードを持たない。仕様駆動開発の成果物は実装リポジトリ側にあり、受け渡し規則を [ADR-008](adr/008-sdd-bridge.md) で定める。requirements は evidence / claims を引用し、横断で再利用する design だけが ADR に、繰り返す tasks だけが playbook に昇格する。spec 本文は取り込まず、リンクと ID のみを持つ。
+このリポジトリの知識は「仕様を決めてからテストで固定する」開発ループを支える。
+
+```text
+evidence → ADR → spec(SDD) → 受け入れ例 → テスト(TDD) → 実装 → 知見を KB に戻す
+```
+
+- **SDD フェーズ**: evidence を根拠に ADR で決定し、spec（requirements / design / tasks）を書く。KB との受け渡しは [PB-00008](playbook/00008-bridge-sdd-spec.md)
+- **TDD フェーズ**: ビジネススペックの具体例から外側のテストを起こし（[PB-00013](playbook/00013-start-tdd-from-examples.md)）、失敗→実装→整えるを回す
+- **還流**: 実装中に得た知見のうち、他案件でも繰り返すものだけ evidence / ADR として kernel に戻す
+
+spec 本文は KB に取り込まない。リンクと ID のみを持つ（[ADR-00008](adr/00008-sdd-bridge.md)）。
 
 ## 他プロジェクトへの適用
 
-このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-019](adr/019-kernel-and-project-layers.md)、手順は [PB-017](playbook/017-apply-kernel-to-project.md)）。
+このリポジトリは働き方の **kernel** である。新しい案件へ載せるときは、既存 ADR を残して参照し、案件の考え方と同じ `adr/` にコピーしない（[ADR-00019](adr/00019-kernel-and-project-layers.md)、手順は [PB-00017](playbook/00017-apply-kernel-to-project.md)）。
 
-根拠の入口は、人が観測を書く [PB-001](playbook/001-add-evidence.md) だけではない。Slack / 議事録 / Confluence など散在ソースからは、エージェントが `status: draft` の evidence を起こし、人間が観測を確認してから `active` にする（[PB-018](playbook/018-draft-evidence-from-sources.md)）。ログインアカウントを ACL 付きでワークフローに載せる PF は、このリポジトリの外のクライアントである。認証は git の外の IdP、git は認証情報を使わない。今の利用例を契約にしない（[ADR-020](adr/020-platform-is-a-client.md)）。
+AI 前提のプロジェクトなら、[PB-00017](playbook/00017-apply-kernel-to-project.md) で kernel を接続し、skill と CI を最初から有効にする。AI 以前の既存プロジェクトでも段階的に載せられる。evidence → ADR → playbook の順に、属人化や暗黙知の多い箇所から後追いで文書化し、CI やエージェントは文書が安定してから足す。詳細は [PB-00017](playbook/00017-apply-kernel-to-project.md) の段階的適用の節、始め方は [SETUP.md](SETUP.md) を参照。
+
+根拠の入口は、人が観測を書く [PB-00001](playbook/00001-add-evidence.md) だけではない。Slack / 議事録 / Confluence など散在ソースからは、エージェントが `status: draft` の evidence を起こし、人間が観測を確認してから `active` にする（[PB-00018](playbook/00018-draft-evidence-from-sources.md)）。ログインアカウントを ACL 付きでワークフローに載せる PF は、このリポジトリの外のクライアントである。認証は git の外の IdP、git は認証情報を使わない。今の利用例を契約にしない（[ADR-00020](adr/00020-platform-is-a-client.md)）。
 
 ## 鮮度ガード（CI）
 
@@ -82,7 +94,7 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **草案の滞留** — `draft` のまま 30 日を超えた文書を警告する（遷移は人間が決めるので落とさない）
 - **週次実行と手動トリガー** — 期限超過は PR と無関係に起きるため `schedule`（週次）で検査し、`workflow_dispatch` でも随時実行できる
 
-`frozen` 文書は本文を触れないため、レビューは [ledger/attestations.md](ledger/attestations.md) への 1 行追記で記録する（[ADR-012](adr/012-review-attestations.md)）。
+`frozen` 文書は本文を触れないため、レビューは [ledger/attestations.md](ledger/attestations.md) への 1 行追記で記録する（[ADR-00012](adr/00012-review-attestations.md)）。
 
 `.github/workflows/index.yml` が [INDEX.md](INDEX.md) の最新性を検査する。
 
@@ -90,7 +102,7 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **Frontmatter 妥当性** — 必須キー欠落・`id` 重複・`tier` の範囲外を拒否
 - **skill 整合性** — `name` とフォルダ名の不一致、参照先 playbook の不在、Claude 用 symlink の欠落・誤リンクを拒否
 - **Frontmatter キーの重複** — `merge=union` が残しうる二重定義を拒否
-- **ID 衝突の走査** — 同じ ID を別ファイル名で使っているブランチを報告する。base ブランチとの衝突は失敗（譲るのは必ず PR 側）、未着地のブランチ同士は警告（先に着地した方が保持する）。新規採番は `check-id-collisions.sh --next EVID` に聞く（[ADR-018](adr/018-id-allocation.md)）
+- **ID 衝突の走査** — 同じ ID を別ファイル名で使っているブランチを報告する。base ブランチとの衝突は失敗（譲るのは必ず PR 側）、未着地のブランチ同士は警告（先に着地した方が保持する）。新規採番は `check-id-collisions.sh --next EVID` に聞く（[ADR-00018](adr/00018-id-allocation.md)）
 
 `.github/workflows/graph.yml` が [GRAPH.md](GRAPH.md) の参照グラフを検査する。
 
@@ -102,12 +114,12 @@ Codex / Cursor / Claude Code のいずれからでも、同じ規範と同じ sk
 - **置き換えの一貫性** — `superseded_by` を持つ文書が `deprecated` であること
 - **グラフの最新性** — 再生成して差分が出たら失敗
 
-グラフは推論を含まず、辺はすべてファイル内の明示的な記述に遡れる（[ADR-010](adr/010-knowledge-graph-layers.md)）。未使用の根拠や入口のない手順といった**レビュー信号**は `GRAPH.md` に出るが CI は落とさない。エラーにするか警告に留めるかの基準は [ADR-013](adr/013-check-grades.md) にあり、違反 0 件で安定した検査から順にエラーへ上げる。
+グラフは推論を含まず、辺はすべてファイル内の明示的な記述に遡れる（[ADR-00010](adr/00010-knowledge-graph-layers.md)）。未使用の根拠や入口のない手順といった**レビュー信号**は `GRAPH.md` に出るが CI は落とさない。エラーにするか警告に留めるかの基準は [ADR-00013](adr/00013-check-grades.md) にあり、違反 0 件で安定した検査から順にエラーへ上げる。
 
 変更の影響範囲は次で照会できる。
 
 ```bash
-python3 .github/scripts/build-graph.py --impact ADR-006
+python3 .github/scripts/build-graph.py --impact ADR-00006
 ```
 
 ## 使い方
@@ -117,7 +129,7 @@ python3 .github/scripts/build-graph.py --impact ADR-006
 1. **最低限** — ワークフローを無駄なく使う（SETUP §1）
 2. **理解したら** — より効率的に使い、このリポジトリを改善する（SETUP §2）
 
-エージェントの読み順は SETUP ではなく本 README の Tier 表と [AGENTS.md](AGENTS.md) である。新しい参加者を乗せる手順は [PB-019](playbook/019-onboard-with-setup-guide.md)。
+エージェントの読み順は SETUP ではなく本 README の Tier 表と [AGENTS.md](AGENTS.md) である。新しい参加者を乗せる手順は [PB-00019](playbook/00019-onboard-with-setup-guide.md)。
 
 ## ライセンス
 
