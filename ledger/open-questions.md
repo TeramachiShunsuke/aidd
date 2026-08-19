@@ -3,8 +3,6 @@ id: LEDGER-OQ
 title: Open questions
 status: active
 last_reviewed: 2026-08-19
-last_reviewed: 2026-08-14
-last_reviewed: 2026-08-15
 owners:
   - TeramachiShunsuke
 tags:
