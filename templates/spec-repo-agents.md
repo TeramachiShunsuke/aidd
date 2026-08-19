@@ -8,14 +8,14 @@ Claude Code を使うなら CLAUDE.md に `@AGENTS.md` の 1 行だけ置く（A
 
 このリポジトリは <製品名> の spec / 実装リポジトリである。働き方（文書の種類・Tier・検査・横断の判断・作業単位の規約）の正本は kernel にあり、ここにはコピーしない。
 
-- Kernel: https://github.com/TeramachiShunsuke/aidd （エージェントが読むときは raw: https://raw.githubusercontent.com/TeramachiShunsuke/aidd/main/ 、ネットワークのない環境ではローカル clone `<例: ../aidd>` を読む）
+- Kernel: https://github.com/TeramachiShunsuke/aidd （参照する commit / tag: `<例: v2026.08 または sha>`。エージェントが読むときは raw: https://raw.githubusercontent.com/TeramachiShunsuke/aidd/main/ 。ネットワークのない harness ではワークスペース内の clone（submodule / multi-root。例 `<workspace>/aidd/`）で同じ相対パスを読む）
 - 案件限りの決定（ADR）の置き場: `<specs/<feature>/adr/ または adr/ のどちらか 1 つ>`。そこにはこの製品の決定だけを置き、kernel の ADR をコピーしない
 
 ## 入力と置き場
 
 | もの | 置き場 | 正本 |
 | --- | --- | --- |
-| PdO の要件（ビジネススペック） | `specs/<feature>/requirements.md`（Confluence が正本ならリンクとページバージョン。本文は転記しない） | Confluence または requirements.md（どちらか 1 つ） |
+| PdO の要件（ビジネススペック） | `specs/<feature>/requirements.md`（Confluence が正本ならリンクとページバージョン。本文は転記しない） | Confluence または requirements.md（どちらか 1 つ）。エージェントが Confluence を読めない harness への本文の渡し方: <MCP / 人が貼る / エクスポートを commit しない読み取り用ファイル> |
 | 受け入れ例 / ブラッシュアップ記録 | `specs/<feature>/acceptance-examples.md` / `acceptance-refinement-log.md` | git |
 | 契約 | `openapi.yaml` / `migrations/`（Markdown に写さない） | git |
 | 振る舞い | テスト（外側テストは受け入れ例の行 ID を持つ） | git |
@@ -43,10 +43,11 @@ Claude Code を使うなら CLAUDE.md に `@AGENTS.md` の 1 行だけ置く（A
 | 外側テストだけを走らせるコマンド | <例: `npm run test:acceptance`> |
 | Jira プロジェクトキー | <例: SHOP> |
 | **Epic 単位の出荷制御**（必須） | <フィーチャーフラグ / デプロイ単位の分離 / リリースブランチ のどれか> |
-| コミット scope の語彙 | 既定（`specs/<feature>` の feature 名。モノレポは `app/feature`）または <上書き> |
+| コミット scope の語彙 | 既定（`specs/<feature>` の feature 名。モノレポは `app/feature`、契約は `api/<feature>` / `db/<feature>`）または <上書き> |
 | PR の規模上限 | 既定（400 行 / 20 ファイル）または <上書き値と理由> |
 | 規模検査の除外パターン | <glob。例: `**/*.lock`, `**/__snapshots__/**`, `gen/**`> |
-| 受け入れ例の回答期限 | 既定（5 営業日）または <上書き値> |
-| モデル階層の対応表 | S = <銘柄> / M = <銘柄> / L = <銘柄>。effort は low / medium / high（harness に無ければ読み替えを書く） |
-| コードグラフ | `graphify extract . --code-only` と `graphify affected "<起点>" --depth 2`（出力は commit しない。`graphify install` は使わない）または <代替ツール> |
+| 受け入れ例の回答期限（書き戻しにも適用） | 既定（5 営業日）または <上書き値> |
+| ブランチ slug | 英小文字・数字・ハイフン。Jira の自動生成名を使うなら Story 要約に英語 slug を併記 |
+| モデル階層の対応表（harness ごとに 1 行） | <harness 名>: S = <銘柄> / M = <銘柄> / L = <銘柄>。effort は low / medium / high（harness に無ければ読み替えを書く） |
+| コードグラフ | `pip install graphifyy` → `graphify extract . --code-only` と `graphify affected "<起点>" --depth 2`（出力は commit しない。`graphify install` は使わない）または <代替ツール> |
 | 影響範囲に手で足す共有ファイル | <マイグレーション連番 / DI・ルーティング登録 / lock / i18n / 生成物 のパス> |

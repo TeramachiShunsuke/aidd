@@ -85,7 +85,7 @@ AI がない既存プロジェクトでも、evidence と ADR から段階的に
 | 繰り返す作業 | `playbook/` | [CONVENTIONS.md](CONVENTIONS.md) |
 | 手順が見つけてもらえない | skill | [PB-00009](playbook/00009-add-skill.md) |
 | 詳細設計をどこまで書くか迷う | 決定だけ `adr/`、他は書かない | [PB-00012](playbook/00012-triage-implementation-spec.md) |
-| PdO の設計はあるが受け入れ条件が曖昧 | 受け入れ例（案件リポ。質問→回答→反映の有限回） | [PB-00020](playbook/00020-refine-acceptance-from-design.md)（`draft`） |
+| PdO の要件（ビジネススペック）はあるが受け入れ条件が曖昧 | 受け入れ例（案件リポ。質問→回答→反映の有限回） | [PB-00020](playbook/00020-refine-acceptance-from-design.md)（`draft`） |
 | 実装に入る前に正しさを固定したい | テスト（文書は作らない） | [PB-00013](playbook/00013-start-tdd-from-examples.md) |
 | DB / インフラの前提を渡したい | 制約は `adr/`、状態は渡さない | [PB-00014](playbook/00014-hand-infra-context.md) |
 | 大規模で複数機能を同時に出す置き場がイメージできない | 案件リポと KB の分担図を置く | [PB-00016](playbook/00016-large-project-usage-map.md) |

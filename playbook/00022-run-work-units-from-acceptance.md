@@ -38,6 +38,7 @@ tier: 2
    - 依拠した KB の ID（シート冒頭の ID）
    - 契約の変更を伴うか（OpenAPI / マイグレーション。後方互換か）、案件 ADR が要るか
    - **影響範囲の要約**（手順 4 で責任者が出す）
+   - 出荷制御がフラグなら、フラグ名と OFF 時の挙動
 3. 1 PR（[ADR-00025](../adr/00025-control-work-units-commits-prs.md) §3: 400 行 / 20 ファイル、除外パターンは案件 `AGENTS.md`）に収まらないと見込むなら、束を分けて Story を分ける。契約（後方互換の expand）→ 振る舞い → 決定の順に縦に割る。機能をまたいで横に割らない
 
 ### 2. 担当を決める
@@ -48,7 +49,7 @@ tier: 2
    | --- | --- | --- |
    | シートの `承認:` が `PdO …`（`未` でない） | ○ | [PB-00020](00020-refine-acceptance-from-design.md) に戻す |
    | 契約が確定、または同 PR 内で後方互換に決められる | ○ | 契約（expand）だけの PR を人が先行させる。contract は振る舞い着地後の別 Story |
-   | 影響範囲が閉じている（[PB-00024](00024-choose-model-effort-context.md) 手順 3〜6 でコードグラフ + 共有ファイルを出す） | ○ | 人が持つか、束を分ける |
+   | 影響範囲が閉じている（[PB-00024](00024-choose-model-effort-context.md) 手順 3〜5・7 でコードグラフ + 共有ファイルを出して判定する） | ○ | 人が持つか、束を分ける |
 
    3 つとも満たす Story はエージェントに渡せる。1 つでも欠けるなら人が持つ。どちらの場合も Jira の assignee は人（責任者）
 5. 同時に走らせる Story は、影響範囲（コード + マイグレーション連番・DI / ルーティング登録・lock・i18n・生成物）が交わらないものだけにする。交わるなら直列にするか、共有部分だけの PR を先に出す
@@ -64,15 +65,15 @@ tier: 2
    | 落ちる外側テストを足す | `test:` | `test(discount): 会員歴 6 か月ちょうどは対象内（境界-1）` |
    | 通す | `feat:` / `fix:` | `feat(discount): 会員歴の境界を含む判定に直す` |
    | 整える | `refactor:` | `refactor(discount): 判定を DiscountPolicy に寄せる` |
-   | 契約を変える（後方互換） | `feat(api):` / `feat(db):` | `feat(db): members に joined_at を追加` |
-   | 受け入れ例・案件 ADR | `docs:` | `docs(discount): 退会済みの反例を追加` |
+   | 契約を変える（後方互換） | `feat(api/<feature>):` / `feat(db/<feature>):` | `feat(db/discount): members に joined_at を追加` |
+   | 案件 ADR・README | `docs:` | `docs(discount): 割引計算の丸め方を ADR に` |
    | 道具 | `build:` / `ci:` / `chore:` | `ci: commitlint を追加` |
 
 9. 各コミットの footer に `Refs: <STORY-KEY>` を書く（Story 起票前の docs / 組み込み PR は Epic キー）。見出しは 72 文字以内。**PR の HEAD（マージ直前）のコミットは green** にする。`git revert` は `revert: <元の見出し>` に書き直す
 
 ### 4. PR
 
-10. タイトルを `<STORY-KEY> type(scope): 要約` にする。本文は [templates/project-pr.md](../templates/project-pr.md) を埋める（行 ID、契約変更、決定、規模、コミット、**モデル**（階層 / effort / 自動検査の初回合否 / 再試行回数 / 最終階層）、検証コマンド）
+10. タイトルを `<STORY-KEY> type(scope): 要約` にする。本文は [templates/project-pr.md](../templates/project-pr.md) を埋める（行 ID、契約変更、決定、規模、コミット、**モデル**（タスク種別 / 初回の階層と effort / 自動検査の初回合否 / 再試行回数 / 最終階層）、検証コマンド）
 11. 規模検査（行数・ファイル数・1 Story）と命名検査（見出し・footer・タイトル・ブランチ）が通ることを確認する。超過の例外は本文に理由を書き、レビュアーが明示承認する。bot の PR と "Update branch" のマージコミットは命名検査の対象外
 12. レビュー後、**base 最新で 1 コマンドの品質ゲートを再実行**してから squash マージする。squash の見出しは `type(scope): 要約`（PR タイトルから Issue キーを外す）、本文末尾に `Refs: <STORY-KEY>`。マージ後に Jira の状態を進める（自動連携があればそれに任せる。git には書かない）
 13. `release/*` への backport は同じ Story キーで追加 PR（タイトル末尾 `[backport]`）
@@ -97,6 +98,7 @@ tier: 2
 - 並走 PR が衝突した、または合流後に赤くなった → 影響範囲の見積りが外れている（共有ファイルの漏れが多い）。衝突した共有部分だけを先行 PR にし、残りを直列にする。手順 12 の再ゲートを省いていないか確認する
 - Issue キーが無いコミットが main に入った → 検査（commitlint / PR タイトル検査）が CI に入っていない。[PB-00021](00021-embed-workflow-in-spec-repo.md) 手順に戻って入れる
 - エージェントに渡した Story が途中で決定を要した → 止めて人に戻す。エージェントがその場で決めない（[PB-00013](00013-start-tdd-from-examples.md) 手順 5）
+- 実装中に受け入れ例を直したくなった → Story を止め、シートの改訂（[PB-00020](00020-refine-acceptance-from-design.md) 手順 17）を別 PR（`Refs:` Epic）で通してから再開する。Story の PR でシートを書き換えない
 - 部分状態が本番に出た → Epic 単位の出荷制御が無い。案件 `AGENTS.md` にフラグ / デプロイ単位を書いてから再開する
 
 ## 関連

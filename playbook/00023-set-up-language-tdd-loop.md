@@ -30,7 +30,7 @@ tier: 2
 ### 1. 共通（全言語）
 
 1. 品質ゲートを 1 コマンドにする（`make check` / `task check` / `npm run check` など案件で 1 つ）。中身は **整形検査 → 静的検査 → 単体テスト → 外側テスト** の順。どれか 1 つでも落ちれば失敗
-2. 外側テストを内側と分けて走らせられるようにする（下表の「外側の分離」）。外側テストの名前かコメントに受け入れ例の**行 ID**（表名 + `#`。例: `acceptance-examples.md#境界-1`）を入れる。1 行 = 1 テスト（パラメタ化可）
+2. 外側テストを内側と分けて走らせられるようにする（下表の「外側の分離」）。外側テストの名前かコメントに受け入れ例の**行 ID**（例: `acceptance-examples.md#境界-1`。spec リポが別なら `<spec リポ>/specs/<feature>/acceptance-examples.md#境界-1`。commit は書かない）を入れる。1 行 = 1 テスト（パラメタ化可）。`PdO 暫定` の行のテストには `暫定` の印（タグ / 名前）を付ける
 3. 案件の `AGENTS.md` に「1 コマンド」「外側だけ走らせるコマンド」「採用した道具」を書く（[templates/spec-repo-agents.md](../templates/spec-repo-agents.md)）
 4. CI は PR 単位で 1 コマンドを回す。red コミットを許す前提なので、コミット単位では回さない（[ADR-00025](../adr/00025-control-work-units-commits-prs.md) §3）
 

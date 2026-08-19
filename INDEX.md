@@ -3,8 +3,8 @@
 
 # INDEX
 
-知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-006](adr/006-context-tiers.md)）。
-このファイルは生成物であり、手で編集しない（[ADR-007](adr/007-generated-index.md)）。文書側を直してから再生成する。
+知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-00006](adr/00006-context-tiers.md)）。
+このファイルは生成物であり、手で編集しない（[ADR-00007](adr/00007-generated-index.md)）。文書側を直してから再生成する。
 
 ## Tier 0 — 規範（毎セッション、全文）
 
@@ -47,7 +47,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | [aidd-setup](.agents/skills/aidd-setup/SKILL.md) | PB-00019 | AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。 |
 | [aidd-spec-triage](.agents/skills/aidd-spec-triage/SKILL.md) | PB-00012 | 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。 |
 | [aidd-tdd-start](.agents/skills/aidd-tdd-start/SKILL.md) | PB-00013 | ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。 |
-| [aidd-work-units](.agents/skills/aidd-work-units/SKILL.md) | PB-00022 | 承認済みの受け入れ例から Jira Story を切り、担当を決め、ブランチ・コミット・PR を規約（Conventional Commits + Issue キー、1 Story = 1 PR、規模上限）どおりに回す。「タスクに分解する」「コミットの粒度」「PR が大きい」「担当をどう割り振るか」と言われたときに使う。 |
+| [aidd-work-units](.agents/skills/aidd-work-units/SKILL.md) | PB-00022 | 承認済みの受け入れ例から Jira Story を切り、担当を決め、ブランチ・コミット・PR を規約（Conventional Commits + Issue キー、1 Story = 1 PR、規模上限）どおりに回す。「タスクに分解する」「コミットの粒度」「担当をどう割り振るか」と言われたときに使う。 |
 | [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-00002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNNNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
 
 ## Tier 2 — 決定と手順（作業種別が決まったら）

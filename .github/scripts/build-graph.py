@@ -406,7 +406,7 @@ def render(graph: Graph) -> str:
         add("（警告なし）")
     add("")
     add("警告は CI を落とさない。次のレビューで扱う候補として出している。")
-    add("エラーになる検査と、警告に留める基準は [ADR-013](adr/013-check-grades.md)。")
+    add("エラーになる検査と、警告に留める基準は [ADR-00013](adr/00013-check-grades.md)。")
     if graph.frozen_exempt:
         add("")
         add(f"根拠節と `related` の突き合わせは frozen {len(graph.frozen_exempt)} 件を"

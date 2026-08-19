@@ -1,6 +1,6 @@
 ---
 name: aidd-work-units
-description: 承認済みの受け入れ例から Jira Story を切り、担当を決め、ブランチ・コミット・PR を規約（Conventional Commits + Issue キー、1 Story = 1 PR、規模上限）どおりに回す。「タスクに分解する」「コミットの粒度」「PR が大きい」「担当をどう割り振るか」と言われたときに使う。
+description: 承認済みの受け入れ例から Jira Story を切り、担当を決め、ブランチ・コミット・PR を規約（Conventional Commits + Issue キー、1 Story = 1 PR、規模上限）どおりに回す。「タスクに分解する」「コミットの粒度」「担当をどう割り振るか」と言われたときに使う。
 metadata:
   aidd-playbook: PB-00022
   aidd-tier: "1"
@@ -22,7 +22,7 @@ metadata:
 
 ## 手順の要点
 
-1. 外側テスト 1 つになる行グループごとに Story を起票し、本文に spec のパス・行番号・KB ID を書く。1 PR に収まらないなら縦に割る
+1. 代表例 1 行と付随する境界・反例を 1 束 = 1 Story として起票し、本文に spec のパス・行 ID・KB ID・影響範囲の要約を書く。1 PR に収まらないなら束を分けるか縦に割る
 2. 3 条件（`承認:` が `PdO …`・契約確定か後方互換・影響範囲が閉じている）を満たす Story だけエージェントへ。責任者は人。並走は影響範囲（コード + 共有ファイル）が交わらないものだけ
 3. ブランチ `<KEY>-<slug>`、コミットは TDD のステップごとに 1 type、footer `Refs: <KEY>`、PR タイトル `<KEY> type(scope): 要約`、squash 見出しはキーを外す
 4. 規模（400 行 / 20 ファイル）と命名の検査を通し、人がレビュー（エージェント PR は責任者 + 別の人）し、base 最新で再ゲートしてから squash マージ。Epic が揃うまで出荷しない

@@ -33,14 +33,14 @@ SDD（requirements / design / tasks）で運用中の spec リポジトリ（実
 
 ### 1. 棚卸し（半日以内）
 
-1. 既存 spec の形を確認する: 機能ごとのディレクトリがあるか（なければ `specs/<feature>/` を新設する。製品全体の `docs/requirements.md` 1 本の構成なら、機能単位に分けてから始める）、requirements に受け入れ基準（EARS / Gherkin など）が既にあるか、design は誰が書いているか（PdO か開発か）、tasks は何と対応しているか
-2. spec リポと実装リポが同じか別かを確認する。別なら、テストや PR から受け入れ例を指す参照は「spec リポの URL + commit + 行 ID」にする
-3. Confluence に PdO の設計原文があるか（あるなら**要件の正本は Confluence か requirements.md のどちらか 1 つ**に決める）、Jira の階層（Epic / Story / Sub-task）とプロジェクトキー、言語とリポ構成（モノレポか）、CI の有無、エージェントの実行環境がネットワークに出られるかを書き出す
+1. 既存 spec の形を確認する: 機能ごとのディレクトリがあるか（なければ `specs/<feature>/` を新設する。製品全体の `docs/requirements.md` 1 本の構成なら、機能単位に分けてから始める）、requirements に受け入れ基準（EARS / Gherkin など）が既にあるか、design は誰が書いているか（PdO か開発か）、tasks.md が何を駆動しているか（チェックボックスで実行を駆動しているなら、Jira へのリンク化への移行を手順 9 で行う）
+2. spec リポと実装リポが同じか別かを確認する。別なら、テストが持つ参照は `<spec リポ>/specs/<feature>/acceptance-examples.md#<表>-<#>`（行 ID のみ。commit は Story と PR だけが持つ）にする
+3. Confluence に PdO の設計原文があるか（あるなら**要件の正本は Confluence か requirements.md のどちらか 1 つ**に決める）、Jira の階層（Epic / Story / Sub-task）とプロジェクトキー、言語とリポ構成（モノレポか）、CI の有無、エージェントの実行環境がネットワークに出られるか（harness ごとに）を書き出す。正本が Confluence でエージェントが読めない harness があるなら、**要件本文の取得経路**（MCP / 人が本文を貼る / エクスポートを commit しない読み取り用ファイルとして渡す）を決めて `AGENTS.md` に書く
 4. 既に受け入れ基準が requirements にある場合、それは「ルール」として残し、受け入れ例シートは「例」に落とす場所と位置づける。二重管理にしないため、例の各行は `出所: 要件 REQ-n` でルールを指す（[ADR-00024](../adr/00024-refine-acceptance-with-bounded-review-rounds.md) §3）
 
 ### 2. 入口を 1 ファイル置く
 
-5. [templates/spec-repo-agents.md](../templates/spec-repo-agents.md) を案件の `AGENTS.md` としてコピーし、案件の値（言語・1 コマンド・Jira キー・**Epic 単位の出荷制御**・scope 語彙・規模の除外パターン・階層の対応表・共有ファイル一覧）だけ埋める。kernel の規範はコピーせず URL で参照する（[ADR-00019](../adr/00019-kernel-and-project-layers.md)）。URL は raw（`raw.githubusercontent.com`）を書き、ネットワークのない環境ではローカル clone のパスを併記する。Claude Code を使うなら `CLAUDE.md` に `@AGENTS.md` の 1 行
+5. [templates/spec-repo-agents.md](../templates/spec-repo-agents.md) を案件の `AGENTS.md` としてコピーし、案件の値（言語・1 コマンド・Jira キー・**Epic 単位の出荷制御**・scope 語彙・規模の除外パターン・階層の対応表（harness ごと）・共有ファイル一覧・要件本文の取得経路・参照する kernel の commit / tag）だけ埋める。kernel の規範はコピーせず URL で参照する（[ADR-00019](../adr/00019-kernel-and-project-layers.md)）。URL は raw（`raw.githubusercontent.com`）を書き、ネットワークのない harness ではワークスペース内に kernel を置く（submodule か multi-root で `<clone>/playbook/…` を同じ相対パスで読む）。Claude Code を使うなら `CLAUDE.md` に `@AGENTS.md` の 1 行
 6. 案件限りの ADR の置き場（`specs/<feature>/adr/` か `adr/`）を 1 行で決めて書く。案件 `adr/` を置かないなら、この行は省いてよい
 7. kernel の skill（`.agents/skills/aidd-*`）は案件リポへ**コピーしない**（配布方法は [OQ-00041](../ledger/open-questions.md)）。エージェントには `AGENTS.md` の URL 表から kernel の playbook を読ませる。案件リポが kernel の CI スクリプトを複製している場合、skill をコピーすると `aidd-playbook` の検査で ERROR になる
 
@@ -62,7 +62,7 @@ SDD（requirements / design / tasks）で運用中の spec リポジトリ（実
 
 ### 4. Jira と Confluence をつなぐ
 
-10. Jira: Epic = 機能、Story = 受け入れ例の束（代表例 1 行 + 付随する境界・反例）。Story 本文に spec のパス（別リポなら URL + commit）・行 ID・依拠 KB の ID・影響範囲の要約を書く。進行の状態は Jira だけが持ち、git には書かない
+10. Jira: 機能ごとに **Epic を先に起票**する（承認前の書き戻し・組み込み PR の `Refs:` に使う）。Story = 受け入れ例の束（代表例 1 行 + 付随する境界・反例）。Story 本文に spec のパス（別リポなら URL + commit）・行 ID・依拠 KB の ID・影響範囲の要約・フラグ名と OFF 時の挙動を書く。進行の状態は Jira だけが持ち、git には書かない
 11. Confluence: PdO の設計原文はページのまま。spec リポはリンクとページバージョンで指し、本文を転記しない（[ADR-00008](../adr/00008-sdd-bridge.md)）。要件の正本が Confluence なら、回答の書き戻し先は PdO が更新する Confluence ページであり、出所には更新後のページバージョンを書く（[PB-00020](00020-refine-acceptance-from-design.md) 手順 11）。PdO の回答・承認は Confluence か Jira のコメントでもよく、その URL を出所に書く（インラインコメントは解決で非表示になるため引用も残す）
 12. Issue キーでの紐づけを有効にする（GitHub と Jira の連携設定は案件の管理者が行う。kernel は規約だけ）
 
@@ -70,7 +70,7 @@ SDD（requirements / design / tasks）で運用中の spec リポジトリ（実
 
 13. 言語ごとの 1 コマンドの品質ゲートを作る（[PB-00023](00023-set-up-language-tdd-loop.md)）。外側テストを含める。PR 単位の CI で回す（コミット単位では回さない）
 14. 作業単位の規約を CI に入れる（[ADR-00025](../adr/00025-control-work-units-commits-prs.md) §2 の正規表現と §3 の既定値）: コミット見出しと footer（commitlint 等。squash 前の非マージコミットが対象、bot は除外）、PR タイトル、ブランチ名、PR の変更行数 / ファイル数（除外パターン適用後）。ツールは案件が選ぶ。案件の PR テンプレートは [templates/project-pr.md](../templates/project-pr.md)
-15. コードグラフ（`graphify extract . --code-only` または同等）をローカルで出せるようにし、`graphify-out/` を `.gitignore` に入れる。`graphify install`（規則・skill・フックの書き込み）は使わない（[PB-00024](00024-choose-model-effort-context.md)）
+15. コードグラフをローカルで出せるようにする（`pip install graphifyy` — PyPI 名は `graphifyy`。`graphify extract . --code-only`）。`graphify-out/` を `.gitignore` に入れる。`graphify install`（規則・skill・フックの書き込み）は使わない（[PB-00024](00024-choose-model-effort-context.md)）。モノレポなら workspace import が辺になるかを 1 回 `affected` で確かめ、ならなければ共有パッケージを共有ファイル一覧に足す
 
 ### 6. 1 機能で試走し、調整する
 
