@@ -13,8 +13,11 @@ tags:
 related:
   - EVID-00026
   - EVID-00029
+  - EVID-00031
   - ADR-00020
+  - ADR-00023
   - ADR-00017
+  - REV-00009
 ---
 
 ## 主張
@@ -27,14 +30,18 @@ related:
 - この仕様は [EVID-00026](00026-no-principal-or-document-acl.md) と矛盾しない。現行 KB の Frontmatter と CI に principal が無いのは欠陥ではなく、認証を git に置かないという境界の帰結である。`owners` が認可に使われていないことも、同じ境界と一致する。
 - [AGENTS.md](../AGENTS.md) は既にトークンと個人データの commit を禁じている。Okta のセッション、リフレッシュトークン、ソースシステムへ委譲したトークンは、その禁止の対象である。git の clone / push に使う GitHub 側の鍵も、このリポジトリの本文へは書かない。
 - git が認証を知らない以上、エージェントがこのリポジトリだけを読んで「今ログインしている人」を復元することはできない。ログイン主体が要る作業（ソース ACL の加味、ワークフローの担当）は PF 側で、Okta セッションがあるあいだに行う。
+- 上記は**認証付き PF 経路**の観測である。[ADR-00023](../adr/00023-pf-first-step-agent-callable-client.md) が定めるクライアント第一歩（非認証のコマンド面で draft→検査→PR）とは層が違う。第一歩は IdP セッションを前提にしない。認証付き経路は製品着工側（[REV-00007](../reviews/00007-platform-acl-adversarial-review.md) / [REV-00009](../reviews/00009-repo-consistency-adversarial-review.md)）で扱う。
 
 ## 限界
 
-Okta のテナント構成、グループと案件の対応、SCIM、MFA、どの IdP 属性を PF が読むかは、本リポジトリでは観測していない。GitHub へ PR を出すときの git 主体も未決である。運用者は直後に、Okta は今の利用例であり kernel の契約は汎用に保つと訂正した（[EVID-00029](00029-keep-platform-contract-generic.md)）。この文書が言えるのは「その時点で Okta を使うと言った」「git は認証情報を使わない」までである。
+Okta のテナント構成、グループと案件の対応、SCIM、MFA、どの IdP 属性を PF が読むかは、本リポジトリでは観測していない。GitHub へ PR を出すときの git 主体も未決である。運用者は直後に、Okta は今の利用例であり kernel の契約は汎用に保つと訂正した（[EVID-00029](00029-keep-platform-contract-generic.md)）。この文書が言えるのは「その時点で Okta を使うと言った」「git は認証情報を使わない」「認証付き経路とクライアント第一歩は層が違う」までである。
 
 ## 関連
 
 - [REV-00007](../reviews/00007-platform-acl-adversarial-review.md)
+- [REV-00009](../reviews/00009-repo-consistency-adversarial-review.md)
 - [ADR-00020](../adr/00020-platform-is-a-client.md)
+- [ADR-00023](../adr/00023-pf-first-step-agent-callable-client.md)
 - [EVID-00026](00026-no-principal-or-document-acl.md)
 - [EVID-00029](00029-keep-platform-contract-generic.md)
+- [EVID-00031](00031-agents-primary-path-is-files-shell-tools.md)

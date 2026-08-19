@@ -70,6 +70,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-00020 | 認証は git の外の IdP、git は認証情報を使わず、PF は汎用クライアントとする | [adr/00020-platform-is-a-client.md](adr/00020-platform-is-a-client.md) | active | 2026-08-19 |
 | ADR-00021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/00021-two-layer-setup-guide.md](adr/00021-two-layer-setup-guide.md) | active | 2026-08-19 |
 | ADR-00022 | 全文書の ID とファイル名を5桁に統一する | [adr/00022-five-digit-id-scheme.md](adr/00022-five-digit-id-scheme.md) | active | 2026-08-19 |
+| ADR-00023 | PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI、必要なら MCP）とする | [adr/00023-pf-first-step-agent-callable-client.md](adr/00023-pf-first-step-agent-callable-client.md) | active | 2026-08-19 |
 | PB-00001 | evidence を追加する | [playbook/00001-add-evidence.md](playbook/00001-add-evidence.md) | active | 2026-08-19 |
 | PB-00002 | ADR を書く | [playbook/00002-write-adr.md](playbook/00002-write-adr.md) | active | 2026-08-19 |
 | PB-00003 | レビューサイクルを回す | [playbook/00003-run-review-cycle.md](playbook/00003-run-review-cycle.md) | active | 2026-08-19 |
@@ -124,6 +125,7 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-00028 | 今の利用では認証は Okta、git は認証情報を使わない | [evidence/00028-okta-auth-git-holds-no-credentials.md](evidence/00028-okta-auth-git-holds-no-credentials.md) | active | 2026-08-19 |
 | EVID-00029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/00029-keep-platform-contract-generic.md](evidence/00029-keep-platform-contract-generic.md) | active | 2026-08-19 |
 | EVID-00030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/00030-human-entry-needs-two-layer-setup.md](evidence/00030-human-entry-needs-two-layer-setup.md) | active | 2026-08-19 |
+| EVID-00031 | 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しである | [evidence/00031-agents-primary-path-is-files-shell-tools.md](evidence/00031-agents-primary-path-is-files-shell-tools.md) | active | 2026-08-19 |
 | REV-00001 | Bootstrap design review | [reviews/00001-bootstrap-design-review.md](reviews/00001-bootstrap-design-review.md) | active | 2026-08-19 |
 | REV-00002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/00002-index-sdd-skills-tier-review.md](reviews/00002-index-sdd-skills-tier-review.md) | active | 2026-08-19 |
 | REV-00003 | 参照グラフによる初回の構造レビュー | [reviews/00003-first-graph-review.md](reviews/00003-first-graph-review.md) | active | 2026-08-19 |
@@ -131,6 +133,8 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | REV-00005 | リポジトリ全体の敵対レビューと取り込み | [reviews/00005-adversarial-review.md](reviews/00005-adversarial-review.md) | active | 2026-08-19 |
 | REV-00006 | ライフサイクル矛盾の解消と、自己レビューで見つけた運用上の穴 | [reviews/00006-lifecycle-self-review.md](reviews/00006-lifecycle-self-review.md) | active | 2026-08-19 |
 | REV-00007 | PF・ログイン ACL・実行ワークフロー構想に対する敵対レビュー | [reviews/00007-platform-acl-adversarial-review.md](reviews/00007-platform-acl-adversarial-review.md) | active | 2026-08-19 |
+| REV-00008 | PF クライアント表面（IDE 拡張 → アプリ / Web / CLI）構想に対する敵対レビュー | [reviews/00008-client-surface-adversarial-review.md](reviews/00008-client-surface-adversarial-review.md) | active | 2026-08-19 |
+| REV-00009 | リポジトリ全体の批判レビューと矛盾点検（PF 草案取り込み後） | [reviews/00009-repo-consistency-adversarial-review.md](reviews/00009-repo-consistency-adversarial-review.md) | active | 2026-08-19 |
 
 ## 内訳
 
@@ -138,9 +142,9 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- |
 | Tier 0 | 2 |
 | Tier 1 | 8 |
-| Tier 2 | 41 |
-| Tier 3 | 37 |
-| status: active | 77 |
+| Tier 2 | 42 |
+| Tier 3 | 40 |
+| status: active | 81 |
 | status: frozen | 5 |
 | status: draft | 0 |
 | status: deprecated | 0 |
