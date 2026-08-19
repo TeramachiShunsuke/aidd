@@ -30,7 +30,7 @@ tier: 2
 ### 1. 共通（全言語）
 
 1. 品質ゲートを 1 コマンドにする（`make check` / `task check` / `npm run check` など案件で 1 つ）。中身は **整形検査 → 静的検査 → 単体テスト → 外側テスト** の順。どれか 1 つでも落ちれば失敗
-2. 外側テストを内側と分けて走らせられるようにする（下表の「外側の分離」）。外側テストの名前かコメントに受け入れ例の行番号を入れる（例: `acceptance-examples.md#境界-1`）
+2. 外側テストを内側と分けて走らせられるようにする（下表の「外側の分離」）。外側テストの名前かコメントに受け入れ例の**行 ID**（表名 + `#`。例: `acceptance-examples.md#境界-1`）を入れる。1 行 = 1 テスト（パラメタ化可）
 3. 案件の `AGENTS.md` に「1 コマンド」「外側だけ走らせるコマンド」「採用した道具」を書く（[templates/spec-repo-agents.md](../templates/spec-repo-agents.md)）
 4. CI は PR 単位で 1 コマンドを回す。red コミットを許す前提なので、コミット単位では回さない（[ADR-00025](../adr/00025-control-work-units-commits-prs.md) §3）
 
@@ -40,11 +40,11 @@ tier: 2
 
 | 言語 | 整形検査 | 静的検査 | 単体テスト | 外側の分離 | 1 コマンドの例 |
 | --- | --- | --- | --- | --- | --- |
-| Java | Spotless（`spotlessCheck`） | Checkstyle / Error Prone、アーキ規則は ArchUnit（テストとして走る） | JUnit 5 + AssertJ | `@Tag("acceptance")` と Gradle の `test` / `acceptanceTest` タスク分離（Maven なら Surefire / Failsafe） | `./gradlew check`（`check` に全段を依存させる） |
-| Python | `ruff format --check` | `ruff check`、型は `mypy` か `pyright` | pytest | `@pytest.mark.acceptance` と `-m acceptance` / `-m "not acceptance"` | `make check`（uv で固定した環境） |
-| TypeScript | `prettier --check` または `biome ci` | ESLint（typescript-eslint）または Biome、型は `tsc --noEmit` | Vitest（または Jest） | `tests/acceptance/` ディレクトリか Vitest の `project` 分離。UI なら Playwright を外側に | `npm run check`（`format:check && lint && typecheck && test && test:acceptance`） |
-| JavaScript | 同上 | 同上。型は JSDoc + `tsc --checkJs`（段階導入） | 同上 | 同上 | 同上 |
-| Go | `gofmt -l` / `goimports -l` が空 | `go vet`、`staticcheck` または `golangci-lint` | `go test ./...`（テーブル駆動） | `//go:build acceptance` タグと `go test -tags acceptance ./...` | `make check` |
+| Java | Spotless（`spotlessCheck`） | Checkstyle / Error Prone、アーキ規則は ArchUnit（テストとして走る） | JUnit 5 + AssertJ | `@Tag("acceptance")`。Gradle は JVM Test Suite プラグインで `acceptanceTest` を定義し `check.dependsOn` に足す（既定タスクではない）。Maven は Surefire（単体）/ Failsafe（外側、`<groups>acceptance</groups>`） | `./gradlew check` / `mvn -B verify` |
+| Python | `ruff format --check` | `ruff check`、型は `mypy` か `pyright` | pytest | `@pytest.mark.acceptance` と `-m acceptance` / `-m "not acceptance"`。マーカーは `pyproject.toml` の `[tool.pytest.ini_options] markers` に登録し `--strict-markers` を付ける | `make check`（uv で固定した環境） |
+| TypeScript | `prettier --check`（Biome なら `biome ci` が整形 + lint を 1 回で行う） | ESLint（typescript-eslint）または Biome、型は `tsc --noEmit` | Vitest（または Jest） | `tests/acceptance/` ディレクトリか Vitest の `projects` 分離。UI なら Playwright を外側に | `npm run check`（`format:check && lint && typecheck && test && test:acceptance`） |
+| JavaScript | 同上 | 同上。型は JSDoc + `tsc --allowJs --checkJs --noEmit`（段階導入。`--noEmit` がないと出力で失敗する） | 同上 | 同上 | 同上 |
+| Go | `gofmt -l` / `goimports -l` が空 | `go vet`、`staticcheck` または `golangci-lint` | `go test ./...`（テーブル駆動） | 既定は別パッケージ / ディレクトリ（例 `acceptance/`）。ビルドタグ `//go:build acceptance` を使うなら `go vet -tags acceptance ./...` と `go test -tags acceptance ./...` を並走させる（タグ付きファイルは無印の `go vet` / `go build` から外れる） | `make check` |
 
 ### 3. 言語別の注意（ループの回し方は同じ）
 

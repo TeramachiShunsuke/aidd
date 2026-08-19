@@ -1,6 +1,6 @@
 ---
 name: aidd-embed-spec-repo
-description: SDD（requirements / design / tasks）で運用中の spec / 実装リポジトリに、AIDD のワークフロー（要件 → 受け入れ例 → TDD → タスク / PR、Jira / Confluence 接続、品質ゲート、モデル階層）を組み込む。「既存プロジェクトに導入する」「spec リポに組み込む」「SpecDocs に AIDD を入れる」「Jira と Confluence につなぐ」「AGENTS.md を案件に置く」と言われたときに使う。
+description: SDD で運用中の spec / 実装リポジトリに AIDD のワークフロー（要件 → 受け入れ例 → TDD → Story / PR、Jira / Confluence 接続、品質ゲート）を組み込む。「既存プロジェクトに導入する」「spec リポに組み込む」「Jira と Confluence につなぐ」と言われたときに使う。
 metadata:
   aidd-playbook: PB-00021
   aidd-tier: "1"
@@ -23,8 +23,8 @@ metadata:
 
 ## 手順の要点
 
-1. 棚卸し（spec の形、Confluence / Jira、言語、CI）のうえ、案件 `AGENTS.md` を雛形から置き、kernel は URL で参照する
-2. 機能ディレクトリに受け入れ例シートと記録を置き、Jira の Story = 外側テスト 1 つの行グループ、状態は Jira だけに
+1. 棚卸し（spec の形、Confluence / Jira、言語、CI、ネットワーク）のうえ、案件 `AGENTS.md` を雛形から置き、kernel は raw URL（またはローカル clone）で参照する。Epic 単位の出荷制御を必ず書く
+2. 機能ディレクトリに受け入れ例シートと記録を置き、Jira の Story = 受け入れ例の束（代表例 + 付随する境界・反例）、進行の状態は Jira だけに（tasks.md はリンクのみ）
 3. 1 コマンドの品質ゲートと、コミット / PR の命名・規模検査を CI に入れる。コードグラフはローカル出力、常時注入しない
 4. 1 機能で要件 → 例 → テスト → PR を通し、案件の上書き値を決める
 

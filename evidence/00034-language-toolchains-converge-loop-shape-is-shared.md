@@ -29,11 +29,11 @@ Java / Python / TypeScript / JavaScript / Go のいずれも、テストラン�
 | Java | [JUnit 5](https://junit.org/junit5/)（Jupiter） | [Spotless](https://github.com/diffplug/spotless)（google-java-format 等を適用） | Checkstyle / Error Prone、アーキテクチャ規則は [ArchUnit](https://www.archunit.org/) | ビルドは Maven か Gradle。アサーションは [AssertJ](https://assertj.github.io/doc/) が広く使われる |
 | Python | [pytest](https://docs.pytest.org/) | [Ruff](https://docs.astral.sh/ruff/)（formatter を内蔵） | Ruff（lint）、型は [mypy](https://mypy.readthedocs.io/) または [Pyright](https://github.com/microsoft/pyright) | 環境・依存は [uv](https://docs.astral.sh/uv/) 等。性質テストは [Hypothesis](https://hypothesis.readthedocs.io/) |
 | TypeScript | [Vitest](https://vitest.dev/)（または Jest） | [Prettier](https://prettier.io/) または [Biome](https://biomejs.dev/) | ESLint（typescript-eslint）または Biome、型は `tsc --noEmit` | E2E は [Playwright](https://playwright.dev/) |
-| JavaScript | 同上 | 同上 | 同上。型ゲートは JSDoc + `tsc --checkJs`（[tsconfig checkJs](https://www.typescriptlang.org/tsconfig/#checkJs)）で代替できる | TS と道具を共有できる |
-| Go | 標準 [testing](https://pkg.go.dev/testing)（`go test`、テーブル駆動） | `gofmt` / [goimports](https://pkg.go.dev/golang.org/x/tools/cmd/goimports)（ツールチェーン同梱） | `go vet`、[staticcheck](https://staticcheck.dev/)、[golangci-lint](https://golangci-lint.run/) | アサーションは標準で足りる。[testify](https://github.com/stretchr/testify) を使う例も多い |
+| JavaScript | 同上 | 同上 | 同上。型ゲートは JSDoc + `tsc --allowJs --checkJs --noEmit`（[tsconfig checkJs](https://www.typescriptlang.org/tsconfig/#checkJs)）で代替できる | TS と道具を共有できる |
+| Go | 標準 [testing](https://pkg.go.dev/testing)（`go test`、テーブル駆動） | `gofmt`（ツールチェーン同梱）/ [goimports](https://pkg.go.dev/golang.org/x/tools/cmd/goimports)（`golang.org/x/tools`） | `go vet`、[staticcheck](https://staticcheck.dev/)、[golangci-lint](https://golangci-lint.run/) | アサーションは標準で足りる。[testify](https://github.com/stretchr/testify) を使う例も多い |
 
-- Go は整形器（gofmt）と `go vet` がツールチェーンに同梱され、選択の余地がほぼない。Python は Ruff が lint と整形を 1 つに束ねた。TS / JS は Prettier + ESLint か Biome の 2 択に収束している。Java はビルドツール（Maven / Gradle）の差があるが、テストは JUnit 5 で一致する。
-- 外側テスト（受け入れ例 1 行 = 1 テスト）と内側テストの分離は、どの言語でも「タグ / マーカー / ビルド制約 / ディレクトリ」で表現できる（JUnit の `@Tag`、pytest の `-m` マーカー、Vitest の `describe` 分離やディレクトリ、Go の `//go:build` 制約）。
+- Go は整形器（gofmt）と `go vet` がツールチェーンに同梱され、選択の余地がほぼない（goimports は `x/tools` だが事実上の標準）。Python は Ruff が lint と整形を 1 つに束ねた。TS / JS は Prettier + ESLint か Biome の 2 択に収束している。Java はビルドツール（Maven / Gradle）の差があるが、テストは JUnit 5 で一致する。
+- 外側テスト（受け入れ例 1 行 = 1 テスト。パラメタ化可）と内側テストの分離は、どの言語でも「タグ / マーカー / ビルド制約 / ディレクトリ」で表現できる（JUnit の `@Tag`、pytest の `-m` マーカー、Vitest の `projects` やディレクトリ、Go のディレクトリ分離か `//go:build` 制約）。ただしビルド制約で外したファイルは無印の `go vet` / `go build` の対象から外れるため、静的検査も同じタグで回す必要がある。
 - 本リポジトリの方針は「振る舞いはテスト、契約は定義ファイル、決定だけ文書」（[EVID-00018](00018-tests-outlive-design-docs.md)、[ADR-00014](../adr/00014-implementation-spec-split.md)）であり、言語によって変わらない。道具の銘柄は案件の考え方（[ADR-00019](../adr/00019-kernel-and-project-layers.md)）に属する。
 - コミットの粒度を TDD のステップに合わせる規約（[EVID-00033](00033-work-units-align-to-acceptance-and-small-prs.md)）も、言語に依存しない。
 

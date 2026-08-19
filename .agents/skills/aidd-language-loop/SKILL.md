@@ -1,6 +1,6 @@
 ---
 name: aidd-language-loop
-description: Java / Python / TypeScript / JavaScript / Go のそれぞれで、TDD ループ（外側テスト → red / green / refactor）と 1 コマンドの品質ゲート（整形 → 静的検査 → 単体 → 外側）を立ち上げる。「この言語で TDD をどう回すか」「テスト・lint・整形をどう揃えるか」「品質ゲートを 1 コマンドにしたい」「言語ごとの開発ワークフロー」と言われたときに使う。
+description: Java / Python / TypeScript / JavaScript / Go で TDD ループと 1 コマンドの品質ゲート（整形 → 静的検査 → 単体 → 外側）を立ち上げる。「この言語で TDD をどう回すか」「品質ゲートを 1 コマンドにしたい」「言語ごとの開発ワークフロー」と言われたときに使う。
 metadata:
   aidd-playbook: PB-00023
   aidd-tier: "1"

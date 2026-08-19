@@ -1,5 +1,5 @@
 # 意味グラフ（Graphify 等）の出力。探索用のローカル成果物で、commit しない。
-# 理由は ADR-010 を参照。
+# 理由は ADR-00010 を参照。
 graphify-out/
 
 # Python のバイトコードキャッシュ（生成物、commit しない）。

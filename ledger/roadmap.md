@@ -12,47 +12,35 @@ tags:
 
 # Roadmap
 
-知識ベース（kernel）自体の進め方。**期日は書かない**（期日と担当は Jira 等の状態側に置く。[ADR-00025](../adr/00025-control-work-units-commits-prs.md) §5）。書くのは順序・依存・完了条件・錨（ADR / PB / OQ / EVID）だけ。錨のない項目は載せない。完了した項目は changelog に 1 行残して消す。
+知識ベース（kernel）自体の進め方。**期日と担当は書かない**（進行の状態は git の外。[ADR-00020](../adr/00020-platform-is-a-client.md) 結果・トレードオフ）。「正確」の定義は次の 3 つ: 錨（ADR / PB / OQ / EVID）が実在する、完了条件が検査できる、依存が循環しない。錨は Markdown リンクで書き、`build-graph.py` の参照解決検査に乗せる。錨のない項目は載せない。完了した項目は changelog に 1 行残して消す。未分類の問いは [open-questions.md](open-questions.md) を見る（ここに写さない）。
 
-## 段階 1 — 今の PR で `draft` として入ったもの（人の判断待ち）
+## 段階 1 — `draft` で入っているもの（人の判断待ち）
 
 | # | 項目 | 錨 | 完了条件 | 依存 |
 | --- | --- | --- | --- | --- |
-| 1-1 | PdO 要件 → 受け入れ例のワークフロー | ADR-00024 / PB-00020 / EVID-00032 | 人が `draft` → `active`（OQ-00042）。その後、ADR-00014 の §3 と AGENTS の一文を同期し、CLAIM-00034 の草案依存注記を外す | — |
-| 1-2 | 作業単位の統制（タスク・担当・コミット・PR・Jira / Confluence） | ADR-00025 / PB-00022 / EVID-00033 | 同上（OQ-00042）。案件 1 つで CI 検査（命名・規模）が回る | 1-1 |
-| 1-3 | 言語別 TDD ループ（Java / Python / TS / JS / Go） | ADR-00026 / PB-00023 / EVID-00034 | 同上。案件で 1 コマンドの品質ゲートが 1 言語以上で動く | 1-2 |
-| 1-4 | モデル階層・effort・文脈（Graphify 影響範囲） | ADR-00027 / PB-00024 / EVID-00035 | 同上。案件の `AGENTS.md` に階層対応表があり、`--code-only` の影響範囲が 1 タスクで使われる | 1-2 |
-| 1-5 | SDD spec リポへの組み込み手順 | PB-00021 / templates/spec-repo-agents.md | 1 案件で手順 1〜16 を通し、1 PR がマージされる。試走の所見を PB-00021 に反映 | 1-1〜1-4 |
+| 1-1 | PdO 要件 → 受け入れ例のワークフロー | [ADR-00024](../adr/00024-refine-acceptance-with-bounded-review-rounds.md) / [PB-00020](../playbook/00020-refine-acceptance-from-design.md) / [EVID-00032](../evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md) | 人が `draft` → `active`（[OQ-00042](open-questions.md)）。その後、ADR-00014 §3 と AGENTS の一文を同期し、CLAIM-00034 の草案依存注記を外す | — |
+| 1-2 | 作業単位の統制（Story・担当・コミット・PR・Jira / Confluence）と、モデル階層・effort・文脈（影響範囲）。互いに参照するため同時に `active` にする | [ADR-00025](../adr/00025-control-work-units-commits-prs.md) / [PB-00022](../playbook/00022-run-work-units-from-acceptance.md) / [EVID-00033](../evidence/00033-work-units-align-to-acceptance-and-small-prs.md) / [ADR-00027](../adr/00027-cost-and-context-per-task.md) / [PB-00024](../playbook/00024-choose-model-effort-context.md) / [EVID-00035](../evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md) / [EVID-00036](../evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md) | 同上（OQ-00042）。案件の `AGENTS.md` に階層対応表と出荷制御がある | 1-1 |
+| 1-3 | 言語別 TDD ループ（Java / Python / TS / JS / Go） | [ADR-00026](../adr/00026-fix-loop-shape-let-projects-pick-toolchains.md) / [PB-00023](../playbook/00023-set-up-language-tdd-loop.md) / [EVID-00034](../evidence/00034-language-toolchains-converge-loop-shape-is-shared.md) | 同上（OQ-00042） | 1-2 |
+| 1-4 | SDD spec リポへの組み込み手順の試走 | [PB-00021](../playbook/00021-embed-workflow-in-spec-repo.md) | 1 案件で手順 1〜17 を通し、1 PR がマージされる（CI の命名・規模検査が回り、1 コマンドの品質ゲートが 1 言語以上で動き、`affected` の影響範囲が 1 Story で使われ、PR にモデル節がある）。試走の所見を PB-00021 に反映 | 1-1〜1-3 |
 
 ## 段階 2 — 試走の集計で決めること
 
 | # | 項目 | 錨 | 完了条件 | 依存 |
 | --- | --- | --- | --- | --- |
-| 2-1 | 巡回数 3・回答期限 5 営業日・観点 6 つの見直し | OQ-00040 / OQ-00022 | 2 機能以上の記録（巡数・残 P0・回答所要）を集計し、既定値を確定または変更 | 1-5 |
-| 2-2 | kernel skill の案件リポへの配布方法 | OQ-00041 / ADR-00009 / ADR-00011 | URL 参照 / コピー / submodule のいずれかを ADR で決める | 1-5 |
-| 2-3 | モデル階層ごとの誤り率・コスト・昇格回数の集計 | OQ-00043 / ADR-00027 | PR 本文の記録が 20 件以上溜まり、既定の階層表を確定または変更 | 1-4, 1-5 |
-| 2-4 | Graphify `--code-only` の精度（言語別）の観測 | EVID-00013 / EVID-00035 / ADR-00027 | 5 言語で影響範囲の見積りと実際の変更ファイルを比較し、evidence に追記 | 1-3, 1-4 |
-| 2-5 | PR 規模 400 行 / 20 ファイルの既定の見直し | ADR-00025 / EVID-00033 | 超過 PR の件数と理由を集計し、既定値を確定または変更 | 1-2, 1-5 |
+| 2-1 | 巡回数 3・回答期限 5 営業日・観点 6 つの見直し | [OQ-00040](open-questions.md) / [OQ-00022](open-questions.md) | 2 機能以上の記録（巡数・残 P0・回答所要）を集計し、既定値を確定または変更 | 1-4 |
+| 2-2 | kernel skill の案件リポへの配布方法 | [OQ-00041](open-questions.md) / [ADR-00009](../adr/00009-skills-as-playbook-entrypoints.md) / [ADR-00011](../adr/00011-cross-tool-agent-integration.md) | URL 参照 / コピー / submodule のいずれかを ADR で決める | 1-4 |
+| 2-3 | モデル階層ごとの初回合格率・昇格回数の集計 | [OQ-00043](open-questions.md) / [ADR-00027](../adr/00027-cost-and-context-per-task.md) | PR 本文「モデル」節の記録が 20 件以上溜まり、既定の階層表と昇格規則を確定または変更 | 1-4 |
+| 2-4 | Graphify `--code-only` / `affected` の実リポでの再現率（言語別） | [EVID-00036](../evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md) / [EVID-00013](../evidence/00013-graphify-needs-llm-for-docs.md) | 玩具サンプルでの動作は EVID-00036 で確認済み。実リポ 1 つ以上で `affected` の出力と実際の変更ファイルを比較し、evidence に追記 | 1-4 |
+| 2-5 | PR 規模 400 行 / 20 ファイルと共有ファイル一覧の見直し | [ADR-00025](../adr/00025-control-work-units-commits-prs.md) / [EVID-00033](../evidence/00033-work-units-align-to-acceptance-and-small-prs.md) | 超過 PR の件数と理由、合流後に赤くなった件数を集計し、既定値を確定または変更 | 1-4 |
+| 2-6 | Tier 0 / 1 の総量上限 | [OQ-00004](open-questions.md) / [EVID-00009](../evidence/00009-context-budget-is-finite.md) | 今回の追加で INDEX と skill description が増えた。上限値を 1 つ仮置きし、超えたら skill の統合か Tier の見直しをする | — |
 
 ## 段階 3 — PF（クライアント第一歩）と KB の機械の強化
 
 | # | 項目 | 錨 | 完了条件 | 依存 |
 | --- | --- | --- | --- | --- |
-| 3-1 | エージェント可呼び面（CLI 正準、必要なら MCP）を別リポで実装 | ADR-00023 / OQ-00038 | 別リポが kernel の契約（読む・問い合わせる・PR を出す）を満たし、OQ-00038 を閉じる | 2-2 |
-| 3-2 | 検査器の統合と fixture テスト | OQ-00014 | staleness / index / graph が 1 検証器になり、fixture で回帰を守る | — |
-| 3-3 | 規範文書に散らばる手書き表の単一出所化 | OQ-00019 | Tier 表・ツール対応表が 1 か所から生成される | 3-2 |
-| 3-4 | レビュー判定の指紋化、評価メタデータ | OQ-00025 / OQ-00015 | ADR で採否を決める | 3-2 |
-| 3-5 | UI デザイン成果物の境界を ADR 化 | OQ-00028 / PB-00016 | ADR が `active` | 1-1 |
-
-## 段階 4 — 測って判断すること（順序未定）
-
-| # | 項目 | 錨 |
-| --- | --- | --- |
-| 4-1 | AIDD の効果測定（検索成功率・手戻り・レビュー時間・グラフ警告の有効率） | OQ-00017 |
-| 4-2 | 実行ワークフローの状態の置き場、PF が PR を出す GitHub 主体 | OQ-00033 / OQ-00034 |
-| 4-3 | アカウント由来の原文の昇格層、散在ソースの取得方式 | OQ-00032 / OQ-00029 |
-| 4-4 | 台帳の断片化、並行 PR の ID 衝突の機械決着、連番の限界 | OQ-00024 / OQ-00026 / OQ-00027 |
-| 4-5 | 期限日の集中の分散、鮮度窓のドメイン別短縮、Tier 0/1 の総量上限 | OQ-00018 / OQ-00001 / OQ-00004 |
-| 4-6 | 生成物の commit 継続か CI 生成か、graph.json 出力、意味グラフの定期探索 | OQ-00005 / OQ-00010 / OQ-00009 / OQ-00023 |
-| 4-7 | frozen 文書のズレ解消、frozen → deprecated の CI 例外 | OQ-00020 / OQ-00002 |
-| 4-8 | Windows の symlink、実機での skill 発火の CI 化 | OQ-00011 / OQ-00012 |
+| 3-1 | エージェント可呼び面（CLI 正準、必要なら MCP）を別リポで実装 | [ADR-00023](../adr/00023-pf-first-step-agent-callable-client.md) / [OQ-00038](open-questions.md) | 別リポが kernel の契約（読む・問い合わせる・PR を出す）を満たし、OQ-00038 を閉じる | — |
+| 3-2 | 検査器の統合と fixture テスト | [OQ-00014](open-questions.md) | staleness / index / graph が 1 検証器になり、fixture で回帰を守る | — |
+| 3-3 | 規範文書に散らばる手書き表の単一出所化 | [OQ-00019](open-questions.md) | Tier 表・ツール対応表が 1 か所から生成される | 3-2 |
+| 3-4 | レビュー判定の指紋化、評価メタデータ | [OQ-00025](open-questions.md) / [OQ-00015](open-questions.md) | ADR で採否を決める | 3-2 |
+| 3-5 | UI デザイン成果物の境界を ADR 化 | [OQ-00028](open-questions.md) / [PB-00016](../playbook/00016-large-project-usage-map.md) | ADR が `active` | 1-1 |
+| 3-6 | kernel / PF 側の実行ワークフローの状態の置き場 | [OQ-00033](open-questions.md) / [OQ-00034](open-questions.md) | 案件側は Jira（ADR-00025）。kernel / PF 側を ADR で決める | 3-1 |
