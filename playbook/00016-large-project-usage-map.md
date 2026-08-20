@@ -125,7 +125,7 @@ sequenceDiagram
   Dev->>KB: 他案件でも使う判断だけ昇格
 ```
 
-受け入れ例は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を案件リポへコピーして埋める（[PB-00013](00013-start-tdd-from-examples.md)）。権限管理の行の例:
+受け入れ例は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を案件リポへコピーして埋める。要件から例まで詰める往復（エージェントが問い、PdO が決める。各行に出所、記録は `acceptance-refinement-log.md`）は [PB-00020](00020-refine-acceptance-from-design.md)（`draft`）、例からテストへは [PB-00013](00013-start-tdd-from-examples.md)。権限管理の行の例:
 
 | # | 入力 | 期待 |
 | --- | --- | --- |
@@ -144,6 +144,7 @@ product-repo/
   specs/
     authz/                             # 権限管理
       acceptance-examples.md
+      acceptance-refinement-log.md     # 例を詰めた巡の指摘と対応（PB-00020）
       adr/00001-rbac-model.md            # 案件限りの決定
     user-groups/
       acceptance-examples.md

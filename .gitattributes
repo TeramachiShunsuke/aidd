@@ -6,3 +6,5 @@ reviews/*.md merge=union
 # 生成物は競合しても中身を読まない。再生成が正解（ADR-007 / PB-015）。
 INDEX.md linguist-generated=true
 GRAPH.md linguist-generated=true
+# roadmap は編集・削除主体の表なので union で削除行が復活しないよう text マージにする（後勝ち）
+ledger/roadmap.md merge=text

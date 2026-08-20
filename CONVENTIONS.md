@@ -10,7 +10,7 @@
 | `adr/` | `ADR` | `NNNNN-short-slug.md` |
 | `playbook/` | `PB` | `NNNNN-short-slug.md` |
 | `reviews/` | `REV` | `NNNNN-short-slug.md` |
-| `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` / `attestations.md` |
+| `ledger/` | （固定名） | `claims.md` / `open-questions.md` / `changelog.md` / `attestations.md` / `roadmap.md` |
 | `templates/` | — | 種別ごとの雛形（コピー元。CI 対象外のメタ扱い可） |
 | `.agents/skills/` | （skill 名） | `<name>/SKILL.md`（playbook への入口。正本） |
 | `.claude/skills/` | （skill 名） | 正本への symlink（Claude Code 用の鏡） |
@@ -223,6 +223,7 @@ Tier はロードのタイミングであり、重要度の格付けではない
 - `open-questions.md` — 未決とブロッカー
 - `changelog.md` — 知識ベース自体の注目すべき変更（追記主体）
 - `attestations.md` — レビュー証跡（追記専用ログ）。形式は `- YYYY-MM-DD <文書 ID> <確認者> — <確認した内容>`。ID が実在しない行と未来日は CI が拒否する
+- `roadmap.md` — kernel 自体の進め方。順序・依存・完了条件・錨（ADR / PB / OQ / EVID）だけを書き、**期日と担当は書かない**（状態は git の外）。完了は changelog に 1 行残して消す
 
 `ledger/*.md` と `reviews/*.md` は `.gitattributes` で `merge=union` を指定してある（[ADR-00016](adr/00016-shrink-conflict-surface.md)）。競合の代わりに両側の行が残るので、マージ後は重複 ID を検査で確認する。手順は [PB-00015](playbook/00015-resolve-conflicts.md)。
 

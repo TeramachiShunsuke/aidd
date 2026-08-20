@@ -3,8 +3,8 @@
 
 # INDEX
 
-知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-006](adr/006-context-tiers.md)）。
-このファイルは生成物であり、手で編集しない（[ADR-007](adr/007-generated-index.md)）。文書側を直してから再生成する。
+知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-00006](adr/00006-context-tiers.md)）。
+このファイルは生成物であり、手で編集しない（[ADR-00007](adr/00007-generated-index.md)）。文書側を直してから再生成する。
 
 ## Tier 0 — 規範（毎セッション、全文）
 
@@ -25,6 +25,7 @@
 | LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-19 |
 | LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-19 |
 | LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-19 |
+| LEDGER-ROADMAP | Roadmap | [ledger/roadmap.md](ledger/roadmap.md) | active | 2026-08-19 |
 
 Skills（起動時は `description` のみロードされる。本文は一致時に読まれる）:
 
@@ -32,16 +33,21 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | --- | --- | --- |
 | [aidd-add-evidence](.agents/skills/aidd-add-evidence/SKILL.md) | PB-00001 | AIDD 知識ベースに evidence（観測・根拠）を追加する。ユーザーが「evidence を書く」「観測を残す」「根拠を記録する」「EVID-NNNNN を作る」と言ったとき、または調査・計測の結果をリポジトリに残したいときに使う。 |
 | [aidd-apply-to-project](.agents/skills/aidd-apply-to-project/SKILL.md) | PB-00017 | 新しいリポジトリやプロジェクトに AIDD の働き方を適用し、kernel の ADR を案件の考え方と混ぜない。ユーザーが「新しいリポジトリ」「プロジェクトに適用」「ワークフローの ADR と混ざる」「可読性」「既存の ADR を残す」と言ったときに使う。 |
+| [aidd-cost-context](.agents/skills/aidd-cost-context/SKILL.md) | PB-00024 | エージェントに渡すタスクごとにモデル階層（S / M / L）・effort・文脈（コードグラフの影響範囲）を選び、自動検査で落ちたら階層を上げる。「どのモデルを使うか」「コストを抑えたい」「Graphify で影響範囲を出す」と言われたときに使う。 |
 | [aidd-draft-evidence](.agents/skills/aidd-draft-evidence/SKILL.md) | PB-00018 | Slack、Google Meet の議事録、Confluence、Issue など散らばった情報から evidence のドラフトを起こす。ユーザーが「エビデンスのドラフト」「議事録から根拠」「Slack を集約」「Confluence をまとめる」「観測点を AI に書かせる」と言ったときに使う。 |
+| [aidd-embed-spec-repo](.agents/skills/aidd-embed-spec-repo/SKILL.md) | PB-00021 | SDD で運用中の spec / 実装リポジトリに AIDD のワークフロー（要件 → 受け入れ例 → TDD → Story / PR、Jira / Confluence 接続、品質ゲート）を組み込む。「既存プロジェクトに導入する」「spec リポに組み込む」「Jira と Confluence につなぐ」と言われたときに使う。 |
 | [aidd-graph-review](.agents/skills/aidd-graph-review/SKILL.md) | PB-00010 | AIDD 知識ベースの参照グラフ GRAPH.md を再生成し、構造化レビューの信号（未使用の根拠、根拠なしの決定、参照切れ、ハブ文書）を読んで対処する。「グラフでレビューする」「参照切れを探す」「使われていない evidence を洗い出す」「影響範囲を知りたい」と言われたときに使う。 |
 | [aidd-infra-context](.agents/skills/aidd-infra-context/SKILL.md) | PB-00014 | DB / インフラの文脈を制約・契約・状態に仕分けし、状態は文書化せず取得コマンドで渡す。「インフラの構成をまとめたい」「DB の設計を残したい」「構成図が古い」「エージェントにインフラ作業をさせたい」「マイグレーションを設計したい」と言われたときに使う。 |
+| [aidd-language-loop](.agents/skills/aidd-language-loop/SKILL.md) | PB-00023 | Java / Python / TypeScript / JavaScript / Go で TDD ループと 1 コマンドの品質ゲート（整形 → 静的検査 → 単体 → 外側）を立ち上げる。「この言語で TDD をどう回すか」「品質ゲートを 1 コマンドにしたい」「言語ごとの開発ワークフロー」と言われたときに使う。 |
 | [aidd-rebuild-index](.agents/skills/aidd-rebuild-index/SKILL.md) | PB-00007 | AIDD 知識ベースの生成インデックス INDEX.md を再生成し、CI の index チェックを通す。文書を追加・改名・削除したとき、status / tier / title を変えたとき、または「INDEX が古い」「index check が失敗する」と言われたときに使う。 |
+| [aidd-refine-acceptance](.agents/skills/aidd-refine-acceptance/SKILL.md) | PB-00020 | PdO の要件（ビジネススペック）を、TDD に渡せる受け入れ例（代表例・境界・反例・制約）まで詰める。エージェントが欠落を質問にし PdO が決め、固定観点のレビュー→修正を最大 3 巡回す。「受け入れ条件を詰めたい」「要件から受け入れ例を起こす」「受け入れ基準をブラッシュアップ」と言われたときに使う。 |
 | [aidd-resolve-conflict](.agents/skills/aidd-resolve-conflict/SKILL.md) | PB-00015 | AIDD 知識ベースのマージ競合と ID の衝突を、ファイルの種類ごとに決まった方法で解決する。新規文書の空き番号を取るときにも使う。「コンフリクトを直して」「マージが競合した」「rebase が止まった」「ID が重複している」「番号を振り直したい」「次の番号は何番」と言われたときに使う。 |
 | [aidd-review-cycle](.agents/skills/aidd-review-cycle/SKILL.md) | PB-00003 | AIDD 知識ベースの定期レビューを実施し、reviews/ に追記して last_reviewed を更新する。ユーザーが「レビューを回す」「鮮度を確認する」「staleness CI が赤い」「90 日超えを直す」と言ったときに使う。 |
 | [aidd-sdd-bridge](.agents/skills/aidd-sdd-bridge/SKILL.md) | PB-00008 | 仕様駆動開発（SDD）の spec — requirements / design / tasks — と AIDD 知識ベースを橋渡しする。spec を書く前に前提となる ADR や evidence を集めたいとき、または実装で得た知見を KB に昇格させたいときに使う。「仕様」「spec」「requirements」「設計を書く」「知見を KB に戻す」で発火する。 |
 | [aidd-setup](.agents/skills/aidd-setup/SKILL.md) | PB-00019 | AIDD 知識ベースの人向けセットアップ案内に乗せる。ユーザーが「セットアップ」「始め方」「使い方」「オンボーディング」「最低限何を読めばいいか」と言ったときに使う。 |
 | [aidd-spec-triage](.agents/skills/aidd-spec-triage/SKILL.md) | PB-00012 | 実装スペック（詳細設計・API 定義・テーブル設計）を書くべきか判断し、契約・決定・振る舞いに振り分ける。「詳細設計をどこまで書くか」「設計書が重い」「この設計は残すべきか」「実装スペックを整理したい」と言われたとき、またはビジネススペックを受け取って実装に入る前に使う。 |
 | [aidd-tdd-start](.agents/skills/aidd-tdd-start/SKILL.md) | PB-00013 | ビジネススペックの受け入れ例からテストを起こして TDD を始める。「TDD で進めたい」「テストから書く」「受け入れ条件をテストにする」「境界値を洗い出す」と言われたとき、または実装に着手する前に何が正しいかを固定したいときに使う。 |
+| [aidd-work-units](.agents/skills/aidd-work-units/SKILL.md) | PB-00022 | 承認済みの受け入れ例から Jira Story を切り、担当を決め、ブランチ・コミット・PR を規約（Conventional Commits + Issue キー、1 Story = 1 PR、規模上限）どおりに回す。「タスクに分解する」「コミットの粒度」「担当をどう割り振るか」と言われたときに使う。 |
 | [aidd-write-adr](.agents/skills/aidd-write-adr/SKILL.md) | PB-00002 | AIDD 知識ベースに ADR（アーキテクチャ・運用上の決定）を書く。ユーザーが「ADR を書く」「決定を残す」「設計判断を記録する」「ADR-NNNNN」と言ったとき、または方針を確定して後から参照できるようにしたいときに使う。 |
 
 ## Tier 2 — 決定と手順（作業種別が決まったら）
@@ -71,6 +77,10 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-00021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/00021-two-layer-setup-guide.md](adr/00021-two-layer-setup-guide.md) | active | 2026-08-19 |
 | ADR-00022 | 全文書の ID とファイル名を5桁に統一する | [adr/00022-five-digit-id-scheme.md](adr/00022-five-digit-id-scheme.md) | active | 2026-08-19 |
 | ADR-00023 | PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI、必要なら MCP）とする | [adr/00023-pf-first-step-agent-callable-client.md](adr/00023-pf-first-step-agent-callable-client.md) | active | 2026-08-19 |
+| ADR-00024 | PdO の要件（ビジネススペック）から受け入れ条件へのブラッシュアップは、案件リポで、エージェントが問い PdO が決める有限回のレビュー往復として回す | [adr/00024-refine-acceptance-with-bounded-review-rounds.md](adr/00024-refine-acceptance-with-bounded-review-rounds.md) | draft | 2026-08-19 |
+| ADR-00025 | 開発の作業単位は受け入れ例に揃え、タスク分解・担当・コミット・命名・PR 規模を機械検査できる規約で統制する | [adr/00025-control-work-units-commits-prs.md](adr/00025-control-work-units-commits-prs.md) | draft | 2026-08-19 |
+| ADR-00026 | TDD ループの形と品質ゲートの構成は言語横断で固定し、言語別のツールチェーンは案件が選ぶ（kernel は既定候補だけ持つ） | [adr/00026-fix-loop-shape-let-projects-pick-toolchains.md](adr/00026-fix-loop-shape-let-projects-pick-toolchains.md) | draft | 2026-08-19 |
+| ADR-00027 | タスク種別ごとにモデル階層と effort の既定を決め、文脈はコードグラフの影響範囲で絞る。昇格は自動検査の失敗で機械的に行う | [adr/00027-cost-and-context-per-task.md](adr/00027-cost-and-context-per-task.md) | draft | 2026-08-19 |
 | PB-00001 | evidence を追加する | [playbook/00001-add-evidence.md](playbook/00001-add-evidence.md) | active | 2026-08-19 |
 | PB-00002 | ADR を書く | [playbook/00002-write-adr.md](playbook/00002-write-adr.md) | active | 2026-08-19 |
 | PB-00003 | レビューサイクルを回す | [playbook/00003-run-review-cycle.md](playbook/00003-run-review-cycle.md) | active | 2026-08-19 |
@@ -90,6 +100,11 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | PB-00017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/00017-apply-kernel-to-project.md](playbook/00017-apply-kernel-to-project.md) | active | 2026-08-19 |
 | PB-00018 | 散在ソースから evidence の下書きを起こす | [playbook/00018-draft-evidence-from-sources.md](playbook/00018-draft-evidence-from-sources.md) | active | 2026-08-19 |
 | PB-00019 | 新しい参加者を二層のセットアップガイドへ乗せる | [playbook/00019-onboard-with-setup-guide.md](playbook/00019-onboard-with-setup-guide.md) | active | 2026-08-19 |
+| PB-00020 | PdO の要件（ビジネススペック）を受け入れ条件までブラッシュアップする | [playbook/00020-refine-acceptance-from-design.md](playbook/00020-refine-acceptance-from-design.md) | draft | 2026-08-19 |
+| PB-00021 | 既存の SDD spec リポジトリに AIDD ワークフローを組み込む（Jira / Confluence と接続） | [playbook/00021-embed-workflow-in-spec-repo.md](playbook/00021-embed-workflow-in-spec-repo.md) | draft | 2026-08-19 |
+| PB-00022 | 受け入れ例からタスク・担当・コミット・PR を規約どおりに回す | [playbook/00022-run-work-units-from-acceptance.md](playbook/00022-run-work-units-from-acceptance.md) | draft | 2026-08-19 |
+| PB-00023 | 言語ごとの TDD ループと 1 コマンドの品質ゲートを立ち上げる（Java / Python / TypeScript / JavaScript / Go） | [playbook/00023-set-up-language-tdd-loop.md](playbook/00023-set-up-language-tdd-loop.md) | draft | 2026-08-19 |
+| PB-00024 | タスクごとにモデル階層・effort・文脈（影響範囲）を選ぶ | [playbook/00024-choose-model-effort-context.md](playbook/00024-choose-model-effort-context.md) | draft | 2026-08-19 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -126,6 +141,11 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-00029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/00029-keep-platform-contract-generic.md](evidence/00029-keep-platform-contract-generic.md) | active | 2026-08-19 |
 | EVID-00030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/00030-human-entry-needs-two-layer-setup.md](evidence/00030-human-entry-needs-two-layer-setup.md) | active | 2026-08-19 |
 | EVID-00031 | 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しである | [evidence/00031-agents-primary-path-is-files-shell-tools.md](evidence/00031-agents-primary-path-is-files-shell-tools.md) | active | 2026-08-19 |
+| EVID-00032 | 設計から受け入れ例への落とし込みは、欠落を質問に変え、値の出所を記録し、有限回で止めないと成立しない | [evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md](evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md) | draft | 2026-08-19 |
+| EVID-00033 | 作業単位は、受け入れ例に揃えて小さく切り、Issue キーで台帳と結ぶと機械で統制できる | [evidence/00033-work-units-align-to-acceptance-and-small-prs.md](evidence/00033-work-units-align-to-acceptance-and-small-prs.md) | draft | 2026-08-19 |
+| EVID-00034 | 主要言語のテスト・整形・静的検査の道具は各エコシステムで収束しており、TDD ループの形は言語をまたいで同じである | [evidence/00034-language-toolchains-converge-loop-shape-is-shared.md](evidence/00034-language-toolchains-converge-loop-shape-is-shared.md) | draft | 2026-08-19 |
+| EVID-00035 | エージェント作業のコストは判断の難しさに比例し作業量には比例しない。検査で正誤が決まる作業は安い階層で足り、文脈は影響範囲で絞れる | [evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md](evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md) | draft | 2026-08-19 |
+| EVID-00036 | Graphify の --code-only は Java / Python / TS / JS / Go のコードから LLM なしで参照グラフを出し、affected で変更起点の影響範囲を列挙できる | [evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md](evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md) | draft | 2026-08-19 |
 | REV-00001 | Bootstrap design review | [reviews/00001-bootstrap-design-review.md](reviews/00001-bootstrap-design-review.md) | active | 2026-08-19 |
 | REV-00002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/00002-index-sdd-skills-tier-review.md](reviews/00002-index-sdd-skills-tier-review.md) | active | 2026-08-19 |
 | REV-00003 | 参照グラフによる初回の構造レビュー | [reviews/00003-first-graph-review.md](reviews/00003-first-graph-review.md) | active | 2026-08-19 |
@@ -135,17 +155,18 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | REV-00007 | PF・ログイン ACL・実行ワークフロー構想に対する敵対レビュー | [reviews/00007-platform-acl-adversarial-review.md](reviews/00007-platform-acl-adversarial-review.md) | active | 2026-08-19 |
 | REV-00008 | PF クライアント表面（IDE 拡張 → アプリ / Web / CLI）構想に対する敵対レビュー | [reviews/00008-client-surface-adversarial-review.md](reviews/00008-client-surface-adversarial-review.md) | active | 2026-08-19 |
 | REV-00009 | リポジトリ全体の批判レビューと矛盾点検（PF 草案取り込み後） | [reviews/00009-repo-consistency-adversarial-review.md](reviews/00009-repo-consistency-adversarial-review.md) | active | 2026-08-19 |
+| REV-00010 | PdO 設計 → 受け入れ条件ワークフロー（ADR-00024 / PB-00020）の批判レビュー 3 巡 | [reviews/00010-pdo-to-acceptance-workflow-review.md](reviews/00010-pdo-to-acceptance-workflow-review.md) | active | 2026-08-19 |
 
 ## 内訳
 
 | 区分 | 件数 |
 | --- | --- |
 | Tier 0 | 2 |
-| Tier 1 | 8 |
-| Tier 2 | 42 |
-| Tier 3 | 40 |
-| status: active | 81 |
+| Tier 1 | 9 |
+| Tier 2 | 51 |
+| Tier 3 | 46 |
+| status: active | 83 |
 | status: frozen | 5 |
-| status: draft | 0 |
+| status: draft | 14 |
 | status: deprecated | 0 |
-| skills | 13 |
+| skills | 18 |

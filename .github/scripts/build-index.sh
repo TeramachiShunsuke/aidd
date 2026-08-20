@@ -253,8 +253,8 @@ render() {
 
 # INDEX
 
-知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-006](adr/006-context-tiers.md)）。
-このファイルは生成物であり、手で編集しない（[ADR-007](adr/007-generated-index.md)）。文書側を直してから再生成する。
+知識ベース全体の索引。Tier はロードのタイミングを表し、重要度の格付けではない（[ADR-00006](adr/00006-context-tiers.md)）。
+このファイルは生成物であり、手で編集しない（[ADR-00007](adr/00007-generated-index.md)）。文書側を直してから再生成する。
 HEADER
 
   local t
