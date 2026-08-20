@@ -2,7 +2,7 @@
 id: LEDGER-CHANGELOG
 title: Knowledge base changelog
 status: active
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:
@@ -13,6 +13,10 @@ tags:
 # Changelog
 
 知識ベース自体の注目すべき変更。新しいエントリを上に追記する。
+
+## 2026-08-20
+
+- 運用者指示により EVID-00032..00036 / ADR-00024..00027 / PB-00020..00024 を `draft` → `active`（PR #19 マージ後。ロードマップ 1-1〜1-3 完了）。OQ-00042 を Resolved。同期作業: ADR-00014 §3 に PB-00020 / ADR-00024 参照を追加、AGENTS / README / GUIDE / PB-00013 / PB-00016 / ADR-00010 / OQ-00033 の `draft` 表記を外し、CLAIM-00034..00037 の草案依存注記を外した。roadmap から完了行 1-1〜1-3 を削除し、1-4 と 3-5 の依存を解消済みに更新
 
 ## 2026-08-19
 

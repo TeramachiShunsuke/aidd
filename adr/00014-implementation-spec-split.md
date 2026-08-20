@@ -2,7 +2,7 @@
 id: ADR-00014
 title: 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す
 status: active
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:
@@ -48,7 +48,7 @@ tier: 2
 
 ### 3. ビジネススペックは受け入れ例まで落とす
 
-PdO が書くビジネススペックには、抽象的な条件だけでなく**具体値と境界値**を入れる。例が TDD の入力になる（[PB-00013](../playbook/00013-start-tdd-from-examples.md)）。雛形は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を spec リポジトリにコピーして使う。
+PdO が書くビジネススペックには、抽象的な条件だけでなく**具体値と境界値**を入れる。例が TDD の入力になる（[PB-00013](../playbook/00013-start-tdd-from-examples.md)）。雛形は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を spec リポジトリにコピーして使う。要件から例まで詰める往復（エージェントが欠落を質問にし、PdO が決め、レビューを有限回で止める）は [PB-00020](../playbook/00020-refine-acceptance-from-design.md)（[ADR-00024](00024-refine-acceptance-with-bounded-review-rounds.md)）。
 
 ### 4. 実装スペックの厚みをレビュー観点にする
 

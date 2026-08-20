@@ -1,8 +1,8 @@
 ---
 id: PB-00021
 title: 既存の SDD spec リポジトリに AIDD ワークフローを組み込む（Jira / Confluence と接続）
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

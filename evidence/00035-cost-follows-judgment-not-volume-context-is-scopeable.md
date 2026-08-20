@@ -1,8 +1,8 @@
 ---
 id: EVID-00035
 title: エージェント作業のコストは判断の難しさに比例し作業量には比例しない。検査で正誤が決まる作業は安い階層で足り、文脈は影響範囲で絞れる
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

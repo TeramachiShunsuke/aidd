@@ -1,8 +1,8 @@
 ---
 id: EVID-00033
 title: 作業単位は、受け入れ例に揃えて小さく切り、Issue キーで台帳と結ぶと機械で統制できる
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

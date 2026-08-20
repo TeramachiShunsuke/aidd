@@ -1,8 +1,8 @@
 ---
 id: PB-00023
 title: 言語ごとの TDD ループと 1 コマンドの品質ゲートを立ち上げる（Java / Python / TypeScript / JavaScript / Go）
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

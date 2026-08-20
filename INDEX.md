@@ -22,10 +22,10 @@
 | ROOT-README | aidd | [README.md](README.md) | - | - |
 | ROOT-SETUP | SETUP — 最低限の利用と、改善できる理解 | [SETUP.md](SETUP.md) | - | - |
 | LEDGER-ATTESTATIONS | Review attestations ledger | [ledger/attestations.md](ledger/attestations.md) | active | 2026-08-19 |
-| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-19 |
-| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-19 |
-| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-19 |
-| LEDGER-ROADMAP | Roadmap | [ledger/roadmap.md](ledger/roadmap.md) | active | 2026-08-19 |
+| LEDGER-CHANGELOG | Knowledge base changelog | [ledger/changelog.md](ledger/changelog.md) | active | 2026-08-20 |
+| LEDGER-CLAIMS | Claims ledger | [ledger/claims.md](ledger/claims.md) | active | 2026-08-20 |
+| LEDGER-OQ | Open questions | [ledger/open-questions.md](ledger/open-questions.md) | active | 2026-08-20 |
+| LEDGER-ROADMAP | Roadmap | [ledger/roadmap.md](ledger/roadmap.md) | active | 2026-08-20 |
 
 Skills（起動時は `description` のみロードされる。本文は一致時に読まれる）:
 
@@ -63,11 +63,11 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-00007 | INDEX.md を生成物とし、CI で最新性を強制する | [adr/00007-generated-index.md](adr/00007-generated-index.md) | active | 2026-08-19 |
 | ADR-00008 | SDD の spec 成果物と知識ベースを、双方向の受け渡しで接続する | [adr/00008-sdd-bridge.md](adr/00008-sdd-bridge.md) | active | 2026-08-19 |
 | ADR-00009 | skills は playbook の入口とし、手順を二重に持たない | [adr/00009-skills-as-playbook-entrypoints.md](adr/00009-skills-as-playbook-entrypoints.md) | active | 2026-08-19 |
-| ADR-00010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/00010-knowledge-graph-layers.md](adr/00010-knowledge-graph-layers.md) | active | 2026-08-19 |
+| ADR-00010 | 知識グラフを構造層と意味層に分け、構造層だけを CI に置く | [adr/00010-knowledge-graph-layers.md](adr/00010-knowledge-graph-layers.md) | active | 2026-08-20 |
 | ADR-00011 | skills と規範をツール横断にし、正本を 1 か所に置く | [adr/00011-cross-tool-agent-integration.md](adr/00011-cross-tool-agent-integration.md) | active | 2026-08-19 |
 | ADR-00012 | レビュー証跡を文書から分離し、実効レビュー日で鮮度を判定する | [adr/00012-review-attestations.md](adr/00012-review-attestations.md) | active | 2026-08-19 |
 | ADR-00013 | 検査を error と warning に等級分けし、充足しているものから機械で固定する | [adr/00013-check-grades.md](adr/00013-check-grades.md) | active | 2026-08-19 |
-| ADR-00014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/00014-implementation-spec-split.md](adr/00014-implementation-spec-split.md) | active | 2026-08-19 |
+| ADR-00014 | 実装スペックを契約・決定・振る舞いに分け、不可逆な箇所にだけ設計を残す | [adr/00014-implementation-spec-split.md](adr/00014-implementation-spec-split.md) | active | 2026-08-20 |
 | ADR-00015 | DB / インフラの文脈を制約・契約・状態に分け、状態は文書化しない | [adr/00015-infra-context-layers.md](adr/00015-infra-context-layers.md) | active | 2026-08-19 |
 | ADR-00016 | 競合は解決を上手くするのではなく、競合面を減らして扱う | [adr/00016-shrink-conflict-surface.md](adr/00016-shrink-conflict-surface.md) | active | 2026-08-19 |
 | ADR-00017 | 機械は事実の記録と検出に限り、status の遷移は人間が行う | [adr/00017-machines-record-facts-humans-decide-status.md](adr/00017-machines-record-facts-humans-decide-status.md) | active | 2026-08-19 |
@@ -77,10 +77,10 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | ADR-00021 | 人の入口は二層の SETUP.md とし、考え方への全共感は成功条件にしない | [adr/00021-two-layer-setup-guide.md](adr/00021-two-layer-setup-guide.md) | active | 2026-08-19 |
 | ADR-00022 | 全文書の ID とファイル名を5桁に統一する | [adr/00022-five-digit-id-scheme.md](adr/00022-five-digit-id-scheme.md) | active | 2026-08-19 |
 | ADR-00023 | PF の第一歩は共有クライアント契約とエージェント可呼び面（CLI、必要なら MCP）とする | [adr/00023-pf-first-step-agent-callable-client.md](adr/00023-pf-first-step-agent-callable-client.md) | active | 2026-08-19 |
-| ADR-00024 | PdO の要件（ビジネススペック）から受け入れ条件へのブラッシュアップは、案件リポで、エージェントが問い PdO が決める有限回のレビュー往復として回す | [adr/00024-refine-acceptance-with-bounded-review-rounds.md](adr/00024-refine-acceptance-with-bounded-review-rounds.md) | draft | 2026-08-19 |
-| ADR-00025 | 開発の作業単位は受け入れ例に揃え、タスク分解・担当・コミット・命名・PR 規模を機械検査できる規約で統制する | [adr/00025-control-work-units-commits-prs.md](adr/00025-control-work-units-commits-prs.md) | draft | 2026-08-19 |
-| ADR-00026 | TDD ループの形と品質ゲートの構成は言語横断で固定し、言語別のツールチェーンは案件が選ぶ（kernel は既定候補だけ持つ） | [adr/00026-fix-loop-shape-let-projects-pick-toolchains.md](adr/00026-fix-loop-shape-let-projects-pick-toolchains.md) | draft | 2026-08-19 |
-| ADR-00027 | タスク種別ごとにモデル階層と effort の既定を決め、文脈はコードグラフの影響範囲で絞る。昇格は自動検査の失敗で機械的に行う | [adr/00027-cost-and-context-per-task.md](adr/00027-cost-and-context-per-task.md) | draft | 2026-08-19 |
+| ADR-00024 | PdO の要件（ビジネススペック）から受け入れ条件へのブラッシュアップは、案件リポで、エージェントが問い PdO が決める有限回のレビュー往復として回す | [adr/00024-refine-acceptance-with-bounded-review-rounds.md](adr/00024-refine-acceptance-with-bounded-review-rounds.md) | active | 2026-08-20 |
+| ADR-00025 | 開発の作業単位は受け入れ例に揃え、タスク分解・担当・コミット・命名・PR 規模を機械検査できる規約で統制する | [adr/00025-control-work-units-commits-prs.md](adr/00025-control-work-units-commits-prs.md) | active | 2026-08-20 |
+| ADR-00026 | TDD ループの形と品質ゲートの構成は言語横断で固定し、言語別のツールチェーンは案件が選ぶ（kernel は既定候補だけ持つ） | [adr/00026-fix-loop-shape-let-projects-pick-toolchains.md](adr/00026-fix-loop-shape-let-projects-pick-toolchains.md) | active | 2026-08-20 |
+| ADR-00027 | タスク種別ごとにモデル階層と effort の既定を決め、文脈はコードグラフの影響範囲で絞る。昇格は自動検査の失敗で機械的に行う | [adr/00027-cost-and-context-per-task.md](adr/00027-cost-and-context-per-task.md) | active | 2026-08-20 |
 | PB-00001 | evidence を追加する | [playbook/00001-add-evidence.md](playbook/00001-add-evidence.md) | active | 2026-08-19 |
 | PB-00002 | ADR を書く | [playbook/00002-write-adr.md](playbook/00002-write-adr.md) | active | 2026-08-19 |
 | PB-00003 | レビューサイクルを回す | [playbook/00003-run-review-cycle.md](playbook/00003-run-review-cycle.md) | active | 2026-08-19 |
@@ -93,18 +93,18 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | PB-00010 | グラフで構造化レビューする | [playbook/00010-review-with-graph.md](playbook/00010-review-with-graph.md) | active | 2026-08-19 |
 | PB-00011 | グラフの警告をエラーへ昇格する | [playbook/00011-promote-check.md](playbook/00011-promote-check.md) | active | 2026-08-19 |
 | PB-00012 | 実装スペックを書くか判断し、契約・決定・振る舞いに振り分ける | [playbook/00012-triage-implementation-spec.md](playbook/00012-triage-implementation-spec.md) | active | 2026-08-19 |
-| PB-00013 | 受け入れ例から TDD を始める | [playbook/00013-start-tdd-from-examples.md](playbook/00013-start-tdd-from-examples.md) | active | 2026-08-19 |
+| PB-00013 | 受け入れ例から TDD を始める | [playbook/00013-start-tdd-from-examples.md](playbook/00013-start-tdd-from-examples.md) | active | 2026-08-20 |
 | PB-00014 | DB / インフラの文脈をエージェントに渡す | [playbook/00014-hand-infra-context.md](playbook/00014-hand-infra-context.md) | active | 2026-08-19 |
 | PB-00015 | 競合と ID 衝突を解決する | [playbook/00015-resolve-conflicts.md](playbook/00015-resolve-conflicts.md) | active | 2026-08-19 |
-| PB-00016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/00016-large-project-usage-map.md](playbook/00016-large-project-usage-map.md) | active | 2026-08-19 |
+| PB-00016 | 大規模マルチ機能リリースへの適用イメージを置く | [playbook/00016-large-project-usage-map.md](playbook/00016-large-project-usage-map.md) | active | 2026-08-20 |
 | PB-00017 | 新しいリポジトリへ kernel を適用し、案件の考え方と混ぜない | [playbook/00017-apply-kernel-to-project.md](playbook/00017-apply-kernel-to-project.md) | active | 2026-08-19 |
 | PB-00018 | 散在ソースから evidence の下書きを起こす | [playbook/00018-draft-evidence-from-sources.md](playbook/00018-draft-evidence-from-sources.md) | active | 2026-08-19 |
 | PB-00019 | 新しい参加者を二層のセットアップガイドへ乗せる | [playbook/00019-onboard-with-setup-guide.md](playbook/00019-onboard-with-setup-guide.md) | active | 2026-08-19 |
-| PB-00020 | PdO の要件（ビジネススペック）を受け入れ条件までブラッシュアップする | [playbook/00020-refine-acceptance-from-design.md](playbook/00020-refine-acceptance-from-design.md) | draft | 2026-08-19 |
-| PB-00021 | 既存の SDD spec リポジトリに AIDD ワークフローを組み込む（Jira / Confluence と接続） | [playbook/00021-embed-workflow-in-spec-repo.md](playbook/00021-embed-workflow-in-spec-repo.md) | draft | 2026-08-19 |
-| PB-00022 | 受け入れ例からタスク・担当・コミット・PR を規約どおりに回す | [playbook/00022-run-work-units-from-acceptance.md](playbook/00022-run-work-units-from-acceptance.md) | draft | 2026-08-19 |
-| PB-00023 | 言語ごとの TDD ループと 1 コマンドの品質ゲートを立ち上げる（Java / Python / TypeScript / JavaScript / Go） | [playbook/00023-set-up-language-tdd-loop.md](playbook/00023-set-up-language-tdd-loop.md) | draft | 2026-08-19 |
-| PB-00024 | タスクごとにモデル階層・effort・文脈（影響範囲）を選ぶ | [playbook/00024-choose-model-effort-context.md](playbook/00024-choose-model-effort-context.md) | draft | 2026-08-19 |
+| PB-00020 | PdO の要件（ビジネススペック）を受け入れ条件までブラッシュアップする | [playbook/00020-refine-acceptance-from-design.md](playbook/00020-refine-acceptance-from-design.md) | active | 2026-08-20 |
+| PB-00021 | 既存の SDD spec リポジトリに AIDD ワークフローを組み込む（Jira / Confluence と接続） | [playbook/00021-embed-workflow-in-spec-repo.md](playbook/00021-embed-workflow-in-spec-repo.md) | active | 2026-08-20 |
+| PB-00022 | 受け入れ例からタスク・担当・コミット・PR を規約どおりに回す | [playbook/00022-run-work-units-from-acceptance.md](playbook/00022-run-work-units-from-acceptance.md) | active | 2026-08-20 |
+| PB-00023 | 言語ごとの TDD ループと 1 コマンドの品質ゲートを立ち上げる（Java / Python / TypeScript / JavaScript / Go） | [playbook/00023-set-up-language-tdd-loop.md](playbook/00023-set-up-language-tdd-loop.md) | active | 2026-08-20 |
+| PB-00024 | タスクごとにモデル階層・effort・文脈（影響範囲）を選ぶ | [playbook/00024-choose-model-effort-context.md](playbook/00024-choose-model-effort-context.md) | active | 2026-08-20 |
 
 ## Tier 3 — 根拠と監査（主張を疑うとき）
 
@@ -141,11 +141,11 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | EVID-00029 | kernel の契約は汎用であり、特定の PF 製品や IdP 名に固定しない | [evidence/00029-keep-platform-contract-generic.md](evidence/00029-keep-platform-contract-generic.md) | active | 2026-08-19 |
 | EVID-00030 | 人の入口は、全共感ではなく二層のセットアップ案内を必要としている | [evidence/00030-human-entry-needs-two-layer-setup.md](evidence/00030-human-entry-needs-two-layer-setup.md) | active | 2026-08-19 |
 | EVID-00031 | 生成AIコーディングエージェントの主経路はファイル・シェル・ツール呼び出しである | [evidence/00031-agents-primary-path-is-files-shell-tools.md](evidence/00031-agents-primary-path-is-files-shell-tools.md) | active | 2026-08-19 |
-| EVID-00032 | 設計から受け入れ例への落とし込みは、欠落を質問に変え、値の出所を記録し、有限回で止めないと成立しない | [evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md](evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md) | draft | 2026-08-19 |
-| EVID-00033 | 作業単位は、受け入れ例に揃えて小さく切り、Issue キーで台帳と結ぶと機械で統制できる | [evidence/00033-work-units-align-to-acceptance-and-small-prs.md](evidence/00033-work-units-align-to-acceptance-and-small-prs.md) | draft | 2026-08-19 |
-| EVID-00034 | 主要言語のテスト・整形・静的検査の道具は各エコシステムで収束しており、TDD ループの形は言語をまたいで同じである | [evidence/00034-language-toolchains-converge-loop-shape-is-shared.md](evidence/00034-language-toolchains-converge-loop-shape-is-shared.md) | draft | 2026-08-19 |
-| EVID-00035 | エージェント作業のコストは判断の難しさに比例し作業量には比例しない。検査で正誤が決まる作業は安い階層で足り、文脈は影響範囲で絞れる | [evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md](evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md) | draft | 2026-08-19 |
-| EVID-00036 | Graphify の --code-only は Java / Python / TS / JS / Go のコードから LLM なしで参照グラフを出し、affected で変更起点の影響範囲を列挙できる | [evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md](evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md) | draft | 2026-08-19 |
+| EVID-00032 | 設計から受け入れ例への落とし込みは、欠落を質問に変え、値の出所を記録し、有限回で止めないと成立しない | [evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md](evidence/00032-acceptance-examples-need-questions-provenance-bounded-rounds.md) | active | 2026-08-20 |
+| EVID-00033 | 作業単位は、受け入れ例に揃えて小さく切り、Issue キーで台帳と結ぶと機械で統制できる | [evidence/00033-work-units-align-to-acceptance-and-small-prs.md](evidence/00033-work-units-align-to-acceptance-and-small-prs.md) | active | 2026-08-20 |
+| EVID-00034 | 主要言語のテスト・整形・静的検査の道具は各エコシステムで収束しており、TDD ループの形は言語をまたいで同じである | [evidence/00034-language-toolchains-converge-loop-shape-is-shared.md](evidence/00034-language-toolchains-converge-loop-shape-is-shared.md) | active | 2026-08-20 |
+| EVID-00035 | エージェント作業のコストは判断の難しさに比例し作業量には比例しない。検査で正誤が決まる作業は安い階層で足り、文脈は影響範囲で絞れる | [evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md](evidence/00035-cost-follows-judgment-not-volume-context-is-scopeable.md) | active | 2026-08-20 |
+| EVID-00036 | Graphify の --code-only は Java / Python / TS / JS / Go のコードから LLM なしで参照グラフを出し、affected で変更起点の影響範囲を列挙できる | [evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md](evidence/00036-graphify-code-only-yields-impact-sets-in-five-languages.md) | active | 2026-08-20 |
 | REV-00001 | Bootstrap design review | [reviews/00001-bootstrap-design-review.md](reviews/00001-bootstrap-design-review.md) | active | 2026-08-19 |
 | REV-00002 | Tier / 生成インデックス / SDD 接続 / skills 導入レビュー | [reviews/00002-index-sdd-skills-tier-review.md](reviews/00002-index-sdd-skills-tier-review.md) | active | 2026-08-19 |
 | REV-00003 | 参照グラフによる初回の構造レビュー | [reviews/00003-first-graph-review.md](reviews/00003-first-graph-review.md) | active | 2026-08-19 |
@@ -165,8 +165,8 @@ Skills（起動時は `description` のみロードされる。本文は一致�
 | Tier 1 | 9 |
 | Tier 2 | 51 |
 | Tier 3 | 46 |
-| status: active | 83 |
+| status: active | 97 |
 | status: frozen | 5 |
-| status: draft | 14 |
+| status: draft | 0 |
 | status: deprecated | 0 |
 | skills | 18 |

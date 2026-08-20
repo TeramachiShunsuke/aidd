@@ -2,7 +2,7 @@
 id: LEDGER-OQ
 title: Open questions
 status: active
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:
@@ -40,16 +40,16 @@ tags:
 - OQ-00028: UI デザイン成果物（Figma・Design System・画面状態）の正本と KB / 案件 ADR の境界を、専用 ADR として固定するか？（現状は ADR-00014 の契約・決定・振る舞い分解を UI に当てた適用指針のみ。playbook:PB-00016）
 - OQ-00029: 散在ソース（Slack / Google Meet / Confluence）の取得を MCP や API 連携にするか、人間が本文を渡す貼り付け運用に留めるか？（現状は PB-00018 が貼り付け前提。コネクタは PF 側。認証情報は git に置かない。evidence:EVID-00025 EVID-00027 EVID-00028 adr:ADR-00020 REV-00007）
 - OQ-00032: アカウント由来の原文を、個人下書き・案件 KB・kernel のどの層まで昇格してよいか？（ADR-00020 は kernel 直書きを禁じた。案件層の扱いと、削除・権限剥奪の伝播は未決。evidence:EVID-00027 adr:ADR-00020 REV-00007）
-- OQ-00033: 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-00020 が今は採らない。案件リポ側は ADR-00025（draft）が Jira を進行状態の既定に置いた。kernel / PF 側は未決（evidence:EVID-00008 adr:ADR-00017 ADR-00020 ADR-00025 REV-00007）
+- OQ-00033: 実行ワークフロー（担当・待ち・ACL ゲート）の状態をどこに置くか？ PF 側の状態機械、GitHub Issue/PR、書かない、のどれか。playbook に状態を持たせる案は ADR-00020 が今は採らない。案件リポ側は ADR-00025 が Jira を進行状態の既定に置いた。kernel / PF 側は未決（evidence:EVID-00008 adr:ADR-00017 ADR-00020 ADR-00025 REV-00007）
 - OQ-00034: PF が git に PR を出すときの GitHub 主体は何か？ IdP ユーザーに紐づく GitHub App の代行か、共通サービスアカウントか。認証情報は git に置かない前提で決める。特定 IdP 名には固定しない（evidence:EVID-00028 EVID-00029 adr:ADR-00020 REV-00007）
 - OQ-00038: エージェント可呼び面の配布は、CLI を先に配って MCP を後から薄く被せるか、最初から CLI+MCP を同梱するか？（契約の意味体系は同一。adr:ADR-00023 evidence:EVID-00031）
 - OQ-00040: 受け入れ条件のブラッシュアップで既定にした「3 巡・観点 6 つ・等級 3 段」は妥当か？ 実案件で巡回数・残った P0/P1・PdO の回答所要を測って見直す（現状は経験則。evidence:EVID-00032 adr:ADR-00024、粒度は OQ-00022、効果測定は OQ-00017 と同根）
 - OQ-00041: kernel の skill を案件（spec）リポのエージェントへどう届けるか？ AGENTS.md から kernel URL を参照するだけか、SKILL.md をコピーしてリンクを URL に書き換えるか、submodule か。コピーは手順の二重管理ではないが skill 本文のドリフトは起きうる（現状は PB-00021 手順 7 が URL 参照のみ、コピー禁止としている。adr:ADR-00009 ADR-00011 ADR-00019 ADR-00024）
-- OQ-00042: 人間が EVID-00032..00036 / ADR-00024..00027 / PB-00020..00024 を `draft` → `active` にするか？ `active` 後の作業: ADR-00014 §3 に PB-00020 への参照を戻す、AGENTS / README / GUIDE / PB-00013 / PB-00016 の `draft` 表記を外す、CLAIM-00034..00037 の草案依存注記を外す（adr:ADR-00017 REV-00010）
 - OQ-00043: モデル階層（S / M / L）× effort の既定表と昇格規則は妥当か？ PR 本文「モデル」節の 5 項目（種別・初回階層 / effort・自動検査の初回合否・再試行回数・最終階層）を案件で集計し、初回合格率と昇格回数で見直す（現状は経験則と 1 : 2 : 5 の価格比。evidence:EVID-00035 adr:ADR-00027、ロードマップ 2-3）
 
 ## Resolved
 
+- OQ-00042: 人間が EVID-00032..00036 / ADR-00024..00027 / PB-00020..00024 を `draft` → `active` にするか？ → **する**（運用者指示 2026-08-20）。続けて ADR-00014 §3 に PB-00020 参照を戻し、AGENTS / README / GUIDE / PB-00013 / PB-00016 / ADR-00010 の `draft` 表記と CLAIM-00034..00037 の草案依存注記を外した（adr:ADR-00017 ADR-00024 REV-00010、2026-08-20）
 - OQ-00039: 人間が EVID-00031 と ADR-00023 を `draft` → `active` にするか？ → **する**（運用者指示 2026-08-15）。続けて AGENTS / README / GUIDE の PF 一文を ADR-00023 に揃えた（adr:ADR-00017 ADR-00023 evidence:EVID-00031 REV-00009、2026-08-15）
 - OQ-00037: 複数 surface の前に共有クライアント契約を先に固定するか？ → **する**。契約内容とクライアント第一歩の範囲は ADR-00023（`active`）。実装は別リポ（adr:ADR-00023 evidence:EVID-00031 EVID-00029 REV-00009、2026-08-14/15）
 - OQ-00036: 第一世代で VS Code 系と IntelliJ を同時に出すか？ → **同時には出さない**。IDE 拡張自体をクライアント第一歩にしない（adr:ADR-00023 REV-00008 REV-00009、2026-08-14/15）
