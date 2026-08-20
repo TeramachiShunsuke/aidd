@@ -1,8 +1,8 @@
 ---
 id: ADR-00027
 title: タスク種別ごとにモデル階層と effort の既定を決め、文脈はコードグラフの影響範囲で絞る。昇格は自動検査の失敗で機械的に行う
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

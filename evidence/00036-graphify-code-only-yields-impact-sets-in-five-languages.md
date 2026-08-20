@@ -1,8 +1,8 @@
 ---
 id: EVID-00036
 title: Graphify の --code-only は Java / Python / TS / JS / Go のコードから LLM なしで参照グラフを出し、affected で変更起点の影響範囲を列挙できる
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

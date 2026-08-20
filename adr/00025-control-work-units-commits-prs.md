@@ -1,8 +1,8 @@
 ---
 id: ADR-00025
 title: 開発の作業単位は受け入れ例に揃え、タスク分解・担当・コミット・命名・PR 規模を機械検査できる規約で統制する
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

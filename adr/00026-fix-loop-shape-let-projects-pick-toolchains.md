@@ -1,8 +1,8 @@
 ---
 id: ADR-00026
 title: TDD ループの形と品質ゲートの構成は言語横断で固定し、言語別のツールチェーンは案件が選ぶ（kernel は既定候補だけ持つ）
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

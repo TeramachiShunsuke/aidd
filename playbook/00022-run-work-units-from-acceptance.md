@@ -1,8 +1,8 @@
 ---
 id: PB-00022
 title: 受け入れ例からタスク・担当・コミット・PR を規約どおりに回す
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

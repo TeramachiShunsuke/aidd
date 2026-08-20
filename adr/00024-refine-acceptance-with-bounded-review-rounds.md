@@ -1,8 +1,8 @@
 ---
 id: ADR-00024
 title: PdO の要件（ビジネススペック）から受け入れ条件へのブラッシュアップは、案件リポで、エージェントが問い PdO が決める有限回のレビュー往復として回す
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

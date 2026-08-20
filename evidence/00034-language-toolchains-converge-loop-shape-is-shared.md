@@ -1,8 +1,8 @@
 ---
 id: EVID-00034
 title: 主要言語のテスト・整形・静的検査の道具は各エコシステムで収束しており、TDD ループの形は言語をまたいで同じである
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

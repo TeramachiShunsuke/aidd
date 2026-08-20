@@ -2,7 +2,7 @@
 id: PB-00016
 title: 大規模マルチ機能リリースへの適用イメージを置く
 status: active
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:
@@ -125,7 +125,7 @@ sequenceDiagram
   Dev->>KB: 他案件でも使う判断だけ昇格
 ```
 
-受け入れ例は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を案件リポへコピーして埋める。要件から例まで詰める往復（エージェントが問い、PdO が決める。各行に出所、記録は `acceptance-refinement-log.md`）は [PB-00020](00020-refine-acceptance-from-design.md)（`draft`）、例からテストへは [PB-00013](00013-start-tdd-from-examples.md)。権限管理の行の例:
+受け入れ例は [templates/acceptance-examples.md](../templates/acceptance-examples.md) を案件リポへコピーして埋める。要件から例まで詰める往復（エージェントが問い、PdO が決める。各行に出所、記録は `acceptance-refinement-log.md`）は [PB-00020](00020-refine-acceptance-from-design.md)、例からテストへは [PB-00013](00013-start-tdd-from-examples.md)。権限管理の行の例:
 
 | # | 入力 | 期待 |
 | --- | --- | --- |

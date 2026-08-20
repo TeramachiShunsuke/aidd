@@ -1,8 +1,8 @@
 ---
 id: PB-00020
 title: PdO の要件（ビジネススペック）を受け入れ条件までブラッシュアップする
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:

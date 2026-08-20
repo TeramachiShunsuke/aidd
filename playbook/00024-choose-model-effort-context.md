@@ -1,8 +1,8 @@
 ---
 id: PB-00024
 title: タスクごとにモデル階層・effort・文脈（影響範囲）を選ぶ
-status: draft
-last_reviewed: 2026-08-19
+status: active
+last_reviewed: 2026-08-20
 owners:
   - TeramachiShunsuke
 tags:
